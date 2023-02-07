@@ -1,13 +1,13 @@
-import firebase from 'firebase/app';
 import { initializeApp } from 'firebase/app';
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
+  apiKey: 'AIzaSyDvXVnNA7Wwwul0zxF4sMS4FTMKOfPtIpk',
+  authDomain: 'fyesta-trello.firebaseapp.com',
+  projectId: 'fyesta-trello',
+  storageBucket: 'fyesta-trello.appspot.com',
+  messagingSenderId: '441776517983',
+  appId: '1:441776517983:web:85ae2234b24d200f773cea',
 };
 
-export const Firebaseapp = initializeApp(firebaseConfig);
+// Initialize Firebase
+export const app = initializeApp(firebaseConfig);

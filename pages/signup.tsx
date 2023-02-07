@@ -2,32 +2,63 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Swal from 'sweetalert2'
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getAuth } from 'firebase/auth';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useState } from 'react'
-import { Firebaseapp } from '@/Firebase/ClientApp';
+import { app } from '@/Firebase/ClientApp';
 
-const auth = getAuth(Firebaseapp);
+const auth = getAuth(app);
 
 export default function SignUp() {
 
-  const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    Swal.fire({
-      icon: 'success',
-      text: 'A sua conta foi criada com sucesso',
-      confirmButtonColor: '#D8807D'
-    })
-  }
-
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordVerify, setPasswordVerify] = useState('')
+  const [picture, setPicture] = useState('')
+
   const [
     createUserWithEmailAndPassword,
     user,
     loading,
     error,
-  ] = useCreateUserWithEmailAndPassword(auth);
+  ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
+  const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (password.length < 8) {
+      Swal.fire({
+        icon: 'error',
+        text: 'A senha deve conter pelo menos 8 caracteres',
+        confirmButtonColor: '#D8807D'
+      })
+      return
+    }
+
+    if (password !== passwordVerify) {
+      Swal.fire({
+        icon: 'error',
+        text: 'As senhas inseridas estão diferentes',
+        confirmButtonColor: '#D8807D'
+      })
+      return
+    }
+
+    Swal.fire({
+      icon: 'success',
+      text: 'A sua conta foi criada com sucesso',
+      confirmButtonColor: '#D8807D'
+    })
+    createUserWithEmailAndPassword(email, password)
+
+    setEmail('')
+    setPassword('')
+    setPasswordVerify('')
+  }
+
+  console.log(user)
+
 
   return (
     <>
@@ -49,23 +80,23 @@ export default function SignUp() {
             </div>
             <div className='flex flex-col gap-2 pt-4'>
               <label>Name</label>
-              <input type='text' placeholder='Your name' className='py-2 px-2 rounded-lg' />
+              <input type='text' placeholder='Your name' className='py-2 px-2 rounded-lg' value={name} onChange={(e) => setName(e.target.value)} />
             </div>
             <div className='flex flex-col gap-2 pt-4'>
               <label>Email Adress</label>
-              <input type='email' placeholder='Email Adress' className='py-2 px-2 rounded-lg' />
+              <input type='email' placeholder='Email Adress' className='py-2 px-2 rounded-lg' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className='flex flex-col gap-2 pt-4'>
               <label>Password</label>
-              <input type='password' placeholder='Password' className='py-2 px-2 rounded-lg' />
+              <input type='password' placeholder='Password' className='py-2 px-2 rounded-lg' value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <div className='flex flex-col gap-2 pt-4'>
               <label>Confirm your password</label>
-              <input type='password' placeholder='Password' className='py-2 px-2 rounded-lg' />
+              <input type='password' placeholder='Password' className='py-2 px-2 rounded-lg' value={passwordVerify} onChange={(e) => setPasswordVerify(e.target.value)} />
             </div>
             <div className='flex flex-col gap-2 pt-4'>
               <label >Insert a photo</label>
-              <input type='text' placeholder='Insert a url' className='py-2 px-2 rounded-lg' />
+              <input type='text' placeholder='Insert a url' className='py-2 px-2 rounded-lg' value={picture} onChange={(e) => setPicture(e.target.value)} />
               <p className='pt-2 text-sm text-center italic'>you do not need to add a picture, is just optional</p>
             </div>
             <div className='pt-8'>

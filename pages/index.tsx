@@ -1,12 +1,44 @@
-import { FirebaseApp } from 'firebase/app'
 import Head from 'next/head'
 import Link from 'next/link'
 import { BsGithub, BsGoogle, BsMicrosoft } from 'react-icons/bs'
+import { getAuth } from 'firebase/auth';
+import { useSignInWithGithub, useSignInWithGoogle, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useState } from 'react'
+import { app } from '@/Firebase/ClientApp';
 
-
+const auth = getAuth(app);
 
 export default function LogIn() {
 
+  const [email, setEmail] = useState('')
+  const [password, setPasswod] = useState('')
+
+  const [
+    signInWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useSignInWithEmailAndPassword(auth);
+
+  const [signInWithGithub,
+    userGithub,
+    loadingGithub,
+    errorGithub
+  ] = useSignInWithGithub(auth);
+
+
+  const [signInWithGoogle,
+    userGoogle,
+    loadingGoogle,
+    errorGoogle
+  ] = useSignInWithGoogle(auth);
+
+
+
+  const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    signInWithEmailAndPassword(email, password)
+  }
 
   return (
     <>
@@ -18,7 +50,7 @@ export default function LogIn() {
       </Head>
       <main className='flex justify-center items-center min-h-screen'>
         <section className='flex flex-col'>
-          <form>
+          <form onSubmit={(e) => HandleSubmit(e)}>
             <div>
               <h1 className='text-center text-4xl'>Welcome Back</h1>
             </div>
@@ -31,11 +63,11 @@ export default function LogIn() {
             <p className='text-center pt-6 pb-4'>Or login with email</p>
             <div className='flex flex-col gap-2 pt-4'>
               <label>Email Adress</label>
-              <input type='email' placeholder='Email Adress' className='py-2 px-2 rounded-lg' />
+              <input type='email' placeholder='Email Adress' className='py-2 px-2 rounded-lg' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
             <div className='flex flex-col gap-2 pt-4'>
               <label>Password</label>
-              <input type='password' placeholder='Password' className='py-2 px-2 rounded-lg' />
+              <input type='password' placeholder='Password' className='py-2 px-2 rounded-lg' value={password} onChange={(e) => setPasswod(e.target.value)} />
             </div>
             <div className='flex gap-10 pt-4'>
               <div className='flex gap-2'>
