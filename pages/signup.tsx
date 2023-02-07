@@ -1,6 +1,13 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Swal from 'sweetalert2'
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useState } from 'react'
+import { Firebaseapp } from '@/Firebase/ClientApp';
+
+const auth = getAuth(Firebaseapp);
 
 export default function SignUp() {
 
@@ -13,6 +20,15 @@ export default function SignUp() {
     })
   }
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useCreateUserWithEmailAndPassword(auth);
+
   return (
     <>
       <Head>
@@ -23,6 +39,10 @@ export default function SignUp() {
       </Head>
       <main className='flex justify-center items-center min-h-screen'>
         <section className='flex flex-col'>
+          <Link href='./' className='pb-8 flex items-center gap-3 w-24'>
+            <AiOutlineArrowLeft />
+            <p className='text-xl'>Return</p>
+          </Link>
           <form className='w-96' onSubmit={(e) => HandleSubmit(e)}>
             <div>
               <h1 className='text-center text-4xl'>Sign Up</h1>
@@ -46,8 +66,7 @@ export default function SignUp() {
             <div className='flex flex-col gap-2 pt-4'>
               <label >Insert a photo</label>
               <input type='text' placeholder='Insert a url' className='py-2 px-2 rounded-lg' />
-              <p className='text-center py-2'>Or</p>
-              <input type='text' placeholder='Future drag-and-drop' className='py-2 px-2 rounded-lg' />
+              <p className='pt-2 text-sm text-center italic'>you do not need to add a picture, is just optional</p>
             </div>
             <div className='pt-8'>
               <button className='w-full bg-[#138859] rounded-lg h-12 '>Create a accont</button>

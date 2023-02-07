@@ -1,8 +1,13 @@
+import { FirebaseApp } from 'firebase/app'
 import Head from 'next/head'
 import Link from 'next/link'
-import { BsGithub, BsGoogle, BsTwitter } from 'react-icons/bs'
+import { BsGithub, BsGoogle, BsMicrosoft } from 'react-icons/bs'
+
+
 
 export default function LogIn() {
+
+
   return (
     <>
       <Head>
@@ -21,7 +26,7 @@ export default function LogIn() {
             <div className='flex justify-center gap-12 py-2'>
               <BsGithub className='h-10 w-10 cursor-pointer' />
               <BsGoogle className='h-10 w-10 cursor-pointer' />
-              <BsTwitter className='h-10 w-10 cursor-pointer' />
+              <BsMicrosoft className='h-10 w-10 cursor-pointer' />
             </div>
             <p className='text-center pt-6 pb-4'>Or login with email</p>
             <div className='flex flex-col gap-2 pt-4'>
@@ -38,7 +43,7 @@ export default function LogIn() {
                 <label>Keep me loged in</label>
               </div>
               <div>
-                <Link href='#' className='text-[#D8807D]'> Forget your password?</Link>
+                <Link href='passwordchange' className='text-[#D8807D]'> Forget your password?</Link>
               </div>
             </div>
             <div className='pt-4'>
