@@ -20,7 +20,7 @@ papel pra nada, praticamente tudo que eu uso é em algum dispositivo, no momento
 - Tailwind css
 - Framer motion
 
-### Requisitos e Funcionalidades
+## Requisitos e Funcionalidades
 
 - [ ] autenticacao (login para salvar os dados por perfil)
 - [ ] O quadro do trello em si
