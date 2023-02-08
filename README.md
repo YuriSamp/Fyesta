@@ -28,6 +28,7 @@ papel pra nada, praticamente tudo que eu uso é em algum dispositivo, no momento
 - [ ] Uma sessão pra ver o diario
 - [ ] criar a pagina do diario
 - [ ] criar o layout da aplicação
+- [ ] trocar o sweetAlert por React-Toast
 
 ## Bonus que eu pretendo bater
 
