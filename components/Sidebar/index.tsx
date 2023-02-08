@@ -2,7 +2,6 @@ import { BsSearch, BsGear, BsTrash, BsBook } from 'react-icons/bs'
 import { AiOutlineCalendar, AiOutlinePlus } from 'react-icons/ai'
 import { FiTarget } from 'react-icons/fi'
 
-
 export const Sidebar = () => {
   return (
     <aside className='w-64 min-h-screen flex flex-col items-center border-r-2 border-gray-800 justify-between'>
@@ -44,7 +43,7 @@ export const Sidebar = () => {
         <AiOutlinePlus className='text-2xl' />
         <p>New Page</p>
       </div>
-    </aside>
 
+    </aside>
   )
 }
