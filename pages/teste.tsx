@@ -1,6 +1,6 @@
 import Head from 'next/head';
-import Sidebar from '../components/sidebar';
-import Navbar from '../components/navbar';
+import { Sidebar } from '../components/sidebar';
+import { Navbar } from '../components/navbar';
 import { BsList } from 'react-icons/bs'
 import { AiOutlineCalendar } from 'react-icons/ai'
 

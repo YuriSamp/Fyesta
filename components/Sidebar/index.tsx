@@ -4,7 +4,7 @@ import { AiOutlineCalendar, AiOutlinePlus } from 'react-icons/ai'
 import { FiTarget } from 'react-icons/fi'
 import logo from '../../public/teste.png'
 
-export default function Sidebar() {
+export const Sidebar = () => {
   return (
     <aside className='w-64 min-h-screen flex flex-col items-center border-r-2 border-gray-800 justify-between'>
 

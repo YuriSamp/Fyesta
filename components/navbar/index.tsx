@@ -3,7 +3,7 @@ import React from 'react'
 // import logo from '../../public'
 import * as Avatar from '@radix-ui/react-avatar';
 
-export default function Navbar() {
+export const Navbar = () => {
   return (
     <header>
       <section className='flex py-4 px-8 border-b-2 border-gray-800 w-full justify-between items-center'>
