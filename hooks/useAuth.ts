@@ -1,7 +1,7 @@
 import { CustomParameters, getAuth, UserCredential } from 'firebase/auth';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
-import { app } from '@/Firebase/ClientApp';
+import { app } from 'Firebase/ClientApp';
 
 export const useAuth = (
   Provider: (
