@@ -1,15 +1,14 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
-import { getAuth } from 'firebase/auth';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useState } from 'react'
-import app from 'Firebase/ClientApp';
+import { auth } from '../Firebase/ClientApp';
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const auth = getAuth(app);
+
 
 export default function SignUp() {
 

@@ -1,7 +1,7 @@
 import { CustomParameters, getAuth, UserCredential } from 'firebase/auth';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useRouter } from 'next/router';
-import app from 'Firebase/ClientApp';
+import { auth } from 'Firebase/ClientApp';
 
 export const useAuth = (
   Provider: (
@@ -9,8 +9,6 @@ export const useAuth = (
     customOAuthParameters?: CustomParameters | undefined
   ) => Promise<UserCredential | undefined>
 ) => {
-  const auth = getAuth(app);
-
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
 
