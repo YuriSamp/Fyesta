@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { Sidebar } from '@ui/sidebar';
+import { Sidebar } from '@ui/teste';
 import { Navbar } from '@ui/navbar';
 import { BsList } from 'react-icons/bs'
 import { AiOutlineCalendar } from 'react-icons/ai'
