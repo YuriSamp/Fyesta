@@ -1,6 +1,5 @@
 import { CustomParameters, getAuth, UserCredential } from 'firebase/auth';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import { app } from '@/Firebase/ClientApp';
 
