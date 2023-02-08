@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { Sidebar } from '@ui/sidebar';
 import { Navbar } from '@ui/navbar';
 import { BsList } from 'react-icons/bs'
 import { AiOutlineCalendar } from 'react-icons/ai'
@@ -12,7 +13,7 @@ export default function Test() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main className='flex'>
-        {/* <Sidebar /> */}
+        <Sidebar />
         <div className='w-full'>
           <Navbar />
           <div className=' flex border-2 border-white mx-8 my-8 rounded-lg'>
