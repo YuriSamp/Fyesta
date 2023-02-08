@@ -1,5 +1,5 @@
 import Head from 'next/head';
-
+import { Navbar } from '@ui/navbar';
 import { BsList } from 'react-icons/bs'
 import { AiOutlineCalendar } from 'react-icons/ai'
 
@@ -14,7 +14,7 @@ export default function Test() {
       <main className='flex'>
         {/* <Sidebar /> */}
         <div className='w-full'>
-          {/* <Navbar /> */}
+          <Navbar />
           <div className=' flex border-2 border-white mx-8 my-8 rounded-lg'>
             <div className='mx-6 my-6 w-full'>
               <p className='text-2xl'>Insira um título</p>
