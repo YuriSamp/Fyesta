@@ -11,14 +11,14 @@ function AvatarWithDropDown() {
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <button className="IconButton" aria-label="Customise options">
+        <button className="rounded-full h-9 w-9 " aria-label="Customise options">
           <AvatarIcon />
         </button>
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content className="DropdownMenuContent" sideOffset={5}>
-          <DropdownMenu.Item className="DropdownMenuItem">
+          <DropdownMenu.Item className="text-black text-base flex items-center px-6 outline-none select-none">
             <p className='italic'>FYESTA</p>
           </DropdownMenu.Item>
           <DropdownMenu.Item className="DropdownMenuItem">
@@ -37,7 +37,7 @@ function AvatarWithDropDown() {
             Atalhos
           </DropdownMenu.Item>
 
-          <DropdownMenu.Separator className="DropdownMenuSeparator" />
+          <DropdownMenu.Separator className="h-[1px] m-1 bg-gray-800" />
           <DropdownMenu.Item className="DropdownMenuItem">
             <button className='flex gap-2'>
               <ExitIcon />
