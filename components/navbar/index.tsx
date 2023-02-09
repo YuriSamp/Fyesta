@@ -16,10 +16,10 @@ export const Navbar = () => {
         </div>
         <div className='flex gap-6 items-center'>
           <p>Welcome back</p>
-          <Avatar.Root className="w-9 h-9 inline-flex justify-center items-center overflow-hidden cursor-pointer select-none bg-white rounded-full">
+          <Avatar.Root className="w-10 h-10 inline-flex justify-center items-center overflow-hidden cursor-pointer select-none bg-white rounded-full">
             <Avatar.Image
               className='w-full h-full object-cover border-inherit'
-              src='../../public/logo.png'
+              src='https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80'
               alt=''
             />
             {/* <Avatar.Fallback className="AvatarFallback" delayMs={600}>
