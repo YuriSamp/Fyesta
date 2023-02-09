@@ -87,7 +87,7 @@ export default function SignUp() {
               <p className='pt-2 text-sm text-center italic'>you do not need to add a picture, is just optional</p>
             </div>
             <div className='pt-8'>
-              <button className='w-full bg-[#138859] rounded-lg h-12 '>Create a accont</button>
+              <button className='w-full bg-[#138859] rounded-lg h-12 '>Create a account</button>
             </div>
           </form>
         </section>

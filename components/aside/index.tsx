@@ -1,5 +1,5 @@
 import { BsSearch, BsGear, BsTrash, BsBook } from 'react-icons/bs'
-import { AiOutlineCalendar, AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlineCalendar, AiOutlinePlus, AiOutlineHeart, AiOutlineHome } from 'react-icons/ai'
 import { FiTarget } from 'react-icons/fi'
 
 export const Sidebar = () => {
@@ -8,7 +8,8 @@ export const Sidebar = () => {
 
       <section >
         <h1 className='pt-4 pb-1 text-4xl font-semibold italic border-b-2 border-white border-dashed'>FYESTA</h1>
-        <div className='flex flex-col gap-6 pt-28'>
+        <div className='flex flex-col gap-6 pt-20'>
+          <h2 className='text-lg italic text-center'>Menu</h2>
           <div className='flex gap-3 items-center cursor-pointer'>
             <BsSearch className='text-xl' />
             <p className='text-xl'>Search</p>
@@ -23,25 +24,34 @@ export const Sidebar = () => {
           </div>
         </div>
 
-        <div className='flex flex-col gap-6 pt-12 '>
+        <div className='flex flex-col gap-6 pt-20'>
+          <h2 className='text-lg italic text-center'>Pages</h2>
+          <div className='flex gap-3 items-center cursor-pointer'>
+            <AiOutlineHome className='text-xl' />
+            <p className='text-xl'>Home</p>
+          </div>
           <div className='flex gap-3 items-center cursor-pointer'>
             <BsBook className='text-xl' />
             <p className='text-xl'>Diario</p>
           </div>
           <div className='flex gap-3 items-center cursor-pointer'>
             <AiOutlineCalendar className='text-xl' />
-            <p className='text-xl' >Semana</p>
+            <p className='text-xl' >Calendario</p>
           </div>
           <div className='flex gap-3 items-center cursor-pointer'>
             <FiTarget className='text-xl' />
             <p className='text-xl'>Metas</p>
+          </div>
+          <div className='flex gap-3 items-center cursor-pointer'>
+            <AiOutlineHeart className='text-xl' />
+            <p className='text-xl'>Emoções</p>
           </div>
         </div>
       </section>
 
       <div className='flex gap-3 items-center cursor-pointer border-t-2 border-gray-800 w-full justify-center py-4 '>
         <AiOutlinePlus className='text-2xl' />
-        <p>New Page</p>
+        <p>New Entry</p>
       </div>
 
     </aside>
