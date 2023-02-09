@@ -15,7 +15,7 @@ papel pra nada, praticamente tudo que eu uso é em algum dispositivo, no momento
 - Firebase
 - Mongo
 - TypeScript
-- Zustand
+- Jotai
 - React Icons
 - Tailwind css
 - Framer motion
