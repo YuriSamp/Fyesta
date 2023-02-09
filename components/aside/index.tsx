@@ -1,6 +1,7 @@
-import { BsSearch, BsGear, BsTrash, BsBook } from 'react-icons/bs'
+import { BsSearch, BsGear, BsTrash, BsBook, BsPencil } from 'react-icons/bs'
 import { AiOutlineCalendar, AiOutlinePlus, AiOutlineHeart, AiOutlineHome } from 'react-icons/ai'
 import { FiTarget } from 'react-icons/fi'
+import Link from 'next/link'
 
 export const Sidebar = () => {
   return (
@@ -26,14 +27,22 @@ export const Sidebar = () => {
 
         <div className='flex flex-col gap-6 pt-20'>
           <h2 className='text-lg italic text-center'>Pages</h2>
-          <div className='flex gap-3 items-center cursor-pointer'>
+          <Link
+            href='/'
+            className='flex gap-3 items-center cursor-pointer'>
             <AiOutlineHome className='text-xl' />
             <p className='text-xl'>Home</p>
-          </div>
+          </Link>
           <div className='flex gap-3 items-center cursor-pointer'>
             <BsBook className='text-xl' />
             <p className='text-xl'>Diario</p>
           </div>
+          <Link
+            href='./planner'
+            className='flex gap-3 items-center cursor-pointer'>
+            <BsPencil className='text-xl' />
+            <p className='text-xl'>Planner</p>
+          </Link>
           <div className='flex gap-3 items-center cursor-pointer'>
             <AiOutlineCalendar className='text-xl' />
             <p className='text-xl' >Calendario</p>

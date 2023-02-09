@@ -1,10 +1,13 @@
 import Head from 'next/head';
 import { Sidebar } from '@ui/aside';
 import { Navbar } from '@ui/navbar';
-import { BsList } from 'react-icons/bs'
-import { AiOutlineCalendar } from 'react-icons/ai'
+import { useRouter } from 'next/router';
 
-export default function Test() {
+export default function Home() {
+
+  const router = useRouter()
+  const page = router.pathname
+
   return (
     <>
       <Head>
@@ -15,23 +18,12 @@ export default function Test() {
       <main className='flex'>
         <Sidebar />
         <div className='w-full'>
-          <Navbar />
-          <div className=' flex border-2 border-white mx-8 my-8 rounded-lg'>
-            <div className='mx-6 my-6 w-full'>
-              <p className='text-2xl'>Insira um título</p>
-              <div className='pt-6 pb-3 flex gap-3 items-center'>
-                <BsList />
-                <p>Tags</p>
-              </div>
-              <div className='w-full border-b-2 border-white'>
-                <div className='py-3 pb-6 flex gap-3 items-center '>
-                  <AiOutlineCalendar />
-                  <p>Date</p>
-                </div>
-              </div>
-              <input className='mt-4 font-thin italic bg-transparent w-full' placeholder='Comece a escrever agora mesmo' />
-            </div>
-          </div>
+          <Navbar
+            Page={page}
+          />
+          <section className='flex flex-col mx-8 my-8 '>
+
+          </section>
         </div>
       </main>
     </>

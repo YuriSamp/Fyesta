@@ -2,8 +2,13 @@ import React from 'react'
 import * as Separator from '@radix-ui/react-separator';
 import AvatarWithDropDown from '@ui/avatar/AvatarWithDropDown';
 
+interface Props {
+  Page: string
+}
 
-export const Navbar = () => {
+export const Navbar = ({ Page }: Props) => {
+
+
 
   return (
     <header>
