@@ -1,5 +1,5 @@
 import { BsSearch, BsGear, BsTrash, BsBook } from 'react-icons/bs'
-import { AiOutlineCalendar, AiOutlinePlus } from 'react-icons/ai'
+import { AiOutlineCalendar, AiOutlinePlus, AiOutlineHeart } from 'react-icons/ai'
 import { FiTarget } from 'react-icons/fi'
 
 export const Sidebar = () => {
@@ -30,11 +30,15 @@ export const Sidebar = () => {
           </div>
           <div className='flex gap-3 items-center cursor-pointer'>
             <AiOutlineCalendar className='text-xl' />
-            <p className='text-xl' >Semana</p>
+            <p className='text-xl' >Calendario</p>
           </div>
           <div className='flex gap-3 items-center cursor-pointer'>
             <FiTarget className='text-xl' />
             <p className='text-xl'>Metas</p>
+          </div>
+          <div className='flex gap-3 items-center cursor-pointer'>
+            <FiTarget className='text-xl' />
+            <p className='text-xl'>Emoções</p>
           </div>
         </div>
       </section>

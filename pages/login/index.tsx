@@ -124,7 +124,7 @@ export default function LogIn() {
               </div>
             </div>
             <div className='pt-4'>
-              <button className='w-full bg-[#138859] rounded-lg h-12'>Log in</button>
+              <button className='w-full bg-[#138859] rounded-lg h-12 text-center'>Log in</button>
             </div>
           </form>
           <div className='pt-4'>
