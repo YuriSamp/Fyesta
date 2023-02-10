@@ -27,11 +27,11 @@ export default function Planner() {
           <section className='flex flex-col mx-8 my-8 '>
             <section className='flex justify-evenly'>
               <div className='pt-11 flex flex-col justify-center '>
-                <h1 className='text-center text-4xl' >Planos para um dia incrivel ! </h1>
+                <h1 className='text-center text-5xl' >Planos para um dia incrivel ! </h1>
               </div>
 
               <div className='pt-8 flex flex-col gap-6'>
-                <h1 className='pl-6 text-2xl'>Informações importantes</h1>
+                <h1 className='text-2xl'>Informações importantes</h1>
                 <div className='flex w-full gap-3 items-center'>
                   <AiOutlineCalendar className='w-7 h-7' />
                   <p>Informe o dia</p>
@@ -49,14 +49,14 @@ export default function Planner() {
 
             <div className=' pt-20 grid grid-cols-2  2xl:grid-cols-3 justify-items-center'>
               <div className='flex flex-col gap-3'>
-                <h1 className='pl-6 text-2xl'>Manhâ</h1>
+                <h1 className='pl-8 text-2xl'>Manhâ</h1>
                 <PlannerLista
                   checkbox={true}
 
                 />
 
                 <div className='pt-20 flex flex-col gap-3'>
-                  <h1 className='pl-6 text-2xl'>Tarde</h1>
+                  <h1 className='pl-8 text-2xl'>Tarde</h1>
                   <PlannerLista
                     checkbox={true}
 
@@ -66,7 +66,7 @@ export default function Planner() {
 
               <div>
                 <div className='flex flex-col gap-3'>
-                  <h1 className='pl-6 text-2xl'>Noite</h1>
+                  <h1 className='pl-8 text-2xl'>Noite</h1>
                   <PlannerLista
                     checkbox={true}
 
@@ -74,7 +74,7 @@ export default function Planner() {
                 </div>
 
                 <div className='pt-[92px] flex flex-col gap-3'>
-                  <h1 className='pl-6 text-2xl'>Notas</h1>
+                  <h1 className='text-2xl'>Notas</h1>
                   <PlannerLista
                     checkbox={false}
 
@@ -84,7 +84,7 @@ export default function Planner() {
 
               <div>
                 <div className='flex flex-col gap-3 pt-10 2xl:pt-0'>
-                  <h1 className='pl-6 text-2xl'>Metas</h1>
+                  <h1 className='text-2xl'>Metas</h1>
                   <PlannerLista
                     checkbox={false}
                   />

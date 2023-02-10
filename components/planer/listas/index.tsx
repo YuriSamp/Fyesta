@@ -21,7 +21,7 @@ function PlannerLista({ checkbox, Quantidade }: Props) {
   for (let index = 0; index < QuantidadeDefault; index++) {
     camposSemCheckbox.push(
       <div className='flex w-full' key={index}>
-        <input className='bg-transparent border-b-2 border-white outline-none w-80' />
+        <input className='bg-transparent border-b-2 border-white outline-none w-80 text-xl' />
       </div>
     )
   }
