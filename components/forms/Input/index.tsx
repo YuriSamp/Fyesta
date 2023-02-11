@@ -1,9 +1,10 @@
 import * as Label from '@radix-ui/react-label';
+import { type } from 'os';
 import { Dispatch, SetStateAction } from 'react'
 
 interface Props {
-  labelText: string
-  Id: string
+  labelText?: string
+  Id?: string
   type: string
   placeholder: string
   value: string
@@ -24,8 +25,8 @@ export const InputWithLabel = ({ labelText, Id, type, onChange, placeholder, val
   )
 }
 
-export const Input = (props: any) => {
+export const Input = ({ labelText, Id, type, onChange, placeholder, value }: Props) => {
   return (
-    <input type='email' placeholder='Email Address' className='py-2 px-2 rounded-lg' value={props} onChange={(e) => props(e.target.value)} />
+    <input type={type} placeholder={placeholder} className='py-2 px-2 rounded-lg' value={value} onChange={(e) => onChange(e.target.value)} />
   )
 }

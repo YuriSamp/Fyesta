@@ -57,6 +57,7 @@ a {
 
 .DropdownMenuContent {
   position: relative;
+  top: 12px;
   right: 15px;
   min-width: 220px;
   background-color: white;
@@ -92,11 +93,35 @@ a {
   padding-left: 25px;
   user-select: none;
   outline: none;
+  cursor: pointer;
 }
 
 .DropdownMenuItem[data-highlighted] {
   background-color: rgb(31, 41, 55);
   color: white;
+}
+
+.buttonaside::after {
+  position: absolute;
+  content: '';
+  display: block;
+
+  bottom: -10px;
+  left: 0;
+
+  background: rgb(240, 240, 240);
+
+  width: 100%;
+  height: 2px;
+
+  transition: transform 0.3s ease-in-out;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.buttonaside:hover::after {
+  transform: scaleX(1);
+  transform-origin: right;
 }
 
 @keyframes slideUpAndFade {
@@ -141,4 +166,46 @@ a {
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.settingUnderline::after {
+  position: absolute;
+  content: '';
+  bottom: -10px;
+  left: 0;
+  background: #138859;
+  width: 100%;
+  height: 2px;
+}
+
+// switch css
+button {
+  all: unset;
+}
+
+.SwitchRoot {
+  width: 42px;
+  height: 25px;
+  background-color: white;
+  border-radius: 9999px;
+  position: relative;
+}
+
+.SwitchRoot[data-state='checked'] {
+  background-color: #138859;
+}
+
+.SwitchThumb {
+  display: block;
+  width: 21px;
+  height: 21px;
+  background-color: black;
+  border-radius: 9999px;
+  box-shadow: 0 2px 2px var(--blackA7);
+  transition: transform 100ms;
+  transform: translateX(2px);
+}
+
+.SwitchThumb[data-state='checked'] {
+  transform: translateX(19px);
 }
