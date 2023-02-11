@@ -6,7 +6,6 @@ import { CheckIcon } from '@radix-ui/react-icons';
 function PlannerListaInput() {
 
   const [checked, setChecked] = useState(false)
-  console.log(checked)
 
   return (
     <div className='flex w-full gap-3 items-center'>

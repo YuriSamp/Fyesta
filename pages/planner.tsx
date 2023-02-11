@@ -52,14 +52,14 @@ export default function Planner() {
                 <h1 className='pl-8 text-2xl'>Manhâ</h1>
                 <PlannerLista
                   checkbox={true}
-
+                  Quantidade={5}
                 />
 
                 <div className='pt-20 flex flex-col gap-3'>
                   <h1 className='pl-8 text-2xl'>Tarde</h1>
                   <PlannerLista
                     checkbox={true}
-
+                    Quantidade={5}
                   />
                 </div>
               </div>
@@ -69,7 +69,7 @@ export default function Planner() {
                   <h1 className='pl-8 text-2xl'>Noite</h1>
                   <PlannerLista
                     checkbox={true}
-
+                    Quantidade={5}
                   />
                 </div>
 
@@ -77,7 +77,7 @@ export default function Planner() {
                   <h1 className='text-2xl'>Notas</h1>
                   <PlannerLista
                     checkbox={false}
-
+                    Quantidade={5}
                   />
                 </div>
               </div>
@@ -87,6 +87,7 @@ export default function Planner() {
                   <h1 className='text-2xl'>Metas</h1>
                   <PlannerLista
                     checkbox={false}
+                    Quantidade={5}
                   />
                 </div>
               </div>
