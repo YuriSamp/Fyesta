@@ -6,7 +6,6 @@ import Link from 'next/link'
 export const Sidebar = () => {
   return (
     <aside className='w-64 min-h-screen flex flex-col items-center border-r-2 border-gray-800 justify-between'>
-
       <section >
         <h1 className='pt-4 pb-1 text-4xl font-semibold italic border-b-2 border-white border-dashed text-center'>FYESTA</h1>
         <div className='flex flex-col gap-7 pt-20'>
@@ -33,28 +32,30 @@ export const Sidebar = () => {
             <AiOutlineHome className='text-xl' />
             <p className='text-xl'>Home</p>
           </Link>
-          <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
+
+          <Link href='/' className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <BsBook className='text-xl' />
             <p className='text-xl'>Diario</p>
-          </div>
+          </Link>
+
           <Link
             href='./planner'
             className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <BsPencil className='text-xl' />
             <p className='text-xl'>Planner</p>
           </Link>
-          <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
+          <Link href='/' className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <AiOutlineCalendar className='text-xl' />
             <p className='text-xl' >Calendario</p>
-          </div>
-          <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
+          </Link>
+          <Link href='/' className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <FiTarget className='text-xl' />
             <p className='text-xl'>Metas</p>
-          </div>
-          <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
+          </Link>
+          <Link href='/' className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <AiOutlineHeart className='text-xl' />
             <p className='text-xl'>Emoções</p>
-          </div>
+          </Link>
         </div>
       </section>
 

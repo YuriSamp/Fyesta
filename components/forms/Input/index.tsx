@@ -1,6 +1,6 @@
 import * as Label from '@radix-ui/react-label';
-import { type } from 'os';
 import { Dispatch, SetStateAction } from 'react'
+import { ControledInput } from './test';
 
 interface Props {
   labelText?: string
@@ -15,18 +15,11 @@ export const InputWithLabel = ({ labelText, Id, type, onChange, placeholder, val
   return (
     <>
       <div className='flex flex-col gap-2 pt-4'>
-        <label>Email Address</label>
         <Label.Root htmlFor={Id}>
           {labelText}
         </Label.Root>
-        <input type={type} id={Id} placeholder={placeholder} className='py-2 px-2 rounded-lg' value={value} onChange={(e) => onChange(e.target.value)} />
+        <ControledInput type={type} Id={Id} placeholder={placeholder} value={value} onChange={onChange} />
       </div>
     </>
-  )
-}
-
-export const Input = ({ labelText, Id, type, onChange, placeholder, value }: Props) => {
-  return (
-    <input type={type} placeholder={placeholder} className='py-2 px-2 rounded-lg' value={value} onChange={(e) => onChange(e.target.value)} />
   )
 }

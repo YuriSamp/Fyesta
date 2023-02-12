@@ -5,12 +5,7 @@
 @import '@radix-ui/colors/mauve.css';
 @import '@radix-ui/colors/violet.css';
 
-// Cores que eu to usando
-// laranja : #D8807D
-// verde : #138859
-// rosa :
-// Vampire black :  #03040B
-// Cream white : #FCFBF4
+//Ver o next theme para fazer os temas
 
 :root {
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
