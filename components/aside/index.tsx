@@ -6,7 +6,6 @@ import Link from 'next/link'
 export const Sidebar = () => {
   return (
     <aside className='w-64 min-h-screen flex flex-col items-center border-r-2 border-gray-800 justify-between'>
-
       <section >
         <h1 className='pt-4 pb-1 text-4xl font-semibold italic border-b-2 border-white border-dashed text-center'>FYESTA</h1>
         <div className='flex flex-col gap-7 pt-20'>
