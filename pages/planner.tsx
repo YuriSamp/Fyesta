@@ -3,7 +3,7 @@ import { Sidebar } from '@ui/aside';
 import { Navbar } from '@ui/navbar';
 import { AiOutlineCalendar, AiOutlineHeart } from 'react-icons/ai'
 import { BsBook } from 'react-icons/bs'
-import PlannerLista from '@ui/planer/listas';
+import PlannerLista from '@ui/planner/listas';
 import { useRouter } from 'next/router';
 
 export default function Planner() {

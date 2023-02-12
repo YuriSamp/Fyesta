@@ -32,28 +32,30 @@ export const Sidebar = () => {
             <AiOutlineHome className='text-xl' />
             <p className='text-xl'>Home</p>
           </Link>
-          <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
+
+          <Link href='/' className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <BsBook className='text-xl' />
             <p className='text-xl'>Diario</p>
-          </div>
+          </Link>
+
           <Link
             href='./planner'
             className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <BsPencil className='text-xl' />
             <p className='text-xl'>Planner</p>
           </Link>
-          <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
+          <Link href='/' className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <AiOutlineCalendar className='text-xl' />
             <p className='text-xl' >Calendario</p>
-          </div>
-          <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
+          </Link>
+          <Link href='/' className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <FiTarget className='text-xl' />
             <p className='text-xl'>Metas</p>
-          </div>
-          <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
+          </Link>
+          <Link href='/' className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <AiOutlineHeart className='text-xl' />
             <p className='text-xl'>Emoções</p>
-          </div>
+          </Link>
         </div>
       </section>
 

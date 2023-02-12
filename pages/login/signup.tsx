@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useState } from 'react'
-import { auth } from '../../Firebase/ClientApp';
+import { auth } from '../../server/Firebase/ClientApp';
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
