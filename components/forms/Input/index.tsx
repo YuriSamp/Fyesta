@@ -21,20 +21,12 @@ const inputStyles = cva(
   },
 );
 
-export interface Uncontroled extends VariantProps<typeof inputStyles> {
+export interface Controled extends VariantProps<typeof inputStyles> {
   Id?: string
   type: string
   placeholder: string
   value: string
   onChange: Dispatch<SetStateAction<string>>
-}
-
-interface Controled extends Uncontroled { }
-
-export function UncontroledInput({ Width, intent, type, Id, placeholder }: Uncontroled) {
-  return (
-    <input className={inputStyles({ Width, intent })} type={type} id={Id} placeholder={placeholder} />
-  )
 }
 
 export function ControledInput({ Width, intent, type, Id, placeholder, value, onChange }: Controled) {
