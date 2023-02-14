@@ -8,7 +8,7 @@ import { auth } from '../../server/Firebase/ClientApp';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ControledInput } from '@ui/forms/Input/test';
+import { ControledInput } from '@ui/forms/Input';
 
 
 export default function LogIn() {
