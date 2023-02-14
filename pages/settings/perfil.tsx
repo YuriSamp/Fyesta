@@ -1,9 +1,17 @@
+import Header from '@ui/settings/header'
+import { useRouter } from 'next/router'
 
 export default function Perfil() {
+  const router = useRouter()
+  const page = router.pathname
+
 
   return (
     <>
-      <section >
+      <section className='px-96 pt-16 '  >
+        <Header
+          Page={page}
+        />
         <div className='py-10 flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Email</h2>

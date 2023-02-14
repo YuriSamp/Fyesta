@@ -30,51 +30,51 @@ export default function Planner() {
           </div>
         </section>
 
-        <div className=' pt-20 grid grid-cols-2  2xl:grid-cols-3 justify-items-center'>
+        <section className=' pt-20 grid grid-cols-2  2xl:grid-cols-3 justify-items-center'>
           <div className='flex flex-col gap-3'>
-            <h1 className='pl-8 text-2xl'>Manhâ</h1>
             <PlannerLista
               checkbox={true}
               Quantidade={5}
+              Title='Manhâ'
             />
 
             <div className='pt-20 flex flex-col gap-3'>
-              <h1 className='pl-8 text-2xl'>Tarde</h1>
               <PlannerLista
                 checkbox={true}
                 Quantidade={5}
+                Title='Tarde'
               />
             </div>
           </div>
 
           <div>
             <div className='flex flex-col gap-3'>
-              <h1 className='pl-8 text-2xl'>Noite</h1>
               <PlannerLista
                 checkbox={true}
                 Quantidade={5}
+                Title='Noite'
               />
             </div>
 
             <div className='pt-[92px] flex flex-col gap-3'>
-              <h1 className='text-2xl'>Notas</h1>
               <PlannerLista
                 checkbox={false}
                 Quantidade={5}
+                Title='Notas'
               />
             </div>
           </div>
 
           <div>
             <div className='flex flex-col gap-3 pt-10 2xl:pt-0'>
-              <h1 className='text-2xl'>Metas</h1>
               <PlannerLista
                 checkbox={false}
                 Quantidade={5}
+                Title='Metas'
               />
             </div>
           </div>
-        </div>
+        </section>
       </section>
 
     </>

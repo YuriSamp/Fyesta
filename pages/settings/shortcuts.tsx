@@ -9,17 +9,11 @@ export default function Shortcuts() {
 
   return (
     <>
-      <Head>
-        <title>Fyesta</title>
-      </Head>
-      <Navbar
-        Page={page}
-      />
-      <main className='px-96 pt-16'>
+      <section className='px-96 pt-16'>
         <Header
           Page={page}
         />
-      </main>
+      </section>
     </>
   )
 }

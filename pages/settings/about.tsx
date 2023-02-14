@@ -1,13 +1,20 @@
 import { AiOutlineGithub } from 'react-icons/ai'
 import Link from 'next/link'
+import Header from '@ui/settings/header'
+import { useRouter } from 'next/router'
 
 
 
 export default function About() {
+  const router = useRouter()
+  const page = router.pathname
 
   return (
     <>
-      <section >
+      <section className='px-96 pt-16' >
+        <Header
+          Page={page}
+        />
         <div className='pt-5 flex flex-col  px-4'>
           <h1 className='text-2xl py-5 '>Porque esse aplicativo existe ? </h1>
           <p className='text-lg tracking-wider'>Esse projeto nasceu da minha vontade de ter um lugar para escrever o meu diário,
