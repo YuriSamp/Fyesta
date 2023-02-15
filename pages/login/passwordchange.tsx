@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { auth } from '../../server/Firebase/ClientApp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { InputWithLabel } from '@ui/forms/Input/InputWithLabel';
 
 export default function Passwordchange() {
 
@@ -43,10 +44,7 @@ export default function Passwordchange() {
               <h1 className='text-center text-4xl'>Forgot your password?</h1>
             </div>
             <p className='text-center py-6 text-xl'>Dont worry, insert your email</p>
-            <div className='flex flex-col gap-2 pt-4'>
-              <label>Email Address</label>
-              <input type='email' placeholder='Email Address' className='py-2 px-2 rounded-lg' value={email} onChange={(e) => setEmail(e.target.value)} />
-            </div>
+            <InputWithLabel labelText='Email Address' type='email' Id='Email' placeholder='Email Address' value={email} onChange={setEmail} />
             <div className='pt-4'>
               <button className='w-full bg-DarkModeGreen rounded-lg h-12 text-center'>Log In</button>
             </div>

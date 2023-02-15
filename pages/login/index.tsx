@@ -8,7 +8,8 @@ import { auth } from '../../server/Firebase/ClientApp';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ControledInput } from '@ui/forms/Input/test';
+import { ControledInput } from '@ui/forms/Input';
+import { InputWithLabel } from '@ui/forms/Input/InputWithLabel';
 
 
 export default function LogIn() {
@@ -105,10 +106,7 @@ export default function LogIn() {
               <BsGoogle className='h-10 w-10 cursor-pointer' title='Google' onClick={() => HandleLoginWithProvider(signInWithGoogle)} />
             </div>
             <p className='text-center pt-6 pb-4'>Or login with email</p>
-            <div className='flex flex-col gap-2 pt-4'>
-              <label>Email Address</label>
-              <ControledInput type='email' placeholder='Email Address' value={email} onChange={setEmail} />
-            </div>
+            <InputWithLabel labelText='Email Address' type='email' placeholder='Email Address' value={email} onChange={setEmail} />
             <div className='flex flex-col gap-2 pt-4'>
               <label>Password</label>
               <ControledInput type='password' placeholder='Password' value={password} onChange={(e) => setPassword} />

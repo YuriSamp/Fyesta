@@ -1,9 +1,27 @@
-import * as Label from '@radix-ui/react-label';
-import { Dispatch, SetStateAction } from 'react'
-import { ControledInput } from './test';
+import { cva, VariantProps } from 'class-variance-authority';
+import { Dispatch, SetStateAction } from 'react';
 
-interface Props {
-  labelText?: string
+const inputStyles = cva(
+  'py-2 px-2 rounded-lg',
+  {
+    variants: {
+      intent: {
+        primary: 'bg-InputGray',
+        secondary: 'bg-gray-200 text-blue-300'
+      },
+      Width: {
+        sm: 'w-4',
+        md: 'w-12',
+        lg: 'w-24',
+      },
+    },
+    defaultVariants: {
+      intent: 'primary'
+    }
+  },
+);
+
+export interface Controled extends VariantProps<typeof inputStyles> {
   Id?: string
   type: string
   placeholder: string
@@ -11,15 +29,8 @@ interface Props {
   onChange: Dispatch<SetStateAction<string>>
 }
 
-export const InputWithLabel = ({ labelText, Id, type, onChange, placeholder, value }: Props) => {
+export function ControledInput({ Width, intent, type, Id, placeholder, value, onChange }: Controled) {
   return (
-    <>
-      <div className='flex flex-col gap-2 pt-4'>
-        <Label.Root htmlFor={Id}>
-          {labelText}
-        </Label.Root>
-        <ControledInput type={type} Id={Id} placeholder={placeholder} value={value} onChange={onChange} />
-      </div>
-    </>
+    <input className={inputStyles({ Width, intent })} type={type} id={Id} placeholder={placeholder} value={value} onChange={(e) => onChange(e.target.value)} />
   )
 }

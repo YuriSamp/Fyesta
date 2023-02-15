@@ -2,12 +2,13 @@ import React from 'react'
 import * as Avatar from '@radix-ui/react-avatar';
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link';
+import AvatarIcon from '@ui/avatar';
 
-const routes = [
-  { name: 'Perfil e visibilidade', link: '/seetings/perfil' },
+export const routes = [
+  { name: 'Perfil e visibilidade', link: '/settings/perfil' },
   { name: 'Configurações', link: '/settings' },
-  { name: 'Atividade', link: '/settings/atividade' },
-  { name: 'Atalhos', link: '/seetings/shortcuts' },
+  { name: 'Atividade', link: '/settings/activity' },
+  { name: 'Atalhos', link: '/settings/shortcuts' },
   { name: 'Sobre', link: '/settings/about' },
 ]
 
@@ -25,16 +26,7 @@ export default function Header({ Page }: Props) {
       <section className='pt-10 pb-2  border-b-2 border-gray-800'>
         <div className='flex'>
           <div className='pl-6' >
-            <Avatar.Root className='w-24 h-24 inline-flex justify-center items-center overflow-hidden cursor-pointer select-none bg-white rounded-full'>
-              <Avatar.Image
-                className='w-full h-full object-cover border-inherit'
-                src='https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80'
-                alt=''
-              />
-              <Avatar.Fallback className="AvatarFallback" delayMs={600}>
-                CT
-              </Avatar.Fallback>
-            </Avatar.Root>
+            <AvatarIcon Width='lg' />
           </div>
           <div className='flex flex-col pl-8 pt-3'>
             <p className='text-3xl'>Yuri Sampaio</p>
