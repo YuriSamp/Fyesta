@@ -27,7 +27,7 @@ function AvatarWithDropDown() {
               className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-gray-800 hover:text-white"
               key={index}
             >
-              <Link href={item.link}>{item.name}</Link>
+              <Link href={item.link} className='w-full' >{item.name}</Link>
             </DropdownMenu.Item>
 
           ))}

@@ -1,5 +1,5 @@
 
-export default function Emoções() {
+export default function Emocões() {
   return (
     <div>Hello World</div>
   )
