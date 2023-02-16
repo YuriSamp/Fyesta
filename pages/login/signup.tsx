@@ -7,7 +7,7 @@ import { auth } from '../../server/Firebase/ClientApp';
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { InputWithLabel } from '@ui/forms/Input/InputWithLabel';
+import { InputWithLabel } from '@ui/Input/InputWithLabel';
 
 
 
@@ -52,7 +52,7 @@ export default function SignUp() {
       <Head>
         <title>Fyesta</title>
       </Head>
-      <main className='flex justify-center items-center min-h-screen'>
+      <main className='flex justify-center items-center min-h-screen ' >
         <ToastContainer />
         <section className='flex flex-col'>
           <Link href='./' className='pb-8 flex items-center gap-3 w-24'>
