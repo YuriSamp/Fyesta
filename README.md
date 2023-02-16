@@ -23,14 +23,18 @@ papel pra nada, praticamente tudo que eu uso é em algum dispositivo, no momento
 
 ## Requisitos e Funcionalidades
 
-- [ ] autenticacao (login para salvar os dados por perfil)
-- [ ] O quadro do trello em si
-- [ ] O cronograma do trello
-- [ ] Uma sessão pra ver o diario
-- [ ] criar a pagina do diario
-- [ ] criar o layout da aplicação
-- [ ] Fazer uma landing page para apresentação
-- [ ] Modal com todas as configurações
+- [ ] Autenticacao (login para salvar os dados do perfil)
+- [ ] Página da home após o login
+- [ ] Pagina de diário
+- [ ] Pagina do planner
+- [ ] Página 404
+- [ ] Página de metas / emoções / calendario
+- [ ] Landing Page para apresentar a ideia
+- [ ] Criar 3 temas, dark ligth e um colorido
+- [ ] Adicionar um banco de dados pra salvar o input do usuario
+- [ ] Criptografar os dados enviados pro banco de dados e descriptografar ao receber no front-end
+- [ ] Salvar o historico do usuario na aplicação
+- [ ] Uma lixeira que exclui os itens depois de 7 dias
 
 ## Bonus que eu pretendo bater
 
