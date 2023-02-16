@@ -1,5 +1,7 @@
 export default function NotFound() {
   return (
-    <h1>TA PERDIDO AMIGAO?</h1>
+    <div className='flex justify-center items-center'>
+      <p>Em construção</p>
+    </div>
   )
 }

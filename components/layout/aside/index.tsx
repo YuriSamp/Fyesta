@@ -1,4 +1,4 @@
-import { BsSearch, BsGear, BsTrash, BsBook, BsPencil } from 'react-icons/bs'
+import { BsSearch, BsTrash, BsBook, BsPencil, BsClockHistory } from 'react-icons/bs'
 import { AiOutlineCalendar, AiOutlinePlus, AiOutlineHeart, AiOutlineHome } from 'react-icons/ai'
 import { FiTarget } from 'react-icons/fi'
 import Link from 'next/link'
@@ -25,8 +25,8 @@ export const Sidebar = () => {
             <p className='text-xl'>Busca</p>
           </div>
           <div className='flex gap-3 items-center cursor-pointer buttonaside relative '>
-            <BsGear className='text-xl' />
-            <p className='text-xl'>Configurações</p>
+            <BsClockHistory className='text-xl' />
+            <p className='text-xl'>Histórico</p>
           </div>
           <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <BsTrash className='text-xl' />
@@ -46,12 +46,6 @@ export const Sidebar = () => {
           ))}
         </div>
       </section>
-
-      <div className='flex gap-3 items-center cursor-pointer border-t-2 border-gray-800 w-full justify-center py-4  hover:bg-gray-800'>
-        <AiOutlinePlus className='text-2xl' />
-        <p>Nova Entrada</p>
-      </div>
-
     </aside>
   )
 }

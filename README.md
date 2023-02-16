@@ -13,7 +13,8 @@ papel pra nada, praticamente tudo que eu uso é em algum dispositivo, no momento
 
 - Next
 - Firebase
-- Mongo
+- Prisma
+- Algum banco de dados
 - TypeScript
 - Jotai
 - React Icons

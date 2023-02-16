@@ -1,6 +1,8 @@
 
 export default function Metas() {
   return (
-    <div>Hello World</div>
+    <div className='flex justify-center items-center'>
+      <p>Em construção</p>
+    </div>
   )
 }

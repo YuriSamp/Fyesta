@@ -28,7 +28,9 @@ export default function Layout({ page, children }: Props) {
               <Navbar
                 Page={page}
               />
-              {children}
+              <section className='flex flex-col mx-12 my-12 '>
+                {children}
+              </section>
             </section>
           </main>
       }
