@@ -3,20 +3,27 @@ import Link from 'next/link'
 import { BsGithub, BsGoogle } from 'react-icons/bs'
 import { CustomParameters, UserCredential } from 'firebase/auth';
 import { useSignInWithGithub, useSignInWithGoogle, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { auth } from '../../server/Firebase/ClientApp';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ControledInput } from '@ui/forms/Input';
+import { Input } from '@ui/forms/Input';
 import { InputWithLabel } from '@ui/forms/Input/InputWithLabel';
 
+interface FormLoginElements extends HTMLFormControlsCollection {
+  email: HTMLInputElement
+  password: HTMLInputElement
+}
+
+interface FormLoginParams extends HTMLFormElement {
+  readonly elements: FormLoginElements
+}
 
 export default function LogIn() {
+  const [test, setTest] = useState("")
 
   const router = useRouter()
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
 
   const [
     signInWithEmailAndPassword,
@@ -48,7 +55,6 @@ export default function LogIn() {
     ) => Promise<UserCredential | undefined>
   ) => {
 
-
     Provider().then((res) => {
       if (res !== undefined) {
         router.push('/');
@@ -61,21 +67,28 @@ export default function LogIn() {
     });
   };
 
-  const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const HandleSubmit = (e: FormEvent<FormLoginParams>) => {
+
     e.preventDefault()
-    signInWithEmailAndPassword(email, password).then(res => {
 
-      if (email.length === 0) {
-        const notify = () => toast.warn("O campo de email encontra-se vazio");
-        notify()
-        return
-      }
+    const { 
+      email: { value: emailValue },
+      password: { value: passwordValue} 
+    } = e.currentTarget.elements
 
-      if (password.length === 0) {
-        const notify = () => toast.warning("O campo de senha encontra-se vazio");
-        notify()
-        return
-      }
+    if (!emailValue.trim()) {
+      const notify = () => toast.warn("O campo de email encontra-se vazio");
+      notify()
+      return
+    }
+
+    if (!passwordValue.trim()) {
+      const notify = () => toast.warning("O campo de senha encontra-se vazio");
+      notify()
+      return
+    }
+
+    signInWithEmailAndPassword(emailValue, passwordValue).then(res => {
 
       if (res !== undefined) {
         router.push('/teste')
@@ -96,7 +109,7 @@ export default function LogIn() {
       <main className='flex justify-center items-center min-h-screen'>
         <ToastContainer />
         <section className='flex flex-col'>
-          <form onSubmit={(e) => HandleSubmit(e)}>
+          <form onSubmit={HandleSubmit}>
             <div>
               <h1 className='text-center text-4xl'>Welcome Back</h1>
             </div>
@@ -106,10 +119,10 @@ export default function LogIn() {
               <BsGoogle className='h-10 w-10 cursor-pointer' title='Google' onClick={() => HandleLoginWithProvider(signInWithGoogle)} />
             </div>
             <p className='text-center pt-6 pb-4'>Or login with email</p>
-            <InputWithLabel labelText='Email Address' type='email' placeholder='Email Address' value={email} onChange={setEmail} />
+            <InputWithLabel labelText='Email Address' type='email' placeholder='Email Address' name="email" />
             <div className='flex flex-col gap-2 pt-4'>
               <label>Password</label>
-              <ControledInput type='password' placeholder='Password' value={password} onChange={(e) => setPassword} />
+              <Input type='password' placeholder='Password' name='password'/>
             </div>
             <div className='flex gap-10 pt-4'>
               <div className='flex gap-2'>
