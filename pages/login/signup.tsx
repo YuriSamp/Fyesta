@@ -52,7 +52,7 @@ export default function SignUp() {
       <Head>
         <title>Fyesta</title>
       </Head>
-      <main className='flex justify-center items-center min-h-screen'>
+      <main className='flex justify-center items-center min-h-screen ' >
         <ToastContainer />
         <section className='flex flex-col'>
           <Link href='./' className='pb-8 flex items-center gap-3 w-24'>

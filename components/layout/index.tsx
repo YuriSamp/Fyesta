@@ -16,23 +16,34 @@ export default function Layout({ page, children }: Props) {
         <title>Fyesta</title>
       </Head>
       {
-        page.includes('/settings') || page.includes('login') || page.includes('404')
+        page.includes('/settings') || page.includes('login')
           ?
           <>
             {children}
           </>
           :
-          <main className='flex'>
-            <Sidebar />
-            <section className='w-full'>
+          page.includes('404')
+            ?
+            <main>
               <Navbar
                 Page={page}
               />
               <section className='flex flex-col mx-12 my-12 '>
                 {children}
               </section>
-            </section>
-          </main>
+            </main>
+            :
+            <main className='flex'>
+              <Sidebar />
+              <section className='w-full'>
+                <Navbar
+                  Page={page}
+                />
+                <section className='flex flex-col mx-12 my-12 '>
+                  {children}
+                </section>
+              </section>
+            </main>
       }
     </>
   )

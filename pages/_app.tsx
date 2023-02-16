@@ -15,7 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
       attribute="class"
       storageKey='theme'
       enableSystem={false}
-      themes={['ligth', 'dark', 'colored']}
+      themes={['light', 'dark', 'colors']}
     >
       <Layout page={page}>
         <Component {...pageProps} />
