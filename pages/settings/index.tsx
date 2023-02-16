@@ -1,13 +1,25 @@
 import * as Switch from '@radix-ui/react-switch';
 import Header from '@ui/settings/header';
 import { useRouter } from 'next/router';
-
-
+import { useState, useEffect } from 'react'
+import { useTheme } from 'next-themes'
 
 export default function Settings() {
   const router = useRouter()
   const page = router.pathname
 
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return null
+  }
+
+  console.log(theme)
 
   return (
     <>
@@ -22,10 +34,14 @@ export default function Settings() {
             <h3 className='text-base'>Customiza o tema do Fyesta no seu dispositivo</h3>
           </div>
           <div>
-            <select className='bg-transparent h-12 w-36 text-center'>
-              <option className='bg-InputGray'>Dark</option>
-              <option className='bg-InputGray'>White</option>
-              <option className='bg-InputGray'>Colors</option>
+            <select
+              className='bg-transparent h-12 w-36 text-center'
+              onChange={e => setTheme(e.target.value)}
+              value={theme}
+            >
+              <option value="dark" className='bg-InputGray'>Dark</option>
+              <option value="ligth" className='bg-InputGray'>White</option>
+              {/* <option className='bg-InputGray'>Colors</option> */}
             </select>
           </div>
         </div>

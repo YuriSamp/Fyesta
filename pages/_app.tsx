@@ -10,10 +10,16 @@ export default function App({ Component, pageProps }: AppProps) {
   const page = router.pathname
 
   return (
-    <ThemeProvider defaultTheme='dark'>
+    <ThemeProvider
+      defaultTheme='dark'
+      attribute="class"
+      storageKey='theme'
+      enableSystem={false}
+      themes={['ligth', 'dark', 'colored']}
+    >
       <Layout page={page}>
         <Component {...pageProps} />
       </Layout>
-    </ThemeProvider>
+    </ThemeProvider >
   )
 }
