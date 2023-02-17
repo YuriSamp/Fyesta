@@ -1,7 +1,8 @@
 import { BsSearch, BsTrash, BsBook, BsPencil, BsClockHistory } from 'react-icons/bs'
-import { AiOutlineCalendar, AiOutlinePlus, AiOutlineHeart, AiOutlineHome } from 'react-icons/ai'
+import { AiOutlineCalendar, AiOutlineHeart, AiOutlineHome } from 'react-icons/ai'
 import { FiTarget } from 'react-icons/fi'
 import Link from 'next/link'
+import BuscaModal from './BuscaModal'
 
 const pages = [
   { link: '/', name: "Home", emoji: <AiOutlineHome className='text-xl' /> },
@@ -11,7 +12,6 @@ const pages = [
   { link: '/metas', name: "Metas", emoji: <FiTarget className='text-xl' /> },
   { link: '/emocoes', name: "Emoções", emoji: <AiOutlineHeart className='text-xl' /> }
 ]
-
 
 export const Sidebar = () => {
   return (
@@ -23,6 +23,7 @@ export const Sidebar = () => {
           <div className='flex gap-3 items-center cursor-pointer buttonaside relative'>
             <BsSearch className='text-xl' />
             <p className='text-xl'>Busca</p>
+            {/* <BuscaModal /> */}
           </div>
           <div className='flex gap-3 items-center cursor-pointer buttonaside relative '>
             <BsClockHistory className='text-xl' />
