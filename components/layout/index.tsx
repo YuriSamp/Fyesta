@@ -16,7 +16,7 @@ export default function Layout({ page, children }: Props) {
         <title>Fyesta</title>
       </Head>
       {
-        page.includes('/settings') || page.includes('login')
+        page.includes('/settings') || page.includes('login') || page.includes('/landingpage')
           ?
           <>
             {children}
