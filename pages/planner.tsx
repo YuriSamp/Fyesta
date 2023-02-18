@@ -9,7 +9,7 @@ export default function Planner() {
     <>
       <section className='flex justify-evenly'>
         <div className='pt-11 flex flex-col justify-center '>
-          <h1 className='text-center text-5xl' >Planos para um dia incrível ! </h1>
+          <h1 className='text-center text-6xl font-Caveat' >Planos para um dia incrível ! </h1>
         </div>
 
         <div className='pt-8 flex flex-col gap-6'>

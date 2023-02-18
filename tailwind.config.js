@@ -1,3 +1,5 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
@@ -13,6 +15,9 @@ module.exports = {
         DarkModeOrange: '#D8807D',
         CreamWhite: '#FCFBF4',
         InputGray: '#383838',
+      },
+      fontFamily: {
+        Caveat: ['var(--font-Caveat)'],
       },
     },
   },
