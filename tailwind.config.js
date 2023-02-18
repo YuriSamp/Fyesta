@@ -1,3 +1,5 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
@@ -14,7 +16,10 @@ module.exports = {
         CreamWhite: '#FCFBF4',
         InputGray: '#383838',
       },
+      fontFamily: {
+        Caveat: ['var(--font-Caveat)'],
+      },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar')],
 };

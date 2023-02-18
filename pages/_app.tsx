@@ -3,6 +3,13 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import Layout from '@ui/layout'
 import { ThemeProvider } from 'next-themes'
+import { Caveat } from '@next/font/google'
+
+
+const CaveatFont = Caveat({
+  subsets: ['latin'],
+  variable: '--font-Caveat'
+})
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -17,9 +24,11 @@ export default function App({ Component, pageProps }: AppProps) {
       enableSystem={false}
       themes={['light', 'dark', 'colors']}
     >
-      <Layout page={page}>
-        <Component {...pageProps} />
-      </Layout>
+      <main className={`${CaveatFont.variable}`}>
+        <Layout page={page}>
+          <Component {...pageProps} />
+        </Layout>
+      </main>
     </ThemeProvider >
   )
 }

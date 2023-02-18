@@ -30,11 +30,13 @@ papel pra nada, praticamente tudo que eu uso é em algum dispositivo, no momento
 - [ ] Página 404
 - [ ] Página de metas / emoções / calendario
 - [ ] Landing Page para apresentar a ideia
+- [ ] Documentação
 - [ ] Criar 3 temas, dark ligth e um colorido
 - [ ] Adicionar um banco de dados pra salvar o input do usuario
 - [ ] Criptografar os dados enviados pro banco de dados e descriptografar ao receber no front-end
 - [ ] Salvar o historico do usuario na aplicação
 - [ ] Uma lixeira que exclui os itens depois de 7 dias
+- [ ] Pagina de loading (esqueleto da págimna)
 
 ## Bonus que eu pretendo bater
 
