@@ -9,18 +9,22 @@ interface Props {
 
 export default function Layout({ page, children }: Props) {
 
+  const paths = [
+    '/home',
+    '/diario',
+    '/emocoes',
+    '/planner',
+    '/metas',
+    '/calendario'
+  ]
+
   return (
     <>
       <Head>
         <title>Fyesta</title>
       </Head>
       {
-        page.includes('/home') ||
-          page.includes('/diario') ||
-          page.includes('/emocoes') ||
-          page.includes('/planner') ||
-          page.includes('/metas') ||
-          page.includes('/calendario')
+        paths.includes(page)
           ?
           <section className='flex'>
             <Sidebar />
@@ -34,20 +38,9 @@ export default function Layout({ page, children }: Props) {
             </section>
           </section>
           :
-          page.includes('404')
-            ?
-            <section>
-              <Navbar
-                Page={page}
-              />
-              <section className='flex flex-col mx-12 my-12 '>
-                {children}
-              </section>
-            </section>
-            :
-            <>
-              {children}
-            </>
+          <>
+            {children}
+          </>
       }
     </>
   )
