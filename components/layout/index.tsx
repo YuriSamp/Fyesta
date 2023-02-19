@@ -9,41 +9,45 @@ interface Props {
 
 export default function Layout({ page, children }: Props) {
 
-
   return (
     <>
       <Head>
         <title>Fyesta</title>
       </Head>
       {
-        page.includes('/settings') || page.includes('login') || page.includes('/landingpage')
+        page.includes('/home') ||
+          page.includes('/diario') ||
+          page.includes('/emocoes') ||
+          page.includes('/planner') ||
+          page.includes('/metas') ||
+          page.includes('/calendario')
           ?
-          <>
-            {children}
-          </>
-          :
-          page.includes('404')
-            ?
-            <main>
+          <section className='flex'>
+            <Sidebar />
+            <section className='w-full'>
               <Navbar
                 Page={page}
               />
               <section className='flex flex-col mx-12 my-12 '>
                 {children}
               </section>
-            </main>
-            :
-            <main className='flex'>
-              <Sidebar />
-              <section className='w-full'>
-                <Navbar
-                  Page={page}
-                />
-                <section className='flex flex-col mx-12 my-12 '>
-                  {children}
-                </section>
+            </section>
+          </section>
+          :
+          page.includes('404')
+            ?
+            <section>
+              <Navbar
+                Page={page}
+              />
+              <section className='flex flex-col mx-12 my-12 '>
+                {children}
               </section>
-            </main>
+            </section>
+            :
+            <>
+              {children}
+            </>
       }
     </>
   )

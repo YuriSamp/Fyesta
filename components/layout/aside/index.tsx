@@ -15,7 +15,7 @@ const SearchModal = dynamic(() => import('./searchModal'), {
 })
 
 const pages = [
-  { link: '/', name: "Home", emoji: <AiOutlineHome className='text-xl' /> },
+  { link: '/home', name: "Home", emoji: <AiOutlineHome className='text-xl' /> },
   { link: '/diario', name: "Diario", emoji: <BsBook className='text-xl' /> },
   { link: '/planner', name: "Planner", emoji: <BsPencil className='text-xl' /> },
   { link: '/calendario', name: "Calendario", emoji: <AiOutlineCalendar className='text-xl' /> },
