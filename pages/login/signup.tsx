@@ -43,7 +43,7 @@ export default function SignUp() {
     }
 
     createUserWithEmailAndPassword(email, password)
-    router.push('/')
+    router.push('/home')
   }
 
 

@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import { Sidebar } from './aside';
 import { Navbar } from './navbar';
+import { useSignOut } from 'react-firebase-hooks/auth';
+import { auth } from 'server/Firebase/ClientApp';
 
 interface Props {
   page: string
@@ -18,6 +20,8 @@ export default function Layout({ page, children }: Props) {
     '/calendario'
   ]
 
+  const [signOut] = useSignOut(auth);
+
   return (
     <>
       <Head>
@@ -31,6 +35,7 @@ export default function Layout({ page, children }: Props) {
             <section className='w-full'>
               <Navbar
                 Page={page}
+                LogOut={signOut}
               />
               <section className='flex flex-col mx-12 my-12 '>
                 {children}

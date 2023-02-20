@@ -1,10 +1,14 @@
 import Header from '@ui/settings/header'
 import { useRouter } from 'next/router'
+import { useSignOut, useDeleteUser } from 'react-firebase-hooks/auth';
+import { auth } from 'server/Firebase/ClientApp';
 
 export default function Perfil() {
   const router = useRouter()
   const page = router.pathname
 
+  const [signOut, loading, error] = useSignOut(auth);
+  const [deleteUser, deleteUserloading, deleteUserError] = useDeleteUser(auth);
 
   return (
     <>
@@ -40,7 +44,14 @@ export default function Perfil() {
             <h3 className='text-base'>Irá te redirecionar para página de login</h3>
           </div>
           <div>
-            <button className='bg-[#B3202C] w-36 h-12'>
+            <button className='bg-[#B3202C] w-36 h-12'
+              onClick={async () => {
+                const resposta = await signOut()
+                if (resposta) {
+                  router.push('../../')
+                }
+              }}
+            >
               Sair da conta
             </button>
           </div>
@@ -51,7 +62,14 @@ export default function Perfil() {
             <h3 className='text-base'>É uma pena que você esteja indo embora <span className='text-lg'>😭</span>  </h3>
           </div>
           <div >
-            <button className='bg-[#B3202C] w-36 h-12'>
+            <button className='bg-[#B3202C] w-36 h-12'
+              onClick={async () => {
+                const resposta = await deleteUser()
+                if (resposta) {
+                  router.push('../../')
+                }
+              }}
+            >
               Excluir sua conta
             </button>
           </div>

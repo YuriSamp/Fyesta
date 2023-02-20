@@ -1,5 +1,4 @@
 import React from 'react'
-import * as Avatar from '@radix-ui/react-avatar';
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link';
 import AvatarIcon from '@ui/avatar';
@@ -19,7 +18,7 @@ interface Props {
 export default function Header({ Page }: Props) {
   return (
     <>
-      <Link href='/' className='flex items-center gap-1'>
+      <Link href='/home' className='flex items-center gap-1'>
         <AiOutlineArrowLeft className='h-6 w-6' />
         <p className='text-2xl'>Home</p>
       </Link>

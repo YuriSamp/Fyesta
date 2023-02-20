@@ -52,7 +52,7 @@ export default function LogIn() {
 
     Provider().then((res) => {
       if (res !== undefined) {
-        router.push('/');
+        router.push('/home');
       }
       if (res === undefined) {
         const notify = () => toast.error("Email ou senha estão incorretos");

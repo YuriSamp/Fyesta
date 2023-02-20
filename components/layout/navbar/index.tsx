@@ -3,9 +3,10 @@ import AvatarWithDropDown from '@ui/avatar/AvatarWithDropDown';
 
 interface Props {
   Page: string
+  LogOut: () => Promise<boolean>
 }
 
-export const Navbar = ({ Page }: Props) => {
+export const Navbar = ({ Page, LogOut }: Props) => {
 
   let FinalString = ''
 
@@ -21,6 +22,7 @@ export const Navbar = ({ Page }: Props) => {
     FinalString = 'Home'
   }
 
+
   return (
     <header>
       <section className='flex py-4 px-8 border-b-2 border-gray-800 w-full justify-between items-center'>
@@ -29,7 +31,7 @@ export const Navbar = ({ Page }: Props) => {
         </div>
         <div className='flex gap-6 items-center'>
           <p>Bem vindo</p>
-          <AvatarWithDropDown />
+          <AvatarWithDropDown LogOut={LogOut} />
         </div>
       </section>
     </header>
