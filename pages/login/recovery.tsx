@@ -8,23 +8,26 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { InputWithLabel } from '@ui/Input/InputWithLabel';
 
+//TODO Concertar essa parte que n mandando o email
+
 export default function Passwordchange() {
 
   const [email, setEmail] = useState('')
   const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
 
-  const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const HandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    sendPasswordResetEmail(email)
 
     if (email.length === 0) {
       const notify = () => toast.warn("O campo de email encontra-se vazio");
       notify()
       return
     }
-
-    const notify = () => toast.success("Verifique na sua caixa de entrada se o email já chegou");
-    notify()
+    const sucess = await sendPasswordResetEmail(email)
+    if (sucess) {
+      const notify = () => toast.success("Verifique na sua caixa de entrada se o email já chegou");
+      notify()
+    }
   }
 
   return (
@@ -46,7 +49,7 @@ export default function Passwordchange() {
             <p className='text-center py-6 text-xl'>Dont worry, insert your email</p>
             <InputWithLabel labelText='Email Address' type='email' Id='Email' placeholder='Email Address' value={email} onChange={setEmail} />
             <div className='pt-4'>
-              <button className='w-full bg-DarkModeGreen rounded-lg h-12 text-center'>Log In</button>
+              <button className='w-full bg-DarkModeGreen rounded-lg h-12 text-center'>Send</button>
             </div>
           </form>
         </section>

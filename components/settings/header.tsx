@@ -2,6 +2,8 @@ import React from 'react'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link';
 import AvatarIcon from '@ui/avatar';
+import { useIdToken } from 'react-firebase-hooks/auth';
+import { auth } from 'server/Firebase/ClientApp';
 
 export const routes = [
   { name: 'Perfil e visibilidade', link: '/settings/perfil' },
@@ -16,6 +18,9 @@ interface Props {
 }
 
 export default function Header({ Page }: Props) {
+
+  const [user] = useIdToken(auth);
+
   return (
     <>
       <Link href='/home' className='flex items-center gap-1'>
@@ -25,11 +30,11 @@ export default function Header({ Page }: Props) {
       <section className='pt-10 pb-2  border-b-2 border-gray-800'>
         <div className='flex'>
           <div className='pl-6' >
-            <AvatarIcon Width='lg' />
+            <AvatarIcon Width='lg' userPhoto={user?.photoURL as string} />
           </div>
           <div className='flex flex-col pl-8 pt-3'>
-            <p className='text-3xl'>Yuri Sampaio</p>
-            <p>yurisamp123@gmail.com</p>
+            <p className='text-3xl'>{user?.displayName}</p>
+            <p>{user?.email}</p>
           </div>
         </div>
         <ul className='flex gap-5 pt-6'>

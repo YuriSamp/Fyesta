@@ -6,13 +6,14 @@ import Link from 'next/link';
 import { routes } from '@ui/settings/header';
 import { useRouter } from 'next/router';
 
-
 interface Props {
   LogOut: () => Promise<boolean>
+  Path: string | undefined
 }
 
-export default function AvatarWithDropDown({ LogOut }: Props) {
+export default function AvatarWithDropDown({ LogOut, Path }: Props) {
   const router = useRouter()
+
 
   return (
     <DropdownMenu.Root>
@@ -20,6 +21,7 @@ export default function AvatarWithDropDown({ LogOut }: Props) {
         <button className="rounded-full h-9 w-9 " aria-label="Customise options">
           <AvatarIcon
             Width='md'
+            userPhoto={Path}
           />
         </button>
       </DropdownMenu.Trigger>
