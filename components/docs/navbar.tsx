@@ -1,9 +1,8 @@
 import Link from 'next/link'
-import React from 'react'
 
 export function Navbar() {
   return (
-    <nav className='flex py-5 px-80 text-black justify-between item border-b-[1px]'>
+    <nav className='bg-CreamWhite z-10 fixed  w-full flex py-5 px-80 text-black justify-between item border-b-[1px]'>
       <div className='flex gap-10 items-center'>
         <Link href='/'>
           <h2 className='italic text-3xl cursor-pointer'>Fyesta</h2>
