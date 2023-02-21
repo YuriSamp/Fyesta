@@ -23,7 +23,7 @@ function PlannerLista({ checkbox, Quantidade, Title }: Props) {
           <h3 className='text-2xl'>{Title}</h3>
           {arr.map((_, index) => (
             <div className='flex w-full' key={index}>
-              <input className='bg-transparent border-b-2 border-white outline-none w-80 text-xl' />
+              <input className='bg-transparent border-b-[1px] border-white outline-none w-80 text-xl' />
             </div>
           ))}
         </>

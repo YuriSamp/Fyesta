@@ -1,6 +1,7 @@
 import { AiOutlineCalendar, AiOutlineHeart } from 'react-icons/ai'
 import { BsBook } from 'react-icons/bs'
 import PlannerLista from '@ui/planner/listas';
+import Link from 'next/link';
 
 export default function Planner() {
 
@@ -16,16 +17,22 @@ export default function Planner() {
           <h1 className='text-2xl'>Informações importantes</h1>
           <div className='flex w-full gap-3 items-center'>
             <AiOutlineCalendar className='w-7 h-7' />
-            <p>Informe o dia</p>
+            <input placeholder='Informe o dia' type='date' className='bg-transparent w-40 pl-7 border-[1px] border-[#5f5f5f]' />
           </div>
           <div className='flex w-full gap-3 items-center'>
             <AiOutlineHeart className='w-7 h-7' />
-            <p>Informe seus sentimentos</p>
+            <select className='bg-transparent w-40 h-7 text-center'>
+              <option className='bg-InputGray'>Triste</option>
+              <option className='bg-InputGray'>Feliz</option>
+              <option className='bg-InputGray'>Animado</option>
+              <option className='bg-InputGray'>Depressivo</option>
+              <option className='bg-InputGray'>Ansioso</option>
+            </select>
           </div>
-          <div className='flex w-full gap-3 items-center'>
+          <Link href='/' className='flex w-full gap-3 items-center'>
             <BsBook className='w-7 h-7' />
             <p>Escreva sobre o seu dia</p>
-          </div>
+          </Link>
         </div>
       </section>
 

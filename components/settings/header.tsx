@@ -8,7 +8,6 @@ import { auth } from 'server/Firebase/ClientApp';
 export const routes = [
   { name: 'Perfil e visibilidade', link: '/settings/perfil' },
   { name: 'Configurações', link: '/settings' },
-  { name: 'Atividade', link: '/settings/activity' },
   { name: 'Atalhos', link: '/settings/shortcuts' },
   { name: 'Sobre', link: '/settings/about' },
 ]

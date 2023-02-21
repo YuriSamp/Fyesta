@@ -15,7 +15,7 @@ function PlannerListaInput() {
           <CheckIcon />
         </Checkbox.Indicator>
       </Checkbox.Root>
-      <input className={`bg-transparent border-b-2 border-white outline-none w-80 text-xl  ${checked ? 'line-through text-gray-400' : ''}`} />
+      <input className={`bg-transparent border-b-[1px] border-white outline-none w-80 text-xl  ${checked ? 'line-through text-gray-400' : ''}`} />
     </div>
   )
 }
