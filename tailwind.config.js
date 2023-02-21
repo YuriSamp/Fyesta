@@ -13,7 +13,7 @@ module.exports = {
         DarkModeGreen: '#138859',
         DarkModeBlack: '#03040B',
         DarkModeOrange: '#D8807D',
-        CreamWhite: '#FCFBF4',
+        CreamWhite: '#F6F6F2',
         InputGray: '#383838',
       },
       fontFamily: {

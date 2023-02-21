@@ -22,7 +22,7 @@ export default function Settings() {
   console.log(theme)
 
   return (
-    <section className='px-96 pt-16 ' >
+    <section className='px-96 pt-16' >
       <Header
         Page={page}
       />
@@ -40,6 +40,7 @@ export default function Settings() {
             <option value="dark" className='bg-InputGray'>Dark</option>
             <option value="ligth" className='bg-InputGray'>Ligth</option>
             <option value="colors" className='bg-InputGray'>Colors</option>
+            <option value="colors" className='bg-InputGray'>Midnigth</option>
           </select>
         </div>
       </div>

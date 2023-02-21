@@ -5,7 +5,8 @@ import reset from '../public/reset.png'
 import recovery from '../public/recovery.png'
 import SignUp from '../public/SignUp.png'
 import { Navbar } from '@ui/docs/navbar';
-
+import { BsShieldCheck, BsBrush } from 'react-icons/bs'
+import { AiOutlineCalendar } from 'react-icons/ai'
 
 export default function Home() {
   return (
@@ -41,9 +42,11 @@ export default function Home() {
 
         <div className='flex justify-center pt-20 gap-8'>
           <div className='flex flex-col w-[400px]'>
-            <h3 className='text-2xl'>Organização</h3>
-            <h3 className='text-lg'>Todo o seu planejamento diario em um lugar só</h3>
-            <h3 className='text-lg'>para lidar com a segurança e autenticação</h3>
+            <div className='flex gap-2 items-center'>
+              <AiOutlineCalendar className='w-5 h-5' />
+              <h3 className='text-2xl'>Organização</h3>
+            </div>
+            <h3 className='text-lg pt-2'>Todo o seu planejamento diário em um só lugar De forma simples rápida e eficiente</h3>
           </div>
           <div className='grid grid-cols-2 justify-items-center gap-6 '>
             <Image src={Loginpage} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
@@ -57,9 +60,11 @@ export default function Home() {
 
         <div className='flex justify-center pt-20 gap-8'>
           <div className='flex flex-col w-[400px]'>
-            <h3 className='text-2xl'>Autenticação</h3>
-            <h3 className='text-lg'>Todas a autenticação foi montada usando firebase </h3>
-            <h3 className='text-lg'>para lidar com a segurança e autenticação</h3>
+            <div className='flex gap-2 items-center'>
+              <BsShieldCheck className='w-5 h-5' />
+              <h3 className='text-2xl'>Autenticação</h3>
+            </div>
+            <h3 className='text-lg pt-2'>Toda a autenticação foi montada usando firebase para lidar com a segurança e autenticação </h3>
           </div>
           <div className='grid grid-cols-2 justify-items-center gap-6 '>
             <Image src={Loginpage} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
@@ -71,9 +76,11 @@ export default function Home() {
 
         <div className='flex justify-center pt-20 gap-8'>
           <div className='flex flex-col w-[400px]  '>
-            <h3 className='text-2xl'>Temas</h3>
-            <h3 className='text-lg'>Pensando em deixar o mais agradavel possivel </h3>
-            <h3 className='text-lg'>Criei temas para todos os gostos</h3>
+            <div className='flex items-center gap-2'>
+              <BsBrush className='w-5 h-5' />
+              <h3 className='text-2xl'>Temas</h3>
+            </div>
+            <h3 className='text-lg pt-2'>Pensando em deixar o mais agradavel possivel Criei temas para todos os gostos </h3>
           </div>
           <div className='grid grid-cols-2 justify-items-center gap-6 '>
             <Image src={Loginpage} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
@@ -97,7 +104,7 @@ export default function Home() {
       <footer className='flex py-5 px-80 text-black justify-between '>
         <div className='flex gap-3'>
           <h2 className='italic text-2xl'>Fyesta</h2>
-          <p className='text-lg self-end'>Criado por <Link href='https://twitter.com/Yuri_Sampa' target='_blank' className='italic underline'>Yuri Sampaio</Link>, Hopedado na <Link href='https://vercel.com' target='_blank' className='italic underline'>Vercel</Link> </p>
+          <p className='text-lg self-end'>Criado por <Link href='https://twitter.com/Yuri_Sampa' target='_blank' className='italic underline'>Yuri Sampaio</Link>, Hospedado na <Link href='https://vercel.com' target='_blank' className='italic underline'>Vercel</Link> </p>
         </div>
         <div className='self-end'>
           <p>Todo o código está disponivel no <Link href='https://github.com/YuriSamp/Fyesta' target='_blank' className='italic underline'>Github</Link></p>

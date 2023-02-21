@@ -12,7 +12,7 @@ const inputStyles = cva(
       Width: {
         sm: 'w-4',
         md: 'w-12',
-        lg: 'w-24',
+        lg: 'w-60',
       },
     },
     defaultVariants: {
