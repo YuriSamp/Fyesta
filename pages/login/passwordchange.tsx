@@ -1,30 +1,26 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
-import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
-import { useState } from 'react'
-import { auth } from '../../server/Firebase/ClientApp';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { InputWithLabel } from '@ui/Input/InputWithLabel';
+import Head from 'next/head';
+import React, { useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify';
 
 export default function Passwordchange() {
+  const [password, setPassword] = useState('')
+  const [passwordVerify, setPasswordVerify] = useState('')
 
-  const [email, setEmail] = useState('')
-  const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
 
-  const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const HandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    sendPasswordResetEmail(email)
 
-    if (email.length === 0) {
-      const notify = () => toast.warn("O campo de email encontra-se vazio");
-      notify()
-      return
-    }
-
-    const notify = () => toast.success("Verifique na sua caixa de entrada se o email já chegou");
-    notify()
+    // if (email.length === 0) {
+    //   const notify = () => toast.warn("O campo de email encontra-se vazio");
+    //   notify()
+    //   return
+    // }
+    // const sucess = await sendPasswordResetEmail(email)
+    // if (sucess) {
+    //   const notify = () => toast.success("Verifique na sua caixa de entrada se o email já chegou");
+    //   notify()
+    // }
   }
 
   return (
@@ -35,18 +31,15 @@ export default function Passwordchange() {
       <main className='flex justify-center items-center min-h-screen'>
         <ToastContainer autoClose={3000} />
         <section className='flex flex-col'>
-          <Link href='./' className='pb-8 flex items-center gap-3 w-24'>
-            <AiOutlineArrowLeft />
-            <p className='text-xl'>Return</p>
-          </Link>
           <form onSubmit={(e) => HandleSubmit(e)}>
             <div>
-              <h1 className='text-center text-4xl'>Forgot your password?</h1>
+              <h1 className='text-center text-4xl'>Reset your password</h1>
             </div>
-            <p className='text-center py-6 text-xl'>Dont worry, insert your email</p>
-            <InputWithLabel labelText='Email Address' type='email' Id='Email' placeholder='Email Address' value={email} onChange={setEmail} />
+            <p className='text-center py-6 text-xl'>Dont worry, just type your new password</p>
+            <InputWithLabel labelText='Password' type='password' Id='password' placeholder='password' value={password} onChange={setPassword} />
+            <InputWithLabel labelText='Password Verify' type='password' Id='passwordVerify' placeholder='password' value={passwordVerify} onChange={setPasswordVerify} />
             <div className='pt-4'>
-              <button className='w-full bg-DarkModeGreen rounded-lg h-12 text-center'>Log In</button>
+              <button className='w-full bg-DarkModeGreen rounded-lg h-12 text-center'>Reset</button>
             </div>
           </form>
         </section>

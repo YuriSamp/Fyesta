@@ -4,8 +4,16 @@ import AvatarIcon from '.';
 import { ExitIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 import { routes } from '@ui/settings/header';
+import { useRouter } from 'next/router';
 
-function AvatarWithDropDown() {
+interface Props {
+  LogOut: () => Promise<boolean>
+  Path: string | undefined
+}
+
+export default function AvatarWithDropDown({ LogOut, Path }: Props) {
+  const router = useRouter()
+
 
   return (
     <DropdownMenu.Root>
@@ -13,6 +21,7 @@ function AvatarWithDropDown() {
         <button className="rounded-full h-9 w-9 " aria-label="Customise options">
           <AvatarIcon
             Width='md'
+            userPhoto={Path}
           />
         </button>
       </DropdownMenu.Trigger>
@@ -33,7 +42,13 @@ function AvatarWithDropDown() {
           ))}
           <DropdownMenu.Separator className="h-[1px] m-1 bg-gray-800" />
           <DropdownMenu.Item className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-gray-800 hover:text-white">
-            <button className='flex gap-2'>
+            <button
+              className='flex gap-2'
+              onClick={async () => {
+                const sucess = await LogOut()
+                if (sucess)
+                  router.push('/')
+              }}>
               <ExitIcon />
               Fazer Logout
             </button>
@@ -43,5 +58,3 @@ function AvatarWithDropDown() {
     </DropdownMenu.Root>
   );
 }
-
-export default AvatarWithDropDown

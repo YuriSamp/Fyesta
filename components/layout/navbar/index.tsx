@@ -1,11 +1,14 @@
 import React from 'react'
 import AvatarWithDropDown from '@ui/avatar/AvatarWithDropDown';
+import { useIdToken } from 'react-firebase-hooks/auth';
+import { auth } from 'server/Firebase/ClientApp';
 
 interface Props {
   Page: string
+  LogOut: () => Promise<boolean>
 }
 
-export const Navbar = ({ Page }: Props) => {
+export const Navbar = ({ Page, LogOut }: Props) => {
 
   let FinalString = ''
 
@@ -21,6 +24,8 @@ export const Navbar = ({ Page }: Props) => {
     FinalString = 'Home'
   }
 
+  const [user] = useIdToken(auth);
+
   return (
     <header>
       <section className='flex py-4 px-8 border-b-2 border-gray-800 w-full justify-between items-center'>
@@ -28,8 +33,8 @@ export const Navbar = ({ Page }: Props) => {
           {FinalString}
         </div>
         <div className='flex gap-6 items-center'>
-          <p>Bem vindo</p>
-          <AvatarWithDropDown />
+          <p>Bem vindo, {user?.displayName}</p>
+          <AvatarWithDropDown LogOut={LogOut} Path={user?.photoURL as string} />
         </div>
       </section>
     </header>

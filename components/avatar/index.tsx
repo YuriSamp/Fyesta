@@ -18,14 +18,16 @@ const inputStyles = cva(
   },
 );
 
-export interface avatar extends VariantProps<typeof inputStyles> { }
+export interface avatar extends VariantProps<typeof inputStyles> {
+  userPhoto: string | undefined
+}
 
-function AvatarIcon({ Width }: avatar) {
+function AvatarIcon({ Width, userPhoto }: avatar) {
   return (
     <Avatar.Root className={inputStyles({ Width })}>
       <Avatar.Image
         className='w-full h-full object-cover border-inherit'
-        src='https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80'
+        src={userPhoto}
         alt=''
       />
       <Avatar.Fallback className="AvatarFallback" delayMs={600}>

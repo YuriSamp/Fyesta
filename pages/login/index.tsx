@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ControledInput } from '@ui/Input';
 import { InputWithLabel } from '@ui/Input/InputWithLabel';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 
 export default function LogIn() {
@@ -17,6 +18,7 @@ export default function LogIn() {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
 
   const [
     signInWithEmailAndPassword,
@@ -51,7 +53,7 @@ export default function LogIn() {
 
     Provider().then((res) => {
       if (res !== undefined) {
-        router.push('/');
+        router.push('/home');
       }
       if (res === undefined) {
         const notify = () => toast.error("Email ou senha estão incorretos");
@@ -96,6 +98,10 @@ export default function LogIn() {
       <main className='flex justify-center items-center min-h-screen'>
         <ToastContainer />
         <section className='flex flex-col'>
+          <Link href='./' className='pb-8 flex items-center gap-3 w-24'>
+            <AiOutlineArrowLeft />
+            <p className='text-xl'>Return</p>
+          </Link>
           <form onSubmit={(e) => HandleSubmit(e)}>
             <div>
               <h1 className='text-center text-4xl'>Welcome Back</h1>
@@ -117,7 +123,7 @@ export default function LogIn() {
                 <label htmlFor='checkbox' >Keep me loged in</label>
               </div>
               <div>
-                <Link href='login/passwordchange' className='text-DarkModeOrange'> Forgot your password?</Link>
+                <Link href='login/recovery' className='text-DarkModeOrange'> Forgot your password?</Link>
               </div>
             </div>
             <div className='pt-4'>
