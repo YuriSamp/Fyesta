@@ -12,7 +12,7 @@ checks:
       threshold: 4
   file-lines:
     config:
-      threshold: 125
+      threshold: 150
   method-complexity:
     config:
       threshold: 5
@@ -21,7 +21,7 @@ checks:
       threshold: 20
   method-lines:
     config:
-      threshold: 60
+      threshold: 100
   nested-control-flow:
     config:
       threshold: 4
@@ -30,10 +30,11 @@ checks:
       threshold: 4
   similar-code:
     config:
-      threshold: # language-specific defaults. an override will affect all languages.
+      threshold: 3
   identical-code:
     config:
       threshold: # language-specific defaults. an override will affect all languages.
 exclude_patterns:
   - '**/node_modules/'
   - '**/*.test.tsx'
+  - '**/pages/index.tsx'

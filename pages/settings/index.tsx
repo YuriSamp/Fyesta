@@ -1,5 +1,5 @@
 import * as Switch from '@radix-ui/react-switch';
-import Header from '@ui/settings/header';
+import Header from '@ui/SettingsHeader';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
@@ -74,7 +74,7 @@ export default function Settings() {
           <h3 className='text-base'>isso vai alterar a maneira como o calendario é apresentado</h3>
         </div>
         <div className=''>
-          <Switch.Root className="SwitchRoot">
+          <Switch.Root className="SwitchRoot" name='Switch'>
             <Switch.Thumb className="SwitchThumb" />
           </Switch.Root>
         </div>

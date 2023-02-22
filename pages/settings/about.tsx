@@ -1,6 +1,6 @@
 import { AiOutlineGithub } from 'react-icons/ai'
 import Link from 'next/link'
-import Header from '@ui/settings/header'
+import Header from '@ui/SettingsHeader'
 import { useRouter } from 'next/router'
 
 
