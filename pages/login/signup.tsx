@@ -1,13 +1,13 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useState } from 'react'
 import { auth } from '../../server/Firebase/ClientApp';
 import { useRouter } from 'next/router'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { InputWithLabel } from '@ui/Input/InputWithLabel';
+import { InputWithLabel } from '@ui/InputWithLabel';
+import { Button } from '@ui/button';
+import RetturnButton from '@ui/RetturnButton';
 
 
 
@@ -55,10 +55,7 @@ export default function SignUp() {
       <main className='flex justify-center items-center min-h-screen ' >
         <ToastContainer />
         <section className='flex flex-col'>
-          <Link href='./' className='pb-8 flex items-center gap-3 w-24'>
-            <AiOutlineArrowLeft />
-            <p className='text-xl'>Return</p>
-          </Link>
+          <RetturnButton text='Retornar' />
           <form className='w-96' onSubmit={(e) => HandleSubmit(e)}>
             <div>
               <h1 className='text-center text-4xl'>Sign Up</h1>
@@ -70,7 +67,7 @@ export default function SignUp() {
             <InputWithLabel labelText='Insert a photo' type='text' Id='photo' placeholder='Insert a url' value={picture} onChange={setPicture} />
             <p className='pt-6 text-sm text-center italic'>you do not need to add a picture, is just optional</p>
             <div className='pt-6'>
-              <button className='w-full bg-DarkModeGreen rounded-lg h-12 text-center '>Create a account</button>
+              <Button Children='Create a account' intent='success' Width='full' />
             </div>
           </form>
         </section>

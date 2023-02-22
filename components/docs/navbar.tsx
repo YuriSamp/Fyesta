@@ -12,10 +12,10 @@ export function Navbar() {
           <Link href='/contato' className='cursor-pointer text-gray-600 hover:text-black'>Contato</Link>
         </div>
       </div>
-      <li className='flex gap-6 items-center'>
-        <Link href='./login' className='select-none cursor-pointer px-6 py-2 border-[1px] border-transparent rounded-lg hover:border-black '>Log in</Link>
-        <Link href='./login/signup' className='bg-black text-white px-6 py-2 rounded-lg select-none cursor-pointer'>Sign Up</Link>
-      </li>
+      <ul className='flex gap-6 items-center'>
+        <li> <Link href='./login' className='select-none cursor-pointer px-6 py-2 border-[1px] border-transparent rounded-lg hover:border-black '>Log in</Link> </li>
+        <li>  <Link href='./login/signup' className='bg-black text-white px-6 py-2 rounded-lg select-none cursor-pointer'>Sign Up</Link>  </li>
+      </ul>
     </nav>
   )
 }

@@ -1,6 +1,4 @@
-import { Navbar } from '@ui/layout/navbar';
-import Header from '@ui/settings/header';
-import Head from 'next/head';
+import Header from '@ui/SettingsHeader';
 import { useRouter } from 'next/router';
 
 export default function Shortcuts() {

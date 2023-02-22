@@ -1,4 +1,5 @@
-import { InputWithLabel } from '@ui/Input/InputWithLabel';
+import { Button } from '@ui/button';
+import { InputWithLabel } from '@ui/InputWithLabel';
 import Head from 'next/head';
 import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
@@ -39,7 +40,7 @@ export default function Passwordchange() {
             <InputWithLabel labelText='Password' type='password' Id='password' placeholder='password' value={password} onChange={setPassword} />
             <InputWithLabel labelText='Password Verify' type='password' Id='passwordVerify' placeholder='password' value={passwordVerify} onChange={setPasswordVerify} />
             <div className='pt-4'>
-              <button className='w-full bg-DarkModeGreen rounded-lg h-12 text-center'>Reset</button>
+              <Button Children='Reset' intent='success' Width='full' />
             </div>
           </form>
         </section>

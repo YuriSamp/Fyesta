@@ -1,19 +1,21 @@
 import React from 'react'
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import AvatarIcon from '.';
+import AvatarIcon from './avatar';
 import { ExitIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import { routes } from '@ui/settings/header';
+import { routes } from '@ui/SettingsHeader';
 import { useRouter } from 'next/router';
+import { useSignOut } from 'react-firebase-hooks/auth';
+import { auth } from 'server/Firebase/ClientApp';
 
 interface Props {
-  LogOut: () => Promise<boolean>
   Path: string | undefined
 }
 
-export default function AvatarWithDropDown({ LogOut, Path }: Props) {
+export default function AvatarWithDropDown({ Path }: Props) {
   const router = useRouter()
 
+  const [signOut] = useSignOut(auth);
 
   return (
     <DropdownMenu.Root>
@@ -45,7 +47,7 @@ export default function AvatarWithDropDown({ LogOut, Path }: Props) {
             <button
               className='flex gap-2'
               onClick={async () => {
-                const sucess = await LogOut()
+                const sucess = await signOut()
                 if (sucess)
                   router.push('/')
               }}>

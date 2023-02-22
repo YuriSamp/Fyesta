@@ -149,11 +149,6 @@ a {
   height: 2px;
 }
 
-// switch css
-button {
-  all: unset;
-}
-
 .SwitchRoot {
   width: 42px;
   height: 25px;

@@ -6,7 +6,9 @@ import { useState } from 'react'
 import { auth } from '../../server/Firebase/ClientApp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { InputWithLabel } from '@ui/Input/InputWithLabel';
+import { InputWithLabel } from '@ui/InputWithLabel';
+import { Button } from '@ui/button';
+import RetturnButton from '@ui/RetturnButton';
 
 //TODO Concertar essa parte que n mandando o email
 
@@ -38,10 +40,7 @@ export default function Passwordchange() {
       <main className='flex justify-center items-center min-h-screen'>
         <ToastContainer autoClose={3000} />
         <section className='flex flex-col'>
-          <Link href='./' className='pb-8 flex items-center gap-3 w-24'>
-            <AiOutlineArrowLeft />
-            <p className='text-xl'>Return</p>
-          </Link>
+          <RetturnButton text='Retornar' />
           <form onSubmit={(e) => HandleSubmit(e)}>
             <div>
               <h1 className='text-center text-4xl'>Forgot your password?</h1>
@@ -49,7 +48,7 @@ export default function Passwordchange() {
             <p className='text-center py-6 text-xl'>Dont worry, insert your email</p>
             <InputWithLabel labelText='Email Address' type='email' Id='Email' placeholder='Email Address' value={email} onChange={setEmail} />
             <div className='pt-4'>
-              <button className='w-full bg-DarkModeGreen rounded-lg h-12 text-center'>Send</button>
+              <Button Children='Send' intent='success' Width='full' />
             </div>
           </form>
         </section>

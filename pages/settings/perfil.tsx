@@ -1,22 +1,26 @@
 
-import { ControledInput } from '@ui/Input';
-import Header from '@ui/settings/header'
+import { Button } from '@ui/button';
+import { ControledInput } from '@ui/index';
+import Header from '@ui/SettingsHeader'
 import { useRouter } from 'next/router'
 import { useState } from 'react';
-import { useSignOut, useDeleteUser } from 'react-firebase-hooks/auth';
+import { useSignOut, useDeleteUser, useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from 'server/Firebase/ClientApp';
 
 export default function Perfil() {
   const router = useRouter()
-
   const page = router.pathname
 
   const [signOut, loading, error] = useSignOut(auth);
   const [deleteUser, deleteUserloading, deleteUserError] = useDeleteUser(auth);
-
-  const [Username, setUsername] = useState<string>('Yuri Sampaio')
+  const [user] = useIdToken(auth);
+  const [Username, setUsername] = useState(user?.displayName as string)
   const [photo, setPhoto] = useState<string>('')
 
+  async function HandlePromise(fn: Promise<Boolean>) {
+    await fn
+    router.push('../../')
+  }
 
   return (
     <>
@@ -32,9 +36,7 @@ export default function Perfil() {
             </div>
           </div>
           <div>
-            <button className='bg-transparent border-2 border-[#2A292B] w-36 h-12'>
-              Atualizar
-            </button>
+            <Button Children='Atualizar' />
           </div>
         </div>
 
@@ -46,12 +48,9 @@ export default function Perfil() {
             </div>
           </div>
           <div>
-            <button className='bg-transparent border-2 border-[#2A292B] w-36 h-12'>
-              Atualizar
-            </button>
+            <Button Children='Atualizar' />
           </div>
         </div>
-
 
         <div className='py-10 flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
@@ -59,9 +58,7 @@ export default function Perfil() {
             <h3 className='text-base'>yurisamp123@gmail.com</h3>
           </div>
           <div>
-            <button className='bg-transparent border-2 border-[#2A292B] w-36 h-12'>
-              Mudar o email
-            </button>
+            <Button Children='Mudar o email' />
           </div>
         </div>
         <div className='py-10  flex justify-between items-center px-4'>
@@ -70,9 +67,7 @@ export default function Perfil() {
             <h3 className='text-base'>Escolha uma senha forte, afinal você não quer que ninguem saiba seus segredos</h3>
           </div>
           <div>
-            <button className='bg-transparent border-2 border-[#2A292B] w-36 h-12 '>
-              Mudar a senha
-            </button>
+            <Button Children='Mudar a senha' />
           </div>
         </div>
         <div className='py-10  flex justify-between items-center px-4'>
@@ -81,16 +76,11 @@ export default function Perfil() {
             <h3 className='text-base'>Irá te redirecionar para página de login</h3>
           </div>
           <div>
-            <button className='bg-[#B3202C] w-36 h-12'
-              onClick={async () => {
-                const resposta = await signOut()
-                if (resposta) {
-                  router.push('../../')
-                }
-              }}
-            >
-              Sair da conta
-            </button>
+            <Button
+              Children='Sair da conta'
+              intent='danger'
+              onClick={async () => HandlePromise(signOut())}
+            />
           </div>
         </div>
         <div className='py-10  flex justify-between items-center px-4'>
@@ -99,16 +89,11 @@ export default function Perfil() {
             <h3 className='text-base'>É uma pena que você esteja indo embora <span className='text-lg'>😭</span>  </h3>
           </div>
           <div >
-            <button className='bg-[#B3202C] w-36 h-12'
-              onClick={async () => {
-                const resposta = await deleteUser()
-                if (resposta) {
-                  router.push('../../')
-                }
-              }}
-            >
-              Excluir sua conta
-            </button>
+            <Button
+              Children='Excluir sua conta'
+              intent='danger'
+              onClick={async () => HandlePromise(deleteUser())}
+            />
           </div>
         </div>
       </section>

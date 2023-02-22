@@ -8,9 +8,10 @@ import { auth } from '../../server/Firebase/ClientApp';
 import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ControledInput } from '@ui/Input';
-import { InputWithLabel } from '@ui/Input/InputWithLabel';
-import { AiOutlineArrowLeft } from 'react-icons/ai';
+import { ControledInput } from '@ui/index';
+import { InputWithLabel } from '@ui/InputWithLabel';
+import { Button } from '@ui/button';
+import RetturnButton from '@ui/RetturnButton';
 
 
 export default function LogIn() {
@@ -98,10 +99,7 @@ export default function LogIn() {
       <main className='flex justify-center items-center min-h-screen'>
         <ToastContainer />
         <section className='flex flex-col'>
-          <Link href='./' className='pb-8 flex items-center gap-3 w-24'>
-            <AiOutlineArrowLeft />
-            <p className='text-xl'>Return</p>
-          </Link>
+          <RetturnButton text='Retornar' />
           <form onSubmit={(e) => HandleSubmit(e)}>
             <div>
               <h1 className='text-center text-4xl'>Welcome Back</h1>
@@ -127,7 +125,7 @@ export default function LogIn() {
               </div>
             </div>
             <div className='pt-4'>
-              <button className='w-full bg-DarkModeGreen rounded-lg h-12 text-center '>Log in</button>
+              <Button Children='Log in' intent='success' Width='full' />
             </div>
           </form>
           <div className='pt-4'>
