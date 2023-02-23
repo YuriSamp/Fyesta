@@ -1,6 +1,6 @@
 import { cva, VariantProps } from 'class-variance-authority';
 
-const inputStyles = cva(
+const ButtonStyles = cva(
   'border-2 border-[#2A292B] w-36 h-12 cursor-pointer',
   {
     variants: {
@@ -21,13 +21,13 @@ const inputStyles = cva(
   },
 );
 
-export interface IButton extends VariantProps<typeof inputStyles> {
+export interface IButton extends VariantProps<typeof ButtonStyles> {
   Children: string
   onClick?: () => Promise<void>
 }
 
 export function Button({ Width, intent, Children, onClick }: IButton) {
   return (
-    <button className={inputStyles({ Width, intent })} onClick={onClick}>{Children}</button>
+    <button className={ButtonStyles({ Width, intent })} onClick={onClick}>{Children}</button>
   )
 }

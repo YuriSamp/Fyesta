@@ -1,6 +1,6 @@
 import * as Label from '@radix-ui/react-label';
 import { Dispatch, SetStateAction } from 'react'
-import { ControledInput } from '.';
+import { ControledInput } from './input';
 
 interface Props {
   labelText?: string
