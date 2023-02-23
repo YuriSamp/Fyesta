@@ -1,17 +1,15 @@
 import { cva, VariantProps } from 'class-variance-authority';
+import { SetStateAction } from 'jotai';
+import { Dispatch } from 'react'
 
 const SelectStyles = cva(
-  'border-2 border-[#2A292B] w-36 h-12 cursor-pointer',
+  'bg-transparent w-36 h-12 text-center',
   {
     variants: {
       intent: {
         primary: '',
-        danger: 'bg-[#B3202C] border-none',
-        success: 'bg-DarkModeGreen rounded-lg'
       },
       Width: {
-        sm: 'w-4',
-        md: 'w-36 h-12',
         full: 'w-full',
       },
     },
@@ -23,15 +21,19 @@ const SelectStyles = cva(
 
 export interface ISelect extends VariantProps<typeof SelectStyles> {
   Options: string | string[]
-  // onClick?: () => Promise<void>
+  value: string | undefined
+  onChange: Dispatch<SetStateAction<string>> | ((theme: string) => void)
 }
 
-export function Select({ Width, intent, Options }: ISelect) {
+export function Select({ Width, intent, Options, onChange, value }: ISelect) {
   if (typeof Options === 'object')
     return (
-      <select className={SelectStyles({ Width, intent })} >
+      <select className={SelectStyles({ Width, intent })}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      >
         {Options.map((item, index) => (
-          <option value={item} key={index}>
+          <option value={item} key={index} className='bg-InputGray'>
             {item}
           </option>
         ))}
