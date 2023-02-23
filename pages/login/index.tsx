@@ -1,32 +1,24 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { BsGithub, BsGoogle } from 'react-icons/bs'
-import { CustomParameters, UserCredential } from 'firebase/auth';
-import { useSignInWithGithub, useSignInWithGoogle, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithGithub, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useState } from 'react'
 import { auth } from '../../server/Firebase/ClientApp';
-import { useRouter } from 'next/router';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ControledInput } from '@ui/index';
+import { ControledInput } from '@ui/input';
 import { InputWithLabel } from '@ui/InputWithLabel';
 import { Button } from '@ui/button';
 import RetturnButton from '@ui/RetturnButton';
+import useAuth from 'hooks/useAuth';
 
 
 export default function LogIn() {
 
-  const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-
-  const [
-    signInWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useSignInWithEmailAndPassword(auth);
+  const [HandleLoginWithProvider, HandleSubmit] = useAuth(email, password)
 
   const [
     signInWithGithub,
@@ -44,52 +36,7 @@ export default function LogIn() {
   ] = useSignInWithGoogle(auth);
 
 
-  const HandleLoginWithProvider = (
-    Provider: (
-      scopes?: string[] | undefined,
-      customOAuthParameters?: CustomParameters | undefined
-    ) => Promise<UserCredential | undefined>
-  ) => {
 
-
-    Provider().then((res) => {
-      if (res !== undefined) {
-        router.push('/home');
-      }
-      if (res === undefined) {
-        const notify = () => toast.error("Email ou senha estão incorretos");
-        notify()
-        return
-      }
-    });
-  };
-
-  const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    signInWithEmailAndPassword(email, password).then(res => {
-
-      if (email.length === 0) {
-        const notify = () => toast.warn("O campo de email encontra-se vazio");
-        notify()
-        return
-      }
-
-      if (password.length === 0) {
-        const notify = () => toast.warning("O campo de senha encontra-se vazio");
-        notify()
-        return
-      }
-
-      if (res !== undefined) {
-        router.push('/teste')
-      }
-      if (res === undefined) {
-        const notify = () => toast.error("Email ou senha estão incorretos");
-        notify()
-        return
-      }
-    })
-  }
 
   return (
     <>
@@ -100,7 +47,9 @@ export default function LogIn() {
         <ToastContainer />
         <section className='flex flex-col'>
           <RetturnButton text='Retornar' />
-          <form onSubmit={(e) => HandleSubmit(e)}>
+          <form
+            onSubmit={(event) => HandleSubmit(event)}
+          >
             <div>
               <h1 className='text-center text-4xl'>Welcome Back</h1>
             </div>

@@ -1,6 +1,6 @@
 
 import { Button } from '@ui/button';
-import { ControledInput } from '@ui/index';
+import { ControledInput } from '@ui/input';
 import Header from '@ui/SettingsHeader'
 import { useRouter } from 'next/router'
 import { useState } from 'react';

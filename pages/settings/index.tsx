@@ -3,12 +3,20 @@ import Header from '@ui/SettingsHeader';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
+import { Select } from '@ui/Select';
+
+const themes = ['Dark', 'Ligth', 'Colors', 'Midnigth']
+const languages = ['Português', 'inglês']
+const openOptions = ['Pagina inicial', 'Última visitada']
 
 export default function Settings() {
   const router = useRouter()
   const page = router.pathname
 
   const [mounted, setMounted] = useState(false)
+  const [language, setLanguage] = useState('Português')
+  const [openOption, setOpenOption] = useState('Pagina inicial')
+
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
@@ -18,8 +26,6 @@ export default function Settings() {
   if (!mounted) {
     return null
   }
-
-  console.log(theme)
 
   return (
     <section className='px-96 pt-16' >
@@ -32,16 +38,7 @@ export default function Settings() {
           <h3 className='text-base'>Customiza o tema do Fyesta no seu dispositivo</h3>
         </div>
         <div>
-          <select
-            className='bg-transparent h-12 w-36 text-center'
-            onChange={e => setTheme(e.target.value)}
-            value={theme}
-          >
-            <option value="dark" className='bg-InputGray'>Dark</option>
-            <option value="ligth" className='bg-InputGray'>Ligth</option>
-            <option value="colors" className='bg-InputGray'>Colors</option>
-            <option value="colors" className='bg-InputGray'>Midnigth</option>
-          </select>
+          <Select Options={themes} onChange={setTheme} value={theme} />
         </div>
       </div>
       <div className='py-10  flex justify-between items-center px-4'>
@@ -50,10 +47,7 @@ export default function Settings() {
           <h3 className='text-base'>Escolha onde iniciar ao abrir o Fyesta</h3>
         </div>
         <div>
-          <select className=' bg-transparent h-12 w-36 text-center'>
-            <option className='bg-InputGray'>Pagina inicial</option>
-            <option className='bg-InputGray'>Última visitada</option>
-          </select>
+          <Select Options={openOptions} onChange={setOpenOption} value={openOption} />
         </div>
       </div>
       <div className='py-10  flex justify-between items-center px-4'>
@@ -62,10 +56,7 @@ export default function Settings() {
           <h3 className='text-base'>Escolha o idioma para a interface</h3>
         </div>
         <div>
-          <select className='bg-transparent h-12 w-36 text-center'>
-            <option className='bg-InputGray'>Português</option>
-            <option className='bg-InputGray'>Inglês</option>
-          </select>
+          <Select Options={languages} value={language} onChange={setLanguage} />
         </div>
       </div>
       <div className='py-10  flex justify-between items-center px-4'>
