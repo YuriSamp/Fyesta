@@ -1,13 +1,20 @@
+import { useState } from 'react'
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 
+// para ano anterior ou posterior  <h1 className='text-3xl'>Fevereiro INSIRA A DATA</h1>
 
 export default function Calendario() {
 
   const arr = [1, 2, 3, 4, 5, 6, 7]
 
-
   return (
     <section className='flex flex-col items-center'>
-      <div className='flex '>
+      <div className='flex gap-6 items-center'>
+        <AiOutlineArrowLeft className='w-7 h-7 cursor-pointer' />
+        <h1 className='text-3xl'>Janeiro</h1>
+        <AiOutlineArrowRight className='w-7 h-7 cursor-pointer' />
+      </div>
+      <div className='flex pt-2 '>
         <div className='px-4 py-2 w-52 text-center'>
           <h3>Domingo</h3>
         </div>
