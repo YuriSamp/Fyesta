@@ -28,6 +28,10 @@ export const Navbar = ({ Page }: Props) => {
   if (horaAtual > 18 && horaAtual <= 24) {
     msg = 'Boa noite'
   }
+  if (horaAtual >= 0 && horaAtual <= 6) {
+    msg = 'Boa Madrugada'
+  }
+
 
   return (
     <header>
