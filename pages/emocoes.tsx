@@ -31,15 +31,6 @@ export default function Emocões() {
         </div>
       </div>
 
-      <div className='flex items-center gap-4 py-6'>
-        <h3 className='text-2xl'>Mood</h3>
-        <div className='flex gap-2'>
-          {arr.map(item => (
-            <div className='rounded-full w-10 h-10 bg-yellow-300' key={item}></div>
-          ))}
-        </div>
-      </div>
-
     </div>
   )
 }
