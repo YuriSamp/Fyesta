@@ -3,6 +3,22 @@ import { InputWithLabel } from '@ui/InputWithLabel';
 import Head from 'next/head';
 import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
+import { GetServerSidePropsContext } from 'next';
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  if (!context.req.url?.includes('mode=resetPassword')) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {}
+  }
+}
 
 export default function Passwordchange() {
   const [password, setPassword] = useState('')

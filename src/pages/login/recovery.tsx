@@ -8,9 +8,8 @@ import { InputWithLabel } from '@ui/InputWithLabel';
 import { Button } from '@ui/button';
 import RetturnButton from '@ui/RetturnButton';
 
-//TODO Concertar essa parte que n mandando o email
-
 export default function Passwordchange() {
+
 
   const [email, setEmail] = useState('')
   const [sendPasswordResetEmail, sending, error] = useSendPasswordResetEmail(auth);
