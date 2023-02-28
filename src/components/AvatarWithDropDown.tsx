@@ -7,6 +7,7 @@ import { routes } from '@ui/SettingsHeader';
 import { useRouter } from 'next/router';
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
+import nookies from 'nookies'
 
 interface Props {
   Path: string | undefined
@@ -49,7 +50,8 @@ export default function AvatarWithDropDown({ Path }: Props) {
               onClick={async () => {
                 const sucess = await signOut()
                 if (sucess)
-                  router.push('/')
+                  nookies.destroy(undefined, 'token')
+                router.push('/')
               }}>
               <ExitIcon />
               Fazer Logout

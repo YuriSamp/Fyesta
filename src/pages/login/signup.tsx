@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { InputWithLabel } from '@ui/InputWithLabel';
 import { Button } from '@ui/button';
 import RetturnButton from '@ui/RetturnButton';
+import nookies from 'nookies'
 
 export default function SignUp() {
 
@@ -41,6 +42,7 @@ export default function SignUp() {
     }
 
     createUserWithEmailAndPassword(email, password)
+    nookies.set(undefined, 'token', email, { maxAge: 60 * 60 * 3, path: '/' })
     router.push('/home')
   }
 

@@ -18,7 +18,7 @@ export default function LogIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const [HandleLoginWithProvider, HandleSubmit] = useAuth(email, password)
+  const [HandleLoginWithProvider, HandleSubmit] = useAuth()
 
   const [
     signInWithGithub,
@@ -27,6 +27,8 @@ export default function LogIn() {
     errorGithub
   ] = useSignInWithGithub(auth);
 
+  console.log()
+
 
   const [
     signInWithGoogle,
@@ -34,9 +36,6 @@ export default function LogIn() {
     loadingGoogle,
     errorGoogle
   ] = useSignInWithGoogle(auth);
-
-
-
 
   return (
     <>
@@ -48,7 +47,7 @@ export default function LogIn() {
         <section className='flex flex-col'>
           <RetturnButton text='Retornar' />
           <form
-            onSubmit={(event) => HandleSubmit(event)}
+            onSubmit={(event) => HandleSubmit(event, email, password)}
           >
             <div>
               <h1 className='text-center text-4xl'>Welcome Back</h1>
