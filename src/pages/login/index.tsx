@@ -27,15 +27,14 @@ export default function LogIn() {
     errorGithub
   ] = useSignInWithGithub(auth);
 
-  console.log()
-
-
   const [
     signInWithGoogle,
     userGoogle,
     loadingGoogle,
     errorGoogle
   ] = useSignInWithGoogle(auth);
+
+  console.log(errorGithub)
 
   return (
     <>
