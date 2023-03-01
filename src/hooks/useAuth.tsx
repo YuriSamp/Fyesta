@@ -43,7 +43,7 @@ export default function useAuth(): useAuthType {
     e.preventDefault()
 
     if (email.length === 0) {
-      const notify = () => toast.warn("O campo de email encontra-se vazio");
+      const notify = () => toast.warning("O campo de email encontra-se vazio");
       notify()
       return
     }

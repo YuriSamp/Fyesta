@@ -18,15 +18,19 @@ export default function Passwordchange() {
     e.preventDefault()
 
     if (email.length === 0) {
-      const notify = () => toast.warn("O campo de email encontra-se vazio");
+      const notify = () => toast.warning("O campo de email encontra-se vazio");
       notify()
       return
     }
-    const sucess = await sendPasswordResetEmail(email)
-    if (sucess) {
+    try {
+      await sendPasswordResetEmail(email)
       const notify = () => toast.success("Verifique na sua caixa de entrada se o email já chegou");
       notify()
+    } catch (error) {
+      const notify = () => toast.error("Ocorreu um erro, tente mais tarde");
+      notify()
     }
+
   }
 
   return (

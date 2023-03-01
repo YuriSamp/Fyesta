@@ -17,20 +17,32 @@ export default function useCreateUser() {
   const router = useRouter()
 
   async function createUser(data: Data) {
-    if (data.password.length === 0) {
-      const notify = () => toast.warning("Um nome para a identificação é necessário");
-      notify()
-      return
-    }
-
     if (data.password.length < 8) {
-      const notify = () => toast.warning("Por favor insira uma senha");
+      const notify = () => toast.warning("A senha precisa ter 8 caracteres");
       notify()
       return
     }
 
     if (data.password !== data.passwordVerify) {
       const notify = () => toast.error("As senhas inseridas estão diferentes");
+      notify()
+      return
+    }
+
+    if (data.displayName.length === 0) {
+      const notify = () => toast.error("Por favor insira um nome");
+      notify()
+      return
+    }
+
+    if (data.password.length === 0) {
+      const notify = () => toast.error("Por favor insira uma senha");
+      notify()
+      return
+    }
+
+    if (data.email.length === 0) {
+      const notify = () => toast.error("Por favor insira um email");
       notify()
       return
     }
