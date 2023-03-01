@@ -16,14 +16,9 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@ui/*": ["./components/*"]
+      "@ui/*": ["./src/components/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "pages/api/auth/[...nextauth].js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
