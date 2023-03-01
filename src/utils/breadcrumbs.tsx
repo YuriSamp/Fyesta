@@ -1,18 +1,16 @@
 
 export default function breadcrumbs(Page: string) {
-  let FinalString = ''
+  let finalString = 'Home'
 
   if (Page !== '/') {
     const string = Page.slice(1)
     const parts = string.split('/')
-    const UpperCaseEachParts = parts.map(item => (item.charAt(0).toUpperCase() + item.slice(1)))
-    for (let i = 0; i < UpperCaseEachParts.length; i++) {
-      FinalString += UpperCaseEachParts[i] + ' / '
+    const upperCaseEachParts = parts.map(item => (item.charAt(0).toUpperCase() + item.slice(1)))
+    for (let i = 0; i < upperCaseEachParts.length; i++) {
+      finalString += upperCaseEachParts[i] + ' / '
     }
-    FinalString = FinalString.slice(0, -3)
-  } else {
-    FinalString = 'Home'
+    finalString = finalString.slice(0, -3)
   }
 
-  return FinalString
+  return finalString
 }

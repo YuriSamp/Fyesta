@@ -1,6 +1,6 @@
 import { CustomParameters, UserCredential } from 'firebase/auth';
 import { useRouter } from 'next/router';
-import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import { auth } from 'src/server/Firebase/ClientApp';
 import nookies from 'nookies'
@@ -10,10 +10,11 @@ type ProviderType = (
   customOAuthParameters?: CustomParameters | undefined
 ) => Promise<UserCredential | undefined>
 
-type useAuthType = [
-  HandleLoginWithProvider: (Provider: ProviderType) => void,
-  HandleSubmit: (e: React.FormEvent<HTMLFormElement>, enail: string, password: string) => void
-]
+type AuthProviderType = (Provider: ProviderType) => void
+
+type AuthSubmitType = (e: React.FormEvent<HTMLFormElement>, enail: string, password: string, persist: boolean) => void
+
+type useAuthType = [AuthhProvider: AuthProviderType, AuthSubmit: AuthSubmitType]
 
 export default function useAuth(): useAuthType {
   const router = useRouter()
@@ -22,7 +23,7 @@ export default function useAuth(): useAuthType {
     signInWithEmailAndPassword,
   ] = useSignInWithEmailAndPassword(auth);
 
-  async function HandleLoginWithProvider(Provider: ProviderType) {
+  async function AuthhProvider(Provider: ProviderType) {
     try {
       const userCredential = await Provider()
       if (!userCredential) {
@@ -31,30 +32,30 @@ export default function useAuth(): useAuthType {
         return
       }
       const token = await userCredential.user.getIdToken()
-      nookies.set(undefined, 'token', token, { maxAge: 60 * 60 * 3, path: '/' })
+      nookies.set(undefined, 'token', token, { maxAge: 60 * 60 * 24 * 15, path: '/' })
       router.push('/home');
-
     } catch (error) {
       console.log(error)
     }
   };
 
-
-  const HandleSubmit = (e: React.FormEvent<HTMLFormElement>, email: string, password: string) => {
+  const AuthSubmit = async (e: React.FormEvent<HTMLFormElement>, email: string, password: string, persist: boolean) => {
     e.preventDefault()
-    signInWithEmailAndPassword(email, password).then(res => {
 
-      if (email.length === 0) {
-        const notify = () => toast.warn("O campo de email encontra-se vazio");
-        notify()
-        return
-      }
+    if (email.length === 0) {
+      const notify = () => toast.warn("O campo de email encontra-se vazio");
+      notify()
+      return
+    }
 
-      if (password.length === 0) {
-        const notify = () => toast.warning("O campo de senha encontra-se vazio");
-        notify()
-        return
-      }
+    if (password.length === 0) {
+      const notify = () => toast.warning("O campo de senha encontra-se vazio");
+      notify()
+      return
+    }
+
+    try {
+      const res = await signInWithEmailAndPassword(email, password)
 
       if (res === undefined) {
         const notify = () => toast.error("Email ou senha estão incorretos");
@@ -62,10 +63,16 @@ export default function useAuth(): useAuthType {
         return
       }
 
-      nookies.set(undefined, 'token', email, { maxAge: 60 * 60 * 3, path: '/' })
+      const maxAge = persist ? 60 * 60 * 24 * 15 : undefined;
+
+      const token = await res.user.getIdToken()
+      nookies.set(undefined, 'token', token, { maxAge, path: '/' });
       router.push('/home');
-    })
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
-  return [HandleLoginWithProvider, HandleSubmit]
+  return [AuthhProvider, AuthSubmit]
 }

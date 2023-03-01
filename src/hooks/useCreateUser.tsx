@@ -24,7 +24,7 @@ export default function useCreateUser() {
     }
 
     if (data.password.length < 8) {
-      const notify = () => toast.warning("As senhas inseridas estão diferentes");
+      const notify = () => toast.warning("Por favor insira uma senha");
       notify()
       return
     }
@@ -40,7 +40,9 @@ export default function useCreateUser() {
 
       await updateProfile(user, { displayName: data.displayName, photoURL: data.photoURL });
 
-      nookies.set(undefined, 'token', data.displayName, { maxAge: 60 * 60 * 3, path: '/' })
+      const token = await user.getIdToken()
+      nookies.set(undefined, 'token', token, { path: '/' })
+
       router.push('/home')
     } catch (error: any) {
 

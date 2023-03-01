@@ -4,6 +4,12 @@ import Head from 'next/head';
 import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
 import { GetServerSidePropsContext } from 'next';
+import { useUpdatePassword } from 'react-firebase-hooks/auth';
+import { auth } from 'src/server/Firebase/ClientApp';
+import { useRouter } from 'next/router';
+
+
+//TODO essa parte aqui tem um problema que resolverei futuramente, eu só consigo mudar a senha do usuario logado, caso o usuario n esteja logado preciso fazer no back-end
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!context.req.url?.includes('mode=resetPassword')) {
@@ -24,20 +30,25 @@ export default function Passwordchange() {
   const [password, setPassword] = useState('')
   const [passwordVerify, setPasswordVerify] = useState('')
 
+  const [updatePassword, updating, error] = useUpdatePassword(auth);
+
+  const router = useRouter()
 
   const HandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // if (email.length === 0) {
-    //   const notify = () => toast.warn("O campo de email encontra-se vazio");
-    //   notify()
-    //   return
-    // }
-    // const sucess = await sendPasswordResetEmail(email)
-    // if (sucess) {
-    //   const notify = () => toast.success("Verifique na sua caixa de entrada se o email já chegou");
-    //   notify()
-    // }
+    if (password !== passwordVerify) {
+      const notify = () => toast.error("As senhas inseridas estão diferentes");
+      notify()
+      return
+    }
+
+    try {
+      const DidUpdate = await updatePassword(password)
+      if (DidUpdate) router.push('/login')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
