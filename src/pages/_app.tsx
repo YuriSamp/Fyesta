@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
       enableSystem={false}
       themes={['light', 'dark', 'colors']}
     >
-      <main className={`${CaveatFont.variable}`}>
+      <main className={`${CaveatFont.variable} `}>
         <Layout page={page}>
           <Component {...pageProps} />
         </Layout>
