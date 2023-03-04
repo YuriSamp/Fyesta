@@ -9,10 +9,28 @@ import useCreateUser from 'src/hooks/useCreateUser';
 import dynamic from 'next/dynamic';
 import { useAtom } from 'jotai';
 import { cookeisIsAccept } from 'src/context/cookiesContext';
+import { GetServerSidePropsContext } from 'next';
+import nookies from 'nookies'
 
 const CookiesModal = dynamic(() => import('@ui/cookieModal'), {
   ssr: false,
 })
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const cookies = nookies.get(context)
+  if (cookies.token) {
+    return {
+      redirect: {
+        destination: '/home',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {}
+  }
+}
 
 
 export default function SignUp() {
