@@ -35,7 +35,7 @@ export const Navbar = ({ Page }: Props) => {
 
   return (
     <header>
-      <section className='flex py-4 px-8 border-b-2 border-gray-800 w-full justify-between items-center'>
+      <section className='flex py-4 px-8 border-b-2 border-neutral-800 w-full justify-between items-center'>
         <div className='flex gap-3'>
           {PageName}
         </div>

@@ -43,10 +43,10 @@ export default function Calendario() {
               {item}
             </div>
             <div className='py-1 px-2 flex flex-col gap-1'>
-              <div className='w-full py-1 text-center bg-green-800 rounded-md cursor-pointer'>
+              <div className='w-full py-1 text-center bg-green-700 rounded-md cursor-pointer'>
                 Terminar esse projeto
               </div>
-              <div className='w-full py-1 text-center bg-orange-700 rounded-md cursor-pointer'>
+              <div className='w-full py-1 text-center bg-DarkModeOrange rounded-md cursor-pointer'>
                 Diminuir as tasks
               </div>
               <div className='w-full py-1 text-center bg-yellow-800 rounded-md cursor-pointer'>

@@ -10,6 +10,13 @@ import { InputWithLabel } from '@ui/InputWithLabel';
 import { Button } from '@ui/button';
 import RetturnButton from '@ui/RetturnButton';
 import useAuth from 'src/hooks/useAuth';
+import dynamic from 'next/dynamic';
+import { cookeisIsAccept } from 'src/context/cookiesContext';
+import { useAtom } from 'jotai';
+
+const CookiesModal = dynamic(() => import('@ui/cookieModal'), {
+  ssr: false,
+})
 
 export default function LogIn() {
 
@@ -19,7 +26,7 @@ export default function LogIn() {
   const [AuthhProvider, AuthSubmit] = useAuth()
   const [signInWithGithub] = useSignInWithGithub(auth);
   const [signInWithGoogle] = useSignInWithGoogle(auth);
-
+  const [cookiesAcept, setCookiesAccept] = useAtom(cookeisIsAccept)
   return (
     <>
       <Head>
@@ -60,6 +67,9 @@ export default function LogIn() {
             <p>Dont have an account? <Link href='login/signup' className='text-DarkModeOrange'> Sign up </Link> </p>
           </div>
         </section>
+        {!cookiesAcept && (
+          <CookiesModal setCookiesAccept={setCookiesAccept} />
+        )}
       </main>
     </>
   )
