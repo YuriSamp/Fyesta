@@ -23,7 +23,7 @@ const ButtonStyles = cva(
 
 export interface IButton extends VariantProps<typeof ButtonStyles> {
   Children: string
-  onClick?: () => Promise<void>
+  onClick?: any
 }
 
 export function Button({ Width, intent, Children, onClick }: IButton) {

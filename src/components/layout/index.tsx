@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { Sidebar } from './aside';
 import { Navbar } from './navbar';
 
-//MIDNIGHT bg-[#00040D]
 
 interface Props {
   page: string

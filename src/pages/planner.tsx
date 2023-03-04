@@ -1,4 +1,4 @@
-import PlannerListaInput from '@ui/planner';
+import { PlannerColumn } from '@ui/planner/plannerColumn';
 
 export default function Planner() {
 
@@ -11,63 +11,15 @@ export default function Planner() {
           <h1 className='text-center text-6xl font-Caveat' >Planos para uma semana incrível ! </h1>
         </div>
       </section>
-
       <section className=' pt-20 grid grid-cols-3  2xl:grid-cols-4 gap-y-24 justify-items-center'>
-        <div className='flex flex-col gap-3'>
-          <div className='pb-3 border-b-2 border-[#383838]'>
-            <h3 className='text-2xl text-green-700'>Segunda</h3>
-          </div>
-          <PlannerListaInput />
-        </div>
-
-        <div className='flex flex-col gap-3'>
-          <div className='pb-3 border-b-2 border-[#383838]'>
-            <h3 className='text-2xl text-green-700'>Terça</h3>
-          </div>
-          <PlannerListaInput />
-        </div>
-
-        <div className='flex flex-col gap-3'>
-          <div className='pb-3 border-b-2 border-[#383838]'>
-            <h3 className='text-2xl text-green-700'>Quarta</h3>
-          </div>
-          <PlannerListaInput />
-        </div>
-
-        <div className='flex flex-col gap-3'>
-          <div className='pb-3 border-b-2 border-[#383838]'>
-            <h3 className='text-2xl text-green-700'>Quinta</h3>
-          </div>
-          <PlannerListaInput />
-        </div>
-
-        <div className='flex flex-col gap-3'>
-          <div className='pb-3 border-b-2 border-[#383838]'>
-            <h3 className='text-2xl text-green-700'>Sexta</h3>
-          </div>
-          <PlannerListaInput />
-        </div>
-
-        <div className='flex flex-col gap-3'>
-          <div className='pb-3 border-b-2 border-[#383838]'>
-            <h3 className='text-2xl text-green-700'>Sábado</h3>
-          </div>
-          <PlannerListaInput />
-        </div>
-
-        <div className='flex flex-col gap-3'>
-          <div className='pb-3 border-b-2 border-[#383838]'>
-            <h3 className='text-2xl text-green-700'>Domingo</h3>
-          </div>
-          <PlannerListaInput />
-        </div>
-
-        <div className='flex flex-col gap-3'>
-          <div className='pb-3 border-b-2 border-[#383838]'>
-            <h3 className='text-2xl text-green-700'>Extra</h3>
-          </div>
-          <PlannerListaInput />
-        </div>
+        <PlannerColumn Title='Segunda' />
+        <PlannerColumn Title='Terça' />
+        <PlannerColumn Title='Quarta' />
+        <PlannerColumn Title='Quinta' />
+        <PlannerColumn Title='Sexta' />
+        <PlannerColumn Title='Sábado' />
+        <PlannerColumn Title='Domingo' />
+        <PlannerColumn Title='Extra' />
       </section>
     </>
   )
