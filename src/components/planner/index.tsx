@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { BsTrash } from 'react-icons/bs'
 
-interface Props {
-  Quantidade: number
-}
-
-export default function PlannerListaInput({ Quantidade }: Props) {
-
-  let arr = []
+export default function PlannerListaInput() {
+  const [Quantidade, setQuantidade] = useState(3)
+  const arr = []
 
   for (let index = 0; index < Quantidade; index++) {
     arr.push({ Id: index, Selecionado: false })
@@ -17,19 +15,25 @@ export default function PlannerListaInput({ Quantidade }: Props) {
   const [lista, setLista] = useState(arr)
 
   function BooleanChange(id: number) {
-    const ListaVerificada = lista?.map(item => {
-      if (item.Id === id) {
-        item.Selecionado = !item.Selecionado
-      }
-      return item
-    })
-    setLista(ListaVerificada);
+    lista[id].Selecionado = !lista[id].Selecionado
+    setLista([...lista])
   }
+
+  function AddNewTask() {
+    setLista(prev => [...prev, { Id: Quantidade, Selecionado: false }])
+    setQuantidade(prev => prev + 1)
+  }
+
+  function RemoveTask(id: number) {
+    const newLista = lista.filter(item => item.Id !== id)
+    setLista(newLista)
+  }
+
 
   return (
     <div className='flex flex-col gap-3 items-center'>
-      {lista.map((item, index) => (
-        <div className='flex gap-3 items-center' key={index}>
+      {lista.map((item) => (
+        <div className='flex gap-3 items-center' key={item.Id}>
           <Checkbox.Root
             className={`w-5 h-5 border-[1px] border-[#383838]  flex items-center justify-center cursor-pointer ${item.Selecionado ? 'bg-green-700' : ''} `}
             id="c1"
@@ -39,14 +43,25 @@ export default function PlannerListaInput({ Quantidade }: Props) {
               <CheckIcon />
             </Checkbox.Indicator>
           </Checkbox.Root>
-          <div className='flex w-full' key={index}>
-            <input className={`bg-transparent  outline-none w-80 text-xl  ${item.Selecionado ? 'line-through text-gray-400' : ''}`}
+          <div className='flex w-full' key={item.Id}>
+            <input className={`bg-transparent  outline-none w-72 text-xl  ${item.Selecionado ? 'line-through text-gray-400' : ''}`}
               placeholder='To - do'
               readOnly={item.Selecionado}
             />
           </div>
+          <BsTrash
+            className='w-5 h-5 cursor-pointer'
+            onClick={() => RemoveTask(item.Id)}
+          />
         </div>
       ))}
+      <div
+        className='flex gap-3 items-center self-start cursor-pointer'
+        onClick={AddNewTask}
+      >
+        <AiOutlinePlus className='w-5 h-5 text-gray-400 ' />
+        <p className='text-gray-400 text-lg'>Tarefa</p>
+      </div>
     </div>
   )
 }

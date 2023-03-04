@@ -1,11 +1,36 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { InputWithLabel } from '@ui/InputWithLabel';
 import { Button } from '@ui/button';
 import RetturnButton from '@ui/RetturnButton';
 import useCreateUser from 'src/hooks/useCreateUser';
+import dynamic from 'next/dynamic';
+import { useAtom } from 'jotai';
+import { cookeisIsAccept } from 'src/context/cookiesContext';
+import { GetServerSidePropsContext } from 'next';
+import nookies from 'nookies'
+
+const CookiesModal = dynamic(() => import('@ui/cookieModal'), {
+  ssr: false,
+})
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const cookies = nookies.get(context)
+  if (cookies.token) {
+    return {
+      redirect: {
+        destination: '/home',
+        permanent: false,
+      },
+    }
+  }
+
+  return {
+    props: {}
+  }
+}
 
 
 export default function SignUp() {
@@ -16,9 +41,19 @@ export default function SignUp() {
   const [passwordVerify, setPasswordVerify] = useState('')
   const [photoURL, setphotoURL] = useState('')
   const createUser = useCreateUser()
+  const [cookiesAcept, setCookiesAccept] = useAtom(cookeisIsAccept)
+
 
   const HandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (cookiesAcept === false) {
+      const notify = () => toast.error("Por favor aceite os cookies primeiro");
+      notify()
+      return
+    }
+
+
     const userData = {
       displayName,
       email,
@@ -53,6 +88,9 @@ export default function SignUp() {
             </div>
           </form>
         </section>
+        {!cookiesAcept && (
+          <CookiesModal setCookiesAccept={setCookiesAccept} />
+        )}
       </main>
     </>
   )

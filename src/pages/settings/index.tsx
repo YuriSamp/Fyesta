@@ -65,8 +65,11 @@ export default function Settings() {
           <h3 className='text-base'>isso vai alterar a maneira como o calendario é apresentado</h3>
         </div>
         <div className=''>
-          <Switch.Root className="SwitchRoot" name='Switch'>
-            <Switch.Thumb className="SwitchThumb" />
+          <Switch.Root
+            className="w-11 h-[25px] bg-white rounded-full relative data-[state=checked]:bg-[#138859]"
+            name='Switch'>
+            <Switch.Thumb
+              className="block w-[21px] h-[21px] bg-black rounded-full shadow-SwitchShadow data-[state=checked]:translate-x-[19px] duration-100 transform translate-x-[2px]" />
           </Switch.Root>
         </div>
       </div>

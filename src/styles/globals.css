@@ -1,30 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '@radix-ui/colors/blackA.css';
-
-:root {
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
 
 .DropdownMenuContent {
   position: relative;
@@ -49,27 +25,6 @@ a {
 }
 .DropdownMenuContent[data-side='left'] {
   animation-name: slideRightAndFade;
-}
-
-.DropdownMenuItem {
-  font-size: 13px;
-  line-height: 1;
-  color: black;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  height: 25px;
-  padding: 0 5px;
-  position: relative;
-  padding-left: 25px;
-  user-select: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.DropdownMenuItem[data-highlighted] {
-  background-color: rgb(31, 41, 55);
-  color: white;
 }
 
 .buttonaside::after {
@@ -147,31 +102,4 @@ a {
   background: #138859;
   width: 100%;
   height: 2px;
-}
-
-.SwitchRoot {
-  width: 42px;
-  height: 25px;
-  background-color: white;
-  border-radius: 9999px;
-  position: relative;
-}
-
-.SwitchRoot[data-state='checked'] {
-  background-color: #138859;
-}
-
-.SwitchThumb {
-  display: block;
-  width: 21px;
-  height: 21px;
-  background-color: black;
-  border-radius: 9999px;
-  box-shadow: 0 2px 2px var(--blackA7);
-  transition: transform 100ms;
-  transform: translateX(2px);
-}
-
-.SwitchThumb[data-state='checked'] {
-  transform: translateX(19px);
 }

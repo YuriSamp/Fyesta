@@ -4,6 +4,8 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { toast } from 'react-toastify';
 import { auth } from 'src/server/Firebase/ClientApp';
 import nookies from 'nookies'
+import { cookeisIsAccept } from 'src/context/cookiesContext';
+import { useAtom } from 'jotai';
 
 type ProviderType = (
   scopes?: string[] | undefined,
@@ -23,7 +25,15 @@ export default function useAuth(): useAuthType {
     signInWithEmailAndPassword,
   ] = useSignInWithEmailAndPassword(auth);
 
+  const [cookiesAcept, setCookiesAccept] = useAtom(cookeisIsAccept)
+
   async function AuthhProvider(Provider: ProviderType) {
+    if (cookiesAcept === false) {
+      const notify = () => toast.error("Por favor aceite os cookies primeiro");
+      notify()
+      return
+    }
+
     try {
       const userCredential = await Provider()
       if (!userCredential) {
@@ -41,6 +51,13 @@ export default function useAuth(): useAuthType {
 
   const AuthSubmit = async (e: React.FormEvent<HTMLFormElement>, email: string, password: string, persist: boolean) => {
     e.preventDefault()
+
+    if (cookiesAcept === false) {
+      const notify = () => toast.error("Por favor aceite os cookies primeiro");
+      notify()
+      return
+    }
+
 
     if (email.length === 0) {
       const notify = () => toast.warning("O campo de email encontra-se vazio");

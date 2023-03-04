@@ -16,6 +16,9 @@ module.exports = {
       fontFamily: {
         Caveat: ['var(--font-Caveat)'],
       },
+      boxShadow: {
+        SwitchShadow: 'hsla(0, 0%, 0%, 0.141)',
+      },
     },
   },
   plugins: [require('tailwind-scrollbar')],
