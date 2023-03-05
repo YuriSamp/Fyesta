@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { auth } from '../../server/Firebase/ClientApp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { InputWithLabel } from '@ui/InputWithLabel';
+import { InputWithLabel } from '@ui/input/InputWithLabel';
 import { Button } from '@ui/button';
 import RetturnButton from '@ui/RetturnButton';
 

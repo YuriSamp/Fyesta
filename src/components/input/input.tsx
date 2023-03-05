@@ -13,6 +13,7 @@ const inputStyles = cva(
         sm: 'w-4',
         md: 'w-12',
         lg: 'w-60',
+        full: 'w-full'
       },
     },
     defaultVariants: {
@@ -21,7 +22,7 @@ const inputStyles = cva(
   },
 );
 
-export interface Controled extends VariantProps<typeof inputStyles> {
+interface Controled extends VariantProps<typeof inputStyles> {
   Id?: string
   type: string
   placeholder: string
@@ -31,6 +32,12 @@ export interface Controled extends VariantProps<typeof inputStyles> {
 
 export function ControledInput({ Width, intent, type, Id, placeholder, value, onChange }: Controled) {
   return (
-    <input className={inputStyles({ Width, intent })} type={type} id={Id} placeholder={placeholder} value={value} onChange={(e) => onChange(e.target.value)} />
+    <input
+      className={inputStyles({ Width, intent })}
+      type={type} id={Id}
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    />
   )
 }

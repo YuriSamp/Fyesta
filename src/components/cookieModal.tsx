@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import * as Portal from '@radix-ui/react-portal';
-import Link from 'next/link';
 
 type cookiesProps = { setCookiesAccept: Dispatch<SetStateAction<boolean>> }
 

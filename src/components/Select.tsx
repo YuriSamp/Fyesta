@@ -39,11 +39,10 @@ export function Select({ Width, intent, Options, onChange, value }: ISelect) {
         ))}
       </select>
     )
-  else {
-    return (
-      <select className={SelectStyles({ Width, intent })} >
-        <option value={Options}>{Options}</option>
-      </select>
-    )
-  }
+  return (
+    <select className={SelectStyles({ Width, intent })} >
+      <option value={Options}>{Options}</option>
+    </select>
+  )
+
 }
