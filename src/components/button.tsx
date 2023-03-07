@@ -1,12 +1,12 @@
 import { cva, VariantProps } from 'class-variance-authority';
 
 const ButtonStyles = cva(
-  'border-2 border-[#2A292B] w-36 h-12 cursor-pointer',
+  'border-[1px] border-[#2A292B] w-36 h-12 cursor-pointer rounded-md',
   {
     variants: {
       intent: {
         primary: '',
-        danger: 'bg-[#B3202C] border-none',
+        danger: 'bg-[#B3202C] border-none text-white',
         success: 'bg-DarkModeGreen rounded-lg'
       },
       Width: {

@@ -3,7 +3,7 @@ import { SetStateAction } from 'jotai';
 import { Dispatch } from 'react'
 
 const SelectStyles = cva(
-  'bg-transparent w-36 h-12 text-center',
+  'bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] ',
   {
     variants: {
       intent: {
@@ -33,7 +33,7 @@ export function Select({ Width, intent, Options, onChange, value }: ISelect) {
         onChange={(e) => onChange(e.target.value)}
       >
         {Options.map((item, index) => (
-          <option value={item} key={index} className='bg-InputGray'>
+          <option value={item} key={index} className='dark:bg-InputGray'>
             {item}
           </option>
         ))}

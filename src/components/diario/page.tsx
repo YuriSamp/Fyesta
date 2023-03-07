@@ -3,6 +3,7 @@ import * as Portal from '@radix-ui/react-portal';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { ModalProps } from 'src/interfaces/Modal';
 import { AiOutlineCalendar, AiOutlineHeart } from 'react-icons/ai';
+import { Button } from '@ui/button';
 
 export default function PaginaDiario({ State, SetState }: ModalProps) {
 
@@ -41,9 +42,7 @@ export default function PaginaDiario({ State, SetState }: ModalProps) {
             </div>
 
             <div className='pt-4 flex justify-end'>
-              <button className='bg-green-600  w-36 h-12'>
-                Salvar
-              </button>
+              <Button Children='Salvar' intent='success' />
             </div>
 
           </div>

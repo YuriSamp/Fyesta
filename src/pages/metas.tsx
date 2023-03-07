@@ -17,7 +17,7 @@ export default function Metas() {
       <section className='w-full flex justify-center gap-12 items-center'>
         <section className='w-80'>
           <div className='pb-2 border-b-2 mb-2 '>
-            <h3 className='text-3xl '>Ano</h3>
+            <h3 className='text-3xl'>Ano</h3>
           </div>
           <div className=' flex flex-col border-2 px-4 py-4 '>
 

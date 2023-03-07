@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { Select } from '@ui/Select';
 
-const themes = ['Dark', 'Ligth', 'Colors', 'Midnigth']
+const themes = ['dark', 'ligth']
 const languages = ['Português', 'inglês']
 const openOptions = ['Pagina inicial', 'Última visitada']
 
@@ -28,7 +28,7 @@ export default function Settings() {
   }
 
   return (
-    <section className='px-96 pt-16' >
+    <section className='px-96 pt-16 text-black dark:text-white min-h-screen bg-CreamWhite dark:bg-[#121212]' >
       <Header
         Page={page}
       />
@@ -66,10 +66,11 @@ export default function Settings() {
         </div>
         <div className=''>
           <Switch.Root
-            className="w-11 h-[25px] bg-white rounded-full relative data-[state=checked]:bg-[#138859]"
-            name='Switch'>
+            className="w-11 h-[25px] bg-gray-300 dark:bg-white rounded-full relative data-[state=checked]:bg-[rgb(59,130,246)] dark:data-[state=checked]:bg-[#138859]"
+            role='switch'
+          >
             <Switch.Thumb
-              className="block w-[21px] h-[21px] bg-black rounded-full shadow-SwitchShadow data-[state=checked]:translate-x-[19px] duration-100 transform translate-x-[2px]" />
+              className="block w-[21px] h-[21px] bg-white dark:bg-black rounded-full shadow-SwitchShadow data-[state=checked]:translate-x-[19px] duration-100 transform translate-x-[2px]" />
           </Switch.Root>
         </div>
       </div>

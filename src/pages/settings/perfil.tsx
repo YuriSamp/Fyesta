@@ -15,7 +15,7 @@ export default function Perfil() {
   const [signOut, loading, error] = useSignOut(auth);
   const [deleteUser, deleteUserloading, deleteUserError] = useDeleteUser(auth);
   const [user] = useIdToken(auth);
-  const [Username, setUsername] = useState(user?.displayName as string)
+  const [Username, setUsername] = useState('')
   const [photo, setPhoto] = useState<string>('')
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [sendPasswordResetEmail, sending, passwordResetError] = useSendPasswordResetEmail(auth);
@@ -27,7 +27,7 @@ export default function Perfil() {
 
 
   return (
-    <section className='px-96 pt-16 '  >
+    <section className='px-96 pt-16 text-black dark:text-white min-h-screen bg-CreamWhite dark:bg-[#121212]'  >
       <Header
         Page={page}
       />
@@ -35,7 +35,7 @@ export default function Perfil() {
         <div className='py-10 flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Nome</h2>
-            <div className='pt-2'>
+            <div className='pt-2 text-white'>
               <ControledInput type='text' Width='lg' placeholder='Yuri Sampaio' value={Username} onChange={setUsername} />
             </div>
           </div>
@@ -50,7 +50,7 @@ export default function Perfil() {
         <div className='py-10 flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Foto</h2>
-            <div className='pt-2'>
+            <div className='pt-2 text-white'>
               <ControledInput type='text' Width='lg' placeholder='Insira a nova url' value={photo} onChange={setPhoto} />
             </div>
           </div>

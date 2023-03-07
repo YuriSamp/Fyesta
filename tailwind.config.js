@@ -15,6 +15,7 @@ module.exports = {
       },
       fontFamily: {
         Caveat: ['var(--font-Caveat)'],
+        EduCursed: ['var(--font-EduCursed)'],
       },
       boxShadow: {
         SwitchShadow: 'hsla(0, 0%, 0%, 0.141)',

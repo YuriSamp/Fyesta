@@ -7,7 +7,7 @@ export default function Shortcuts() {
 
   return (
     <>
-      <section className='px-96 pt-16'>
+      <section className='px-96 pt-16 text-black dark:text-white min-h-screen bg-CreamWhite dark:bg-[#121212]'>
         <Header
           Page={page}
         />

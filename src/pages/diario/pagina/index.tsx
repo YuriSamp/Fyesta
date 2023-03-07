@@ -5,7 +5,7 @@ import { AiOutlineCalendar, AiOutlineHeart } from 'react-icons/ai'
 export default function Pagina() {
 
   return (
-    <section >
+    <section className='text-black dark:text-white' >
       <div className='flex flex-col gap-8'>
         <input
           className='bg-transparent focus:outline-none p-4 text-3xl'
@@ -15,12 +15,12 @@ export default function Pagina() {
         <div className='flex flex-col gap-6'>
           <div className='flex w-full gap-3 items-center'>
             <AiOutlineCalendar className='w-6 h-6' />
-            <input type='date' className='bg-transparent h-7 px-2 border-[1px]  border-white rounded-md focus:outline-none text-center' />
+            <input type='date' className='bg-transparent h-7 px-2 border-[1px]  border-black dark:border-white rounded-md focus:outline-none text-center' />
           </div>
           <div className='flex w-full gap-3 items-center'>
             <AiOutlineHeart className='w-6 h-6' />
             <select
-              className='bg-transparent h-7 w-[155px] text-center border-[1px]  border-white rounded-md'
+              className='bg-transparent h-7 w-[155px] text-center border-[1px]  border-black dark:border-white rounded-md '
               placeholder='Sentimentos'
             >
               <option className='bg-InputGray'>Triste</option>
@@ -37,7 +37,7 @@ export default function Pagina() {
           placeholder='Comece a escrever sobre o seu dia'
         />
         <div className='flex '>
-          <button className='bg-green-700 p-4 rounded-md'>Incluir no diario</button>
+          <button className='bg-green-700 p-4 rounded-md text-white'>Incluir no diario</button>
         </div>
       </div>
     </section>
