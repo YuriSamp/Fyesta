@@ -8,7 +8,6 @@ import { Edu_NSW_ACT_Foundation } from '@next/font/google'
 import { api } from 'src/utils/api'
 import { type AppType } from "next/app";
 
-
 const CaveatFont = Caveat({
   subsets: ['latin'],
   variable: '--font-Caveat'

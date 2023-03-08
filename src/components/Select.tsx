@@ -22,7 +22,7 @@ const SelectStyles = cva(
 export interface ISelect extends VariantProps<typeof SelectStyles> {
   Options: string | string[]
   value: string | undefined
-  onChange: Dispatch<SetStateAction<string>> | ((theme: string) => void)
+  onChange: Dispatch<SetStateAction<string>> | ((theme: string) => void) | ((mode: string) => void)
 }
 
 export function Select({ Width, intent, Options, onChange, value }: ISelect) {

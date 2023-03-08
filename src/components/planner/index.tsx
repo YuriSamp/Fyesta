@@ -50,7 +50,7 @@ export default function PlannerListaInput() {
             />
           </div>
           <BsTrash
-            className='w-5 h-5 cursor-pointer'
+            className='w-5 h-5 cursor-pointer text-black dark:text-white'
             onClick={() => RemoveTask(item.Id)}
           />
         </div>
