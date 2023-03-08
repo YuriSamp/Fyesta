@@ -54,8 +54,12 @@ export default function LogIn() {
       <main className='flex justify-center items-center min-h-screen'>
         <ToastContainer />
         <section className='flex flex-col'>
-          <RetturnButton text='Retornar' />
+          <RetturnButton
+            text='Retornar'
+            href='./'
+          />
           <form
+            className='pt-8'
             onSubmit={(event) => AuthSubmit(event, email, password, persist)}
           >
             <div>

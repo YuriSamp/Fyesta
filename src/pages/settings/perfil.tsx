@@ -2,6 +2,7 @@
 import { Button } from '@ui/button';
 import { ControledInput } from '@ui/input/input';
 import Header from '@ui/SettingsHeader'
+import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router'
 import { useState } from 'react';
 import { useSignOut, useDeleteUser, useIdToken, useUpdateProfile, useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
@@ -19,30 +20,39 @@ export default function Perfil() {
   const [photo, setPhoto] = useState<string>('')
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [sendPasswordResetEmail, sending, passwordResetError] = useSendPasswordResetEmail(auth);
+  const { theme, setTheme } = useTheme()
+
 
   async function HandlePromise(fn: Promise<Boolean>) {
     await fn
     router.push('../../')
   }
 
-
   return (
-    <section className='px-96 pt-16 text-black dark:text-white min-h-screen bg-CreamWhite dark:bg-[#121212]'  >
+    <section className='px-96 pt-16 text-black dark:text-white min-h-screen bg-CreamWhite dark:bg-[#121212] '  >
       <Header
         Page={page}
       />
       <div className='max-h-[600px] overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2'>
         <div className='py-10 flex justify-between items-center px-4'>
-          <div className='flex flex-col gap-2'>
+          <div className='flex flex-col gap-2 '>
             <h2 className='text-xl'>Nome</h2>
-            <div className='pt-2 text-white'>
-              <ControledInput type='text' Width='lg' placeholder='Yuri Sampaio' value={Username} onChange={setUsername} />
+            <div className='pt-2'>
+              {theme == 'ligth' ?
+                <ControledInput type='text' Width='lg' intent='light' placeholder={user?.displayName as string} value={Username} onChange={setUsername} />
+                :
+                <ControledInput type='text' Width='lg' placeholder={user?.displayName as string} value={Username} onChange={setUsername} />
+              }
             </div>
           </div>
           <div>
             <Button
               Children='Atualizar'
-              onClick={() => updateProfile({ displayName: Username })}
+              onClick={() => {
+                updateProfile({ displayName: Username })
+                setUsername('')
+              }
+              }
             />
           </div>
         </div>
@@ -50,14 +60,21 @@ export default function Perfil() {
         <div className='py-10 flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Foto</h2>
-            <div className='pt-2 text-white'>
-              <ControledInput type='text' Width='lg' placeholder='Insira a nova url' value={photo} onChange={setPhoto} />
+            <div className='pt-2 '>
+              {theme === 'ligth' ?
+                <ControledInput type='text' Width='lg' intent='light' placeholder='Insira a nova url' value={photo} onChange={setPhoto} />
+                :
+                <ControledInput type='text' Width='lg' placeholder='Insira a nova url' value={photo} onChange={setPhoto} />
+              }
             </div>
           </div>
           <div>
             <Button
               Children='Atualizar'
-              onClick={() => updateProfile({ photoURL: photo })}
+              onClick={() => {
+                updateProfile({ photoURL: photo })
+                setPhoto('')
+              }}
             />
           </div>
         </div>
@@ -70,7 +87,6 @@ export default function Perfil() {
           <div>
             <Button
               Children='Mudar o email'
-
             />
           </div>
         </div>

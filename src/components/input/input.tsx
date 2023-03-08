@@ -2,12 +2,12 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { Dispatch, SetStateAction } from 'react';
 
 const inputStyles = cva(
-  'py-2 px-2 rounded-lg',
+  'py-2 px-2 rounded-lg focus:outline-none',
   {
     variants: {
       intent: {
         primary: 'bg-InputGray',
-        secondary: 'bg-gray-200 text-blue-300'
+        light: 'bg-transparent border-[1px] border-black'
       },
       Width: {
         sm: 'w-4',

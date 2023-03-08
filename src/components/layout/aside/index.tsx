@@ -36,7 +36,7 @@ export const Sidebar = () => {
         <div className='flex flex-col gap-7 pt-20'>
           <h2 className='text-lg  text-center font-semibold text-violet-900 dark:text-white'>Menu</h2>
           <div className='flex gap-3 items-center cursor-pointer buttonaside relative'
-            onClick={() => setSearchmodal((prevstate) => !prevstate)}
+          // onClick={() => setSearchmodal((prevstate) => !prevstate)}
           >
             <BsSearch className='text-xl' />
             <p className='text-xl'>Busca</p>
@@ -46,7 +46,7 @@ export const Sidebar = () => {
             <p className='text-xl'>Histórico</p>
           </div>
           <div className='flex gap-3 items-center cursor-pointer buttonaside relative'
-            onClick={() => setTrashmodal((prevstate) => !prevstate)}
+          // onClick={() => setTrashmodal((prevstate) => !prevstate)}
           >
             <BsTrash className='text-xl' />
             <p className='text-xl'>Lixeira</p>

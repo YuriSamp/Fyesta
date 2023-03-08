@@ -41,8 +41,13 @@ export default function Passwordchange() {
       <main className='flex justify-center items-center min-h-screen'>
         <ToastContainer autoClose={3000} />
         <section className='flex flex-col'>
-          <RetturnButton text='Retornar' />
-          <form onSubmit={(e) => HandleSubmit(e)}>
+          <RetturnButton
+            text='Retornar'
+            href='./'
+          />
+          <form
+            className='pt-8'
+            onSubmit={(e) => HandleSubmit(e)}>
             <div>
               <h1 className='text-center text-4xl'>Forgot your password?</h1>
             </div>

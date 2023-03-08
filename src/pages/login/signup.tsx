@@ -73,8 +73,11 @@ export default function SignUp() {
       <main className='flex justify-center items-center min-h-screen ' >
         <ToastContainer />
         <section className='flex flex-col'>
-          <RetturnButton text='Retornar' />
-          <form className='w-96' onSubmit={(e) => HandleSubmit(e)}>
+          <RetturnButton
+            text='Retornar'
+            href='./'
+          />
+          <form className='w-96 pt-8' onSubmit={(e) => HandleSubmit(e)}>
             <div>
               <h1 className='text-center text-4xl'>Sign Up</h1>
             </div>

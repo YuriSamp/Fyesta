@@ -3,12 +3,13 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 interface Props {
   text: string
+  href: string
 }
 
-export default function RetturnButton({ text }: Props) {
+export default function RetturnButton({ text, href }: Props) {
   return (
-    <Link href='./' className='mb-8 flex items-center gap-3 w-24'>
-      <AiOutlineArrowLeft />
+    <Link href={href} className='flex items-center gap-2 w-24'>
+      <AiOutlineArrowLeft className='h-5 w-5' />
       <p className='text-xl'>{text}</p>
     </Link>
   )

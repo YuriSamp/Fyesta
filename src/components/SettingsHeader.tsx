@@ -4,6 +4,7 @@ import Link from 'next/link';
 import AvatarIcon from '@ui/avatar';
 import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
+import RetturnButton from './RetturnButton';
 
 export const routes = [
   { name: 'Perfil e visibilidade', link: '/settings/perfil' },
@@ -22,10 +23,7 @@ export default function Header({ Page }: Props) {
 
   return (
     <>
-      <Link href='/home' className='flex items-center gap-1'>
-        <AiOutlineArrowLeft className='h-6 w-6' />
-        <p className='text-2xl'>Home</p>
-      </Link>
+      <RetturnButton href='/home' text='Home' />
       <section className='pt-10 pb-2  border-b-2 border-gray-800'>
         <div className='flex'>
           <div className='pl-6' >

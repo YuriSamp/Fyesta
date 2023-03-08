@@ -1,12 +1,12 @@
-import DiarypageWritten from '@ui/diario/DiarypageCard';
+import DiarypageWritten from '@ui/diario/Card';
 import { useState } from 'react';
 import Link from 'next/link';
+import { useAtom } from 'jotai';
+import { diaryPage } from 'src/context/diaryContext';
 
 export default function Diario() {
 
-  const array = ['20 / 02', '19 / 02', '18 / 02', '17 / 02', '16 / 02', '18 / 02', '18 / 02', '18 / 02']
-
-  const [entry, setEntry] = useState(array)
+  const [diary, setdiary] = useAtom(diaryPage);
 
   return (
     <>
@@ -19,9 +19,11 @@ export default function Diario() {
         >
           <p className='text-lg'> + Entrada</p>
         </Link>
-        {entry.filter(item => item.at(-1) === '2').map((item, index) => (
+        {diary.map((item, index) => (
           <DiarypageWritten
-            item={item}
+            text={item.Text}
+            title={item.Title}
+            data={item.Data}
             key={index}
           />
         ))}
