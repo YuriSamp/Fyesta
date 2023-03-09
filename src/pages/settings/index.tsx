@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { Select } from '@ui/Select';
 import { useAtom } from 'jotai';
-import { Language, Monday } from 'src/context/seetings';
+import { Language, Monday } from 'src/context/seetingsContext';
 
 const themes = ['dark', 'ligth']
 const languages = ['Português', 'inglês']

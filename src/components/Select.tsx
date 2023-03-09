@@ -1,6 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority';
 import { SetStateAction } from 'jotai';
 import { Dispatch } from 'react'
+import UpperCaseFirstLetter from 'src/utils/UppercaseFirstLetter';
 
 const SelectStyles = cva(
   'bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] ',
@@ -34,7 +35,7 @@ export function Select({ Width, intent, Options, onChange, value }: ISelect) {
       >
         {Options.map((item, index) => (
           <option value={item} key={index} className='dark:bg-InputGray'>
-            {item}
+            {UpperCaseFirstLetter(item)}
           </option>
         ))}
       </select>

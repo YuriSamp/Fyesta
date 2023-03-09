@@ -49,19 +49,21 @@ export default function PlannerListaInput() {
               readOnly={item.Selecionado}
             />
           </div>
-          <BsTrash
-            className='w-5 h-5 cursor-pointer text-black dark:text-white'
-            onClick={() => RemoveTask(item.Id)}
-          />
+          <button className='w-5 h-5'>
+            <BsTrash
+              className='cursor-pointer text-black dark:text-white'
+              onClick={() => RemoveTask(item.Id)}
+            />
+          </button>
         </div>
       ))}
-      <div
+      <button
         className='flex gap-3 items-center self-start cursor-pointer'
         onClick={AddNewTask}
       >
         <AiOutlinePlus className='w-5 h-5 text-gray-600 dark:text-gray-400 ' />
         <p className='text-gray-600 dark:text-gray-400 text-lg'>Tarefa</p>
-      </div>
+      </button>
     </div>
   )
 }
