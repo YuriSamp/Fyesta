@@ -1,7 +1,9 @@
 import { SetStateAction } from 'jotai';
-import { SetAtom } from 'jotai/vanilla/atom';
 import { Dispatch } from 'react';
 
+type SetAtom<Args extends unknown[], Result> = <A extends Args>(
+  ...args: A
+) => Result;
 export interface IGoal {
   Id: number;
   Meta: string;
