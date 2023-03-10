@@ -1,12 +1,18 @@
 import React from 'react'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
-import { GoalProp } from 'src/interfaces/Goals'
-
-//MAX de 24 metas
+import { GoalProp, Tarefa } from 'src/interfaces/Goals'
 
 export default function YearBox({ Metas }: GoalProp) {
 
   const MetasPlanejadas = Metas.map(item => item.Tarefas.length)
+
+  function VerificaTarefas(item: Tarefa[], id: number) {
+    const arrVerificado = item.filter(item => item.realizada === false)
+    if (arrVerificado.length === 0) {
+      return <RiCheckboxCircleFill className='w-5 h-5  text-violet-900 dark:text-DarkModeGreen' key={id} />
+    }
+    return <RiCheckboxBlankCircleLine className='w-5 h-5' key={id} />
+  }
 
   return (
     <section className='w-80'>
@@ -23,10 +29,9 @@ export default function YearBox({ Metas }: GoalProp) {
           Progresoo :
         </div>
         <div className='flex gap-2 flex-wrap h-10'>
-          {Metas.map((_, index) => (
-            <RiCheckboxBlankCircleLine className=' text-violet-900 dark:text-DarkModeGreen' key={index} />
-          ))
-          }
+          {Metas.map((item, index) => (
+            VerificaTarefas(item.Tarefas, item.Id)
+          ))}
         </div>
         <div className='pt-4 pb-2'>
           <p>Planejadas</p>

@@ -2,20 +2,29 @@ import React from 'react'
 import { BsLayers } from 'react-icons/bs'
 import { IoLayersSharp } from 'react-icons/io5'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
-import { GoalProp } from 'src/interfaces/Goals'
+import { GoalProp, Tarefas } from 'src/interfaces/Goals'
 
 export default function Fields({ Metas }: GoalProp) {
 
-  const arr2 = new Array(5).fill('')
-  const arr3 = new Array(3).fill('')
+  const arrTratado = Metas.map(item => {
+    const newObject = {
+      Catergoria: item.Categoria,
+      Tarefas: item.Tarefas,
+    }
+    return newObject
+  })
 
-  const Category = Metas.map(item => item.Categoria)
-  const MetasFinanceiras = Category.filter(item => item === 'Financeiro')
-  const MetasPessoais = Category.filter(item => item === 'Pessoal')
-  const MetasIntelectuais = Category.filter(item => item === 'Intelectual')
-
-  console.log(Category)
-  console.log(MetasFinanceiras)
+  const ProgressTasks = (item: Tarefas, categoria: 'Intelectual' | 'Pessoal' | 'Financeiro') => {
+    const arrDeCategoriaFiltrado = item.filter(item => item.Catergoria === categoria)
+    const arrFinal = arrDeCategoriaFiltrado.map((item, index) => {
+      const arrVerificado = item.Tarefas.filter(item => item.realizada === false)
+      if (arrVerificado.length === 0) {
+        return <RiCheckboxCircleFill className='w-5 h-5  text-violet-900 dark:text-DarkModeGreen' key={index} />
+      }
+      return <RiCheckboxBlankCircleLine className='w-5 h-5' key={index} />
+    })
+    return arrFinal
+  }
 
   return (
     <section className='self-start'>
@@ -25,18 +34,13 @@ export default function Fields({ Metas }: GoalProp) {
       <div className='flex gap-2'>
         <div className='w-80 flex flex-col border-2 px-4 py-4'>
           <IoLayersSharp className='w-20 h-20 self-center my-5' />
-
           <div className='flex gap-2 items-center pb-4 text-lg'>
             <BsLayers />
             <p>Intelectual</p>
           </div>
-
           <p className='pb-2'>Progresso</p>
           <div className='flex gap-2 flex-wrap h-10'>
-            {arr2.map((_, index) => (
-              <RiCheckboxCircleFill className=' text-violet-900 dark:text-DarkModeGreen ' key={index} />
-            ))
-            }
+            {ProgressTasks(arrTratado, 'Intelectual')}
           </div>
         </div>
         <div className='w-80 flex flex-col border-2 px-4 py-4'>
@@ -47,10 +51,7 @@ export default function Fields({ Metas }: GoalProp) {
           </div>
           <p className='pb-2'>Progresso</p>
           <div className='flex gap-2 flex-wrap h-10'>
-            {arr3.map((_, index) => (
-              <RiCheckboxBlankCircleLine key={index} />
-            ))
-            }
+            {ProgressTasks(arrTratado, 'Pessoal')}
           </div>
         </div>
         <div className='w-80 flex flex-col border-2 px-4 py-4'>
@@ -62,10 +63,7 @@ export default function Fields({ Metas }: GoalProp) {
 
           <p className='pb-2'>Progresso</p>
           <div className='flex gap-2 flex-wrap h-10'>
-            {MetasFinanceiras.map((_, index) => (
-              <RiCheckboxBlankCircleLine key={index} />
-            ))
-            }
+            {ProgressTasks(arrTratado, 'Financeiro')}
           </div>
         </div>
       </div>

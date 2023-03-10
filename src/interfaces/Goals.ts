@@ -1,5 +1,17 @@
 import { SetStateAction } from 'jotai';
 import { SetAtom } from 'jotai/vanilla/atom';
+import { Dispatch } from 'react';
+
+export interface IGoal {
+  Id: number;
+  Meta: string;
+  Tarefas: {
+    Tarefa: string;
+    realizada: boolean;
+    id: number;
+  }[];
+  Categoria: string;
+}
 
 export interface GoalsProps {
   Metas: {
@@ -8,6 +20,7 @@ export interface GoalsProps {
     Tarefas: {
       Tarefa: string;
       realizada: boolean;
+      id: number;
     }[];
     Categoria: string;
   }[];
@@ -20,6 +33,7 @@ export interface GoalsProps {
           Tarefas: {
             Tarefa: string;
             realizada: boolean;
+            id: number;
           }[];
           Categoria: string;
         }[]
@@ -36,7 +50,27 @@ export interface GoalProp {
     Tarefas: {
       Tarefa: string;
       realizada: boolean;
+      id: number;
     }[];
     Categoria: string;
   }[];
+}
+
+export type Tarefas = {
+  Catergoria: string;
+  Tarefas: {
+    Tarefa: string;
+    realizada: boolean;
+    id: number;
+  }[];
+}[];
+
+export type Tarefa = {
+  Tarefa: string;
+  realizada: boolean;
+  id: number;
+};
+
+export interface SheetsProps extends GoalsProps {
+  setState: Dispatch<SetStateAction<boolean>>;
 }

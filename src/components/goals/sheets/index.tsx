@@ -1,10 +1,9 @@
 import { AiOutlinePlus, AiOutlineStar } from 'react-icons/ai'
-import { RiCheckboxBlankCircleLine } from 'react-icons/ri'
+import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
 import { SlArrowDown } from 'react-icons/sl'
-import { GoalsProps } from 'src/interfaces/Goals'
+import { SheetsProps } from 'src/interfaces/Goals'
 
-
-export default function Sheets({ Metas, setMetas }: GoalsProps) {
+export default function Sheets({ Metas, setState }: SheetsProps) {
 
   return (
     <section className='flex flex-col w-[976px]  self-start'>
@@ -38,8 +37,11 @@ export default function Sheets({ Metas, setMetas }: GoalsProps) {
                 <p className='text-xl'>{item.Meta}</p>
               </div>
               <div className='w-96 flex gap-2 items-center justify-center'>
-                {item.Tarefas.map((_, index) => (
-                  <RiCheckboxBlankCircleLine key={index} />
+                {item.Tarefas.map((item, index) => (
+                  item.realizada === true ?
+                    <RiCheckboxCircleFill className='w-5 h-5  text-violet-900 dark:text-DarkModeGreen' key={index} />
+                    :
+                    <RiCheckboxBlankCircleLine className='w-5 h-5' key={index} />
                 ))
                 }
                 <p>Ações</p>
@@ -52,18 +54,7 @@ export default function Sheets({ Metas, setMetas }: GoalsProps) {
           ))}
           <div
             className='flex gap-2 items-center text-gray-400 cursor-pointer w-48'
-            onClick={() =>
-              Metas.length < 24 && setMetas(prev => [...prev, {
-                Id: 2,
-                Meta: 'Ganhar 10 mil reias',
-                Tarefas: [
-                  { Tarefa: 'Ganhar um aumento', realizada: false },
-                  { Tarefa: 'Diminuir os custos', realizada: true },
-                  { Tarefa: 'Participar do jogo do bixo', realizada: false },
-                ],
-                TarefasConcluidas: 3,
-                Categoria: 'Financeiro',
-              },])}
+            onClick={() => setState(true)}
           >
             <AiOutlinePlus className='w-7 h-7' />
             <p className='text-xl'>Nova meta</p>

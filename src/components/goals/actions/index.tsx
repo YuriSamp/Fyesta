@@ -1,9 +1,21 @@
 import React from 'react'
 import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
 import { SlArrowDown } from 'react-icons/sl'
-import { GoalProp } from 'src/interfaces/Goals'
+import { GoalsProps } from 'src/interfaces/Goals'
 
-export default function Actions({ Metas }: GoalProp) {
+export default function Actions({ Metas, setMetas }: GoalsProps) {
+
+  const ActionComplete = (id: number) => {
+    const Tasks = Metas.map(item => {
+      item.Tarefas.map(item => {
+        if (item.id === id) {
+          item.realizada = !item.realizada
+        }
+      })
+      return item
+    })
+    setMetas(Tasks)
+  }
 
   return (
     <section className='w-80 self-start'>
@@ -18,8 +30,9 @@ export default function Actions({ Metas }: GoalProp) {
         {Metas.map(item => (
           item.Tarefas.map((item, index) => (
             <div
-              className='flex gap-2 pt-2 items-center'
+              className='flex gap-2 pt-2 items-center cursor-pointer'
               key={index}
+              onClick={() => ActionComplete(index)}
             >
               {item.realizada === true ?
                 <>

@@ -4,10 +4,19 @@ import Fields from '@ui/goals/fields'
 import Actions from '@ui/goals/actions'
 import { useAtom } from 'jotai'
 import { Goals } from 'src/context/Goals/GoalContext'
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
+
+const Modal = dynamic(() => import('@ui/goals/goalsModal'), {
+  ssr: false
+})
 
 export default function Metas() {
 
   const [Metas, setMetas] = useAtom(Goals)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  console.log(Metas)
 
   return (
     <div className='flex flex-col gap-16 text-black dark:text-white'>
@@ -16,9 +25,17 @@ export default function Metas() {
         <Fields Metas={Metas} />
       </section>
       <section className='w-full flex justify-center gap-12 items-center'>
-        <Sheets Metas={Metas} setMetas={setMetas} />
-        <Actions Metas={Metas} />
+        <Sheets
+          Metas={Metas}
+          setMetas={setMetas}
+          setState={setIsModalOpen} />
+        <Actions
+          Metas={Metas}
+          setMetas={setMetas} />
       </section>
+      <Modal
+        State={isModalOpen}
+        SetState={setIsModalOpen} />
     </div>
   )
 }
