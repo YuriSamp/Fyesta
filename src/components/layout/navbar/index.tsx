@@ -16,10 +16,20 @@ export const Navbar = ({ Page }: Props) => {
   const horaAtual = new Date().getHours()
   let msg = ''
 
-  if (horaAtual >= 0 && horaAtual <= 6) msg = 'Boa Madrugada'
-  if (horaAtual > 6 && horaAtual <= 12) msg = 'Bom dia'
-  if (horaAtual > 12 && horaAtual <= 18) msg = 'Boa tarde'
-  if (horaAtual > 18 && horaAtual <= 24) msg = 'Boa noite'
+  switch (true) {
+    case horaAtual >= 0 && horaAtual <= 6:
+      msg = 'Boa Madrugada';
+      break;
+    case horaAtual > 6 && horaAtual <= 12:
+      msg = 'Bom dia';
+      break;
+    case horaAtual > 12 && horaAtual <= 18:
+      msg = 'Boa tarde';
+      break;
+    case horaAtual > 18 && horaAtual <= 24:
+      msg = 'Boa noite';
+      break;
+  }
 
   return (
     <header>

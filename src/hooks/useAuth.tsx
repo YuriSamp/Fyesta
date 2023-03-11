@@ -1,11 +1,11 @@
 import { CustomParameters, UserCredential } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { toast } from 'react-toastify';
 import { auth } from 'src/server/Firebase/ClientApp';
 import nookies from 'nookies'
 import { cookeisIsAccept } from 'src/context/cookiesContext';
 import { useAtom } from 'jotai';
+import { toastNotify } from 'src/utils/toastNotify';
 
 type ProviderType = (
   scopes?: string[] | undefined,
@@ -13,9 +13,7 @@ type ProviderType = (
 ) => Promise<UserCredential | undefined>
 
 type AuthProviderType = (Provider: ProviderType) => void
-
 type AuthSubmitType = (e: React.FormEvent<HTMLFormElement>, enail: string, password: string, persist: boolean) => void
-
 type useAuthType = [AuthhProvider: AuthProviderType, AuthSubmit: AuthSubmitType]
 
 export default function useAuth(): useAuthType {
@@ -28,21 +26,15 @@ export default function useAuth(): useAuthType {
   const [cookiesAcept, setCookiesAccept] = useAtom(cookeisIsAccept)
 
   async function AuthhProvider(Provider: ProviderType) {
-    if (cookiesAcept === false) {
-      const notify = () => toast.error("Por favor aceite os cookies primeiro");
-      notify()
-      return
-    }
-
     try {
+      toastNotify(cookiesAcept === false, "Por favor aceite os cookies primeiro", 'error')
       const userCredential = await Provider()
-      if (!userCredential) {
-        const notify = () => toast.error("Ocorreu algum erro com o provedor");
-        notify()
-        return
-      }
-      const token = await userCredential.user.getIdToken()
-      nookies.set(undefined, 'token', token, { maxAge: 60 * 60 * 24 * 15, path: '/' })
+
+      toastNotify(userCredential === undefined, "Ocorreu algum erro com o provedor", 'error')
+
+      const token = await userCredential?.user.getIdToken()
+
+      nookies.set(undefined, 'token', token as string, { maxAge: 60 * 60 * 24 * 15, path: '/' })
       router.push('/home');
     } catch (error) {
       console.log(error)
@@ -52,43 +44,22 @@ export default function useAuth(): useAuthType {
   const AuthSubmit = async (e: React.FormEvent<HTMLFormElement>, email: string, password: string, persist: boolean) => {
     e.preventDefault()
 
-    if (cookiesAcept === false) {
-      const notify = () => toast.error("Por favor aceite os cookies primeiro");
-      notify()
-      return
-    }
-
-
-    if (email.length === 0) {
-      const notify = () => toast.warning("O campo de email encontra-se vazio");
-      notify()
-      return
-    }
-
-    if (password.length === 0) {
-      const notify = () => toast.warning("O campo de senha encontra-se vazio");
-      notify()
-      return
-    }
-
     try {
+      toastNotify(cookiesAcept === false, "Por favor aceite os cookies primeiro", 'error')
+      toastNotify(email.length === 0, "O campo de email encontra-se vazio", 'warn')
+      toastNotify(password.length === 0, "O campo de senha encontra-se vazio", 'warn')
+
       const res = await signInWithEmailAndPassword(email, password)
 
-      if (res === undefined) {
-        const notify = () => toast.error("Email ou senha estão incorretos");
-        notify()
-        return
-      }
+      toastNotify(res === undefined, "Email ou senha estão incorretos", 'error')
 
       const maxAge = persist ? 60 * 60 * 24 * 15 : undefined;
-
-      const token = await res.user.getIdToken()
-      nookies.set(undefined, 'token', token, { maxAge, path: '/' });
+      const token = await res?.user.getIdToken()
+      nookies.set(undefined, 'token', token as string, { maxAge, path: '/' });
       router.push('/home');
     } catch (error) {
       console.log(error)
     }
-
   }
 
   return [AuthhProvider, AuthSubmit]

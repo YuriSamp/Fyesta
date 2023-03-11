@@ -4,6 +4,11 @@ import { IoLayersSharp } from 'react-icons/io5'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
 import { GoalsProps, TaskWithCategory } from 'src/interfaces/Goals'
 
+interface IField {
+  FieldName: 'Intelectual' | 'Pessoal' | 'Financeiro'
+  Metas: JSX.Element[]
+}
+
 export default function Fields({ Metas }: GoalsProps) {
 
   const arrTratado = Metas.map(item => {
@@ -32,41 +37,35 @@ export default function Fields({ Metas }: GoalsProps) {
         <h3 className='text-3xl  dark:text-white '>Áreas</h3>
       </div>
       <div className='flex gap-2'>
-        <div className='w-80 flex flex-col border-2 px-4 py-4'>
-          <IoLayersSharp className='w-20 h-20 self-center my-5' />
-          <div className='flex gap-2 items-center pb-4 text-lg'>
-            <BsLayers />
-            <p>Intelectual</p>
-          </div>
-          <p className='pb-2'>Progresso</p>
-          <div className='flex gap-2 flex-wrap h-10'>
-            {ProgressTasks(arrTratado, 'Intelectual')}
-          </div>
-        </div>
-        <div className='w-80 flex flex-col border-2 px-4 py-4'>
-          <IoLayersSharp className='w-20 h-20 self-center my-5' />
-          <div className='flex gap-2 items-center pb-4 text-lg'>
-            <BsLayers />
-            <p>Pessoal</p>
-          </div>
-          <p className='pb-2'>Progresso</p>
-          <div className='flex gap-2 flex-wrap h-10'>
-            {ProgressTasks(arrTratado, 'Pessoal')}
-          </div>
-        </div>
-        <div className='w-80 flex flex-col border-2 px-4 py-4'>
-          <IoLayersSharp className='w-20 h-20 self-center my-5' />
-          <div className='flex gap-2 items-center pb-4 text-lg'>
-            <BsLayers />
-            <p>Financeiro</p>
-          </div>
-
-          <p className='pb-2'>Progresso</p>
-          <div className='flex gap-2 flex-wrap h-10'>
-            {ProgressTasks(arrTratado, 'Financeiro')}
-          </div>
-        </div>
+        <Field
+          FieldName='Intelectual'
+          Metas={ProgressTasks(arrTratado, 'Intelectual')}
+        />
+        <Field
+          FieldName='Pessoal'
+          Metas={ProgressTasks(arrTratado, 'Pessoal')}
+        />
+        <Field
+          FieldName='Financeiro'
+          Metas={ProgressTasks(arrTratado, 'Financeiro')}
+        />
       </div>
     </section>
+  )
+}
+
+function Field({ FieldName, Metas }: IField) {
+  return (
+    <div className='w-80 flex flex-col border-2 px-4 py-4'>
+      <IoLayersSharp className='w-20 h-20 self-center my-5' />
+      <div className='flex gap-2 items-center pb-4 text-lg'>
+        <BsLayers />
+        <p>{FieldName}</p>
+      </div>
+      <p className='pb-2'>Progresso</p>
+      <div className='flex gap-2 flex-wrap h-10'>
+        {Metas}
+      </div>
+    </div>
   )
 }
