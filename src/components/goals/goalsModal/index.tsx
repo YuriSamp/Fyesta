@@ -5,12 +5,11 @@ import { ModalProps } from 'src/interfaces/Modal';
 import { useAtom } from 'jotai';
 import { Goals } from 'src/context/Goals/GoalContext';
 import { Task } from 'src/interfaces/Goals';
-import { toast } from 'react-toastify';
+import { toastNotify } from 'src/utils/toastNotify';
+
+//TODO finalizar ui e talvez componentizar o input type radio
 
 export default function GoalsModal({ State, SetState }: ModalProps) {
-
-  //AJEITAR O NOME DA META
-
 
   const [Metas, setMetas] = useAtom(Goals)
   const [id, setId] = useState(0)
@@ -38,43 +37,6 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
     return Categoria
   }
 
-
-  const addGoal = () => {
-    const Categoria = FieldSelected()
-
-    if (taskName.length === 0) {
-      const notify = () => toast.error("Insira o nome da meta");
-      notify()
-      return
-    }
-
-    if (taskarr.length === 0) {
-      const notify = () => toast.warn("Insira ao menos uma meta");
-      notify()
-      return
-    }
-
-    if (field === 0) {
-      const notify = () => toast.warn("Escolha uma área");
-      notify()
-      return
-    }
-
-    if (Metas.length < 24) {
-      setMetas(prev => [...prev, {
-        Id: id,
-        Meta: taskName,
-        Tarefas: taskarr,
-        Categoria: Categoria,
-      },])
-      setId(prev => prev + 1)
-      setTaskarr([])
-      setTaskName('')
-      setTask('')
-      setField(0)
-    }
-  }
-
   const addTask = (task: string) => {
     const taskobj = {
       Tarefa: task,
@@ -86,6 +48,33 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
     setTask('')
   }
 
+
+  const addGoal = () => {
+    try {
+      const Categoria = FieldSelected()
+      toastNotify(taskName.length === 0, "Insira o nome da meta", 'warn')
+      toastNotify(taskarr.length === 0, "Insira ao menos uma meta", 'warn')
+      toastNotify(field === 0, 'Escolha uma área', 'warn')
+
+      if (Metas.length < 24) {
+        setMetas(prev => [...prev, {
+          Id: id,
+          Meta: taskName,
+          Tarefas: taskarr,
+          Categoria: Categoria,
+        },])
+        setId(prev => prev + 1)
+        setTaskarr([])
+        setTaskName('')
+        setTask('')
+        setField(0)
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <Portal.Root>
       {State &&
@@ -93,12 +82,13 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
           ref={domNode}
         >
           <div className='pt-4 text-center'>
-            <h1 className='text-2xl'>Adicione uma nova meta</h1>
+            <h1 className='text-2xl'>Adicione uma nova ação</h1>
           </div>
           <div className='pt-2 pl-4'>
             <input
               placeholder='Adicione um nome'
               className='bg-transparent placeholder:text-black w-72 border-[1px] border-black rounded-lg px-2 focus:outline-none '
+              value={taskName}
               onChange={e => setTaskName(e.target.value)}
             />
           </div>

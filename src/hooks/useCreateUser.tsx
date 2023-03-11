@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { auth } from 'src/server/Firebase/ClientApp';
 import nookies from 'nookies'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { toastNotify } from 'src/utils/toastNotify';
 
 type Data = {
   displayName: string
@@ -17,37 +18,13 @@ export default function useCreateUser() {
   const router = useRouter()
 
   async function createUser(data: Data) {
-    if (data.password.length < 8) {
-      const notify = () => toast.warning("A senha precisa ter 8 caracteres");
-      notify()
-      return
-    }
-
-    if (data.password !== data.passwordVerify) {
-      const notify = () => toast.error("As senhas inseridas estão diferentes");
-      notify()
-      return
-    }
-
-    if (data.displayName.length === 0) {
-      const notify = () => toast.error("Por favor insira um nome");
-      notify()
-      return
-    }
-
-    if (data.password.length === 0) {
-      const notify = () => toast.error("Por favor insira uma senha");
-      notify()
-      return
-    }
-
-    if (data.email.length === 0) {
-      const notify = () => toast.error("Por favor insira um email");
-      notify()
-      return
-    }
-
     try {
+      toastNotify(data.displayName.length === 0, "Por favor insira um nome", 'warn')
+      toastNotify(data.email.length === 0, "Por favor insira um email", 'warn')
+      toastNotify(data.password.length === 0, "Por favor insira uma senha", 'warn')
+      toastNotify(data.password.length < 8, "A senha precisa ter 8 caracteres", 'warn')
+      toastNotify(data.password !== data.passwordVerify, "As senhas inseridas estão diferentes", 'warn')
+
       const { user } = await createUserWithEmailAndPassword(auth, data.email, data.password);
 
       await updateProfile(user, { displayName: data.displayName, photoURL: data.photoURL });
@@ -57,15 +34,11 @@ export default function useCreateUser() {
 
       router.push('/home')
     } catch (error: any) {
-
       if (error.message.includes('email-already')) {
         const notify = () => toast.error("E-mail já cadastrado. Faça seu login.");
         notify()
         return
       }
-
-      const notify = () => toast.error("Ocorreu um erro, tente mais tarde");
-      notify()
     }
   }
 

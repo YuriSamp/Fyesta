@@ -9,6 +9,8 @@ import { useSignOut, useDeleteUser, useIdToken, useUpdateProfile, useSendPasswor
 import { toast } from 'react-toastify';
 import { auth } from 'src/server/Firebase/ClientApp';
 
+//TODO incluir a logica de mudar o email
+
 export default function Perfil() {
   const router = useRouter()
   const page = router.pathname
@@ -21,7 +23,6 @@ export default function Perfil() {
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [sendPasswordResetEmail, sending, passwordResetError] = useSendPasswordResetEmail(auth);
   const { theme, setTheme } = useTheme()
-
 
   async function HandlePromise(fn: Promise<Boolean>) {
     await fn
@@ -45,16 +46,14 @@ export default function Perfil() {
               }
             </div>
           </div>
-          <div>
-            <Button
-              Children='Atualizar'
-              onClick={() => {
-                updateProfile({ displayName: Username })
-                setUsername('')
-              }
-              }
-            />
-          </div>
+          <Button
+            Children='Atualizar'
+            onClick={() => {
+              updateProfile({ displayName: Username })
+              setUsername('')
+            }
+            }
+          />
         </div>
 
         <div className='py-10 flex justify-between items-center px-4'>
@@ -68,15 +67,13 @@ export default function Perfil() {
               }
             </div>
           </div>
-          <div>
-            <Button
-              Children='Atualizar'
-              onClick={() => {
-                updateProfile({ photoURL: photo })
-                setPhoto('')
-              }}
-            />
-          </div>
+          <Button
+            Children='Atualizar'
+            onClick={() => {
+              updateProfile({ photoURL: photo })
+              setPhoto('')
+            }}
+          />
         </div>
 
         <div className='py-10 flex justify-between items-center px-4'>
@@ -84,11 +81,9 @@ export default function Perfil() {
             <h2 className='text-xl'>Email</h2>
             <h3 className='text-base'>yurisamp123@gmail.com</h3>
           </div>
-          <div>
-            <Button
-              Children='Mudar o email'
-            />
-          </div>
+          <Button
+            Children='Mudar o email'
+          />
         </div>
 
         <div className='py-10  flex justify-between items-center px-4'>
@@ -96,41 +91,35 @@ export default function Perfil() {
             <h2 className='text-xl'>Senha</h2>
             <h3 className='text-base'>Escolha uma senha forte, afinal você não quer que ninguem saiba seus segredos</h3>
           </div>
-          <div>
-            <Button Children='Mudar a senha'
-              onClick={() => {
-                sendPasswordResetEmail(user?.email as string)
-                const notify = () => toast.success("Um email foi enviado para alterar a senha");
-                notify()
-              }}
-            />
-          </div>
+          <Button Children='Mudar a senha'
+            onClick={() => {
+              sendPasswordResetEmail(user?.email as string)
+              const notify = () => toast.success("Um email foi enviado para alterar a senha");
+              notify()
+            }}
+          />
         </div>
         <div className='py-10  flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Log out</h2>
             <h3 className='text-base'>Irá te redirecionar para página de login</h3>
           </div>
-          <div>
-            <Button
-              Children='Sair da conta'
-              intent='danger'
-              onClick={async () => HandlePromise(signOut())}
-            />
-          </div>
+          <Button
+            Children='Sair da conta'
+            intent='danger'
+            onClick={async () => HandlePromise(signOut())}
+          />
         </div>
         <div className='py-10  flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Excluir sua conta</h2>
             <h3 className='text-base'>É uma pena que você esteja indo embora <span className='text-lg'>😭</span>  </h3>
           </div>
-          <div >
-            <Button
-              Children='Excluir sua conta'
-              intent='danger'
-              onClick={async () => HandlePromise(deleteUser())}
-            />
-          </div>
+          <Button
+            Children='Excluir sua conta'
+            intent='danger'
+            onClick={async () => HandlePromise(deleteUser())}
+          />
         </div>
       </div>
     </section>

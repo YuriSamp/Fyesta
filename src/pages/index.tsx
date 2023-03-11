@@ -7,6 +7,13 @@ import SignUp from '../../public/SignUp.png'
 import { Navbar } from '@ui/docs/navbar';
 import { BsShieldCheck, BsBrush } from 'react-icons/bs'
 import { AiOutlineCalendar } from 'react-icons/ai'
+import { IconType } from 'react-icons'
+
+interface IFeatureBox {
+  Title: string
+  Description: string
+  Icon: IconType
+}
 
 export default function Home() {
   return (
@@ -34,72 +41,35 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
       <section className='pt-10 pb-20 border-b-[1px] text-black'>
         <p className=' text-center pt-10 text-4xl'>Features</p>
         <span className=' text-center block pt-2 text-xl'>Esse projeto nasceu da minha vontade de melhorar as minhas habilidades de verdade utilizando Typescript e Next</span>
         <span className=' text-center block pt-2 text-xl'>Portanto ele conta com diversas features como autenticação, criptografia, um back-end proprio e muito mais</span>
+        <FeatureBox
+          Title='Autenticação'
+          Icon={BsShieldCheck}
+          Description='Toda a autenticação foi montada usando firebase para lidar com a segurança e autenticação'
+        />
 
+        <FeatureBox
+          Title='Organização'
+          Icon={AiOutlineCalendar}
+          Description='Todo o seu planejamento diário em um só lugar De forma simples rápida e eficiente'
+        />
 
-        <div className='flex justify-center pt-20 gap-8'>
-          <div className='flex flex-col w-[400px]'>
-            <div className='flex gap-2 items-center'>
-              <AiOutlineCalendar className='w-5 h-5' />
-              <h3 className='text-2xl'>Organização</h3>
-            </div>
-            <h3 className='text-lg pt-2'>Todo o seu planejamento diário em um só lugar De forma simples rápida e eficiente</h3>
-          </div>
-          <div className='grid grid-cols-2 justify-items-center gap-6 '>
-            <Image src={Loginpage} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-            <Image src={SignUp} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-            <Image src={recovery} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-            <Image src={reset} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-          </div>
-        </div>
-
-
-
-        <div className='flex justify-center pt-20 gap-8'>
-          <div className='flex flex-col w-[400px]'>
-            <div className='flex gap-2 items-center'>
-              <BsShieldCheck className='w-5 h-5' />
-              <h3 className='text-2xl'>Autenticação</h3>
-            </div>
-            <h3 className='text-lg pt-2'>Toda a autenticação foi montada usando firebase para lidar com a segurança e autenticação </h3>
-          </div>
-          <div className='grid grid-cols-2 justify-items-center gap-6 '>
-            <Image src={Loginpage} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-            <Image src={SignUp} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-            <Image src={recovery} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-            <Image src={reset} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-          </div>
-        </div>
-
-        <div className='flex justify-center pt-20 gap-8'>
-          <div className='flex flex-col w-[400px]  '>
-            <div className='flex items-center gap-2'>
-              <BsBrush className='w-5 h-5' />
-              <h3 className='text-2xl'>Temas</h3>
-            </div>
-            <h3 className='text-lg pt-2'>Pensando em deixar o mais agradavel possivel Criei temas para todos os gostos </h3>
-          </div>
-          <div className='grid grid-cols-2 justify-items-center gap-6 '>
-            <Image src={Loginpage} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-            <Image src={SignUp} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-            <Image src={recovery} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-            <Image src={reset} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-          </div>
-        </div>
-
+        <FeatureBox
+          Title='Personalização'
+          Icon={BsBrush}
+          Description='Pensando em deixar o mais agradavel possivel Criei diversas personalizações pro usuário'
+        />
       </section>
-
 
       <section className='pt-10 pb-20 border-b-[1px]'>
         <p className='text-black text-center pt-10 text-4xl'>Open Source</p>
         <span className='text-black text-center block pt-2 text-xl'>Nada disso seria possivel caso o projeto não fosse open source e tivesse contribuições de tantos amigos</span>
         <span className='text-black text-center block pt-2 text-xl'>Caso esteja curioso pra ver o código. está por completo no <Link href='https://github.com/YuriSamp/Fyesta' target='_blank' className='italic underline'>Github</Link>, <Link href='/' className='italic underline'>também estou documentando tudo por aqui.</Link> </span>
       </section>
-
-
 
       <footer className='flex py-5 px-80 text-black justify-between '>
         <div className='flex gap-3'>
@@ -110,6 +80,26 @@ export default function Home() {
           <p>Todo o código está disponivel no <Link href='https://github.com/YuriSamp/Fyesta' target='_blank' className='italic underline'>Github</Link></p>
         </div>
       </footer>
+    </div>
+  )
+}
+
+function FeatureBox({ Description, Title, Icon }: IFeatureBox) {
+  return (
+    <div className='flex justify-center pt-20 gap-8'>
+      <div className='flex flex-col w-[400px]'>
+        <div className='flex gap-2 items-center'>
+          <Icon className='w-5 h-5' />
+          <h3 className='text-2xl'>{Title}</h3>
+        </div>
+        <h3 className='text-lg pt-2'>{Description}</h3>
+      </div>
+      <div className='grid grid-cols-2 justify-items-center gap-6 '>
+        <Image src={Loginpage} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
+        <Image src={SignUp} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
+        <Image src={recovery} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
+        <Image src={reset} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
+      </div>
     </div>
   )
 }

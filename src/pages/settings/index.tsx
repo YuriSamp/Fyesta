@@ -55,7 +55,7 @@ export default function Settings() {
           <h2 className='text-xl'>Começar a semana na segunda</h2>
           <h3 className='text-base'>isso vai alterar a maneira como o calendario é apresentado</h3>
         </div>
-        <div className=''>
+        <div>
           <Switch.Root
             className="w-11 h-[25px] bg-gray-300 dark:bg-white rounded-full relative data-[state=checked]:bg-[rgb(59,130,246)] dark:data-[state=checked]:bg-[#138859]"
             role='switch'
