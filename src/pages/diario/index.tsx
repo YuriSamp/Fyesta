@@ -10,7 +10,7 @@ export default function Diario() {
 
   return (
     <>
-      <p className='text-4xl mb-2 font-EduCursed text-violet-900 dark:text-green-700'>Fevereiro 2023</p>
+      <p className='text-3xl mb-2  text-violet-900 dark:text-green-700'>Fevereiro 2023</p>
       <hr />
       <div className='flex flex-wrap gap-[19px] pt-4 max-w-[1550px] '>
         <Link
@@ -28,7 +28,7 @@ export default function Diario() {
           />
         ))}
       </div>
-      <p className='text-4xl mb-2 font-EduCursed pt-10 text-violet-900 dark:text-green-700'>Janeiro 2023</p>
+      <p className='text-3xl mb-2 pt-10 text-violet-900 dark:text-green-700'>Janeiro 2023</p>
       <hr />
     </>
   )
