@@ -4,7 +4,8 @@ import { Dispatch } from 'react';
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
 ) => Result;
-export interface IGoal {
+
+export interface Goal {
   Id: number;
   Meta: string;
   Tarefas: {
@@ -16,63 +17,20 @@ export interface IGoal {
 }
 
 export interface GoalsProps {
-  Metas: {
-    Id: number;
-    Meta: string;
-    Tarefas: {
-      Tarefa: string;
-      realizada: boolean;
-      id: number;
-    }[];
-    Categoria: string;
-  }[];
-  setMetas: SetAtom<
-    [
-      SetStateAction<
-        {
-          Id: number;
-          Meta: string;
-          Tarefas: {
-            Tarefa: string;
-            realizada: boolean;
-            id: number;
-          }[];
-          Categoria: string;
-        }[]
-      >
-    ],
-    void
-  >;
+  Metas: Goal[];
+}
+export interface GoalsWithSetterProps extends GoalsProps {
+  setMetas: SetAtom<[SetStateAction<Goal[]>], void>;
 }
 
-export interface GoalProp {
-  Metas: {
-    Id: number;
-    Meta: string;
-    Tarefas: {
-      Tarefa: string;
-      realizada: boolean;
-      id: number;
-    }[];
-    Categoria: string;
-  }[];
+export interface SheetsProps extends GoalsWithSetterProps {
+  setState: Dispatch<SetStateAction<boolean>>;
 }
 
-export type Tarefas = {
-  Catergoria: string;
-  Tarefas: {
-    Tarefa: string;
-    realizada: boolean;
-    id: number;
-  }[];
-}[];
+export type TaskWithCategory = Omit<Goal, 'Id' | 'Meta'>;
 
-export type Tarefa = {
+export type Task = {
   Tarefa: string;
   realizada: boolean;
   id: number;
 };
-
-export interface SheetsProps extends GoalsProps {
-  setState: Dispatch<SetStateAction<boolean>>;
-}

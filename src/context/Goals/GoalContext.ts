@@ -1,4 +1,4 @@
 import { atom } from 'jotai';
-import { IGoal } from 'src/interfaces/Goals';
+import { Goal } from 'src/interfaces/Goals';
 
-export const Goals = atom<IGoal[]>([]);
+export const Goals = atom<Goal[]>([]);

@@ -1,9 +1,9 @@
 import React from 'react'
 import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
 import { SlArrowDown } from 'react-icons/sl'
-import { GoalsProps } from 'src/interfaces/Goals'
+import { GoalsWithSetterProps } from 'src/interfaces/Goals'
 
-export default function Actions({ Metas, setMetas }: GoalsProps) {
+export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
 
   const ActionComplete = (id: number) => {
     const Tasks = Metas.map(item => {
@@ -32,17 +32,17 @@ export default function Actions({ Metas, setMetas }: GoalsProps) {
             <div
               className='flex gap-2 pt-2 items-center cursor-pointer'
               key={index}
-              onClick={() => ActionComplete(index)}
+              onClick={() => ActionComplete(item.id)}
             >
               {item.realizada === true ?
                 <>
                   <RiCheckboxCircleFill className='w-5 h-5  text-violet-900 dark:text-DarkModeGreen' />
-                  <p className='text-xl'>{item.Tarefa}</p>
+                  <p className='text-xl select-none'>{item.Tarefa}</p>
                 </>
                 :
                 <>
                   <RiCheckboxBlankCircleLine className='w-5 h-5' />
-                  <p className='text-xl'>{item.Tarefa}</p>
+                  <p className='text-xl select-none'>{item.Tarefa}</p>
                 </>
               }
             </div>

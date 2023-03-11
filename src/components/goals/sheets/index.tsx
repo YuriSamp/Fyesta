@@ -1,9 +1,16 @@
 import { AiOutlinePlus, AiOutlineStar } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
 import { SlArrowDown } from 'react-icons/sl'
-import { SheetsProps } from 'src/interfaces/Goals'
+import { SheetsProps, Task } from 'src/interfaces/Goals'
 
 export default function Sheets({ Metas, setState }: SheetsProps) {
+
+  const tasksDone = (Tasksarr: Task[]) => {
+    const Tasks = Tasksarr.map(item => item.realizada)
+    const TasksDoneArr = Tasks.filter(item => item === true)
+    return TasksDoneArr.length
+  }
+
 
   return (
     <section className='flex flex-col w-[976px]  self-start'>
@@ -45,7 +52,7 @@ export default function Sheets({ Metas, setState }: SheetsProps) {
                 ))
                 }
                 <p>Ações</p>
-                <p> 0 / {item.Tarefas.length} </p>
+                <p> {tasksDone(item.Tarefas)} / {item.Tarefas.length} </p>
               </div>
               <div className='w-60 text-center'>
                 <p>{item.Categoria}</p>

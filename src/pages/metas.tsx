@@ -6,6 +6,8 @@ import { useAtom } from 'jotai'
 import { Goals } from 'src/context/Goals/GoalContext'
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Modal = dynamic(() => import('@ui/goals/goalsModal'), {
   ssr: false
@@ -16,10 +18,10 @@ export default function Metas() {
   const [Metas, setMetas] = useAtom(Goals)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  console.log(Metas)
 
   return (
     <div className='flex flex-col gap-16 text-black dark:text-white'>
+      <ToastContainer />
       <section className='w-full flex justify-center gap-12 items-center'>
         <YearBox Metas={Metas} />
         <Fields Metas={Metas} />

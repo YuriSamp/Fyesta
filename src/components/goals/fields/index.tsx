@@ -2,20 +2,20 @@ import React from 'react'
 import { BsLayers } from 'react-icons/bs'
 import { IoLayersSharp } from 'react-icons/io5'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
-import { GoalProp, Tarefas } from 'src/interfaces/Goals'
+import { GoalsProps, TaskWithCategory } from 'src/interfaces/Goals'
 
-export default function Fields({ Metas }: GoalProp) {
+export default function Fields({ Metas }: GoalsProps) {
 
   const arrTratado = Metas.map(item => {
     const newObject = {
-      Catergoria: item.Categoria,
       Tarefas: item.Tarefas,
+      Categoria: item.Categoria,
     }
     return newObject
   })
 
-  const ProgressTasks = (item: Tarefas, categoria: 'Intelectual' | 'Pessoal' | 'Financeiro') => {
-    const arrDeCategoriaFiltrado = item.filter(item => item.Catergoria === categoria)
+  const ProgressTasks = (item: TaskWithCategory[], categoria: 'Intelectual' | 'Pessoal' | 'Financeiro') => {
+    const arrDeCategoriaFiltrado = item.filter(item => item.Categoria === categoria)
     const arrFinal = arrDeCategoriaFiltrado.map((item, index) => {
       const arrVerificado = item.Tarefas.filter(item => item.realizada === false)
       if (arrVerificado.length === 0) {
