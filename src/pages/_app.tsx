@@ -4,13 +4,18 @@ import { useRouter } from 'next/router'
 import Layout from '@ui/layout'
 import { ThemeProvider } from 'next-themes'
 import { Caveat } from '@next/font/google'
+import { Edu_NSW_ACT_Foundation } from '@next/font/google'
 import { api } from 'src/utils/api'
 import { type AppType } from "next/app";
-
 
 const CaveatFont = Caveat({
   subsets: ['latin'],
   variable: '--font-Caveat'
+})
+
+const EduCursedFont = Edu_NSW_ACT_Foundation({
+  subsets: ['latin'],
+  variable: '--font-EduCursed'
 })
 
 const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
@@ -24,9 +29,8 @@ const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
       attribute="class"
       storageKey='theme'
       enableSystem={false}
-      themes={['light', 'dark', 'colors']}
     >
-      <main className={`${CaveatFont.variable} `}>
+      <main className={`${CaveatFont.variable} ${EduCursedFont.variable} `}>
         <Layout page={page}>
           <Component {...pageProps} />
         </Layout>

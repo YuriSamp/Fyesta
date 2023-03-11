@@ -30,13 +30,13 @@ export const Sidebar = () => {
   const [Historyhmodal, setHistorymodal] = useState(false)
 
   return (
-    <aside className='w-64 min-h-screen flex flex-col items-center bg-neutral-900 justify-between'>
+    <aside className='w-64  flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white justify-between z-10'>
       <section >
-        <h1 className='pt-4 pb-1 text-4xl font-semibold italic border-b-2 border-white border-dashed text-center'>FYESTA</h1>
+        <h1 className='pt-4 pb-1 text-4xl font-semibold italic text-center'>FYESTA</h1>
         <div className='flex flex-col gap-7 pt-20'>
-          <h2 className='text-lg italic text-center'>Menu</h2>
+          <h2 className='text-lg  text-center font-semibold text-violet-900 dark:text-white'>Menu</h2>
           <div className='flex gap-3 items-center cursor-pointer buttonaside relative'
-            onClick={() => setSearchmodal((prevstate) => !prevstate)}
+          // onClick={() => setSearchmodal((prevstate) => !prevstate)}
           >
             <BsSearch className='text-xl' />
             <p className='text-xl'>Busca</p>
@@ -46,14 +46,14 @@ export const Sidebar = () => {
             <p className='text-xl'>Histórico</p>
           </div>
           <div className='flex gap-3 items-center cursor-pointer buttonaside relative'
-            onClick={() => setTrashmodal((prevstate) => !prevstate)}
+          // onClick={() => setTrashmodal((prevstate) => !prevstate)}
           >
             <BsTrash className='text-xl' />
             <p className='text-xl'>Lixeira</p>
           </div>
         </div>
         <div className='flex flex-col gap-7 pt-20'>
-          <h2 className='text-lg italic text-center'>Páginas</h2>
+          <h2 className='text-lg  text-center font-semibold text-violet-900 dark:text-white'>Páginas</h2>
           {pages.map((item, index) => (
             <Link
               key={index}

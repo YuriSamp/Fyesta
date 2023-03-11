@@ -37,4 +37,3 @@ checks:
 exclude_patterns:
   - '**/node_modules/'
   - '**/*.test.tsx'
-  - '**/pages/index.tsx'

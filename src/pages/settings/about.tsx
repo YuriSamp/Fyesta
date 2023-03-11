@@ -11,7 +11,7 @@ export default function About() {
 
   return (
     <>
-      <section className='px-96 pt-16' >
+      <section className='px-96 pt-16 text-black dark:text-white min-h-screen bg-CreamWhite dark:bg-[#121212]' >
         <Header
           Page={page}
         />
@@ -19,10 +19,10 @@ export default function About() {
           <h1 className='text-2xl py-5 '>Porque esse aplicativo existe ? </h1>
           <p className='text-lg tracking-wider'>Esse projeto nasceu da minha vontade de ter um lugar para escrever o meu diário,
             mas eu nunca encontrei um aplicativo para computador da exata maneira que eu queria,
-            então por muito tempo eu usei o Google Keep depois acabei migrei para o notion,
+            então por muito tempo eu usei o Google Keep posteriormente acabei migrando para o notion,
             o notion soluciona o problema de ter um lugar para armazenar o meu diário e tem uma interface muito legal,
-            mas acabando criando outros problemas enquanto tenta resolver as coisas básicas, visando deixar as coisas da maneira
-            que eu sempre quis, esse projeto ganhou vida .
+            mas acaba criando outros problemas enquanto tenta resolver as coisas básicas, visando deixar as coisas da maneira
+            que eu sempre quis, esse projeto ganhou vida.
           </p>
           <h1 className='text-2xl py-5 '>O que ele utiliza por debaixo dos panos ? </h1>
           <ul>
@@ -30,7 +30,7 @@ export default function About() {
             <li><p>- Typescirpt</p></li>
             <li><p>- Tailwind Css</p></li>
             <li><p>- Framer motion</p></li>
-            <li><p>- mongoDB</p></li>
+            <li><p>- PlanetScale</p></li>
             <li><p>- Firebase</p></li>
             <li><p>- Jotai</p></li>
           </ul>

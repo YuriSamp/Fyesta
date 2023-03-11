@@ -44,24 +44,26 @@ export default function PlannerListaInput() {
             </Checkbox.Indicator>
           </Checkbox.Root>
           <div className='flex w-full' key={item.Id}>
-            <input className={`bg-transparent  outline-none w-72 text-xl  ${item.Selecionado ? 'line-through text-gray-400' : ''}`}
+            <input className={`bg-transparent  outline-none w-72 text-xl text-black dark:text-white  ${item.Selecionado ? 'line-through text-gray-400' : ''} placeholder:text-gray-600 placeholder:dark:text-gray-400`}
               placeholder='To - do'
               readOnly={item.Selecionado}
             />
           </div>
-          <BsTrash
-            className='w-5 h-5 cursor-pointer'
-            onClick={() => RemoveTask(item.Id)}
-          />
+          <button className='w-5 h-5'>
+            <BsTrash
+              className='cursor-pointer text-black dark:text-white'
+              onClick={() => RemoveTask(item.Id)}
+            />
+          </button>
         </div>
       ))}
-      <div
+      <button
         className='flex gap-3 items-center self-start cursor-pointer'
         onClick={AddNewTask}
       >
-        <AiOutlinePlus className='w-5 h-5 text-gray-400 ' />
-        <p className='text-gray-400 text-lg'>Tarefa</p>
-      </div>
+        <AiOutlinePlus className='w-5 h-5 text-gray-600 dark:text-gray-400 ' />
+        <p className='text-gray-600 dark:text-gray-400 text-lg'>Tarefa</p>
+      </button>
     </div>
   )
 }

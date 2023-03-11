@@ -8,7 +8,7 @@ export default function Emocões() {
   }
 
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col justify-center items-center text-black dark:text-white'>
       <h1 className='text-3xl pb-4'>Mood of January</h1>
 
       <div className='flex items-center gap-4 pt-6'>

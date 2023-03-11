@@ -1,5 +1,4 @@
 import { Button } from '@ui/button';
-import { InputWithLabel } from '@ui/InputWithLabel';
 import Head from 'next/head';
 import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify';
@@ -7,6 +6,7 @@ import { GetServerSidePropsContext } from 'next';
 import { useUpdatePassword } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
 import { useRouter } from 'next/router';
+import { PasswordInput } from '@ui/input/passwordInput';
 
 
 //TODO essa parte aqui tem um problema que resolverei futuramente, eu só consigo mudar a senha do usuario logado, caso o usuario n esteja logado preciso fazer no back-end
@@ -64,8 +64,8 @@ export default function Passwordchange() {
               <h1 className='text-center text-4xl'>Reset your password</h1>
             </div>
             <p className='text-center py-6 text-xl'>Dont worry, just type your new password</p>
-            <InputWithLabel labelText='Password' type='password' Id='password' placeholder='password' value={password} onChange={setPassword} />
-            <InputWithLabel labelText='Password Verify' type='password' Id='passwordVerify' placeholder='password' value={passwordVerify} onChange={setPasswordVerify} />
+            <PasswordInput labelText='Password' Id='password' placeholder='Password' value={password} onChange={setPassword} />
+            <PasswordInput labelText='Confirm yourPassword' Id='password2' placeholder='Password' value={passwordVerify} onChange={setPasswordVerify} />
             <div className='pt-4'>
               <Button Children='Reset' intent='success' Width='full' />
             </div>

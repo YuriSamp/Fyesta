@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { auth } from '../../server/Firebase/ClientApp';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { InputWithLabel } from '@ui/InputWithLabel';
+import { InputWithLabel } from '@ui/input/InputWithLabel';
 import { Button } from '@ui/button';
 import RetturnButton from '@ui/RetturnButton';
 import useAuth from 'src/hooks/useAuth';
@@ -15,6 +15,7 @@ import { cookeisIsAccept } from 'src/context/cookiesContext';
 import { useAtom } from 'jotai';
 import { GetServerSidePropsContext } from 'next';
 import nookies from 'nookies'
+import { PasswordInput } from '@ui/input/passwordInput';
 
 const CookiesModal = dynamic(() => import('@ui/cookieModal'), {
   ssr: false,
@@ -53,8 +54,12 @@ export default function LogIn() {
       <main className='flex justify-center items-center min-h-screen'>
         <ToastContainer />
         <section className='flex flex-col'>
-          <RetturnButton text='Retornar' />
+          <RetturnButton
+            text='Retornar'
+            href='./'
+          />
           <form
+            className='pt-8'
             onSubmit={(event) => AuthSubmit(event, email, password, persist)}
           >
             <div>
@@ -67,7 +72,7 @@ export default function LogIn() {
             </div>
             <p className='text-center pt-6 pb-4'>Or login with email</p>
             <InputWithLabel labelText='Email Address' type='email' placeholder='Email Address' value={email} onChange={setEmail} />
-            <InputWithLabel labelText='Password' type='password' placeholder='Password' value={password} onChange={setPassword} />
+            <PasswordInput labelText='Password' placeholder='Password' value={password} onChange={setPassword} />
             <div className='flex gap-10 pt-4'>
               <div className='flex gap-2'>
                 <input type='checkbox' id='checkbox' className='' onClick={() => setPersist(prevstate => !prevstate)} />

@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { Sidebar } from './aside';
 import { Navbar } from './navbar';
 
-//MIDNIGHT bg-[#00040D]
 
 interface Props {
   page: string
@@ -29,13 +28,14 @@ export default function Layout({ page, children }: Props) {
       {
         paths.includes(page)
           ?
-          <section className='flex '>
+          <section className='flex  '>
             <Sidebar />
             <section className='w-full'>
               <Navbar
                 Page={page}
               />
-              <div className='flex flex-col overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 h-[980px] '>
+              <div
+                className='flex flex-col overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 h-[980px] bg-white dark:bg-[#121212] '>
                 <div className='mx-12 my-12'>
                   {children}
                 </div>
