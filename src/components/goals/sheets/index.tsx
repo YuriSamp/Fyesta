@@ -1,7 +1,10 @@
-import { AiOutlinePlus, AiOutlineStar } from 'react-icons/ai'
+import { Select } from '@ui/Select'
+import { useState } from 'react'
+import { AiOutlinePlus } from 'react-icons/ai'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
-import { SlArrowDown } from 'react-icons/sl'
-import { SheetsProps, Task } from 'src/interfaces/Goals'
+import { SheetsProps, Task, Goal } from 'src/interfaces/Goals'
+
+type Filter = 'Todas' | 'Concluidas' | 'Em progresso' | 'Não iniciadas'
 
 export default function Sheets({ Metas, setState }: SheetsProps) {
 
@@ -11,15 +14,35 @@ export default function Sheets({ Metas, setState }: SheetsProps) {
     return TasksDoneArr.length
   }
 
+  const [FilterState, setFilterState] = useState<Filter>('Todas')
+
+  function OrdenaPlanilha(Metas: Goal[], filtro: Filter) {
+    if (filtro === 'Todas') {
+      return Metas
+    }
+    if (filtro === 'Concluidas') {
+      const tasksDonearr = Metas.filter(meta => meta.Tarefas.every(task => task.realizada === true))
+      return tasksDonearr
+    } if (filtro === 'Não iniciadas') {
+      const tasksToDoarr = Metas.filter(meta => meta.Tarefas.every(task => task.realizada === false))
+      return tasksToDoarr
+    }
+    if (filtro = 'Em progresso') {
+      const tasksTodoarr = Metas.filter(meta => !meta.Tarefas.every(task => task.realizada === false))
+      const tasksinProgress = tasksTodoarr.filter(meta => !meta.Tarefas.every(task => task.realizada === true))
+      return tasksinProgress
+    }
+  }
 
   return (
     <section className='flex flex-col w-[976px]  self-start'>
-      <div className='pb-2 border-b-2 mb-2 flex items-center gap-6 '>
+      <div className='pb-2 border-b-2 mb-2 flex items-center justify-between '>
         <h3 className='text-3xl  dark:text-white'>Metas</h3>
-        <div className='flex gap-2 text-gray-100 self-end items-center'>
-          <p className='text-lg'>Em progresso</p>
-          <SlArrowDown />
-        </div>
+        <Select
+          Options={['Todas', 'Concluidas', 'Em progresso', 'Não iniciadas']}
+          onChange={setFilterState}
+          value={FilterState}
+          Width='md' />
       </div>
       <div className='flex flex-col gap-3 pt-2'>
         <div className='flex '>
@@ -34,13 +57,12 @@ export default function Sheets({ Metas, setState }: SheetsProps) {
           </div>
         </div>
         <section className='flex flex-col gap-3 h-[200px] overflow-y-auto  scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
-          {Metas.map(item => (
+          {OrdenaPlanilha(Metas, FilterState)?.map(item => (
             <div
               className='w-full flex gap-3'
               key={item.Id}
             >
               <div className='flex gap-2 items-center w-60'>
-                <AiOutlineStar className='w-5 h-5' />
                 <p className='text-xl'>{item.Meta}</p>
               </div>
               <div className='w-96 flex gap-2 items-center justify-center'>
@@ -59,13 +81,13 @@ export default function Sheets({ Metas, setState }: SheetsProps) {
               </div>
             </div>
           ))}
-          <div
+          <button
             className='flex gap-2 items-center text-gray-400 cursor-pointer w-48'
             onClick={() => setState(true)}
           >
             <AiOutlinePlus className='w-7 h-7' />
             <p className='text-xl'>Nova meta</p>
-          </div>
+          </button>
         </section>
       </div>
     </section>

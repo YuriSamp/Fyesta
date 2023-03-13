@@ -35,7 +35,7 @@ export default function PlannerListaInput() {
       {lista.map((item) => (
         <div className='flex gap-3 items-center' key={item.Id}>
           <Checkbox.Root
-            className={`w-5 h-5 border-[1px] border-[#383838]  flex items-center justify-center cursor-pointer ${item.Selecionado ? 'bg-green-700' : ''} `}
+            className={`w-5 h-5 border-[1px] border-[#383838]  flex items-center justify-center cursor-pointer ${item.Selecionado ? 'bg-violet-900 dark:bg-green-700' : ''} `}
             id="c1"
             onClick={() => BooleanChange(item.Id)}>
             <Checkbox.Indicator
@@ -44,7 +44,7 @@ export default function PlannerListaInput() {
             </Checkbox.Indicator>
           </Checkbox.Root>
           <div className='flex w-full' key={item.Id}>
-            <input className={`bg-transparent  outline-none w-72 text-xl text-black dark:text-white  ${item.Selecionado ? 'line-through text-gray-400' : ''} placeholder:text-gray-600 placeholder:dark:text-gray-400`}
+            <input className={`bg-transparent  outline-none w-72 text-xl text-black dark:text-white  ${item.Selecionado ? 'line-through  text-gray-400' : ''} placeholder:text-gray-600 placeholder:dark:text-gray-400`}
               placeholder='To - do'
               readOnly={item.Selecionado}
             />

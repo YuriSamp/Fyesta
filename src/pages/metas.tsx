@@ -20,24 +20,26 @@ export default function Metas() {
 
 
   return (
-    <div className='flex flex-col gap-16 text-black dark:text-white'>
-      <ToastContainer />
-      <section className='w-full flex justify-center gap-12 items-center'>
-        <YearBox Metas={Metas} />
-        <Fields Metas={Metas} />
-      </section>
-      <section className='w-full flex justify-center gap-12 items-center'>
-        <Sheets
-          Metas={Metas}
-          setMetas={setMetas}
-          setState={setIsModalOpen} />
-        <Actions
-          Metas={Metas}
-          setMetas={setMetas} />
-      </section>
-      <Modal
-        State={isModalOpen}
-        SetState={setIsModalOpen} />
-    </div>
+    <>
+      <ToastContainer limit={3} />
+      <div className={`flex flex-col gap-16 text-black dark:text-white ${isModalOpen ? 'blur-sm' : ''}`}>
+        <section className='w-full flex justify-center gap-12 items-center'>
+          <YearBox Metas={Metas} />
+          <Fields Metas={Metas} />
+        </section>
+        <section className='w-full flex justify-center gap-12 items-center'>
+          <Sheets
+            Metas={Metas}
+            setMetas={setMetas}
+            setState={setIsModalOpen} />
+          <Actions
+            Metas={Metas}
+            setMetas={setMetas} />
+        </section>
+        <Modal
+          State={isModalOpen}
+          SetState={setIsModalOpen} />
+      </div>
+    </>
   )
 }

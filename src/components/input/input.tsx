@@ -6,7 +6,7 @@ const inputStyles = cva(
   {
     variants: {
       intent: {
-        primary: 'bg-InputGray',
+        primary: 'bg-InputGray text-white',
         light: 'bg-transparent border-[1px] border-black'
       },
       Width: {

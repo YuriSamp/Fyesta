@@ -85,7 +85,7 @@ export default function Pagina() {
           <button className='bg-green-700 p-4 rounded-md text-white'>Incluir no diario</button>
         </div>
       </form>
-      <ToastContainer />
+      <ToastContainer limit={3} />
     </section>
   )
 }

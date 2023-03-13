@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 
+/** Executa a comparação informada, e caso ela seja verdadeira, retorna um erro e um toast com a mensagem que foi passada de parametro */
 export const toastNotify = (
   Comparation: any,
   msg: string,

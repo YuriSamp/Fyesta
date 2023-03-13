@@ -6,8 +6,11 @@ import { useAtom } from 'jotai';
 import { Goals } from 'src/context/Goals/GoalContext';
 import { Task } from 'src/interfaces/Goals';
 import { toastNotify } from 'src/utils/toastNotify';
+import { InputWithLabel } from '@ui/input/InputWithLabel';
+import { Button } from '@ui/button';
+import * as RadioGroup from '@radix-ui/react-radio-group';
 
-//TODO finalizar ui e talvez componentizar o input type radio
+// TODO Revisar
 
 export default function GoalsModal({ State, SetState }: ModalProps) {
 
@@ -48,6 +51,13 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
     setTask('')
   }
 
+  const ClearStates = () => {
+    setTaskarr([])
+    setTaskName('')
+    setTask('')
+    setField(0)
+  }
+
 
   const addGoal = () => {
     try {
@@ -64,10 +74,7 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
           Categoria: Categoria,
         },])
         setId(prev => prev + 1)
-        setTaskarr([])
-        setTaskName('')
-        setTask('')
-        setField(0)
+        ClearStates()
       }
 
     } catch (error) {
@@ -78,82 +85,121 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
   return (
     <Portal.Root>
       {State &&
-        <section className='border-2 w-[450px] fixed left-[720px] top-[300px] flex flex-col bg-white text-black'
+        <section
+          className='w-[500px] fixed left-[720px] top-[300px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm border-[1px] border-black dark:border-none'
           ref={domNode}
         >
           <div className='pt-4 text-center'>
-            <h1 className='text-2xl'>Adicione uma nova ação</h1>
+            <h1 className='text-2xl'>Adicione uma nova meta</h1>
           </div>
-          <div className='pt-2 pl-4'>
-            <input
-              placeholder='Adicione um nome'
-              className='bg-transparent placeholder:text-black w-72 border-[1px] border-black rounded-lg px-2 focus:outline-none '
+          <div className='pt-2 pl-4 flex flex-col gap-2 w-3/4'>
+            <InputWithLabel
+              onChange={setTaskName}
+              placeholder='Doar para caridade'
+              type='text'
               value={taskName}
-              onChange={e => setTaskName(e.target.value)}
+              Id='form1'
+              labelText='Insira o nome da meta'
             />
-          </div>
-          <div className='pt-2 pl-4'>
-            <input
-              placeholder='Adicione uma ação'
-              className='bg-transparent placeholder:text-black w-72 border-[1px] border-black rounded-lg px-2 focus:outline-none'
+            <InputWithLabel
+              onChange={setTask}
+              placeholder='Juntar dinheiro'
+              type='text'
               value={task}
-              onChange={e => setTask(e.target.value)}
+              Id='form1'
+              labelText='Escreva uma ação para realizar a meta'
             />
           </div>
-          <div className='py-2 pl-4'>
-            <button
-              className='bg-green-700 p-1 rounded-md text-white'
+          <div className='pb-2 pt-4 pl-4'>
+            <Button
+              Children='Incluir ação'
+              Width='md'
+              intent='success'
               onClick={() => addTask(task)}
-            >
-              Incluir meta
-            </button>
+            />
           </div>
-          <div className='h-52 px-4 mx-4 my-4 border-[1px] border-black rounded-lg'>
+
+          <hr className='border-black  dark:border-white w-3/4 flex justify-center my-2' />
+
+          <div
+            className='h-52 px-4 py-1 mx-4  rounded-lg w-4/5 text-center  overflow-y-auto  scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'
+          >
             <ul>
+              <li className='pb-2 dark:text-gray-400 text-neutral-700'>Suas ações aparecerâo aqui</li>
               {taskarr.map(item => (
                 <li key={item.id}>{item.Tarefa}</li>
               ))}
             </ul>
           </div>
-          <div className='flex px-4 justify-center gap-4'>
-            <div className='flex gap-2'>
-              <input
-                type='radio'
-                id='op1'
-                name='field'
-                onChange={() => setField(1)}
-                checked={field === 1}
-              />
-              <label htmlFor="op1">Intelectual</label>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='radio'
-                id='op2'
-                name='field'
-                onChange={() => setField(2)}
-                checked={field === 2}
-              />
-              <label htmlFor="op2">Pessoal</label>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='radio'
-                id='op3'
-                name='field'
-                onChange={() => setField(3)}
-                checked={field === 3}
-              />
-              <label htmlFor="op3">Financeiro</label>
-            </div>
-          </div>
-          <div className='pl-4 py-4' >
-            <button
-              className='bg-green-700 p-4 rounded-md text-white'
-              onClick={() => addGoal()}
+
+          <hr className='border-black dark:border-white w-3/4 flex justify-center my-2 mb-3' />
+
+          <div className='flex py-3 justify-center gap-4'>
+            <RadioGroup.Root
+              className="flex gap-2.5"
+              defaultValue="default"
+              aria-label="View density"
             >
-              Incluir meta
-            </button>
+              <div className="flex items-center">
+                <RadioGroup.Item
+                  className="bg-white w-5 h-5 rounded-full focus:shadow-black outline-none cursor-default ring-violet-600 ring-2 dark:ring-0"
+                  value="Intelectual"
+                  id="r1"
+                  onClick={() => setField(1)}
+                  checked={field === 1}
+                >
+                  <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-3 after:h-3 after:rounded-[50%] after:dark:bg-green-600 after:bg-violet-600" />
+                </RadioGroup.Item>
+                <label className="dark:text-white text-[15px] leading-none pl-3" htmlFor="r1">
+                  Intelectual
+                </label>
+              </div>
+
+              <div className="flex items-center">
+                <RadioGroup.Item
+                  className="bg-white w-5 h-5 rounded-full focus:shadow-black outline-none cursor-default ring-violet-600 ring-2 dark:ring-0"
+                  value="Pessoal"
+                  id="r2"
+                  onClick={() => setField(2)}
+                  checked={field === 2}
+                >
+                  <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-3 after:h-3 after:rounded-[50%] after:dark:bg-green-600 after:bg-violet-600" />
+                </RadioGroup.Item>
+                <label className="dark:text-white text-[15px] leading-none pl-3" htmlFor="r2">
+                  Pessoal
+                </label>
+              </div>
+
+              <div className="flex items-center">
+                <RadioGroup.Item
+                  className="bg-white w-5 h-5 rounded-full focus:shadow-black outline-none cursor-default ring-violet-600 ring-2 dark:ring-0"
+                  value='Financeiro'
+                  id="r3"
+                  onClick={() => setField(3)}
+                  checked={field === 3}
+                >
+                  <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-3 after:h-3 after:rounded-[50%] after:dark:bg-green-600 after:bg-violet-600" />
+                </RadioGroup.Item>
+                <label className="dark:text-white text-[15px] leading-none pl-3" htmlFor="r3">
+                  Financeiro
+                </label>
+              </div>
+            </RadioGroup.Root>
+          </div>
+
+          <div className='py-4 flex justify-center gap-8' >
+            <Button
+              Children='Incluir meta'
+              Width='md'
+              intent='success'
+              onClick={() => addGoal()}
+            />
+            <Button
+              Children='Limpar meta'
+              Width='md'
+              intent='danger'
+              onClick={() => ClearStates()}
+            />
           </div>
         </section>
       }
