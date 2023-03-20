@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { useAtom } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
 
+// TODO bug na data do diario
+
 export default function Diario() {
 
   const [diary, setdiary] = useAtom(diaryPage);
@@ -15,7 +17,7 @@ export default function Diario() {
       <div className='flex flex-wrap gap-[19px] pt-4 max-w-[1550px] '>
         <Link
           href='./diario/pagina'
-          className='w-60 h-52  bg-white  text-black dark:text-white drop-shadow-lg dark:bg-neutral-900 flex justify-center items-center cursor-pointer  select'
+          className='w-60 h-52  bg-white  text-black dark:text-white drop-shadow-lg dark:bg-neutral-900 flex justify-center items-center cursor-pointer  select border-2'
         >
           <p className='text-lg'> + Entrada</p>
         </Link>

@@ -4,7 +4,9 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs'
 
-export default function PlannerListaInput() {
+type Editable = { editable: boolean }
+
+export default function PlannerListaInput({ editable }: Editable) {
   const [Quantidade, setQuantidade] = useState(3)
   const arr = []
 
@@ -49,21 +51,25 @@ export default function PlannerListaInput() {
               readOnly={item.Selecionado}
             />
           </div>
-          <button className='w-5 h-5'>
-            <BsTrash
-              className='cursor-pointer text-black dark:text-white'
-              onClick={() => RemoveTask(item.Id)}
-            />
-          </button>
+          {editable &&
+            <button className='w-5 h-5'>
+              <BsTrash
+                className='cursor-pointer text-black dark:text-white'
+                onClick={() => RemoveTask(item.Id)}
+              />
+            </button>
+          }
         </div>
       ))}
-      <button
-        className='flex gap-3 items-center self-start cursor-pointer'
-        onClick={AddNewTask}
-      >
-        <AiOutlinePlus className='w-5 h-5 text-gray-600 dark:text-gray-400 ' />
-        <p className='text-gray-600 dark:text-gray-400 text-lg'>Tarefa</p>
-      </button>
+      {editable &&
+        <button
+          className='flex gap-3 items-center self-start cursor-pointer'
+          onClick={AddNewTask}
+        >
+          <AiOutlinePlus className='w-5 h-5 text-gray-600 dark:text-gray-400 ' />
+          <p className='text-gray-600 dark:text-gray-400 text-lg'>Tarefa</p>
+        </button>
+      }
     </div>
   )
 }

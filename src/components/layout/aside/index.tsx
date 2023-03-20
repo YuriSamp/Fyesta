@@ -32,7 +32,7 @@ export const Sidebar = () => {
   return (
     <aside className='w-64  flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white justify-between z-10'>
       <section >
-        <h1 className='pt-4 pb-1 text-4xl font-semibold italic text-center'>FYESTA</h1>
+        <h1 className='pt-4 pb-1 text-4xl  font-medium italic text-center'>Fyesta</h1>
         <div className='flex flex-col gap-7 pt-20'>
           <h2 className='text-lg  text-center font-semibold text-violet-900 dark:text-white'>Menu</h2>
           <div className='flex gap-3 items-center cursor-pointer buttonaside relative'

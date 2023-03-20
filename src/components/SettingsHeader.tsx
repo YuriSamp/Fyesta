@@ -9,7 +9,6 @@ import RetturnButton from './RetturnButton';
 export const routes = [
   { name: 'Perfil e visibilidade', link: '/settings/perfil' },
   { name: 'Configurações', link: '/settings' },
-  { name: 'Atalhos', link: '/settings/shortcuts' },
   { name: 'Sobre', link: '/settings/about' },
 ]
 

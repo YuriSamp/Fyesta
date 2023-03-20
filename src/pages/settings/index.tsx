@@ -28,14 +28,14 @@ export default function Settings() {
   }
 
   return (
-    <section className='px-96 pt-16 text-black dark:text-white min-h-screen bg-CreamWhite dark:bg-[#121212]' >
+    <>
       <Header
         Page={page}
       />
       <div className='py-10 flex justify-between items-center px-4'>
         <div className='flex flex-col gap-2'>
           <h2 className='text-xl'>Aparencia</h2>
-          <h3 className='text-base'>Customiza o tema do Fyesta no seu dispositivo</h3>
+          <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Customiza o tema do Fyesta no seu dispositivo</h3>
         </div>
         <div>
           <Select Options={themes} onChange={setTheme} value={theme} />
@@ -44,7 +44,7 @@ export default function Settings() {
       <div className='py-10  flex justify-between items-center px-4'>
         <div className='flex flex-col gap-2'>
           <h2 className='text-xl'>Idioma</h2>
-          <h3 className='text-base'>Escolha o idioma para a interface</h3>
+          <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o idioma para a interface</h3>
         </div>
         <div>
           <Select Options={languages} value={language} onChange={setLanguage} />
@@ -53,7 +53,7 @@ export default function Settings() {
       <div className='py-10  flex justify-between items-center px-4'>
         <div className='flex flex-col gap-2'>
           <h2 className='text-xl'>Começar a semana na segunda</h2>
-          <h3 className='text-base'>isso vai alterar a maneira como o calendario é apresentado</h3>
+          <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>isso vai alterar a maneira como o calendario é apresentado</h3>
         </div>
         <div>
           <Switch.Root
@@ -67,6 +67,6 @@ export default function Settings() {
           </Switch.Root>
         </div>
       </div>
-    </section>
+    </>
   )
 }

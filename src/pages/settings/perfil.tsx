@@ -30,7 +30,7 @@ export default function Perfil() {
   }
 
   return (
-    <section className='px-96 pt-16 text-black dark:text-white min-h-screen bg-CreamWhite dark:bg-[#121212] '  >
+    <>
       <Header
         Page={page}
       />
@@ -79,7 +79,7 @@ export default function Perfil() {
         <div className='py-10 flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Email</h2>
-            <h3 className='text-base'>yurisamp123@gmail.com</h3>
+            <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>{user?.email}</h3>
           </div>
           <Button
             Children='Mudar o email'
@@ -89,7 +89,7 @@ export default function Perfil() {
         <div className='py-10  flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Senha</h2>
-            <h3 className='text-base'>Escolha uma senha forte, afinal você não quer que ninguem saiba seus segredos</h3>
+            <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha uma senha forte, afinal você não quer que ninguem saiba seus segredos</h3>
           </div>
           <Button Children='Mudar a senha'
             onClick={() => {
@@ -102,7 +102,7 @@ export default function Perfil() {
         <div className='py-10  flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Log out</h2>
-            <h3 className='text-base'>Irá te redirecionar para página de login</h3>
+            <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>Irá te redirecionar para página de login</h3>
           </div>
           <Button
             Children='Sair da conta'
@@ -113,7 +113,7 @@ export default function Perfil() {
         <div className='py-10  flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Excluir sua conta</h2>
-            <h3 className='text-base'>É uma pena que você esteja indo embora <span className='text-lg'>😭</span>  </h3>
+            <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>É uma pena que você esteja indo embora <span className='text-lg'>😭</span>  </h3>
           </div>
           <Button
             Children='Excluir sua conta'
@@ -122,6 +122,6 @@ export default function Perfil() {
           />
         </div>
       </div>
-    </section>
+    </>
   )
 }
