@@ -52,7 +52,7 @@ export default function LogIn() {
         <title>Fyesta</title>
       </Head>
       <main className='flex justify-center items-center min-h-screen'>
-        <ToastContainer />
+        <ToastContainer limit={3} />
         <section className='flex flex-col'>
           <RetturnButton
             text='Retornar'

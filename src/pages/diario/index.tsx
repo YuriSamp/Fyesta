@@ -1,8 +1,9 @@
 import DiarypageWritten from '@ui/diario/Card';
-import { useState } from 'react';
 import Link from 'next/link';
 import { useAtom } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
+
+//TODO logica de acessa a pagina já escrita
 
 export default function Diario() {
 
@@ -15,16 +16,16 @@ export default function Diario() {
       <div className='flex flex-wrap gap-[19px] pt-4 max-w-[1550px] '>
         <Link
           href='./diario/pagina'
-          className='w-60 h-52  bg-white  text-black dark:text-white drop-shadow-lg dark:bg-neutral-900 flex justify-center items-center cursor-pointer  select'
+          className='w-60 h-52  bg-white  text-black dark:text-white drop-shadow-lg dark:bg-neutral-900 flex justify-center items-center cursor-pointer  select border-2'
         >
           <p className='text-lg'> + Entrada</p>
         </Link>
-        {diary.map((item, index) => (
+        {diary.map(entry => (
           <DiarypageWritten
-            text={item.Text}
-            title={item.Title}
-            data={item.Data}
-            key={index}
+            text={entry.Text}
+            title={entry.Title}
+            data={entry.Data}
+            key={entry.Id}
           />
         ))}
       </div>

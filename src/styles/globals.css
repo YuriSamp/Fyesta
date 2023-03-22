@@ -88,3 +88,7 @@
     transform: translateX(0);
   }
 }
+
+.ligth:not(.dark) ::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}

@@ -4,7 +4,9 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs'
 
-export default function PlannerListaInput() {
+type Editable = { editable: boolean }
+
+export default function PlannerListaInput({ editable }: Editable) {
   const [Quantidade, setQuantidade] = useState(3)
   const arr = []
 
@@ -15,8 +17,13 @@ export default function PlannerListaInput() {
   const [lista, setLista] = useState(arr)
 
   function BooleanChange(id: number) {
-    lista[id].Selecionado = !lista[id].Selecionado
-    setLista([...lista])
+    const ListaVerificada = lista.map(item => {
+      if (item.Id === id) {
+        item.Selecionado = !item.Selecionado
+      }
+      return item
+    })
+    setLista([...ListaVerificada]);
   }
 
   function AddNewTask() {
@@ -35,7 +42,7 @@ export default function PlannerListaInput() {
       {lista.map((item) => (
         <div className='flex gap-3 items-center' key={item.Id}>
           <Checkbox.Root
-            className={`w-5 h-5 border-[1px] border-[#383838]  flex items-center justify-center cursor-pointer ${item.Selecionado ? 'bg-green-700' : ''} `}
+            className={`w-5 h-5 border-[1px] border-[#383838]  flex items-center justify-center cursor-pointer ${item.Selecionado ? 'bg-violet-900 dark:bg-green-700' : ''} `}
             id="c1"
             onClick={() => BooleanChange(item.Id)}>
             <Checkbox.Indicator
@@ -44,26 +51,30 @@ export default function PlannerListaInput() {
             </Checkbox.Indicator>
           </Checkbox.Root>
           <div className='flex w-full' key={item.Id}>
-            <input className={`bg-transparent  outline-none w-72 text-xl text-black dark:text-white  ${item.Selecionado ? 'line-through text-gray-400' : ''} placeholder:text-gray-600 placeholder:dark:text-gray-400`}
+            <input className={`bg-transparent  outline-none w-72 text-xl text-black dark:text-white  ${item.Selecionado ? 'line-through  text-gray-400' : ''} placeholder:text-gray-600 placeholder:dark:text-gray-400`}
               placeholder='To - do'
               readOnly={item.Selecionado}
             />
           </div>
-          <button className='w-5 h-5'>
-            <BsTrash
-              className='cursor-pointer text-black dark:text-white'
-              onClick={() => RemoveTask(item.Id)}
-            />
-          </button>
+          {editable &&
+            <button className='w-5 h-5'>
+              <BsTrash
+                className='cursor-pointer text-black dark:text-white'
+                onClick={() => RemoveTask(item.Id)}
+              />
+            </button>
+          }
         </div>
       ))}
-      <button
-        className='flex gap-3 items-center self-start cursor-pointer'
-        onClick={AddNewTask}
-      >
-        <AiOutlinePlus className='w-5 h-5 text-gray-600 dark:text-gray-400 ' />
-        <p className='text-gray-600 dark:text-gray-400 text-lg'>Tarefa</p>
-      </button>
+      {editable &&
+        <button
+          className='flex gap-3 items-center self-start cursor-pointer'
+          onClick={AddNewTask}
+        >
+          <AiOutlinePlus className='w-5 h-5 text-gray-600 dark:text-gray-400 ' />
+          <p className='text-gray-600 dark:text-gray-400 text-lg'>Tarefa</p>
+        </button>
+      }
     </div>
   )
 }

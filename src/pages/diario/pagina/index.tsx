@@ -1,23 +1,24 @@
 import { AiOutlineCalendar, AiOutlineHeart } from 'react-icons/ai'
 import { useState } from 'react'
 import { useAtom } from 'jotai'
-import { diaryPage } from 'src/context/diaryContext'
+import { diaryId, diaryPage } from 'src/context/diaryContext'
 import FormataData from 'src/utils/FormataData'
 import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-
-//TODO customizar o icone do calendario futuramente
+import DiaryDateHelper from 'src/helper/DiaryDate'
 
 export default function Pagina() {
 
-  const route = useRouter()
+  const DateInput = DiaryDateHelper()
 
+  const route = useRouter()
   const [Title, setTitle] = useState('')
   const [Feeling, setFeeling] = useState('Feliz')
   const [Text, setText] = useState('')
-  const [DataRaw, setData] = useState('')
+  const [DataRaw, setData] = useState(DateInput)
   const [diary, setdiary] = useAtom(diaryPage);
+  const [Id, setdiaryId] = useAtom(diaryId);
 
   function HandleForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -34,10 +35,12 @@ export default function Pagina() {
       Title,
       Data,
       Feeling,
-      Text
+      Text,
+      Id
     }
 
     setdiary(prev => [...prev, notes])
+    setdiaryId(prev => prev + 1)
     route.push('./')
   }
 
@@ -57,6 +60,7 @@ export default function Pagina() {
             <input
               type='date'
               className='bg-transparent h-7 px-2 border-[1px]  border-black dark:border-white rounded-md focus:outline-none text-center'
+              value={DataRaw}
               onChange={e => setData(e.target.value)}
             />
           </div>
@@ -85,7 +89,7 @@ export default function Pagina() {
           <button className='bg-green-700 p-4 rounded-md text-white'>Incluir no diario</button>
         </div>
       </form>
-      <ToastContainer />
+      <ToastContainer limit={3} />
     </section>
   )
 }

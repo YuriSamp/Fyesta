@@ -23,15 +23,19 @@ papel pra nada, praticamente tudo que eu uso é em algum dispositivo, no momento
 
 ## Requisitos e Funcionalidades
 
-- [ ] Autenticacao (login para salvar os dados do perfil)
+- [x] Autenticacao (login para salvar os dados do perfil)
+- [x] Pagina de diário
+- [x] Pagina do planner
+- [x] Página de metas
+- [x] Landing Page para apresentar a ideia
+- [x] Criar o dark mode e o ligth mode
 - [ ] Página da home após o login
-- [ ] Pagina de diário
-- [ ] Pagina do planner
 - [ ] Página 404
-- [ ] Página de metas / emoções / calendario
-- [ ] Landing Page para apresentar a ideia
+- [ ] Página 500
+- [ ] Página de emoções
+- [ ] Página do calendario
 - [ ] Documentação
-- [ ] Criar 3 temas, dark ligth e um colorido
+- [ ] Criar futuramente mais 2 temas
 - [ ] Adicionar um banco de dados pra salvar o input do usuario
 - [ ] Criptografar os dados enviados pro banco de dados e descriptografar ao receber no front-end
 - [ ] Salvar o historico do usuario na aplicação

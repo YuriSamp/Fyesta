@@ -11,6 +11,9 @@ const SelectStyles = cva(
         primary: '',
       },
       Width: {
+        md: 'w-28 h-9',
+        xmd: 'w-44 h-9',
+        lg: 'w-36 h-12',
         full: 'w-full',
       },
     },
@@ -21,29 +24,22 @@ const SelectStyles = cva(
 );
 
 export interface ISelect extends VariantProps<typeof SelectStyles> {
-  Options: string | string[]
+  Options: string[]
   value: string | undefined
-  onChange: Dispatch<SetStateAction<string>> | ((theme: string) => void) | ((mode: string) => void)
+  onChange: Dispatch<SetStateAction<any>> | ((theme: string) => void) | ((mode: string) => void)
 }
 
 export function Select({ Width, intent, Options, onChange, value }: ISelect) {
-  if (typeof Options === 'object')
-    return (
-      <select className={SelectStyles({ Width, intent })}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      >
-        {Options.map((item, index) => (
-          <option value={item} key={index} className='dark:bg-InputGray'>
-            {UpperCaseFirstLetter(item)}
-          </option>
-        ))}
-      </select>
-    )
   return (
-    <select className={SelectStyles({ Width, intent })} >
-      <option value={Options}>{Options}</option>
+    <select className={SelectStyles({ Width, intent })}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+    >
+      {Options.map((item, index) => (
+        <option value={item} key={index} className='dark:bg-InputGray'>
+          {UpperCaseFirstLetter(item)}
+        </option>
+      ))}
     </select>
   )
-
 }

@@ -48,28 +48,8 @@ export default function Calendario() {
       </div>
       <div className='flex' >
         {arr.map(item => (
-          <div className='w-52 h-40 border-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4'>
-              {item}
-            </div>
-            <div className='py-1 px-2 flex flex-col gap-1'>
-              <div className='w-full py-1 text-center bg-green-700 rounded-md cursor-pointer'>
-                Terminar esse projeto
-              </div>
-              <div className='w-full py-1 text-center bg-DarkModeOrange rounded-md cursor-pointer'>
-                Diminuir as tasks
-              </div>
-              <div className='w-full py-1 text-center bg-yellow-800 rounded-md cursor-pointer'>
-                Melhorar o Design
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className='flex' >
-        {arr.map(item => (
-          <div className='w-52 h-40 border-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4'>
+          <div className='w-52 h-40 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
+            <div className='text-end py-2 pr-4 select-none'>
               {item}
             </div>
           </div>
@@ -77,8 +57,8 @@ export default function Calendario() {
       </div>
       <div className='flex' >
         {arr.map(item => (
-          <div className='w-52 h-40 border-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4'>
+          <div className='w-52 h-40 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
+            <div className='text-end py-2 pr-4 select-none'>
               {item}
             </div>
           </div>
@@ -86,8 +66,8 @@ export default function Calendario() {
       </div>
       <div className='flex' >
         {arr.map(item => (
-          <div className='w-52 h-40 border-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4'>
+          <div className='w-52 h-40 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
+            <div className='text-end py-2 pr-4 select-none'>
               {item}
             </div>
           </div>
@@ -95,14 +75,22 @@ export default function Calendario() {
       </div>
       <div className='flex' >
         {arr.map(item => (
-          <div className='w-52 h-40 border-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4'>
+          <div className='w-52 h-40 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
+            <div className='text-end py-2 pr-4 select-none'>
               {item}
             </div>
           </div>
         ))}
       </div>
-
+      <div className='flex' >
+        {arr.map(item => (
+          <div className='w-52 h-40 border-b-2 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
+            <div className='text-end py-2 pr-4 select-none'>
+              {item}
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   )
 }
