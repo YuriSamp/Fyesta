@@ -8,6 +8,8 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import DiaryDateHelper from 'src/helper/DiaryDate'
 
+// TODO ver a possibildiade de implementar uma toolbar
+
 export default function Pagina() {
 
   const DateInput = DiaryDateHelper()

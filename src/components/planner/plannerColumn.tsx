@@ -1,5 +1,7 @@
 import PlannerListaInput from '.';
 
+// TODO Refatorar pra isso tudo ser um componente só
+
 type Title = { Title: string, editable: boolean }
 
 export function PlannerColumn({ Title, editable }: Title) {

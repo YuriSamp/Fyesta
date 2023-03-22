@@ -1,5 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority';
 
+//TODO fazer um componente de link
+
 const ButtonStyles = cva(
   'border-[1px] border-[#2A292B] w-36 h-12 cursor-pointer rounded-md',
   {

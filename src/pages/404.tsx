@@ -1,6 +1,5 @@
+import RetturnButton from '@ui/RetturnButton'
 import Image from 'next/image'
-import Link from 'next/link'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
 import svg404 from '../../public/404.svg'
 
 export default function NotFound() {
@@ -16,10 +15,10 @@ export default function NotFound() {
           height={600}
         />
         <div className='pt-6'>
-          <Link href='/home' className='flex items-center gap-2'>
-            <AiOutlineArrowLeft className='h-7 w-7' />
-            <p className='text-2xl'>Voltar a home</p>
-          </Link>
+          <RetturnButton
+            href='/home'
+            text='Voltar a home'
+          />
         </div>
       </div>
     </section>

@@ -1,39 +1,88 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 
-
 //TODO ta funcionando para um ano só, agora precisa funcionar pro resto
-// para ano anterior ou posterior  <h1 className='text-3xl'>Fevereiro INSIRA A DATA</h1>
+// TODO usar o nth-child pra fazer o css
 
 export default function Calendario() {
-
-  const arr = [1, 2, 3, 4, 5, 6, 7]
-  const arrTeste = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+  const arrMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
   const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
-  const [Quantity, setQuantity] = useState(0);
+  const date = new Date()
+  const month = date.getMonth()
+  const [Quantity, setQuantity] = useState(month);
+  const [year, setYear] = useState(date.getFullYear())
+  let monthDisplay = arrMeses[Quantity]
 
   const minQuantity = 0;
   const maxQuantity = 11;
 
+  const daysDisplay = () => {
+    const date = new Date()
+    date.setDate(1);
+    const arr: number[] = []
+    const prevLastDay = new Date(year, Quantity, 0).getDate();
+    const lastDayIndex = new Date(year, Quantity + 1, 0).getDay();
+    const nextDays = 7 - lastDayIndex - 1;
+    const firstDayIndex = new Date(year, Quantity, 0).getDay()
+    const lastDay = new Date(year, Quantity + 1, 0).getDate();
+
+    if (firstDayIndex !== 6) {
+      for (let i = firstDayIndex + 1; i > 0; i--) {
+        arr.push(prevLastDay - i + 1)
+      }
+    }
+
+    if (year % 2 === 0) {
+
+    }
+    for (let i = 1; i <= lastDay; i++) {
+      arr.push(i)
+    }
+
+    for (let i = 1; i <= nextDays; i++) {
+      arr.push(i)
+    }
+
+    return arr
+  }
+
   const minusQuantity = (Quantity: number) => {
     if (Quantity > minQuantity) return Quantity - 1;
+    setYear(year => year - 1)
     return 11;
   };
   const plusQuantity = (Quantity: number) => {
     if (Quantity < maxQuantity) return Quantity + 1;
+    setYear(year => year + 1)
     return 0;
   };
+
+  const [days, setDays] = useState<number[]>(daysDisplay())
+
+  useEffect(() => {
+    setDays(daysDisplay)
+  }, [Quantity])
+
+
+  console.log(days.length)
 
   return (
     <section className='flex flex-col items-center text-black dark:text-white'>
       <div className='flex gap-6 items-center'>
         <AiOutlineArrowLeft
           className='w-7 h-7 cursor-pointer'
-          onClick={() => setQuantity(minusQuantity(Quantity))}
+          onClick={() => {
+            setQuantity(minusQuantity(Quantity))
+            monthDisplay = arrMeses[Quantity]
+          }
+          }
         />
-        <h1 className='text-3xl w-32 text-center select-none'>{arrTeste[Quantity]}</h1>
+        <h1 className='text-3xl text-center select-none w-72'>{monthDisplay} de {year}</h1>
         <AiOutlineArrowRight className='w-7 h-7 cursor-pointer'
-          onClick={() => setQuantity(plusQuantity(Quantity))}
+          onClick={() => {
+            setQuantity(plusQuantity(Quantity))
+            monthDisplay = arrMeses[Quantity]
+          }}
         />
       </div>
       <div className='flex pt-2 '>
@@ -46,50 +95,24 @@ export default function Calendario() {
           </div>
         ))}
       </div>
-      <div className='flex' >
-        {arr.map(item => (
-          <div className='w-52 h-40 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4 select-none'>
-              {item}
+      <div className='flex flex-wrap max-w-[1460px] justify-center' >
+        {days.length > 35 ?
+          days.map((item, index) => (
+            <div className='w-52 h-32 calendar' key={index}>
+              <div className='text-center py-2 pr-4 select-none'>
+                {item}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className='flex' >
-        {arr.map(item => (
-          <div className='w-52 h-40 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4 select-none'>
-              {item}
+          ))
+          :
+          days.map((item, index) => (
+            <div className='w-52 h-40 calendar' key={index}>
+              <div className='text-center py-2 pr-4 select-none'>
+                {item}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className='flex' >
-        {arr.map(item => (
-          <div className='w-52 h-40 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4 select-none'>
-              {item}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className='flex' >
-        {arr.map(item => (
-          <div className='w-52 h-40 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4 select-none'>
-              {item}
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className='flex' >
-        {arr.map(item => (
-          <div className='w-52 h-40 border-b-2 border-t-2 border-r-2 first:border-l-2 border-[#383838]' key={item}>
-            <div className='text-end py-2 pr-4 select-none'>
-              {item}
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </section>
   )

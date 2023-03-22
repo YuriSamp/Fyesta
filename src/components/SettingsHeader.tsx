@@ -1,5 +1,4 @@
 import React from 'react'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link';
 import AvatarIcon from '@ui/avatar';
 import { useIdToken } from 'react-firebase-hooks/auth';

@@ -92,3 +92,15 @@
 .ligth:not(.dark) ::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
+
+.calendar {
+  border-right: 1px solid;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-color: #383838;
+}
+
+.calendar:nth-child(7n + 1) {
+  border-left: 1px solid;
+  border-color: #383838;
+}

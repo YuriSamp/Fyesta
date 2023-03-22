@@ -39,7 +39,7 @@ export const Navbar = ({ Page }: Props) => {
           {PageName}
         </div>
         <div className='flex gap-6 items-center'>
-          <p>{msg}, {user?.displayName}</p>
+          <p className='select-none'>{msg}, {user?.displayName}</p>
           <AvatarWithDropDown Path={user?.photoURL as string} />
         </div>
       </section>

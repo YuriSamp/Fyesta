@@ -7,8 +7,10 @@ import * as Progress from '@radix-ui/react-progress';
 
 // TODO adicionar um editar 
 
-type Filter = 'Todas' | 'Concluidas' | 'Em progresso' | 'Não iniciadas' | 'Intelectual' | 'Pessoal' | 'Financeiro'
 export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
+
+  const options = ['Todas', 'Concluidas', 'Em progresso', 'Não iniciadas', 'Intelectual', 'Pessoal', 'Financeiro'] as const
+  type Filter = typeof options[number]
 
   const [FilterState, setFilterState] = useState<Filter>('Todas')
 
@@ -54,7 +56,7 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
       <div className='pb-2 border-b-2 mb-2 flex items-center justify-between '>
         <h3 className='text-3xl  dark:text-white'>Metas</h3>
         <Select
-          Options={['Todas', 'Concluidas', 'Em progresso', 'Não iniciadas', 'Intelectual', 'Pessoal', 'Financeiro']}
+          Options={options}
           onChange={setFilterState}
           value={FilterState}
           Width='md' />
@@ -89,7 +91,7 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
                   value={item.Tarefas.length}
                 >
                   <Progress.Indicator
-                    className="bg-violet-900 w-full h-full transition-transform duration-[660ms] ease-[cubic-bezier(0.65, 0, 0.35, 1)]"
+                    className="bg-violet-900 dark:bg-green-700 w-full h-full transition-transform duration-[660ms] ease-[cubic-bezier(0.65, 0, 0.35, 1)]"
                     style={{ transform: `translateX(-${100 - (ProgressBarfunc(item.Tarefas) * (100 / item.Tarefas.length))}%)` }}
                   />
                 </Progress.Root>
