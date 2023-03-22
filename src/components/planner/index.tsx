@@ -17,8 +17,13 @@ export default function PlannerListaInput({ editable }: Editable) {
   const [lista, setLista] = useState(arr)
 
   function BooleanChange(id: number) {
-    lista[id].Selecionado = !lista[id].Selecionado
-    setLista([...lista])
+    const ListaVerificada = lista.map(item => {
+      if (item.Id === id) {
+        item.Selecionado = !item.Selecionado
+      }
+      return item
+    })
+    setLista([...ListaVerificada]);
   }
 
   function AddNewTask() {

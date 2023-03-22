@@ -2,8 +2,6 @@ import { PlannerColumn } from '@ui/planner/plannerColumn';
 
 export default function Planner() {
 
-  // TODO bug quando exlcui todos os itens de um dia, depois escreve e tenta marcar como feito
-
   return (
     <>
       <section className='flex justify-evenly'>

@@ -7,7 +7,7 @@ import { Select } from '@ui/Select';
 import { useAtom } from 'jotai';
 import { Language, Monday } from 'src/context/seetingsContext';
 
-const themes = ['dark', 'ligth']
+const themes = ['dark', 'light']
 const languages = ['Português', 'inglês']
 
 export default function Settings() {

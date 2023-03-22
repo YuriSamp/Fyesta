@@ -1,10 +1,9 @@
 import DiarypageWritten from '@ui/diario/Card';
-import { useState } from 'react';
 import Link from 'next/link';
 import { useAtom } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
 
-// TODO bug na data do diario
+//TODO logica de acessa a pagina já escrita
 
 export default function Diario() {
 
@@ -21,12 +20,12 @@ export default function Diario() {
         >
           <p className='text-lg'> + Entrada</p>
         </Link>
-        {diary.map((item, index) => (
+        {diary.map(entry => (
           <DiarypageWritten
-            text={item.Text}
-            title={item.Title}
-            data={item.Data}
-            key={index}
+            text={entry.Text}
+            title={entry.Title}
+            data={entry.Data}
+            key={entry.Id}
           />
         ))}
       </div>

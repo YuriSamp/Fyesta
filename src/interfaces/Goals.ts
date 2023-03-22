@@ -5,6 +5,15 @@ type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
 ) => Result;
 
+export type CategoryFilter =
+  | 'Todas'
+  | 'Concluidas'
+  | 'Em progresso'
+  | 'Não iniciadas'
+  | 'Intelectual'
+  | 'Pessoal'
+  | 'Financeiro';
+
 export interface Goal {
   Id: number;
   Meta: string;

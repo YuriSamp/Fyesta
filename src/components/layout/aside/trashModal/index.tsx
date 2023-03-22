@@ -6,9 +6,6 @@ import * as Portal from '@radix-ui/react-portal';
 import { useClickOutside } from 'src/hooks/useClickOutside'
 import { ModalProps } from 'src/interfaces/Modal';
 
-//TODO fazer divs em volta dos icones para o title aparecer melhor
-//TODO Programar o back-end para receber as paginas que foram deletadas
-
 const teste = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
 export default function TrashModal({ State, SetState }: ModalProps) {

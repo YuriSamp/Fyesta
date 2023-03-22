@@ -29,7 +29,7 @@ export default function Home() {
       </div>
       <div className='flex gap-20'>
         <div className=''>
-          {/* <GoalTracker /> */}
+          <GoalTracker />
         </div>
         <div className='flex justify-center items-center shadow-xl border-2 rounded-lg w-96'>
           <p>Aqui vai entrar o mood tracker</p>

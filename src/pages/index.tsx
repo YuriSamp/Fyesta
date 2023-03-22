@@ -42,7 +42,7 @@ export default function Home() {
           </h2>
         </div>
         <div className='flex justify-center gap-8 pt-8'>
-          <Link href='./login' className='w-40 h-14 bg-black rounded-xl drop-shadow-xl flex justify-center items-center'>
+          <Link href='./login' className='w-40 h-14 bg-black rounded-xl drop-shadow-xl flex justify-center items-center text-white'>
             <p>Comece a usar</p>
           </Link>
           <Link href='https://github.com/YuriSamp/Fyesta' target='_blank' className='w-40 h-14 bg-white rounded-xl drop-shadow-xl flex justify-center items-center'>

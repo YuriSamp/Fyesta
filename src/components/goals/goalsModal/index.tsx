@@ -9,8 +9,7 @@ import { toastNotify } from 'src/utils/toastNotify';
 import { InputWithLabel } from '@ui/input/InputWithLabel';
 import { Button } from '@ui/button';
 import * as RadioGroup from '@radix-ui/react-radio-group';
-
-// TODO Revisar
+import { useTheme } from 'next-themes';
 
 export default function GoalsModal({ State, SetState }: ModalProps) {
 
@@ -21,6 +20,8 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
   const [taskName, setTaskName] = useState('')
   const [task, setTask] = useState('')
   const [field, setField] = useState(0)
+  const { theme, setTheme } = useTheme()
+
 
   const domNode = useClickOutside(() => SetState(false))
 
@@ -100,6 +101,7 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
               value={taskName}
               Id='form1'
               labelText='Insira o nome da meta'
+              theme={theme === 'light' ? 'light' : ''}
             />
             <InputWithLabel
               onChange={setTask}
@@ -108,6 +110,7 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
               value={task}
               Id='form1'
               labelText='Escreva uma ação para realizar a meta'
+              theme={theme === 'light' ? 'light' : ''}
             />
           </div>
           <div className='pb-2 pt-4 pl-4'>

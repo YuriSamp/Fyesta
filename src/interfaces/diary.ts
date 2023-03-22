@@ -3,4 +3,5 @@ export default interface diary {
   Data: string;
   Feeling: string;
   Text: string;
+  Id: number;
 }
