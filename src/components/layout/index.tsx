@@ -1,8 +1,5 @@
 import Head from 'next/head';
-import { Sidebar } from './aside';
 import { Navbar } from './navbar';
-
-
 interface Props {
   page: string
   children: React.ReactNode
@@ -26,17 +23,14 @@ export default function Layout({ page, children }: Props) {
         <Head>
           <title>Fyesta</title>
         </Head>
-        <section className='flex  '>
-          <Sidebar />
-          <section className='w-full'>
-            <Navbar
-              Page={page}
-            />
-            <div
-              className='flex flex-col overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 h-[980px] bg-white dark:bg-[#121212] px-12 py-12 select-none'>
-              {children}
-            </div>
-          </section>
+        <section className='w-full'>
+          <Navbar
+            Page={page}
+          />
+          <div
+            className='flex flex-col overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 bg-white dark:bg-[#121212] px-12 py-10 select-none'>
+            {children}
+          </div>
         </section>
       </>
     )

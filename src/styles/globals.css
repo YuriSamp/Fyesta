@@ -2,24 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .buttonaside {
-    @apply after:absolute after:bottom-[-10px] after:left-0 after:block  after:h-[2px] after:w-full after:origin-left  after:bg-violet-900  after:content-['']  after:hover:origin-right   after:dark:bg-white;
-  }
-  .settingUnderline {
-    @apply after:absolute after:bottom-[-11px] after:left-0 after:h-[2px] after:w-full after:bg-violet-900 after:content-[''] after:dark:bg-[#138859];
-  }
-}
-
-.buttonaside::after {
-  transition: transform 0.3s ease-in-out;
-  transform: scaleX(0);
-}
-
-.buttonaside:hover::after {
-  transform: scaleX(1);
-}
-
 .DropdownMenuContent {
   position: relative;
   top: 12px;
