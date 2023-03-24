@@ -6,13 +6,13 @@ import FormataData from 'src/utils/FormataData'
 import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import DiaryDateHelper from 'src/helper/DiaryDate'
+import { DateHelper } from 'src/helper/DiaryDate'
 
 // TODO ver a possibildiade de implementar uma toolbar
 
 export default function Pagina() {
 
-  const DateInput = DiaryDateHelper()
+  const DateInput = DateHelper()
 
   const route = useRouter()
   const [Title, setTitle] = useState('')

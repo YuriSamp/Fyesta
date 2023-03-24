@@ -24,7 +24,6 @@ export default function SearchModal({ State, SetState }: ModalProps) {
     <Portal.Root>
       {State &&
         <section className='border-2 w-[450px] h-96 border-white rounded-lg fixed left-60 top-48 flex- flex-col bg-[#0b0b0c]'
-          ref={domNode}
         >
           <div className='py-4 flex items-center gap-3 px-4 border-b-[1px] border-white'>
             <BsSearch className='w-6 h-6' />

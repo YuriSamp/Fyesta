@@ -8,7 +8,7 @@ import { BsTrash } from 'react-icons/bs'
 
 type Editable = { editable: boolean }
 
-export default function PlannerListaInput({ editable }: Editable) {
+export function PlannerListaInput({ editable }: Editable) {
   const [Quantidade, setQuantidade] = useState(3)
   const arr = []
 

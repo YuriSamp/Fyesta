@@ -1,4 +1,4 @@
-import PlannerListaInput from '.';
+import { PlannerListaInput } from '.';
 
 // TODO Refatorar pra isso tudo ser um componente só
 

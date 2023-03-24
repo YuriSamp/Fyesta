@@ -1,4 +1,4 @@
-export default function DiaryDateHelper(): string {
+export function DateHelper(): string {
   let DateInput = '';
   const date = new Date();
   const day = date.getDate();

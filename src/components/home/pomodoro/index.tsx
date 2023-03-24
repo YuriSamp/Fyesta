@@ -3,7 +3,7 @@ import { CiPlay1, CiPause1 } from 'react-icons/ci';
 import { FiCoffee } from 'react-icons/fi';
 import { useState, useRef, useEffect } from 'react'
 import { IoPlaySkipForwardOutline } from 'react-icons/io5'
-import PlannerListaInput from '@ui/planner';
+import { PlannerListaInput } from '@ui/planner';
 
 // TODO adicionar a logica de pegar pelo dia da semana
 
