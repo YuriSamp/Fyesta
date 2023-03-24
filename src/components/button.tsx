@@ -9,7 +9,8 @@ const ButtonStyles = cva(
       intent: {
         primary: '',
         danger: 'bg-[#B3202C] border-none text-white',
-        success: 'bg-DarkModeGreen rounded-lg border-none text-white'
+        success: 'bg-violet-700 dark:bg-DarkModeGreen rounded-lg border-none text-white',
+        Selected: 'text-violet-700 bg-gray-200 dark:text-DarkModeGreen dark:bg-neutral-800'
       },
       Width: {
         sm: 'w-4',

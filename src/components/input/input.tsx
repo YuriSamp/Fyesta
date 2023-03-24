@@ -7,7 +7,8 @@ const inputStyles = cva(
     variants: {
       intent: {
         primary: 'bg-InputGray text-white',
-        light: 'bg-transparent border-[1px] border-black'
+        light: 'bg-transparent border-[1px] border-black',
+        transparent: 'bg-transparent border-b-2 border-black rounded-none dark:border-white focus:border-violet-700'
       },
       Width: {
         sm: 'w-4',
@@ -15,6 +16,12 @@ const inputStyles = cva(
         lg: 'w-60',
         full: 'w-full'
       },
+      textSize: {
+        md: 'text-base',
+        lg: 'text-lg',
+        xl: 'text-xl',
+        Dxl: 'text-2xl',
+      }
     },
     defaultVariants: {
       intent: 'primary'
@@ -30,10 +37,10 @@ interface Controled extends VariantProps<typeof inputStyles> {
   onChange: Dispatch<SetStateAction<string>>
 }
 
-export function ControledInput({ Width, intent, type, Id, placeholder, value, onChange }: Controled) {
+export function ControledInput({ Width, intent, textSize, type, Id, placeholder, value, onChange }: Controled) {
   return (
     <input
-      className={inputStyles({ Width, intent })}
+      className={inputStyles({ Width, intent, textSize })}
       type={type} id={Id}
       placeholder={placeholder}
       value={value}

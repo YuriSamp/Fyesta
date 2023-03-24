@@ -87,7 +87,7 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
     <Portal.Root>
       {State &&
         <section
-          className='w-[500px] fixed left-[720px] top-[300px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm border-[1px] border-black dark:border-none'
+          className='w-[500px] fixed left-[720px] top-[300px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm shadow-2xl dark:shadow-none'
           ref={domNode}
         >
           <div className='pt-4 text-center'>
