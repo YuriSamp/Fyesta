@@ -8,6 +8,8 @@ import { BsShieldCheck, BsBrush } from 'react-icons/bs'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { IconType } from 'react-icons'
 
+// TODO tirar fotos melhores pra home
+
 interface IFeatureBox {
   Title: string
   Description: string

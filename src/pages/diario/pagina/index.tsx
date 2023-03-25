@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { DateHelper } from 'src/helper/DiaryDate'
 
 // TODO ver a possibildiade de implementar uma toolbar
+// TODO adicionar a possibilidade do usuario criar uma emoção pro select
 
 export default function Pagina() {
 
