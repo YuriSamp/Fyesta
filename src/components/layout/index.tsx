@@ -10,7 +10,6 @@ export default function Layout({ page, children }: Props) {
   const paths = [
     '/home',
     '/diario',
-    '/diario/pagina',
     '/emocoes',
     '/planner',
     '/metas',

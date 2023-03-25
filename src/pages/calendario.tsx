@@ -59,7 +59,7 @@ export default function Calendario() {
     setMonthIndex(date.getMonth())
   }
 
-  console.log(days)
+  // console.log(days)
 
   return (
     <section className='flex flex-col items-center text-black dark:text-white'>
