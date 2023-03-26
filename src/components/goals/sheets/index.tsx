@@ -14,30 +14,23 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
 
   const [FilterState, setFilterState] = useState<Filter>('Todas')
 
-  function OrdenaPlanilha(Metas: Goal[], filtro: Filter) {
-    if (filtro === 'Todas') {
-      return Metas
-    }
-    if (filtro === 'Concluidas') {
-      const tasksDonearr = Metas.filter(meta => meta.Tarefas.every(task => task.realizada === true))
-      return tasksDonearr
-    } if (filtro === 'Não iniciadas') {
-      const tasksToDoarr = Metas.filter(meta => meta.Tarefas.every(task => task.realizada === false))
-      return tasksToDoarr
-    }
-    if (filtro === 'Em progresso') {
-      const tasksTodoarr = Metas.filter(meta => !meta.Tarefas.every(task => task.realizada === false))
-      const tasksinProgress = tasksTodoarr.filter(meta => !meta.Tarefas.every(task => task.realizada === true))
-      return tasksinProgress
-    }
-    if (filtro === 'Financeiro') {
-      return Metas.filter(meta => meta.Categoria === 'Financeiro')
-    }
-    if (filtro === 'Intelectual') {
-      return Metas.filter(meta => meta.Categoria === 'Intelectual')
-    }
-    if (filtro === 'Pessoal') {
-      return Metas.filter(meta => meta.Categoria === 'Pessoal')
+  function ordenaPlanilha(Metas: Goal[], filtro: Filter) {
+
+    switch (filtro) {
+      case "Todas":
+        return Metas;
+      case "Concluidas":
+        return Metas.filter(meta => meta.Tarefas.every(task => task.realizada));
+      case "Não iniciadas":
+        return Metas.filter(meta => meta.Tarefas.every(task => !task.realizada));
+      case "Em progresso":
+        return Metas.filter(meta => meta.Tarefas.some(task => !task.realizada) && meta.Tarefas.some(task => task.realizada));
+      case "Financeiro":
+      case "Intelectual":
+      case "Pessoal":
+        return Metas.filter(meta => meta.Categoria === filtro);
+      default:
+        throw new Error("Filtro inválido");
     }
   }
 
@@ -74,7 +67,7 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
           </div>
         </div>
         <section className='flex flex-col gap-3 h-[200px] overflow-y-auto  scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
-          {OrdenaPlanilha(Metas, FilterState)?.map(item => (
+          {ordenaPlanilha(Metas, FilterState)?.map(item => (
             <div
               className='w-full flex gap-3'
               key={item.Id}
