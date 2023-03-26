@@ -18,10 +18,10 @@ const Pagina = () => {
   const [diary, setdiary] = useAtom(diaryPage);
   const [Id, setdiaryId] = useAtom(diaryId);
 
-  const [Title, setTitle] = useState(diary[PageIdNumber].Title)
-  const [Feeling, setFeeling] = useState(diary[PageIdNumber].Feeling)
-  const [Text, setText] = useState(diary[PageIdNumber].Text)
-  const [Data, setData] = useState(diary[PageIdNumber].Data)
+  const [Title, setTitle] = useState(diary[PageIdNumber]?.Title)
+  const [Feeling, setFeeling] = useState(diary[PageIdNumber]?.Feeling)
+  const [Text, setText] = useState(diary[PageIdNumber]?.Text)
+  const [Data, setData] = useState(diary[PageIdNumber]?.Data)
 
   function HandleForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
