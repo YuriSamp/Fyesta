@@ -4,6 +4,7 @@ import { FiCoffee } from 'react-icons/fi';
 import { useState, useRef, useEffect } from 'react'
 import { IoPlaySkipForwardOutline } from 'react-icons/io5'
 import { PlannerListaInput } from '@ui/planner';
+import DisplayList from '@ui/To-do/DisplayList';
 
 // TODO adicionar a logica de pegar pelo dia da semana
 
@@ -110,8 +111,8 @@ export default function Pomodoro() {
           }}
         />
       </div>
-      <div className='flex flex-col gap-3 w-full py-4 pl-16'>
-        <PlannerListaInput editable={false} />
+      <div className='flex justify-center pb-10'>
+        <DisplayList />
       </div>
     </div>
   )
