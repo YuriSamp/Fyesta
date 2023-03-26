@@ -1,9 +1,12 @@
 import { Select } from '@ui/Select'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
 import { Goal, GoalsWithSetterProps } from 'src/interfaces/Goals'
 
+//TODO concertar o bug de ficar com o filtro errado, mesmo se a opção não existir mais
+
 export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
+  const [Filter, setFilter] = useState('Todas')
 
   const ActionComplete = (id: number) => {
     const Tasks = Metas.map(item => {
@@ -17,17 +20,14 @@ export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
     setMetas(Tasks)
   }
 
-  const [Filter, setFilter] = useState('Todas')
-
-  const arr = Metas.map(meta => meta.Meta)
-  const options = ['Todas', ...arr]
+  const options = useMemo(() => {
+    const arr = Metas.map(meta => meta.Meta)
+    return ['Todas', ...arr]
+  }, [Metas])
 
   const ActionFilter = (Metas: Goal[], Filter: string) => {
-    if (Filter != 'Todas') {
-      const acoesFiltradas = Metas.filter(meta => meta.Meta === Filter)
-      return acoesFiltradas
-    }
-    return Metas
+    if (Filter === 'Todas') return Metas
+    return Metas.filter(meta => meta.Meta === Filter)
   }
 
   return (

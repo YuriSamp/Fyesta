@@ -5,8 +5,6 @@ import { useState, useRef, useEffect } from 'react'
 import { IoPlaySkipForwardOutline } from 'react-icons/io5'
 import DisplayList from '@ui/To-do/DisplayList';
 
-// TODO adicionar a logica de pegar pelo dia da semana
-
 export default function Pomodoro() {
 
   const [pomodoroTimer, setpomodoroTimer] = useState(25 * 60);
