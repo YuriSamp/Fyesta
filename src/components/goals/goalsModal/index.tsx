@@ -3,7 +3,7 @@ import * as Portal from '@radix-ui/react-portal';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { ModalProps } from 'src/interfaces/Modal';
 import { useAtom } from 'jotai';
-import { Goals } from 'src/context/Goals/GoalContext';
+import { Goals } from 'src/context/GoalContext';
 import { Task } from 'src/interfaces/Goals';
 import { toastNotify } from 'src/utils/toastNotify';
 import { InputWithLabel } from '@ui/input/InputWithLabel';
@@ -87,7 +87,7 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
     <Portal.Root>
       {State &&
         <section
-          className='w-[500px] fixed left-[720px] top-[300px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm border-[1px] border-black dark:border-none'
+          className='w-[500px] fixed left-[720px] top-[300px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm shadow-2xl dark:shadow-none'
           ref={domNode}
         >
           <div className='pt-4 text-center'>

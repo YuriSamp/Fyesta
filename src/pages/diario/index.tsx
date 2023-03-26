@@ -22,9 +22,11 @@ export default function Diario() {
         </Link>
         {diary.map(entry => (
           <DiarypageWritten
-            text={entry.Text}
-            title={entry.Title}
-            data={entry.Data}
+            Text={entry.Text}
+            Title={entry.Title}
+            Data={entry.Data}
+            Feeling={entry.Feeling}
+            Id={entry.Id}
             key={entry.Id}
           />
         ))}

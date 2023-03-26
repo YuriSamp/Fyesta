@@ -5,23 +5,23 @@ import { diaryId, diaryPage } from 'src/context/diaryContext'
 import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { DateHelper } from 'src/helper/DiaryDate'
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
 
-// TODO adicionar a possibilidade do usuario criar uma emoção pro select
+// TODO concertar o bug da data e do select 
 
-const NovaPagina = () => {
-
-  const DateInput = DateHelper()
+const Pagina = () => {
   const router = useRouter()
+  const { PageId } = router.query
+  const PageIdNumber = Number(PageId)
 
-  const [Title, setTitle] = useState('')
-  const [Feeling, setFeeling] = useState('Feliz')
-  const [Text, setText] = useState('')
-  const [Data, setData] = useState(DateInput)
-  const [_, setdiary] = useAtom(diaryPage);
+  const [diary, setdiary] = useAtom(diaryPage);
   const [Id, setdiaryId] = useAtom(diaryId);
+
+  const [Title, setTitle] = useState(diary[PageIdNumber]?.Title)
+  const [Feeling, setFeeling] = useState(diary[PageIdNumber]?.Feeling)
+  const [Text, setText] = useState(diary[PageIdNumber]?.Text)
+  const [Data, setData] = useState(diary[PageIdNumber]?.Data)
 
   function HandleForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -91,6 +91,7 @@ const NovaPagina = () => {
             <textarea
               className='h-[500px] bg-transparent focus:outline-none p-3 text-lg placeholder:italic resize-none tracking-wide leading-relaxed indent-5'
               placeholder='Comece a escrever sobre o seu dia'
+              value={Text}
               onChange={e => setText(e.target.value)}
             />
             <div className='flex '>
@@ -104,4 +105,4 @@ const NovaPagina = () => {
   )
 }
 
-export default NovaPagina
+export default Pagina

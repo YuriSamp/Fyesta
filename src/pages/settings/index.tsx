@@ -10,6 +10,8 @@ import { Language, Monday } from 'src/context/seetingsContext';
 const themes = ['dark', 'light']
 const languages = ['Português', 'inglês']
 
+//TODO retirar o calendario na segunda e implementar o resto
+
 export default function Settings() {
   const router = useRouter()
   const page = router.pathname

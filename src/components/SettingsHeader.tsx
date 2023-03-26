@@ -1,5 +1,4 @@
 import React from 'react'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
 import Link from 'next/link';
 import AvatarIcon from '@ui/avatar';
 import { useIdToken } from 'react-firebase-hooks/auth';
@@ -37,7 +36,11 @@ export default function Header({ Page }: Props) {
           {routes.map((item, index) => (
             item.link === Page ?
               <li key={index}>
-                <Link href={item.link} className='text-xl cursor-pointer settingUnderline relative text-violet-900 dark:text-[#138859]'>{item.name}</Link>
+                <Link
+                  href={item.link}
+                  className="text-xl cursor-pointer relative text-violet-900 dark:text-[#138859]  after:absolute after:bottom-[-11px] after:left-0 after:h-[2px]  after:w-full after:bg-violet-900 after:content-[''] after:dark:bg-[#138859]">
+                  {item.name}
+                </Link>
               </li>
               :
               <li key={index}>

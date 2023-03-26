@@ -4,9 +4,11 @@ import { CheckIcon } from '@radix-ui/react-icons';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs'
 
+// TODO Remover a props editavel
+
 type Editable = { editable: boolean }
 
-export default function PlannerListaInput({ editable }: Editable) {
+export function PlannerListaInput({ editable }: Editable) {
   const [Quantidade, setQuantidade] = useState(3)
   const arr = []
 

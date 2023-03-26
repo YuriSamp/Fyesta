@@ -6,6 +6,9 @@ import { useIdToken } from 'react-firebase-hooks/auth'
 import { auth } from 'src/server/Firebase/ClientApp'
 import plannerPhoto from '../../public/plannerImage.jpg'
 
+// TODO implementar o spotify / apple music
+// TODO implementar o GoalTracker
+// TODO implementar o Mood Tracker
 
 export default function Home() {
 
