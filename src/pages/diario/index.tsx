@@ -3,8 +3,6 @@ import Link from 'next/link';
 import { useAtom } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
 
-//TODO logica de acessa a pagina já escrita
-
 export default function Diario() {
 
   const [diary, setdiary] = useAtom(diaryPage);
