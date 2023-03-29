@@ -51,7 +51,7 @@ export const Navbar = ({ Page }: Props) => {
         className='flex py-4 px-8 dark:border-b-2 bg-[#fafaf5] drop-shadow-lg dark:border-neutral-800 dark:bg-[#121212] w-full justify-between items-center text-black dark:text-white'>
         <div className='flex gap-6 select-none'>
           {pages.map((item, index) => (
-            Page === item.link ?
+            Page.includes(item.link) ?
               <Link
                 key={index}
                 href={item.link}
