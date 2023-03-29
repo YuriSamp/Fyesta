@@ -89,7 +89,7 @@ const NovaPagina = () => {
             </div>
             <hr />
             <textarea
-              className='h-[500px] bg-transparent focus:outline-none p-3 text-lg placeholder:italic resize-none tracking-wide leading-relaxed indent-5'
+              className='h-[450px] bg-transparent focus:outline-none p-3 text-lg placeholder:italic resize-none tracking-wide leading-relaxed indent-5 scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'
               placeholder='Comece a escrever sobre o seu dia'
               onChange={e => setText(e.target.value)}
             />

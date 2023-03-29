@@ -1,6 +1,6 @@
 import { AiOutlineCalendar, AiOutlineHeart } from 'react-icons/ai'
 import { useState } from 'react'
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { diaryId, diaryPage } from 'src/context/diaryContext'
 import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
@@ -16,7 +16,7 @@ const Pagina = () => {
   const PageIdNumber = Number(PageId)
 
   const [diary, setdiary] = useAtom(diaryPage);
-  const [Id, setdiaryId] = useAtom(diaryId);
+  const Id = useAtomValue(diaryId);
 
   const [Title, setTitle] = useState(diary[PageIdNumber]?.Title)
   const [Feeling, setFeeling] = useState(diary[PageIdNumber]?.Feeling)
@@ -32,17 +32,18 @@ const Pagina = () => {
       return
     }
 
-    const notes = {
-      Title,
-      Data,
-      Feeling,
-      Text,
-      Id
-    }
+    const updated = diary.map(item => {
+      if (item.Id === Id - 1) {
+        item.Title = Title
+        item.Data = Data
+        item.Feeling = Feeling
+        item.Text = Text
+      }
+      return item
+    })
 
-    setdiary(prev => [...prev, notes])
-    setdiaryId(prev => prev + 1)
-    router.push('./')
+    setdiary(updated)
+    router.push('../')
   }
 
   return (
@@ -89,13 +90,13 @@ const Pagina = () => {
             </div>
             <hr />
             <textarea
-              className='h-[500px] bg-transparent focus:outline-none p-3 text-lg placeholder:italic resize-none tracking-wide leading-relaxed indent-5'
+              className='h-[450px] bg-transparent focus:outline-none p-3 text-lg placeholder:italic resize-none tracking-wide leading-relaxed indent-5 scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'
               placeholder='Comece a escrever sobre o seu dia'
               value={Text}
               onChange={e => setText(e.target.value)}
             />
             <div className='flex '>
-              <button className='bg-green-700 p-4 rounded-md text-white'>Incluir no diario</button>
+              <button className='bg-green-700 p-4 rounded-md text-white'>Salvar mudanças</button>
             </div>
           </form>
           <ToastContainer limit={3} />
