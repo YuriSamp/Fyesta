@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import * as Portal from '@radix-ui/react-portal';
 import { useClickOutside } from 'src/hooks/useClickOutside';
-import { ModalProps } from 'src/interfaces/Modal';
 import { useAtom } from 'jotai';
 import { Goals } from 'src/context/GoalContext';
-import { Task } from 'src/interfaces/Goals';
+import { GoalsModalType, Task } from 'src/interfaces/Goals';
 import { toastNotify } from 'src/utils/toastNotify';
 import { InputWithLabel } from '@ui/input/InputWithLabel';
 import { Button } from '@ui/button';
@@ -12,7 +11,7 @@ import * as RadioGroup from '@radix-ui/react-radio-group';
 import { useTheme } from 'next-themes';
 import { BsTrash } from 'react-icons/bs';
 
-export default function GoalsModal({ State, SetState }: ModalProps) {
+export default function GoalsModal({ State, SetState, goalId, setGoalId }: GoalsModalType) {
 
   const [Metas, setMetas] = useAtom(Goals)
   const [id, setId] = useState(0)
@@ -23,8 +22,35 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
   const [field, setField] = useState(0)
   const { theme, setTheme } = useTheme()
 
+  const FieldReceived = (Filter: string) => {
+    let Categoria = 0
+    switch (Filter) {
+      case 'Intelectual':
+        Categoria = 1
+        break
+      case 'Pessoal':
+        Categoria = 2
+        break
+      case 'Financeiro':
+        Categoria = 3
+        break
+    }
+    return Categoria
+  }
 
-  const domNode = useClickOutside(() => SetState(false))
+  useEffect(() => {
+    if (goalId != null) {
+      setTaskarr(Metas[goalId].Tarefas)
+      setTaskId(Metas[goalId].Id)
+      setTaskName(Metas[goalId].Meta)
+      setField(FieldReceived(Metas[goalId].Categoria))
+    }
+  }, [goalId, Metas])
+
+  const domNode = useClickOutside(() => {
+    SetState(false)
+    setGoalId(null)
+  })
 
   const FieldSelected = () => {
     let Categoria = ''
@@ -87,6 +113,33 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
       console.log(error)
     }
   }
+
+  const EditGoal = () => {
+    try {
+      const Categoria = FieldSelected()
+      toastNotify(taskName.length === 0, "Insira o nome da meta", 'warn')
+      toastNotify(taskarr.length === 0, "Insira ao menos uma meta", 'warn')
+      toastNotify(field === 0, 'Escolha uma área', 'warn')
+
+      const GoalUpdated = Metas.map(item => {
+        if (item.Id === goalId) {
+          item.Categoria = Categoria
+          item.Meta = taskName
+          item.Tarefas = taskarr
+        }
+        return item
+      })
+
+      setMetas(GoalUpdated)
+      ClearStates()
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  console.log(goalId)
 
   return (
     <Portal.Root>
@@ -201,12 +254,21 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
           </div>
 
           <div className='py-4 flex justify-center gap-8' >
-            <Button
-              Children='Incluir meta'
-              Width='md'
-              intent='success'
-              onClick={() => addGoal()}
-            />
+            {goalId === null ?
+              <Button
+                Children='Incluir meta'
+                Width='md'
+                intent='success'
+                onClick={() => addGoal()}
+              />
+              :
+              <Button
+                Children='Atualizar meta'
+                Width='md'
+                intent='success'
+                onClick={() => EditGoal()}
+              />
+            }
             <Button
               Children='Limpar meta'
               Width='md'

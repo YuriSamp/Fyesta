@@ -1,4 +1,3 @@
-import React from 'react'
 import AvatarWithDropDown from '@ui/AvatarWithDropDown';
 import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
@@ -6,8 +5,6 @@ import { AiOutlineCalendar, AiOutlineHeart, AiOutlineHome } from 'react-icons/ai
 import { BsBook, BsPencil } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
 import Link from 'next/link';
-
-//TODO implementar o suspense pra nome que ele ta pegando
 
 interface Props {
   Page: string

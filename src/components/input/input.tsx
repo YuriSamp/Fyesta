@@ -41,10 +41,12 @@ export function ControledInput({ Width, intent, textSize, type, Id, placeholder,
   return (
     <input
       className={inputStyles({ Width, intent, textSize })}
-      type={type} id={Id}
+      type={type}
+      id={Id}
       placeholder={placeholder}
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      autoComplete="off"
     />
   )
 }

@@ -5,9 +5,7 @@ import { SheetsProps, Task, Goal } from 'src/interfaces/Goals'
 import { BsTrash, BsPencil } from 'react-icons/bs'
 import * as Progress from '@radix-ui/react-progress';
 
-// TODO adicionar um editar 
-
-export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
+export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsProps) {
 
   const options = ['Todas', 'Concluidas', 'Em progresso', 'Não iniciadas', 'Intelectual', 'Pessoal', 'Financeiro'] as const
   type Filter = typeof options[number]
@@ -43,8 +41,6 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
     const TarefasFeitas = tarefas.filter(task => task.realizada === false)
     return tarefas.length - TarefasFeitas.length
   }
-
-  const EditTask = (id: number) => { }
 
   return (
     <section className='flex flex-col w-[976px]  self-start'>
@@ -95,7 +91,12 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
                 <p>{item.Categoria}</p>
               </div>
               <div className='flex gap-5 items-center'>
-                <BsPencil className='w-4 h-4 cursor-pointer' />
+                <BsPencil className='w-4 h-4 cursor-pointer'
+                  onClick={() => {
+                    setGoalId(item.Id)
+                    setState(true)
+                  }}
+                />
                 <BsTrash className='w-4 h-4 cursor-pointer'
                   onClick={() => RemoveTask(item.Id)}
                 />

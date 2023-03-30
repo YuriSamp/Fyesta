@@ -17,7 +17,7 @@ export default function Metas() {
 
   const [Metas, setMetas] = useAtom(Goals)
   const [isModalOpen, setIsModalOpen] = useState(false)
-
+  const [goalId, setGoalId] = useState<number | null>(null)
 
   return (
     <>
@@ -31,14 +31,19 @@ export default function Metas() {
           <Sheets
             Metas={Metas}
             setMetas={setMetas}
-            setState={setIsModalOpen} />
+            setState={setIsModalOpen}
+            setGoalId={setGoalId}
+          />
           <Actions
             Metas={Metas}
             setMetas={setMetas} />
         </section>
         <Modal
           State={isModalOpen}
-          SetState={setIsModalOpen} />
+          SetState={setIsModalOpen}
+          goalId={goalId}
+          setGoalId={setGoalId}
+        />
       </div>
     </>
   )

@@ -1,5 +1,6 @@
 import { SetStateAction } from 'jotai';
 import { Dispatch } from 'react';
+import { ModalProps } from './Modal';
 
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
@@ -28,12 +29,19 @@ export interface Goal {
 export interface GoalsProps {
   Metas: Goal[];
 }
+
+export interface GoalsModalType extends ModalProps {
+  goalId: number | null;
+  setGoalId: Dispatch<SetStateAction<number | null>>;
+}
+
 export interface GoalsWithSetterProps extends GoalsProps {
   setMetas: SetAtom<[SetStateAction<Goal[]>], void>;
 }
 
 export interface SheetsProps extends GoalsWithSetterProps {
   setState: Dispatch<SetStateAction<boolean>>;
+  setGoalId: Dispatch<SetStateAction<number | null>>;
 }
 
 export type TaskWithCategory = Omit<Goal, 'Id' | 'Meta'>;
