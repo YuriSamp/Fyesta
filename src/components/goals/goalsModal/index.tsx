@@ -10,6 +10,7 @@ import { InputWithLabel } from '@ui/input/InputWithLabel';
 import { Button } from '@ui/button';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { useTheme } from 'next-themes';
+import { BsTrash } from 'react-icons/bs';
 
 export default function GoalsModal({ State, SetState }: ModalProps) {
 
@@ -59,6 +60,10 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
     setField(0)
   }
 
+  const RemoveTask = (id: number) => {
+    const newLista = taskarr.filter(item => item.id !== id)
+    setTaskarr(newLista)
+  }
 
   const addGoal = () => {
     try {
@@ -87,7 +92,7 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
     <Portal.Root>
       {State &&
         <section
-          className='w-[500px] fixed left-[720px] top-[300px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm shadow-2xl dark:shadow-none'
+          className='w-[500px] fixed left-[720px] top-[100px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm shadow-2xl dark:shadow-none'
           ref={domNode}
         >
           <div className='pt-4 text-center'>
@@ -125,12 +130,17 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
           <hr className='border-black  dark:border-white w-3/4 flex justify-center my-2' />
 
           <div
-            className='h-52 px-4 py-1 mx-4  rounded-lg w-4/5 text-center  overflow-y-auto  scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'
+            className='h-52 px-4 py-1 mx-4 rounded-lg w-4/5  overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'
           >
-            <ul>
-              <li className='pb-2 dark:text-gray-400 text-neutral-700'>Suas ações aparecerâo aqui</li>
+            <ul className='flex flex-col gap-2'>
+              <li className='pb-2 dark:text-gray-400 text-neutral-700 text-center '>Suas ações aparecerâo aqui</li>
               {taskarr.map(item => (
-                <li key={item.id}>{item.Tarefa}</li>
+                <li key={item.id} className='flex justify-between select-none'>
+                  <p>{item.Tarefa}</p>
+                  <BsTrash className='w-4 h-4 cursor-pointer'
+                    onClick={() => RemoveTask(item.id)}
+                  />
+                </li>
               ))}
             </ul>
           </div>

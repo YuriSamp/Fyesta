@@ -30,6 +30,7 @@ export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
     return Metas.filter(meta => meta.Meta === Filter)
   }
 
+
   return (
     <section className='w-80 self-start'>
       <div className='pb-2 border-b-2 mb-2 flex items-center justify-between'>

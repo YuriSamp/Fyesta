@@ -14,7 +14,7 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
 
   const [FilterState, setFilterState] = useState<Filter>('Todas')
 
-  function ordenaPlanilha(Metas: Goal[], filtro: Filter) {
+  const ordenaPlanilha = (Metas: Goal[], filtro: Filter) => {
 
     switch (filtro) {
       case "Todas":
@@ -34,7 +34,7 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
     }
   }
 
-  function RemoveTask(id: number) {
+  const RemoveTask = (id: number) => {
     const newLista = Metas.filter(item => item.Id !== id)
     setMetas(newLista)
   }
@@ -43,6 +43,8 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
     const TarefasFeitas = tarefas.filter(task => task.realizada === false)
     return tarefas.length - TarefasFeitas.length
   }
+
+  const EditTask = (id: number) => { }
 
   return (
     <section className='flex flex-col w-[976px]  self-start'>
