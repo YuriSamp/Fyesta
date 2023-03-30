@@ -10,6 +10,7 @@ import { type AppType } from "next/app";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // TODO implementar o i18 com ingles
+// TODO Formato de hora pro americano
 
 const CaveatFont = Caveat({
   subsets: ['latin'],

@@ -1,32 +1,15 @@
 import { Button } from '@ui/button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { CalendarDays, ICalendarDays } from 'src/helper/calendarArrDays';
-import { useQuery } from '@tanstack/react-query'
-import { BrasilApiData } from 'src/interfaces/BrasilApi';
 import dynamic from 'next/dynamic';
 
 const CalendarModal = dynamic(() => import('@ui/CalendarModal'), {
   ssr: false
 })
 
-// TODO adicionar a opção de data em inglês
-// TODO Formato de hora pro americano
-// TODO bater na api pra pegar os feriados
-// TODO useMemo no calendario
-// TODO sincronizar com o google calendar
-
 export default function Calendario() {
   const date = new Date()
-
-  // const { isLoading, error, data } = useQuery<BrasilApiData[]>({
-  //   queryKey: ['Feriados'],
-  //   queryFn: () =>
-  //     fetch(`https://brasilapi.com.br/api/feriados/v1/${date.getFullYear()}`).then(
-  //       (res) => res.json(),
-  //     ),
-  // })
-
   const arrMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
   const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
   const minMonthIndex = 0;
@@ -34,7 +17,10 @@ export default function Calendario() {
   const month = date.getMonth()
   const [MonthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
-  const [days, setDays] = useState<ICalendarDays[]>(CalendarDays(year, MonthIndex))
+
+  const CalendarDaysValue = useMemo(() => CalendarDays(year, MonthIndex), [year, MonthIndex])
+
+  const [days, setDays] = useState<ICalendarDays[]>(CalendarDaysValue)
   const [ismodalOpen, setIsModaOpen] = useState(false)
   let monthDisplay = arrMeses[MonthIndex]
 
@@ -58,8 +44,6 @@ export default function Calendario() {
     setYear(date.getFullYear())
     setMonthIndex(date.getMonth())
   }
-
-  // console.log(data)
 
   return (
     <section className='flex flex-col items-center text-black dark:text-white'>

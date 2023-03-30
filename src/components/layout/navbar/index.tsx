@@ -7,6 +7,8 @@ import { BsBook, BsPencil } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
 import Link from 'next/link';
 
+//TODO implementar o suspense pra nome que ele ta pegando
+
 interface Props {
   Page: string
 }
