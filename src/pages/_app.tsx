@@ -9,7 +9,7 @@ import { api } from 'src/utils/api'
 import { type AppType } from "next/app";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-// TODO traduzir tudo pra português depois fazer o i18
+// TODO implementar o i18 com ingles
 
 const CaveatFont = Caveat({
   subsets: ['latin'],

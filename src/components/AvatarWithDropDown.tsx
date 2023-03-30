@@ -54,7 +54,7 @@ export default function AvatarWithDropDown({ Path }: Props) {
                 router.push('/')
               }}>
               <ExitIcon />
-              Fazer Logout
+              Sair da conta
             </button>
           </DropdownMenu.Item>
         </DropdownMenu.Content>

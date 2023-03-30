@@ -63,31 +63,31 @@ export default function LogIn() {
             onSubmit={(event) => AuthSubmit(event, email, password, persist)}
           >
             <div>
-              <h1 className='text-center text-4xl'>Welcome Back</h1>
+              <h1 className='text-center text-4xl'>Bem vindo de volta</h1>
             </div>
-            <p className='text-center py-6'>Log in with</p>
+            <p className='text-center py-6'>Entre com</p>
             <div className='flex justify-center gap-12 py-2'>
               <BsGithub className='h-10 w-10 cursor-pointer' title='Github' onClick={() => AuthhProvider(signInWithGithub)} />
               <BsGoogle className='h-10 w-10 cursor-pointer' title='Google' onClick={() => AuthhProvider(signInWithGoogle)} />
             </div>
-            <p className='text-center pt-6 pb-4'>Or login with email</p>
-            <InputWithLabel labelText='Email Address' type='email' placeholder='Email Address' value={email} onChange={setEmail} />
-            <PasswordInput labelText='Password' placeholder='Password' value={password} onChange={setPassword} />
+            <p className='text-center pt-6 pb-4'>Ou use seu email</p>
+            <InputWithLabel labelText='Email' type='email' placeholder='Email' value={email} onChange={setEmail} />
+            <PasswordInput labelText='Senha' placeholder='Senha' value={password} onChange={setPassword} />
             <div className='flex gap-10 pt-4'>
               <div className='flex gap-2'>
                 <input type='checkbox' id='checkbox' className='' onClick={() => setPersist(prevstate => !prevstate)} />
-                <label htmlFor='checkbox' >Keep me loged in</label>
+                <label htmlFor='checkbox' >Mantenha logado</label>
               </div>
               <div>
-                <Link href='login/recovery' className='text-DarkModeOrange'> Forgot your password?</Link>
+                <Link href='login/recovery' className='text-DarkModeOrange'>Esqueceu sua senha?</Link>
               </div>
             </div>
             <div className='pt-4'>
-              <Button Children='Log in' intent='success' Width='full' />
+              <Button Children='Entrar' intent='success' Width='full' />
             </div>
           </form>
           <div className='pt-4'>
-            <p>Dont have an account? <Link href='login/signup' className='text-DarkModeOrange'> Sign up </Link> </p>
+            <p>Ainda não possui uma conta? <Link href='login/signup' className='text-DarkModeOrange'> Criar uma conta </Link> </p>
           </div>
         </section>
         {!cookiesAcept && (
