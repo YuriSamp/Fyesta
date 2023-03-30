@@ -1,32 +1,15 @@
 import { Button } from '@ui/button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
 import { CalendarDays, ICalendarDays } from 'src/helper/calendarArrDays';
-import { useQuery } from '@tanstack/react-query'
-import { BrasilApiData } from 'src/interfaces/BrasilApi';
 import dynamic from 'next/dynamic';
 
 const CalendarModal = dynamic(() => import('@ui/CalendarModal'), {
   ssr: false
 })
 
-// TODO adicionar a opção de data em inglês
-// TODO Formato de hora pro americano
-// TODO bater na api pra pegar os feriados
-// TODO useMemo no calendario
-// TODO sincronizar com o google calendar
-
 export default function Calendario() {
   const date = new Date()
-
-  // const { isLoading, error, data } = useQuery<BrasilApiData[]>({
-  //   queryKey: ['Feriados'],
-  //   queryFn: () =>
-  //     fetch(`https://brasilapi.com.br/api/feriados/v1/${date.getFullYear()}`).then(
-  //       (res) => res.json(),
-  //     ),
-  // })
-
   const arrMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
   const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
   const minMonthIndex = 0;
@@ -34,7 +17,10 @@ export default function Calendario() {
   const month = date.getMonth()
   const [MonthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
-  const [days, setDays] = useState<ICalendarDays[]>(CalendarDays(year, MonthIndex))
+
+  const CalendarDaysValue = useMemo(() => CalendarDays(year, MonthIndex), [year, MonthIndex])
+
+  const [days, setDays] = useState<ICalendarDays[]>(CalendarDaysValue)
   const [ismodalOpen, setIsModaOpen] = useState(false)
   let monthDisplay = arrMeses[MonthIndex]
 
@@ -58,8 +44,6 @@ export default function Calendario() {
     setYear(date.getFullYear())
     setMonthIndex(date.getMonth())
   }
-
-  // console.log(days)
 
   return (
     <section className='flex flex-col items-center text-black dark:text-white'>
@@ -100,7 +84,7 @@ export default function Calendario() {
           </div>
         ))}
       </div>
-      <div className='flex flex-wrap max-w-[1460px] justify-center' >
+      <div className='flex flex-wrap max-w-[1460px] justify-center text-lg' >
         {days.length > 35 ?
           days.map((item, index) => (
             <div className='w-52 h-32 calendar' key={index}>
@@ -111,9 +95,14 @@ export default function Calendario() {
                   </div>
                 </div>
                 :
-                <div className='text-center py-2 pr-4 select-none'>
-                  {item.day}
-                </div>
+                item.Month === MonthIndex ?
+                  <div className='text-center py-2 pr-4 select-none'>
+                    {item.day}
+                  </div>
+                  :
+                  <div className='text-center py-2 pr-4 select-none text-red-600 dark:text-gray-600'>
+                    {item.day}
+                  </div>
               }
             </div>
           ))
@@ -123,20 +112,25 @@ export default function Calendario() {
               key={index}
               onClick={(e) => {
                 setIsModaOpen(prev => !prev)
-                console.log(e.screenX)
-                console.log(e.screenY)
+                // console.log(e.screenX)
+                // console.log(e.screenY)
               }}
             >
               {item.Month === date.getMonth() && item.day === date.getDate() ?
                 <div className='flex justify-center  py-2  select-none'>
-                  <div className='w-7 bg-violet-700 dark:bg-DarkModeGreen h-7 flex justify-center items-center  text-white rounded-full'>
+                  <div className='w-8 bg-violet-700 dark:bg-DarkModeGreen h-8 flex justify-center items-center  text-white rounded-full'>
                     {item.day}
                   </div>
                 </div>
                 :
-                <div className='text-center py-2 pr-4 select-none'>
-                  {item.day}
-                </div>
+                item.Month === MonthIndex ?
+                  <div className='text-center py-2 pr-4 select-none'>
+                    {item.day}
+                  </div>
+                  :
+                  <div className='text-center py-2 pr-4 select-none text-red-00 dark:text-gray-600'>
+                    {item.day}
+                  </div>
               }
             </div>
           ))

@@ -8,7 +8,6 @@ import { auth } from 'src/server/Firebase/ClientApp';
 import { useRouter } from 'next/router';
 import { PasswordInput } from '@ui/input/passwordInput';
 
-
 //TODO essa parte aqui tem um problema que resolverei futuramente, eu só consigo mudar a senha do usuario logado, caso o usuario n esteja logado preciso fazer no back-end
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {

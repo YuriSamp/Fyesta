@@ -4,7 +4,6 @@ import { IoLayersSharp } from 'react-icons/io5'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
 import { GoalsProps, TaskWithCategory } from 'src/interfaces/Goals'
 
-// TODO adicionar a possibilidade do usuario adicionar uma categoria, e a animação de carrosel
 interface IField {
   FieldName: 'Intelectual' | 'Pessoal' | 'Financeiro'
   Metas: JSX.Element[]

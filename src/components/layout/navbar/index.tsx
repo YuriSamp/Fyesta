@@ -1,4 +1,3 @@
-import React from 'react'
 import AvatarWithDropDown from '@ui/AvatarWithDropDown';
 import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
@@ -12,12 +11,12 @@ interface Props {
 }
 
 const pages = [
-  { link: '/home', name: "Home", emoji: <AiOutlineHome className='text-xl' /> },
-  { link: '/diario', name: "Diario", emoji: <BsBook className='text-xl' /> },
-  { link: '/planner', name: "Planner", emoji: <BsPencil className='text-xl' /> },
-  { link: '/calendario', name: "Calendario", emoji: <AiOutlineCalendar className='text-xl' /> },
-  { link: '/metas', name: "Metas", emoji: <FiTarget className='text-xl' /> },
-  { link: '/emocoes', name: "Emoções", emoji: <AiOutlineHeart className='text-xl' /> }
+  { link: '/home', name: "home", emoji: <AiOutlineHome className='text-xl' /> },
+  { link: '/diario', name: "diario", emoji: <BsBook className='text-xl' /> },
+  { link: '/planner', name: "planner", emoji: <BsPencil className='text-xl' /> },
+  { link: '/calendario', name: "calendario", emoji: <AiOutlineCalendar className='text-xl' /> },
+  { link: '/metas', name: "metas", emoji: <FiTarget className='text-xl' /> },
+  { link: '/emocoes', name: "emocoes", emoji: <AiOutlineHeart className='text-xl' /> }
 ]
 
 export const Navbar = ({ Page }: Props) => {
@@ -42,16 +41,13 @@ export const Navbar = ({ Page }: Props) => {
       break;
   }
 
-
-
-
   return (
     <header>
       <section
         className='flex py-4 px-8 dark:border-b-2 bg-[#fafaf5] drop-shadow-lg dark:border-neutral-800 dark:bg-[#121212] w-full justify-between items-center text-black dark:text-white'>
         <div className='flex gap-6 select-none'>
           {pages.map((item, index) => (
-            Page.includes(item.link) ?
+            Page.includes(item.name) ?
               <Link
                 key={index}
                 href={item.link}

@@ -5,16 +5,14 @@ import { SheetsProps, Task, Goal } from 'src/interfaces/Goals'
 import { BsTrash, BsPencil } from 'react-icons/bs'
 import * as Progress from '@radix-ui/react-progress';
 
-// TODO adicionar um editar 
-
-export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
+export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsProps) {
 
   const options = ['Todas', 'Concluidas', 'Em progresso', 'Não iniciadas', 'Intelectual', 'Pessoal', 'Financeiro'] as const
   type Filter = typeof options[number]
 
   const [FilterState, setFilterState] = useState<Filter>('Todas')
 
-  function ordenaPlanilha(Metas: Goal[], filtro: Filter) {
+  const ordenaPlanilha = (Metas: Goal[], filtro: Filter) => {
 
     switch (filtro) {
       case "Todas":
@@ -34,7 +32,7 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
     }
   }
 
-  function RemoveTask(id: number) {
+  const RemoveTask = (id: number) => {
     const newLista = Metas.filter(item => item.Id !== id)
     setMetas(newLista)
   }
@@ -93,7 +91,12 @@ export default function Sheets({ Metas, setState, setMetas }: SheetsProps) {
                 <p>{item.Categoria}</p>
               </div>
               <div className='flex gap-5 items-center'>
-                <BsPencil className='w-4 h-4 cursor-pointer' />
+                <BsPencil className='w-4 h-4 cursor-pointer'
+                  onClick={() => {
+                    setGoalId(item.Id)
+                    setState(true)
+                  }}
+                />
                 <BsTrash className='w-4 h-4 cursor-pointer'
                   onClick={() => RemoveTask(item.Id)}
                 />

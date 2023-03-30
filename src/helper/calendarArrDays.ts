@@ -2,12 +2,12 @@ export interface ICalendarDays {
   day: number;
   Month: number;
   year: number;
-  tasks?: [];
+  tasks?: ICalendarTask[];
 }
 
-// interface ICalendarTask {
-//   type: 'Data Comemorativa' | 'Feriado' | 'Task';
-// }
+interface ICalendarTask {
+  name: string;
+}
 
 export const CalendarDays = (year: number, MonthIndex: number) => {
   const date = new Date();

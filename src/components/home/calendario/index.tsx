@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 
-
 //TODO animação quando mudar as horas e minutos
 
 export default function HomeCalendar() {

@@ -116,7 +116,7 @@ export default function Perfil() {
         </div>
         <div className='py-10  flex justify-between items-center px-4'>
           <div className='flex flex-col gap-2'>
-            <h2 className='text-xl'>Log out</h2>
+            <h2 className='text-xl'>Sair da conta</h2>
             <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>Irá te redirecionar para página de login</h3>
           </div>
           <Button

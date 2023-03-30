@@ -79,14 +79,14 @@ export default function SignUp() {
           />
           <form className='w-96 pt-8' onSubmit={(e) => HandleSubmit(e)}>
             <div>
-              <h1 className='text-center text-4xl'>Sign Up</h1>
+              <h1 className='text-center text-4xl'>Criar uma conta</h1>
             </div>
-            <InputWithLabel labelText='Name' type='text' Id='Name' placeholder='Your name' value={displayName} onChange={setdisplayName} />
-            <InputWithLabel labelText='Email Address' type='email' Id='email' placeholder='Email Address' value={email} onChange={setEmail} />
-            <PasswordInput labelText='Password' Id='password' placeholder='Password' value={password} onChange={setPassword} />
-            <PasswordInput labelText='Confirm yourPassword' Id='password2' placeholder='Password' value={passwordVerify} onChange={setPasswordVerify} />
-            <InputWithLabel labelText='Insert a photo' type='text' Id='photo' placeholder='Insert a url' value={photoURL} onChange={setphotoURL} />
-            <p className='pt-6 text-sm text-center italic'>you do not need to add a picture, is just optional</p>
+            <InputWithLabel labelText='Nome' type='text' Id='Name' placeholder='Seu nome' value={displayName} onChange={setdisplayName} />
+            <InputWithLabel labelText='Email' type='email' Id='email' placeholder='Email' value={email} onChange={setEmail} />
+            <PasswordInput labelText='Senha' Id='password' placeholder='Senha' value={password} onChange={setPassword} />
+            <PasswordInput labelText='Confirme sua senha' Id='password2' placeholder='Senha' value={passwordVerify} onChange={setPasswordVerify} />
+            <InputWithLabel labelText='Coloque uma foto' type='text' Id='photo' placeholder='Insira a url' value={photoURL} onChange={setphotoURL} />
+            <p className='pt-6 text-sm text-center italic'>Você não preicsa de uma foto, é só pra ficar bonitao</p>
             <div className='pt-6'>
               <Button Children='Create a account' intent='success' Width='full' />
             </div>

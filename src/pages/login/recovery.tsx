@@ -49,12 +49,12 @@ export default function Passwordchange() {
             className='pt-8'
             onSubmit={(e) => HandleSubmit(e)}>
             <div>
-              <h1 className='text-center text-4xl'>Forgot your password?</h1>
+              <h1 className='text-center text-4xl'>Esqueceu sua senha?</h1>
             </div>
-            <p className='text-center py-6 text-xl'>Dont worry, insert your email</p>
-            <InputWithLabel labelText='Email Address' type='email' Id='Email' placeholder='Email Address' value={email} onChange={setEmail} />
+            <p className='text-center py-6 text-xl'>Sem problemas, insira seu email</p>
+            <InputWithLabel labelText='Email' type='email' Id='Email' placeholder='Email' value={email} onChange={setEmail} />
             <div className='pt-4'>
-              <Button Children='Send' intent='success' Width='full' />
+              <Button Children='Enviar email' intent='success' Width='full' />
             </div>
           </form>
         </section>

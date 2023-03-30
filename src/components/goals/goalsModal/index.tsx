@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import { useState, useEffect } from 'react'
 import * as Portal from '@radix-ui/react-portal';
 import { useClickOutside } from 'src/hooks/useClickOutside';
-import { ModalProps } from 'src/interfaces/Modal';
 import { useAtom } from 'jotai';
 import { Goals } from 'src/context/GoalContext';
-import { Task } from 'src/interfaces/Goals';
+import { GoalsModalType, Task } from 'src/interfaces/Goals';
 import { toastNotify } from 'src/utils/toastNotify';
 import { InputWithLabel } from '@ui/input/InputWithLabel';
 import { Button } from '@ui/button';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { useTheme } from 'next-themes';
+import { BsTrash } from 'react-icons/bs';
 
-export default function GoalsModal({ State, SetState }: ModalProps) {
+export default function GoalsModal({ State, SetState, goalId, setGoalId }: GoalsModalType) {
 
   const [Metas, setMetas] = useAtom(Goals)
   const [id, setId] = useState(0)
@@ -22,8 +22,35 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
   const [field, setField] = useState(0)
   const { theme, setTheme } = useTheme()
 
+  const FieldReceived = (Filter: string) => {
+    let Categoria = 0
+    switch (Filter) {
+      case 'Intelectual':
+        Categoria = 1
+        break
+      case 'Pessoal':
+        Categoria = 2
+        break
+      case 'Financeiro':
+        Categoria = 3
+        break
+    }
+    return Categoria
+  }
 
-  const domNode = useClickOutside(() => SetState(false))
+  useEffect(() => {
+    if (goalId != null) {
+      setTaskarr(Metas[goalId].Tarefas)
+      setTaskId(Metas[goalId].Id)
+      setTaskName(Metas[goalId].Meta)
+      setField(FieldReceived(Metas[goalId].Categoria))
+    }
+  }, [goalId, Metas])
+
+  const domNode = useClickOutside(() => {
+    SetState(false)
+    setGoalId(null)
+  })
 
   const FieldSelected = () => {
     let Categoria = ''
@@ -59,6 +86,10 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
     setField(0)
   }
 
+  const RemoveTask = (id: number) => {
+    const newLista = taskarr.filter(item => item.id !== id)
+    setTaskarr(newLista)
+  }
 
   const addGoal = () => {
     try {
@@ -83,11 +114,38 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
     }
   }
 
+  const EditGoal = () => {
+    try {
+      const Categoria = FieldSelected()
+      toastNotify(taskName.length === 0, "Insira o nome da meta", 'warn')
+      toastNotify(taskarr.length === 0, "Insira ao menos uma meta", 'warn')
+      toastNotify(field === 0, 'Escolha uma área', 'warn')
+
+      const GoalUpdated = Metas.map(item => {
+        if (item.Id === goalId) {
+          item.Categoria = Categoria
+          item.Meta = taskName
+          item.Tarefas = taskarr
+        }
+        return item
+      })
+
+      setMetas(GoalUpdated)
+      ClearStates()
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
+  console.log(goalId)
+
   return (
     <Portal.Root>
       {State &&
         <section
-          className='w-[500px] fixed left-[720px] top-[300px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm shadow-2xl dark:shadow-none'
+          className='w-[500px] fixed left-[720px] top-[100px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm shadow-2xl dark:shadow-none'
           ref={domNode}
         >
           <div className='pt-4 text-center'>
@@ -125,12 +183,17 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
           <hr className='border-black  dark:border-white w-3/4 flex justify-center my-2' />
 
           <div
-            className='h-52 px-4 py-1 mx-4  rounded-lg w-4/5 text-center  overflow-y-auto  scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'
+            className='h-52 px-4 py-1 mx-4 rounded-lg w-4/5  overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'
           >
-            <ul>
-              <li className='pb-2 dark:text-gray-400 text-neutral-700'>Suas ações aparecerâo aqui</li>
+            <ul className='flex flex-col gap-2'>
+              <li className='pb-2 dark:text-gray-400 text-neutral-700 text-center '>Suas ações aparecerâo aqui</li>
               {taskarr.map(item => (
-                <li key={item.id}>{item.Tarefa}</li>
+                <li key={item.id} className='flex justify-between select-none'>
+                  <p>{item.Tarefa}</p>
+                  <BsTrash className='w-4 h-4 cursor-pointer'
+                    onClick={() => RemoveTask(item.id)}
+                  />
+                </li>
               ))}
             </ul>
           </div>
@@ -191,12 +254,21 @@ export default function GoalsModal({ State, SetState }: ModalProps) {
           </div>
 
           <div className='py-4 flex justify-center gap-8' >
-            <Button
-              Children='Incluir meta'
-              Width='md'
-              intent='success'
-              onClick={() => addGoal()}
-            />
+            {goalId === null ?
+              <Button
+                Children='Incluir meta'
+                Width='md'
+                intent='success'
+                onClick={() => addGoal()}
+              />
+              :
+              <Button
+                Children='Atualizar meta'
+                Width='md'
+                intent='success'
+                onClick={() => EditGoal()}
+              />
+            }
             <Button
               Children='Limpar meta'
               Width='md'
