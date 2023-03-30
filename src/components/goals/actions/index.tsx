@@ -1,9 +1,7 @@
 import { Select } from '@ui/Select'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
 import { Goal, GoalsWithSetterProps } from 'src/interfaces/Goals'
-
-//TODO concertar o bug de ficar com o filtro errado, mesmo se a opção não existir mais
 
 export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
   const [Filter, setFilter] = useState('Todas')
@@ -30,6 +28,7 @@ export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
     return Metas.filter(meta => meta.Meta === Filter)
   }
 
+  useEffect(() => setFilter('Todas'), [options])
 
   return (
     <section className='w-80 self-start'>
