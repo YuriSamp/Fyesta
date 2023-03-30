@@ -8,8 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
 
-// TODO concertar o bug da data e do select 
-
 const Pagina = () => {
   const router = useRouter()
   const { PageId } = router.query
@@ -22,6 +20,7 @@ const Pagina = () => {
   const [Feeling, setFeeling] = useState(diary[PageIdNumber]?.Feeling)
   const [Text, setText] = useState(diary[PageIdNumber]?.Text)
   const [Data, setData] = useState(diary[PageIdNumber]?.Data)
+
 
   function HandleForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -78,6 +77,7 @@ const Pagina = () => {
                 <select
                   className='bg-transparent h-7 w-[155px] text-center border-[1px]  border-black dark:border-white rounded-md '
                   placeholder='Sentimentos'
+                  value={Feeling}
                   onChange={e => setFeeling(e.target.value)}
                 >
                   <option className='bg-white dark:bg-InputGray'>Feliz</option>
