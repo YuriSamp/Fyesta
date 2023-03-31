@@ -23,6 +23,6 @@ export function DateCalendarConvert(year: number, month: number): string {
     DateInput = year + '-' + '0' + String(Number(month) + 1);
     return DateInput;
   }
-  DateInput = year + '-' + '0' + String(Number(month) + 1);
+  DateInput = year + '-' + String(Number(month) + 1);
   return DateInput;
 }

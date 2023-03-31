@@ -1,8 +1,8 @@
 import { Button } from '@ui/button';
 import { useEffect, useState, useMemo } from 'react';
-import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai'
-import { CalendarDays, ICalendarDays } from 'src/helper/calendarArrDays';
+import { CalendarDays, ICalendarDays } from 'src/helper/CalendarHelpers';
 import dynamic from 'next/dynamic';
+import MonthController from '@ui/MonthController';
 
 const CalendarModal = dynamic(() => import('@ui/CalendarModal'), {
   ssr: false
@@ -10,10 +10,7 @@ const CalendarModal = dynamic(() => import('@ui/CalendarModal'), {
 
 export default function Calendario() {
   const date = new Date()
-  const arrMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
   const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
-  const minMonthIndex = 0;
-  const maxMonthIndex = 11;
   const month = date.getMonth()
   const [MonthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
@@ -22,23 +19,11 @@ export default function Calendario() {
 
   const [days, setDays] = useState<ICalendarDays[]>(CalendarDaysValue)
   const [ismodalOpen, setIsModaOpen] = useState(false)
-  let monthDisplay = arrMeses[MonthIndex]
+
 
   useEffect(() => {
     setDays(CalendarDays(year, MonthIndex))
   }, [MonthIndex])
-
-  const minusMonthIndex = (MonthIndex: number) => {
-    if (MonthIndex > minMonthIndex) return MonthIndex - 1;
-    setYear(year => year - 1)
-    return 11;
-  };
-
-  const plusMonthIndex = (MonthIndex: number) => {
-    if (MonthIndex < maxMonthIndex) return MonthIndex + 1;
-    setYear(year => year + 1)
-    return 0;
-  };
 
   const BackToday = () => {
     setYear(date.getFullYear())
@@ -52,24 +37,12 @@ export default function Calendario() {
           Children='Hoje'
           onClick={() => BackToday()}
         />
-        <div className='flex gap-6 items-center'>
-          <AiOutlineArrowLeft
-            className='w-7 h-7 cursor-pointer'
-            onClick={() => {
-              setMonthIndex(minusMonthIndex(MonthIndex))
-              monthDisplay = arrMeses[MonthIndex]
-            }}
-            title='mês anterior'
-          />
-          <h1 className='text-3xl text-center select-none w-72'>{monthDisplay} de {year}</h1>
-          <AiOutlineArrowRight className='w-7 h-7 cursor-pointer'
-            onClick={() => {
-              setMonthIndex(plusMonthIndex(MonthIndex))
-              monthDisplay = arrMeses[MonthIndex]
-            }}
-            title='proximo mês'
-          />
-        </div>
+        <MonthController
+          monthIndex={MonthIndex}
+          setMonthIndex={setMonthIndex}
+          setYear={setYear}
+          year={year}
+        />
         <Button
           Children='Criar'
         />
