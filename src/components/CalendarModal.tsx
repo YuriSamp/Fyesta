@@ -6,7 +6,7 @@ import { ControledInput } from './input/input';
 import { Select } from './Select';
 import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
-import { DateHelper } from 'src/helper/DiaryDate';
+import { DateHelper } from 'src/helper/DateHelpers';
 import FormataData from 'src/utils/FormataData';
 
 // TODO Finalizar o modal

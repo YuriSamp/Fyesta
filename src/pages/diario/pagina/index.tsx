@@ -5,11 +5,11 @@ import { diaryId, diaryPage } from 'src/context/diaryContext'
 import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { DateHelper } from 'src/helper/DiaryDate'
+import { DateHelper } from 'src/helper/DateHelpers'
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
 
-// TODO adicionar a possibilidade do usuario criar uma emoção pro select
+//TODO adicionar a possibilidade do usuario criar uma emoção pro select
 
 const NovaPagina = () => {
 
