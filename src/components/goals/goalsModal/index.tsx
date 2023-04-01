@@ -3,7 +3,7 @@ import * as Portal from '@radix-ui/react-portal';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { useAtom } from 'jotai';
 import { Goals } from 'src/context/GoalContext';
-import { GoalsModalType, Task } from 'src/interfaces/Goals';
+import { GoalsModalType, Task } from 'src/interfaces/GoalsTypes';
 import { toastNotify } from 'src/utils/toastNotify';
 import { InputWithLabel } from '@ui/input/InputWithLabel';
 import { Button } from '@ui/button';

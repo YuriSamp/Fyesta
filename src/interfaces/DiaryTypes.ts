@@ -1,4 +1,4 @@
-export default interface diary {
+export interface Idiary {
   Title: string;
   Data: string;
   Feeling: string;

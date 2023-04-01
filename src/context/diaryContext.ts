@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import diary from 'src/interfaces/diary';
+import { Idiary } from 'src/interfaces/DiaryTypes';
 
-export const diaryPage = atom<diary[]>([]);
+export const diaryPage = atom<Idiary[]>([]);
 export const diaryId = atom<number>(0);

@@ -9,7 +9,7 @@ import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
 import nookies from 'nookies'
 
-interface Props {
+type Props = {
   Path: string | undefined
 }
 

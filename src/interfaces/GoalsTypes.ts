@@ -1,6 +1,6 @@
 import { SetStateAction } from 'jotai';
 import { Dispatch } from 'react';
-import { ModalProps } from './Modal';
+import { ModalProps } from './ModalTypes';
 
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
@@ -51,3 +51,8 @@ export type Task = {
   realizada: boolean;
   id: number;
 };
+
+export interface IField {
+  FieldName: 'Intelectual' | 'Pessoal' | 'Financeiro';
+  Metas: JSX.Element[];
+}

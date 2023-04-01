@@ -1,7 +1,7 @@
 import { Select } from '@ui/Select'
 import { useEffect, useMemo, useState } from 'react'
 import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
-import { Goal, GoalsWithSetterProps } from 'src/interfaces/Goals'
+import { Goal, GoalsWithSetterProps } from 'src/interfaces/GoalsTypes'
 
 export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
   const [Filter, setFilter] = useState('Todas')

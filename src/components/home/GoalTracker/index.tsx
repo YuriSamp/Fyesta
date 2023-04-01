@@ -1,8 +1,8 @@
 import { Select } from '@ui/Select'
 import { useState } from 'react'
-import { AiOutlinePlus } from 'react-icons/ai'
-import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
-import { SheetsProps, Task, Goal } from 'src/interfaces/Goals'
+import { SheetsProps, Task, Goal } from 'src/interfaces/GoalsTypes'
+
+//TODO organizar esse filter
 
 type Filter = 'Todas' | 'Concluidas' | 'Em progresso' | 'Não iniciadas'
 

@@ -1,8 +1,10 @@
 import { Button } from '@ui/button';
 import { useEffect, useState, useMemo } from 'react';
-import { CalendarDays, ICalendarDays } from 'src/helper/CalendarHelpers';
+import { CalendarDays } from 'src/helper/CalendarHelpers';
 import dynamic from 'next/dynamic';
 import MonthController from '@ui/MonthController';
+import { DateToDateInput } from 'src/helper/DateHelpers';
+import { ICalendarDays } from 'src/interfaces/CalendarTypes';
 
 const CalendarModal = dynamic(() => import('@ui/CalendarModal'), {
   ssr: false
@@ -10,20 +12,22 @@ const CalendarModal = dynamic(() => import('@ui/CalendarModal'), {
 
 export default function Calendario() {
   const date = new Date()
+  const day = date.getDate()
   const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
   const month = date.getMonth()
   const [MonthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
-
   const CalendarDaysValue = useMemo(() => CalendarDays(year, MonthIndex), [year, MonthIndex])
 
   const [days, setDays] = useState<ICalendarDays[]>(CalendarDaysValue)
   const [ismodalOpen, setIsModaOpen] = useState(false)
 
+  const [dateInputModal, setDateInputModal] = useState(DateToDateInput(day, month + 1, year))
 
   useEffect(() => {
     setDays(CalendarDays(year, MonthIndex))
   }, [MonthIndex])
+
 
   const BackToday = () => {
     setYear(date.getFullYear())
@@ -60,7 +64,13 @@ export default function Calendario() {
       <div className='flex flex-wrap max-w-[1460px] justify-center text-lg' >
         {days.length > 35 ?
           days.map((item, index) => (
-            <div className='w-52 h-32 calendar' key={index}>
+            <div className='w-52 h-32 calendar'
+              key={index}
+              onClick={() => {
+                setDateInputModal(DateToDateInput(item.day, item.Month + 1, item.year))
+                setIsModaOpen(prev => !prev)
+              }}
+            >
               {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
                 <div className='flex justify-center  py-2  select-none'>
                   <div className='w-10 bg-violet-700 dark:bg-DarkModeGreen text-center text-white rounded-full'>
@@ -83,10 +93,9 @@ export default function Calendario() {
           days.map((item, index) => (
             <div className='w-52 h-40 calendar'
               key={index}
-              onClick={(e) => {
+              onClick={() => {
+                setDateInputModal(DateToDateInput(item.day, item.Month + 1, item.year))
                 setIsModaOpen(prev => !prev)
-                // console.log(e.screenX)
-                // console.log(e.screenY)
               }}
             >
               {item.Month === date.getMonth() && item.day === date.getDate() ?
@@ -112,6 +121,7 @@ export default function Calendario() {
       <CalendarModal
         State={ismodalOpen}
         SetState={setIsModaOpen}
+        day={dateInputModal}
       />
     </section>
   )

@@ -1,25 +1,51 @@
 import * as Portal from '@radix-ui/react-portal';
-import { useState } from 'react';
-import { ModalProps } from 'src/interfaces/Modal';
+import { useState, useEffect } from 'react';
+import { ModalProps } from 'src/interfaces/ModalTypes';
 import { Button } from './button';
 import { ControledInput } from './input/input';
 import { Select } from './Select';
 import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
-import { DateHelper } from 'src/helper/DateHelpers';
 import FormataData from 'src/utils/FormataData';
 
 // TODO Finalizar o modal
 
-export default function CalendarModal({ State, SetState }: ModalProps) {
+interface ICalendarModal extends ModalProps {
+  day: string
+}
 
-  const DateInput = DateHelper()
+export default function CalendarModal({ State, SetState, day }: ICalendarModal) {
 
   const [Title, setTitle] = useState('')
   const [reminderOption, setReminderOption] = useState('Não se repete')
   const [ModalOption, setModalOption] = useState('Tarefa')
-  const [DataRaw, setData] = useState(DateInput)
-  const Data = FormataData(DataRaw)
+  const [taskText, setTaskText] = useState('')
+  const [DataRaw, setData] = useState(day)
+
+
+  useEffect(() => {
+    setData(day)
+  }, [day])
+
+  const handleSubimit = () => {
+    if (ModalOption === 'Lembrete') {
+      const lembreteObj = {
+        title: Title,
+        reminder: reminderOption,
+        date: FormataData(DataRaw),
+      }
+    }
+
+    if (ModalOption === 'Tarefa') {
+      const TarefaObj = {
+        title: Title,
+        taskText: taskText,
+        date: FormataData(DataRaw),
+
+      }
+    }
+  }
+
 
   return (
     <Portal.Root>
@@ -70,6 +96,8 @@ export default function CalendarModal({ State, SetState }: ModalProps) {
               <textarea
                 className='w-full h-32 px-2 py-1 resize-none bg-transparent outline-none border-[1px] dark:border-white border-black'
                 placeholder='Adicionar uma descrição'
+                value={taskText}
+                onChange={e => setTaskText(e.target.value)}
               />
             </div>
             :
@@ -86,6 +114,7 @@ export default function CalendarModal({ State, SetState }: ModalProps) {
             <Button
               intent='success'
               Children='Salvar'
+              onClick={handleSubimit}
             />
           </div>
         </section>

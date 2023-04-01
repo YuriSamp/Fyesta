@@ -2,7 +2,7 @@ import * as Label from '@radix-ui/react-label';
 import { useState } from 'react'
 import { ControledInput } from './input';
 import { RiEyeLine, RiEyeOffFill } from 'react-icons/ri'
-import { passwordInputType } from 'src/interfaces/InputProps';
+import { passwordInputType } from 'src/interfaces/InputTypes';
 
 export const PasswordInput = ({ labelText, Id, onChange, placeholder, value }: passwordInputType) => {
 
