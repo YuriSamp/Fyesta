@@ -1,13 +1,4 @@
-export interface ICalendarDays {
-  day: number;
-  Month: number;
-  year: number;
-  tasks?: ICalendarTask[];
-}
-
-interface ICalendarTask {
-  name: string;
-}
+import { ICalendarDays } from 'src/interfaces/Calendar';
 
 export const CalendarDays = (year: number, MonthIndex: number) => {
   const date = new Date();

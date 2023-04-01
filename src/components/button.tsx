@@ -22,7 +22,7 @@ const ButtonStyles = cva(
   },
 );
 
-export interface IButton extends VariantProps<typeof ButtonStyles> {
+interface IButton extends VariantProps<typeof ButtonStyles> {
   Children: string
   onClick?: any
 }

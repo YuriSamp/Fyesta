@@ -1,7 +1,7 @@
 
 import Link from 'next/link'
 import React from 'react'
-import diary from 'src/interfaces/diary'
+import diary from 'src/interfaces/Diary'
 
 export default function DiarypageWritten({ Data, Text, Feeling, Id, Title }: diary) {
 

@@ -5,7 +5,7 @@ import { diaryId, diaryPage } from 'src/context/diaryContext'
 import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { DateHelper } from 'src/helper/DateHelpers'
+import { TodayDateToDateInput } from 'src/helper/DateHelpers'
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
 
@@ -13,7 +13,7 @@ import { Navbar } from '@ui/layout/navbar'
 
 const NovaPagina = () => {
 
-  const DateInput = DateHelper()
+  const DateInput = TodayDateToDateInput()
   const router = useRouter()
 
   const [Title, setTitle] = useState('')

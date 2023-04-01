@@ -2,7 +2,7 @@ import DiarypageWritten from '@ui/diario/Card';
 import Link from 'next/link';
 import { useAtom } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
-import diary from 'src/interfaces/diary';
+import diary from 'src/interfaces/Diary';
 import { useEffect, useState } from 'react';
 import { DateCalendarConvert } from 'src/helper/DateHelpers';
 import MonthController from '@ui/MonthController';

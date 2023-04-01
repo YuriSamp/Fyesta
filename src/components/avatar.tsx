@@ -18,7 +18,7 @@ const inputStyles = cva(
   },
 );
 
-export interface avatar extends VariantProps<typeof inputStyles> {
+interface avatar extends VariantProps<typeof inputStyles> {
   userPhoto: string | undefined
 }
 

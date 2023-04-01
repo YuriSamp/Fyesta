@@ -51,3 +51,8 @@ export type Task = {
   realizada: boolean;
   id: number;
 };
+
+export interface IField {
+  FieldName: 'Intelectual' | 'Pessoal' | 'Financeiro';
+  Metas: JSX.Element[];
+}
