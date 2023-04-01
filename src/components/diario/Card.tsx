@@ -1,9 +1,10 @@
 
 import Link from 'next/link'
 import React from 'react'
-import diary from 'src/interfaces/Diary'
+import { Idiary } from 'src/interfaces/Diary'
 
-export default function DiarypageWritten({ Data, Text, Feeling, Id, Title }: diary) {
+
+export default function DiarypageWritten({ Data, Text, Feeling, Id, Title }: Idiary) {
 
   const FormatedText = Text.slice(0, 200) + '...'
   const FormatedData = Data.slice(-5).split('-').reverse()
