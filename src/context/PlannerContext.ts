@@ -1,4 +1,4 @@
-import { IPlannerTask } from './../interfaces/Planner';
+import { IPlannerTask } from '../interfaces/PlannerTypes';
 import { atom } from 'jotai';
 
 const arr: IPlannerTask[] = [];

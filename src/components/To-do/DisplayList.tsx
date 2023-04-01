@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { AiOutlineCheck } from 'react-icons/ai';
 import { useAtom } from 'jotai';
 import { PlannerTask } from 'src/context/PlannerContext';
