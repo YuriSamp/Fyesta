@@ -1,7 +1,7 @@
 import { Select } from '@ui/Select'
 import { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { SheetsProps, Task, Goal } from 'src/interfaces/Goals'
+import { SheetsProps, Task, Goal } from 'src/interfaces/GoalsTypes'
 import { BsTrash, BsPencil } from 'react-icons/bs'
 import * as Progress from '@radix-ui/react-progress';
 

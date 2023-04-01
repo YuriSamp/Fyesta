@@ -1,5 +1,5 @@
 import * as Label from '@radix-ui/react-label';
-import { inputProps } from 'src/interfaces/InputProps';
+import { inputProps } from 'src/interfaces/InputTypes';
 import { ControledInput } from './input';
 
 export const InputWithLabel = ({ labelText, Id, type, onChange, placeholder, value, theme }: inputProps) => {

@@ -1,6 +1,6 @@
 import * as Portal from '@radix-ui/react-portal';
 import { useState, useEffect } from 'react';
-import { ModalProps } from 'src/interfaces/Modal';
+import { ModalProps } from 'src/interfaces/ModalTypes';
 import { Button } from './button';
 import { ControledInput } from './input/input';
 import { Select } from './Select';

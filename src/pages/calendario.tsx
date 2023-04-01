@@ -4,7 +4,7 @@ import { CalendarDays } from 'src/helper/CalendarHelpers';
 import dynamic from 'next/dynamic';
 import MonthController from '@ui/MonthController';
 import { DateToDateInput } from 'src/helper/DateHelpers';
-import { ICalendarDays } from 'src/interfaces/Calendar';
+import { ICalendarDays } from 'src/interfaces/CalendarTypes';
 
 const CalendarModal = dynamic(() => import('@ui/CalendarModal'), {
   ssr: false

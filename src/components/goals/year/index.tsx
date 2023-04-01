@@ -1,6 +1,6 @@
 import React from 'react'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
-import { GoalsProps, Task } from 'src/interfaces/Goals'
+import { GoalsProps, Task } from 'src/interfaces/GoalsTypes'
 
 export default function YearBox({ Metas }: GoalsProps) {
 

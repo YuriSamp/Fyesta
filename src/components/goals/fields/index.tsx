@@ -2,7 +2,7 @@ import React from 'react'
 import { BsLayers } from 'react-icons/bs'
 import { IoLayersSharp } from 'react-icons/io5'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
-import { GoalsProps, IField, TaskWithCategory } from 'src/interfaces/Goals'
+import { GoalsProps, IField, TaskWithCategory } from 'src/interfaces/GoalsTypes'
 
 
 
