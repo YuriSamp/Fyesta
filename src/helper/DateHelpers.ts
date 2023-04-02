@@ -5,15 +5,15 @@ export function TodayDateToDateInput(): string {
   const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
+  if (month < 10 && day < 10) {
+    DateInput = year + '-' + '0' + month + '-' + '0' + day;
+    return DateInput;
+  }
   if (month < 10) {
     DateInput = year + '-' + '0' + month + '-' + day;
     return DateInput;
   }
-  if (day < 10) {
-    DateInput = year + '-' + month + '-' + '0' + day;
-    return DateInput;
-  }
-  DateInput = year + '-' + '0' + month + '-' + '0' + day;
+  DateInput = year + '-' + month + '-' + '0' + day;
   return DateInput;
 }
 

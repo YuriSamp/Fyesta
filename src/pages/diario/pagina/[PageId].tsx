@@ -7,6 +7,8 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
+import { InputWithSelect } from '@ui/InputWithSelect'
+import { emotionsOptions } from 'src/context/emotionsOptions'
 
 const Pagina = () => {
   const router = useRouter()
@@ -20,7 +22,7 @@ const Pagina = () => {
   const [Feeling, setFeeling] = useState(diary[PageIdNumber]?.Feeling)
   const [Text, setText] = useState(diary[PageIdNumber]?.Text)
   const [Data, setData] = useState(diary[PageIdNumber]?.Data)
-
+  const [options, setoptions] = useAtom(emotionsOptions)
 
   function HandleForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -74,18 +76,12 @@ const Pagina = () => {
               </div>
               <div className='flex w-full gap-3 items-center'>
                 <AiOutlineHeart className='w-6 h-6' />
-                <select
-                  className='bg-transparent h-7 w-[155px] text-center border-[1px]  border-black dark:border-white rounded-md '
-                  placeholder='Sentimentos'
-                  value={Feeling}
-                  onChange={e => setFeeling(e.target.value)}
-                >
-                  <option className='bg-white dark:bg-InputGray'>Feliz</option>
-                  <option className='bg-white dark:bg-InputGray'>Triste</option>
-                  <option className='bg-white dark:bg-InputGray'>Animado</option>
-                  <option className='bg-white dark:bg-InputGray'>Depressivo</option>
-                  <option className='bg-white dark:bg-InputGray'>Indiferente</option>
-                </select>
+                <InputWithSelect
+                  options={options}
+                  setoption={setoptions}
+                  setState={setFeeling}
+                  placeholder={'Procure o sentimento'}
+                />
               </div>
             </div>
             <hr />
