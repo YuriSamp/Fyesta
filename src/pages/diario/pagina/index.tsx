@@ -11,8 +11,6 @@ import { Navbar } from '@ui/layout/navbar'
 import { InputWithSelect } from '@ui/InputWithSelect'
 import { emotionsOptions } from 'src/context/emotionsOptions'
 
-//TODO adicionar a possibilidade do usuario criar uma emoção pro select
-
 const NovaPagina = () => {
 
   const DateInput = TodayDateToDateInput()

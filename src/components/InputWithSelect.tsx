@@ -1,12 +1,13 @@
-import React, { useEffect, useState, SetStateAction, Dispatch, useRef } from 'react';
+import React, { useEffect, useState, SetStateAction, Dispatch, } from 'react';
 import { BsThreeDots, BsTrash } from 'react-icons/bs'
 import { useClickOutside } from 'src/hooks/useClickOutside';
-
-type emotionOptions = { name: string, id: number }
+import { AiOutlineCheck } from 'react-icons/ai'
+import { emotionOptions, emotionColors } from 'src/context/emotionsOptions';
 
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
 ) => Result;
+
 
 interface InputWithSelectI {
   value?: string
@@ -15,10 +16,20 @@ interface InputWithSelectI {
   setState: Dispatch<SetStateAction<string>>
   options: emotionOptions[]
   setoption: SetAtom<[SetStateAction<emotionOptions[]>], void>
-
 }
 
-// DESCOBRIR COMO FECHAR UM MODAL E MANTER O OUTRO ABERTO
+interface ISubMenu {
+  setSubModalIsOpen: Dispatch<React.SetStateAction<boolean>>
+  y: number
+  x: number
+  emotion: string
+  setEmotion: Dispatch<SetStateAction<string>>
+  options: emotionOptions[]
+  setoption: SetAtom<[SetStateAction<emotionOptions[]>], void>
+  setOptionsState: Dispatch<React.SetStateAction<emotionOptions[]>>
+  itemId: number
+  defaultColor: string
+}
 
 export function InputWithSelect({ options, setState, placeholder, setoption }: InputWithSelectI) {
 
@@ -27,14 +38,17 @@ export function InputWithSelect({ options, setState, placeholder, setoption }: I
     const OtherLetters = item.name.slice(1).toLowerCase()
     item.name = firstletterUppercase + OtherLetters
     return item
-  }
-  )
+  })
 
   const [inputSearch, setInputSearch] = useState('')
   const [focus, setFocus] = useState(false)
   const [subModalIsOpen, setSubModalIsOpen] = useState(false)
   const [optionsState, setOptionsState] = useState(optionsTratado)
-
+  const [emotion, setEmotion] = useState('')
+  const [x, setX] = useState(0)
+  const [y, setY] = useState(0)
+  const [itemId, setItemId] = useState(0)
+  const [defaultColor, setDefaultColor] = useState('')
 
   const domRef = useClickOutside(() => {
     setFocus(false)
@@ -52,10 +66,8 @@ export function InputWithSelect({ options, setState, placeholder, setoption }: I
     setState(inputSearch)
   }, [inputSearch])
 
-  console.log(subModalIsOpen)
-
   return (
-    <div
+    <menu
       className='flex flex-col h-10'
       ref={domRef}
     >
@@ -65,135 +77,176 @@ export function InputWithSelect({ options, setState, placeholder, setoption }: I
         placeholder={placeholder}
         onFocus={() => setFocus(true)}
       />
-      <div className='relative z-10 bg-white w-64 shadow-2xl rounded-lg'>
+      <section className='relative z-10 bg-white w-64 shadow-2xl rounded-lg'>
         {focus
           &&
-          <div className=''>
-            <div className='text-sm pt-4 px-4 pb-3'>
-              <p>Selecione uma opção ou crie uma</p>
-            </div>
+          <>
+            <p className='text-sm pt-4 px-4 pb-3'>Selecione uma opção ou crie uma</p>
             {optionsState.length > 0 ?
               optionsState.map(item => (
                 <div
                   className='hover:bg-gray-200 cursor-pointer'
                   key={item.id}
                 >
-                  <div className='flex  items-center py-1 px-4 '
-                  >
-                    <div className='flex items-center w-full'
+                  <div className='flex  items-center py-1 px-4 '>
+                    <button
+                      type='button'
+                      className='flex items-center w-full'
                       onClick={() => {
                         setInputSearch(item.name)
                         setFocus(false)
                       }}
                     >
-                      <p>{item.name}</p>
-                    </div>
-                    <span className="relative">
-                      <div className='hover:bg-gray-300 w-6 h-6 flex justify-center items-center'>
-                        <BsThreeDots
-                          onClick={() => setSubModalIsOpen(true)}
-                        />
-                      </div>
-                       {subModalIsOpen &&
-                          <SubMenu
-                            setSubModalIsOpen={setSubModalIsOpen}
-                          />
-                        }
-                    </span>
+                      <p
+                        style={{ backgroundColor: item.color }}
+                        className='px-2 py-1 bg-red-300 rounded-md min-w-[70px] flex justify-center'
+                      >{item.name}</p>
+                    </button>
+                    <button
+                      type='button'
+                      className='hover:bg-gray-300 w-6 h-6 flex justify-center items-center'
+                      onClick={(e) => {
+                        setEmotion(item.name)
+                        setSubModalIsOpen(true)
+                        setX(80)
+                        setY(100 - item.id * 30)
+                        setItemId(item.id)
+                        setDefaultColor(item.color)
+                      }}>
+                      <BsThreeDots />
+                    </button>
                   </div>
                 </div>
               ))
               :
-              <div
+              <button
+                type='button'
                 className='hover:bg-gray-200 cursor-pointer'
-                key={options.length + 1}
                 onClick={() => {
-                  setInputSearch(inputSearch)
+                  const randomColor = emotionColors.sort(() => 0.5 - Math.random()).splice(0, 1).map(item => item.color)
+                  setoption(prev => [...prev, { name: inputSearch, id: options.length, color: randomColor[0] }])
+                  setInputSearch('')
                   setFocus(false)
                 }}
               >
-                <div
+                <p
                   className='flex gap-5 items-center py-1 px-4 '
-                  onClick={() => {
-                    setoption(prev => [...prev, { name: inputSearch, id: options.length }])
-                  }}
                 >
-                  <p>Criar</p>
-                  <p>{inputSearch}</p>
-                </div>
-              </div>
+                  <span>Criar</span>
+                  <span>{inputSearch}</span>
+                </p>
+              </button>
             }
-          </div>
+          </>
         }
-      </div>
-    </div>
+      </section>
+      {subModalIsOpen &&
+        <SubMenu
+          setSubModalIsOpen={setSubModalIsOpen}
+          y={y}
+          x={x}
+          emotion={emotion}
+          setEmotion={setEmotion}
+          options={options}
+          itemId={itemId}
+          setoption={setoption}
+          setOptionsState={setOptionsState}
+          defaultColor={defaultColor}
+        />
+      }
+    </menu>
   );
 };
 
 
-interface ISubMenu {
-  setSubModalIsOpen: Dispatch<React.SetStateAction<boolean>>
-}
+const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId, setoption, setOptionsState, defaultColor }: ISubMenu) => {
 
-const SubMenu = ({ setSubModalIsOpen }: ISubMenu) => {
+  const domRef = useClickOutside(() => {
+    setSubModalIsOpen(false)
+  })
 
-  const domRef = useClickOutside(() => setSubModalIsOpen(false))
+  useEffect(() => {
+    const optionsEdited = options.map(item => {
+      if (item.id === itemId) {
+        item.name = emotion
+      }
+      return item
+    })
+    setoption(optionsEdited)
+  }, [emotion])
+
+  const deleteItem = () => {
+    const optionsEdited = options.filter(item => item.id != itemId)
+    setoption(optionsEdited)
+    setOptionsState(optionsEdited)
+  }
+
+  const ChangeColor = (color: string, id: number) => {
+    const optionWithNewColor = options.map(item => {
+      if (item.id === itemId) {
+        item.color = color
+      }
+      return item
+    })
+    setoption(optionWithNewColor)
+  }
+
+  const [colorSelected, setColorSelected] = useState(defaultColor)
 
   return (
-    <div
-      className='bg-white w-64 shadow-2xl z-20 px-5 relative translate-x-20 -translate-y-4 absolute bottom-0'
+    <menu
+      style={{ transform: `translate(${x + 'px'}, -${y + 'px'})`, }}
+      className=' bg-white w-64 shadow-2xl z-20 px-5 relative'
       ref={domRef}
     >
-      <div className='py-4 flex flex-col gap-2 border-b'>
+      <section className='pt-4 pb-2 flex flex-col'>
         <input
-          className='bg-[rgb(245,237,237)] border'
+          className='bg-[rgb(243,239,239)] border px-2 py-1 focus:outline-none'
           autoFocus={true}
+          value={emotion}
+          onChange={e => setEmotion(e.target.value)}
         />
-        <div className='flex gap-5 items-center'>
-          <BsTrash />
-          <p>Deletar</p>
+        <div className='py-3 '>
+          <button
+            type='button'
+            className='flex gap-2 items-center pl-1  hover:bg-gray-200 cursor-pointer'
+            onClick={() => {
+              deleteItem()
+              setSubModalIsOpen(false)
+            }}
+          >
+            <BsTrash className='w-4 h-4' />
+            <p>Deletar</p>
+          </button>
         </div>
-      </div>
-      <p>Colors</p>
-      <ul className='flex flex-col gap-2 py-2'>
-        <li className='hover:bg-gray-200'>
-          <button className='flex gap-5'>
-            <div className='h-5 w-5 bg-blue-500 rounded-md'></div>
-            <p>Blue</p>
-          </button>
-        </li>
-        <li className='hover:bg-gray-200'>
-          <button className='flex gap-5'>
-            <div className='h-5 w-5 bg-blue-500 rounded-md'></div>
-            <p>Blue</p>
-          </button>
-        </li>
-        <li className='hover:bg-gray-200'>
-          <button className='flex gap-5'>
-            <div className='h-5 w-5 bg-blue-500 rounded-md'></div>
-            <p>Blue</p>
-          </button>
-        </li>
-        <li className='hover:bg-gray-200'>
-          <button className='flex gap-5'>
-            <div className='h-5 w-5 bg-blue-500 rounded-md'></div>
-            <p>Blue</p>
-          </button>
-        </li>
-        <li className='hover:bg-gray-200'>
-          <button className='flex gap-5'>
-            <div className='h-5 w-5 bg-blue-500 rounded-md'></div>
-            <p>Blue</p>
-          </button>
-        </li>
-        <li className='hover:bg-gray-200'>
-          <button className='flex gap-5'>
-            <div className='h-5 w-5 bg-blue-500 rounded-md'></div>
-            <p>Blue</p>
-          </button>
-        </li>
-
+      </section>
+      <p className='pb-2'>Colors</p>
+      <ul className='flex flex-col gap-2 pb-2'>
+        {emotionColors.map((item, index) => (
+          <li className='hover:bg-gray-200 ' key={index}>
+            <button
+              type='button'
+              className='flex justify-between items-center w-full cursor-pointer'
+              onClick={() => {
+                setColorSelected(item.color)
+                ChangeColor(item.color, itemId)
+              }}
+            >
+              <div className='flex gap-3 items-center'>
+                <div
+                  style={{ backgroundColor: item.color }}
+                  className={`h-5 w-5 rounded-md`}
+                >
+                </div>
+                <p className=''>{item.name}</p>
+              </div>
+              {colorSelected === item.color &&
+                <AiOutlineCheck />
+              }
+            </button>
+          </li>
+        ))}
       </ul>
-    </div>
+    </menu>
   )
 }
