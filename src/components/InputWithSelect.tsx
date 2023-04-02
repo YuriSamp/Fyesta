@@ -96,7 +96,6 @@ export function InputWithSelect({ options, setState, placeholder, setoption }: I
                       </div>
                        {subModalIsOpen &&
                           <SubMenu
-                            className="absolute bottom-0"
                             setSubModalIsOpen={setSubModalIsOpen}
                           />
                         }
@@ -142,7 +141,7 @@ const SubMenu = ({ setSubModalIsOpen }: ISubMenu) => {
 
   return (
     <div
-      className=' bg-white w-64 shadow-2xl z-20 px-5 relative translate-x-20 -translate-y-4'
+      className='bg-white w-64 shadow-2xl z-20 px-5 relative translate-x-20 -translate-y-4 absolute bottom-0'
       ref={domRef}
     >
       <div className='py-4 flex flex-col gap-2 border-b'>
