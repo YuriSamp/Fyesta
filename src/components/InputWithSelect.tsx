@@ -88,11 +88,18 @@ export function InputWithSelect({ options, setState, placeholder, setoption }: I
                     >
                       <p>{item.name}</p>
                     </div>
-                    <div className='hover:bg-gray-300 w-6 h-6 flex justify-center items-center'>
-                      <BsThreeDots
-                        onClick={() => setSubModalIsOpen(true)}
-                      />
-                    </div>
+                    <span className="relative">
+                      <div className='hover:bg-gray-300 w-6 h-6 flex justify-center items-center'>
+                        <BsThreeDots
+                          onClick={() => setSubModalIsOpen(true)}
+                        />
+                      </div>
+                       {subModalIsOpen &&
+                          <SubMenu
+                            setSubModalIsOpen={setSubModalIsOpen}
+                          />
+                        }
+                    </span>
                   </div>
                 </div>
               ))
@@ -119,11 +126,6 @@ export function InputWithSelect({ options, setState, placeholder, setoption }: I
           </div>
         }
       </div>
-      {subModalIsOpen &&
-        <SubMenu
-          setSubModalIsOpen={setSubModalIsOpen}
-        />
-      }
     </div>
   );
 };
@@ -139,7 +141,7 @@ const SubMenu = ({ setSubModalIsOpen }: ISubMenu) => {
 
   return (
     <div
-      className=' bg-white w-64 shadow-2xl z-20 px-5 relative translate-x-20 -translate-y-4'
+      className='bg-white w-64 shadow-2xl z-20 px-5 relative translate-x-20 -translate-y-4 absolute bottom-0'
       ref={domRef}
     >
       <div className='py-4 flex flex-col gap-2 border-b'>
