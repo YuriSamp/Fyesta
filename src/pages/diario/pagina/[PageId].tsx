@@ -7,8 +7,11 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
-import { InputWithSelect } from '@ui/InputWithSelect'
+import { InputWithSelect } from '@ui/input/EmotionInput'
 import { emotionsOptions } from 'src/context/emotionsOptions'
+
+// TODO descobrir o porque ta bugando o sentimento quando acessa a pagina
+// Só passar o valor que vem do array como default value que da tudo certo
 
 const Pagina = () => {
   const router = useRouter()
@@ -23,6 +26,7 @@ const Pagina = () => {
   const [Text, setText] = useState(diary[PageIdNumber]?.Text)
   const [Data, setData] = useState(diary[PageIdNumber]?.Data)
   const [options, setoptions] = useAtom(emotionsOptions)
+  const [Color, setColor] = useState('')
 
   function HandleForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -39,6 +43,7 @@ const Pagina = () => {
         item.Data = Data
         item.Feeling = Feeling
         item.Text = Text
+        item.Color = Color
       }
       return item
     })
@@ -80,6 +85,7 @@ const Pagina = () => {
                   options={options}
                   setoption={setoptions}
                   setState={setFeeling}
+                  setColor={setColor}
                   placeholder={'Procure o sentimento'}
                 />
               </div>

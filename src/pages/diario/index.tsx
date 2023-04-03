@@ -6,6 +6,8 @@ import { Idiary } from 'src/interfaces/DiaryTypes';
 import { useEffect, useState } from 'react';
 import { DateCalendarConvert } from 'src/helper/DateHelpers';
 import MonthController from '@ui/MonthController';
+import { Button } from '@ui/button';
+import DiaryPopover from '@ui/DiaryPopover';
 
 interface IMonthComponent {
   diary: Idiary[]
@@ -28,20 +30,28 @@ export default function Diario() {
     setdiaryRef(diaryPerMonthSorted)
   }, [monthIndex])
 
+
   return (
     <section className='pt-5'>
-      <MonthController
-        monthIndex={monthIndex}
-        year={year}
-        setYear={setYear}
-        setMonthIndex={setMonthIndex}
-      />
+      <div className='flex justify-center gap-12'>
+        <DiaryPopover />
+        <MonthController
+          monthIndex={monthIndex}
+          year={year}
+          setYear={setYear}
+          setMonthIndex={setMonthIndex}
+        />
+        <Button
+          Children='Filtro'
+        />
+      </div>
       <MonthComponent
         diary={diaryRef}
       />
     </section>
   )
 }
+
 
 const MonthComponent = ({ diary }: IMonthComponent) => {
   return (
@@ -61,6 +71,7 @@ const MonthComponent = ({ diary }: IMonthComponent) => {
             Data={entry.Data}
             Feeling={entry.Feeling}
             Id={entry.Id}
+            Color={entry.Color}
             key={entry.Id}
           />
         ))}

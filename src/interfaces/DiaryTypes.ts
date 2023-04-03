@@ -4,4 +4,5 @@ export interface Idiary {
   Feeling: string;
   Text: string;
   Id: number;
+  Color : string
 }

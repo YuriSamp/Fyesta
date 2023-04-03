@@ -16,6 +16,7 @@ interface InputWithSelectI {
   setState: Dispatch<SetStateAction<string>>
   options: emotionOptions[]
   setoption: SetAtom<[SetStateAction<emotionOptions[]>], void>
+  setColor: Dispatch<SetStateAction<string>>
 }
 
 interface ISubMenu {
@@ -31,7 +32,7 @@ interface ISubMenu {
   defaultColor: string
 }
 
-export function InputWithSelect({ options, setState, placeholder, setoption }: InputWithSelectI) {
+export function InputWithSelect({ options, setState, placeholder, setoption, setColor }: InputWithSelectI) {
 
   const optionsTratado = options.map(item => {
     const firstletterUppercase = item.name.slice(0, 1).toUpperCase()
@@ -95,6 +96,7 @@ export function InputWithSelect({ options, setState, placeholder, setoption }: I
                       onClick={() => {
                         setInputSearch(item.name)
                         setFocus(false)
+                        setColor(item.color)
                       }}
                     >
                       <p
@@ -105,7 +107,7 @@ export function InputWithSelect({ options, setState, placeholder, setoption }: I
                     <button
                       type='button'
                       className='hover:bg-gray-300 w-6 h-6 flex justify-center items-center'
-                      onClick={(e) => {
+                      onClick={() => {
                         setEmotion(item.name)
                         setSubModalIsOpen(true)
                         setX(80)
@@ -124,6 +126,7 @@ export function InputWithSelect({ options, setState, placeholder, setoption }: I
                 className='hover:bg-gray-200 cursor-pointer'
                 onClick={() => {
                   const randomColor = emotionColors.sort(() => 0.5 - Math.random()).splice(0, 1).map(item => item.color)
+                  setColor(randomColor[0])
                   setoption(prev => [...prev, { name: inputSearch, id: options.length, color: randomColor[0] }])
                   setInputSearch('')
                   setFocus(false)

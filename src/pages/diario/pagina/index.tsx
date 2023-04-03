@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { TodayDateToDateInput } from 'src/helper/DateHelpers'
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
-import { InputWithSelect } from '@ui/InputWithSelect'
+import { InputWithSelect } from '@ui/input/EmotionInput'
 import { emotionsOptions } from 'src/context/emotionsOptions'
 
 const NovaPagina = () => {
@@ -23,6 +23,7 @@ const NovaPagina = () => {
   const [_, setdiary] = useAtom(diaryPage);
   const [Id, setdiaryId] = useAtom(diaryId);
   const [options, setoptions] = useAtom(emotionsOptions)
+  const [Color, setColor] = useState('')
 
   function HandleForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -38,7 +39,8 @@ const NovaPagina = () => {
       Data,
       Feeling,
       Text,
-      Id
+      Id,
+      Color
     }
 
     setdiary(prev => [...prev, notes])
@@ -79,6 +81,7 @@ const NovaPagina = () => {
                   options={options}
                   setoption={setoptions}
                   setState={setFeeling}
+                  setColor={setColor}
                   placeholder={'Procure o sentimento'}
                 />
               </div>
