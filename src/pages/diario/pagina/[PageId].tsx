@@ -10,9 +10,6 @@ import { Navbar } from '@ui/layout/navbar'
 import { InputWithSelect } from '@ui/input/EmotionInput'
 import { emotionsOptions } from 'src/context/emotionsOptions'
 
-// TODO descobrir o porque ta bugando o sentimento quando acessa a pagina
-// Só passar o valor que vem do array como default value que da tudo certo
-
 const Pagina = () => {
   const router = useRouter()
   const { PageId } = router.query
@@ -74,7 +71,7 @@ const Pagina = () => {
                 <AiOutlineCalendar className='w-6 h-6' />
                 <input
                   type='date'
-                  className='bg-transparent h-7 px-2 border-[1px]  border-black dark:border-white rounded-md focus:outline-none text-center'
+                  className='bg-transparent h-[40px] px-2 border-[1px] w-[176px] border-black dark:border-white rounded-md focus:outline-none text-center'
                   value={Data}
                   onChange={e => setData(e.target.value)}
                 />
@@ -86,6 +83,7 @@ const Pagina = () => {
                   setoption={setoptions}
                   setState={setFeeling}
                   setColor={setColor}
+                  defaultValue={Feeling}
                   placeholder={'Procure o sentimento'}
                 />
               </div>

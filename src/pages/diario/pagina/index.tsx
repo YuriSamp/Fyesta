@@ -70,7 +70,7 @@ const NovaPagina = () => {
                 <AiOutlineCalendar className='w-6 h-6' />
                 <input
                   type='date'
-                  className='bg-transparent h-7 px-2 border-[1px]  border-black dark:border-white rounded-md focus:outline-none text-center'
+                  className='bg-transparent h-[40px] px-2 border-[1px] w-[176px] border-black dark:border-white rounded-md focus:outline-none text-center'
                   value={Data}
                   onChange={e => setData(e.target.value)}
                 />
@@ -82,6 +82,7 @@ const NovaPagina = () => {
                   setoption={setoptions}
                   setState={setFeeling}
                   setColor={setColor}
+                  defaultValue=''
                   placeholder={'Procure o sentimento'}
                 />
               </div>

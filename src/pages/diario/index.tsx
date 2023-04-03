@@ -1,13 +1,14 @@
 import DiarypageWritten from '@ui/diario/Card';
 import Link from 'next/link';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
 import { Idiary } from 'src/interfaces/DiaryTypes';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { DateCalendarConvert } from 'src/helper/DateHelpers';
 import MonthController from '@ui/MonthController';
-import { Button } from '@ui/button';
-import DiaryPopover from '@ui/DiaryPopover';
+import { DiaryPopover } from '@ui/diario/DiaryPopover';
+import { emotionsOptions } from 'src/context/emotionsOptions';
+import { Select } from '@ui/Select';
 
 interface IMonthComponent {
   diary: Idiary[]
@@ -15,13 +16,31 @@ interface IMonthComponent {
 
 export default function Diario() {
 
+  const options = useAtomValue(emotionsOptions)
+
+  const selectOptions = useMemo(() => {
+    const optionsName = options.map(item => item.name)
+    optionsName.unshift('Todas')
+    return optionsName
+  }, [options])
+
+
   const date = new Date()
   const month = date.getMonth()
-
   const [monthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
-  const [diary, setdiary] = useAtom(diaryPage);
+  const diary = useAtomValue(diaryPage);
   const [diaryRef, setdiaryRef] = useState(diary)
+  const [emotionSelected, setEmotionSelected] = useState('Todas')
+
+  const diarioFiltrado = (diario: Idiary[], filtro: string) => {
+    if (filtro === 'Todas') {
+      return diario
+    }
+    return diario.filter(item => item.Feeling === filtro)
+  }
+
+
 
   useEffect(() => {
     const compareDate = DateCalendarConvert(year, monthIndex)
@@ -41,12 +60,14 @@ export default function Diario() {
           setYear={setYear}
           setMonthIndex={setMonthIndex}
         />
-        <Button
-          Children='Filtro'
+        <Select
+          Options={selectOptions}
+          onChange={setEmotionSelected}
+          value={emotionSelected}
         />
       </div>
       <MonthComponent
-        diary={diaryRef}
+        diary={diarioFiltrado(diaryRef, emotionSelected)}
       />
     </section>
   )

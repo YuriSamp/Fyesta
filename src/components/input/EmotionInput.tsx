@@ -11,7 +11,7 @@ type SetAtom<Args extends unknown[], Result> = <A extends Args>(
 
 interface InputWithSelectI {
   value?: string
-  defaultValue?: string
+  defaultValue: string
   placeholder?: string
   setState: Dispatch<SetStateAction<string>>
   options: emotionOptions[]
@@ -32,7 +32,7 @@ interface ISubMenu {
   defaultColor: string
 }
 
-export function InputWithSelect({ options, setState, placeholder, setoption, setColor }: InputWithSelectI) {
+export function InputWithSelect({ options, setState, placeholder, setoption, setColor, defaultValue }: InputWithSelectI) {
 
   const optionsTratado = options.map(item => {
     const firstletterUppercase = item.name.slice(0, 1).toUpperCase()
@@ -41,7 +41,7 @@ export function InputWithSelect({ options, setState, placeholder, setoption, set
     return item
   })
 
-  const [inputSearch, setInputSearch] = useState('')
+  const [inputSearch, setInputSearch] = useState(defaultValue)
   const [focus, setFocus] = useState(false)
   const [subModalIsOpen, setSubModalIsOpen] = useState(false)
   const [optionsState, setOptionsState] = useState(optionsTratado)
