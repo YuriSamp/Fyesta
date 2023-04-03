@@ -41,7 +41,7 @@ export default function Layout({ page, children }: Props) {
         <Head>
           <title>Fyesta</title>
         </Head>
-        <section className='px-10 sm:px-20 lg:px-40 2xl:px-96 pt-16 text-black dark:text-white min-h-screen bg-CreamWhite dark:bg-[#121212] select-none' >
+        <section className='px-10 sm:px-20 lg:px-40 2xl:px-96 pt-16 text-black dark:text-white min-h-screen bg-white dark:bg-[#121212] select-none' >
           {children}
         </section>
       </>

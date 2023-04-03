@@ -4,7 +4,7 @@ import { ControledInput } from './input';
 
 export const InputWithLabel = ({ labelText, Id, type, onChange, placeholder, value, theme }: inputProps) => {
   return (
-    <div className='flex flex-col gap-2 pt-4'>
+    <fieldset className='flex flex-col gap-2 pt-4'>
       <Label.Root htmlFor={Id}>
         {labelText}
       </Label.Root>
@@ -13,7 +13,6 @@ export const InputWithLabel = ({ labelText, Id, type, onChange, placeholder, val
         :
         <ControledInput type={type} Id={Id} placeholder={placeholder} value={value} onChange={onChange} />
       }
-
-    </div>
+    </fieldset>
   )
 }

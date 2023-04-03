@@ -30,7 +30,7 @@ export default function AvatarWithDropDown({ Path }: Props) {
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="DropdownMenuContent" sideOffset={5}>
+        <DropdownMenu.Content className=" absolute top-[12px] left-[-190px] min-w-[220px] bg-white rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade" sideOffset={5}>
           <DropdownMenu.Item className="text-black text-base flex items-center px-6 outline-none select-none mb-1 ">
             <p className='italic'>FYESTA</p>
           </DropdownMenu.Item>

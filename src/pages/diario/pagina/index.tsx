@@ -8,8 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { TodayDateToDateInput } from 'src/helper/DateHelpers'
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
-
-//TODO adicionar a possibilidade do usuario criar uma emoção pro select
+import { InputWithSelect } from '@ui/input/EmotionInput'
+import { emotionsOptions } from 'src/context/emotionsOptions'
 
 const NovaPagina = () => {
 
@@ -22,6 +22,8 @@ const NovaPagina = () => {
   const [Data, setData] = useState(DateInput)
   const [_, setdiary] = useAtom(diaryPage);
   const [Id, setdiaryId] = useAtom(diaryId);
+  const [options, setoptions] = useAtom(emotionsOptions)
+  const [Color, setColor] = useState('')
 
   function HandleForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -37,7 +39,8 @@ const NovaPagina = () => {
       Data,
       Feeling,
       Text,
-      Id
+      Id,
+      Color
     }
 
     setdiary(prev => [...prev, notes])
@@ -67,24 +70,21 @@ const NovaPagina = () => {
                 <AiOutlineCalendar className='w-6 h-6' />
                 <input
                   type='date'
-                  className='bg-transparent h-7 px-2 border-[1px]  border-black dark:border-white rounded-md focus:outline-none text-center'
+                  className='bg-transparent h-[40px] px-2 border-[1px] w-[176px] border-black dark:border-white rounded-md focus:outline-none text-center'
                   value={Data}
                   onChange={e => setData(e.target.value)}
                 />
               </div>
               <div className='flex w-full gap-3 items-center'>
                 <AiOutlineHeart className='w-6 h-6' />
-                <select
-                  className='bg-transparent h-7 w-[155px] text-center border-[1px]  border-black dark:border-white rounded-md '
-                  placeholder='Sentimentos'
-                  onChange={e => setFeeling(e.target.value)}
-                >
-                  <option className='bg-white dark:bg-InputGray'>Feliz</option>
-                  <option className='bg-white dark:bg-InputGray'>Triste</option>
-                  <option className='bg-white dark:bg-InputGray'>Animado</option>
-                  <option className='bg-white dark:bg-InputGray'>Depressivo</option>
-                  <option className='bg-white dark:bg-InputGray'>Indiferente</option>
-                </select>
+                <InputWithSelect
+                  options={options}
+                  setoption={setoptions}
+                  setState={setFeeling}
+                  setColor={setColor}
+                  defaultValue=''
+                  placeholder={'Procure o sentimento'}
+                />
               </div>
             </div>
             <hr />
