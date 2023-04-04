@@ -1,5 +1,5 @@
-import { IPlannerTask } from '../interfaces/PlannerTypes';
 import { atom } from 'jotai';
+import { IPlannerTask } from 'src/interfaces/plannerTypes';
 
 const arr: IPlannerTask[] = [];
 

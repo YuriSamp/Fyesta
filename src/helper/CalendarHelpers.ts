@@ -1,4 +1,4 @@
-import { ICalendarDays } from 'src/interfaces/CalendarTypes';
+import { ICalendarDays } from 'src/interfaces/calendarTypes';
 
 export const CalendarDays = (year: number, MonthIndex: number) => {
   const date = new Date();

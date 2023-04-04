@@ -1,4 +1,5 @@
-import Header from 'src/components/SettingsHeader';
+
+import Header from '@ui/settingsHeader';
 import { useRouter } from 'next/router';
 
 export default function Shortcuts() {

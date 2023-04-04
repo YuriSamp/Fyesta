@@ -3,7 +3,8 @@ import { CiPlay1, CiPause1 } from 'react-icons/ci';
 import { FiCoffee } from 'react-icons/fi';
 import { useState, useRef, useEffect } from 'react'
 import { IoPlaySkipForwardOutline } from 'react-icons/io5'
-import DisplayList from '@ui/To-do/DisplayList';
+import DisplayList from '@ui/To-do/displayList';
+
 
 export default function Pomodoro() {
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { AiOutlineCheck } from 'react-icons/ai';
 import { BsTrash } from 'react-icons/bs'
 import { useAtom } from 'jotai';
-import { PlannerTask } from 'src/context/PlannerContext';
+import { PlannerTask } from 'src/context/plannerContext';
 
 interface Props {
   index: number
@@ -14,10 +14,10 @@ export default function EditableListItem({ index, day, value }: Props) {
 
   const [taskName, setTaskName] = useState(value)
   const [finished, setFinished] = useState(false)
-  const [TaskArr, setTaskArr] = useAtom(PlannerTask)
+  const [taskArr, setTaskArr] = useAtom(PlannerTask)
 
   const registerText = (task: string) => {
-    const newTaskArr = TaskArr.map(item => {
+    const newTaskArr = taskArr.map(item => {
       if (item.day === day) {
         item.tasks[index].text = task
       }

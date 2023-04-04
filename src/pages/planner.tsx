@@ -1,4 +1,5 @@
-import EditableList from '@ui/To-do/EditableList';
+import EditableList from '@ui/To-do/editableList';
+
 
 export default function Planner() {
   return (

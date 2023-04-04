@@ -184,7 +184,7 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
     setOptionsState(optionsEdited)
   }
 
-  const ChangeColor = (color: string, id: number) => {
+  const changeColor = (color: string) => {
     const optionWithNewColor = options.map(item => {
       if (item.id === itemId) {
         item.color = color
@@ -232,7 +232,7 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
               className='flex justify-between items-center w-full cursor-pointer'
               onClick={() => {
                 setColorSelected(item.color)
-                ChangeColor(item.color, itemId)
+                changeColor(item.color)
               }}
             >
               <div className='flex gap-3 items-center'>

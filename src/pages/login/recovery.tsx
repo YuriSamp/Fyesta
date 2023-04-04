@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { auth } from '../../server/Firebase/ClientApp';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { InputWithLabel } from '@ui/input/InputWithLabel';
+import { InputWithLabel } from '@ui/input/inputWithLabel';
 import { Button } from '@ui/button';
-import RetturnButton from '@ui/RetturnButton';
+import RetturnButton from '@ui/retturnButton';
 
 export default function Passwordchange() {
 

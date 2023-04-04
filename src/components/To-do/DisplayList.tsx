@@ -1,14 +1,14 @@
 import { AiOutlineCheck } from 'react-icons/ai';
 import { useAtom } from 'jotai';
-import { PlannerTask } from 'src/context/PlannerContext';
+import { PlannerTask } from 'src/context/plannerContext';
 
 export default function DisplayList() {
 
-  const [TaskArr, setTaskArr] = useAtom(PlannerTask)
+  const [taskArr, setTaskArr] = useAtom(PlannerTask)
   const dayOfWeek = new Date().getDay()
 
   function BooleanChange(id: number) {
-    const newTaskArr = TaskArr.map(taskObj => {
+    const newTaskArr = taskArr.map(taskObj => {
       if (taskObj.day === dayOfWeek) {
         taskObj.tasks[id - 1].done = !taskObj.tasks[id - 1].done
       }
@@ -19,7 +19,7 @@ export default function DisplayList() {
 
   return (
     <div className='flex flex-col gap-3 taskObjs-center w-[280px]'>
-      {TaskArr[dayOfWeek].tasks.map(task => (
+      {taskArr[dayOfWeek].tasks.map(task => (
         <div className='flex gap-3 tasks-center' key={task.id}>
           <input className={`bg-transparent  outline-none  text-xl text-black dark:text-white  ${task.done ? 'line-through  text-gray-400 dark:text-green-700' : ''} placeholder:text-gray-600 placeholder:dark:text-gray-400 tracking-wide`}
             placeholder='To - do'

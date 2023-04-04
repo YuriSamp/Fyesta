@@ -2,11 +2,12 @@ import { Button } from '@ui/button';
 import { useEffect, useState, useMemo } from 'react';
 import { CalendarDays } from 'src/helper/CalendarHelpers';
 import dynamic from 'next/dynamic';
-import MonthController from '@ui/MonthController';
 import { DateToDateInput } from 'src/helper/DateHelpers';
-import { ICalendarDays } from 'src/interfaces/CalendarTypes';
+import { ICalendarDays } from 'src/interfaces/calendarTypes';
+import MonthController from '@ui/monthController';
 
-const CalendarModal = dynamic(() => import('@ui/CalendarModal'), {
+
+const CalendarModal = dynamic(() => import('@ui/calendarModal'), {
   ssr: false
 })
 
@@ -15,9 +16,9 @@ export default function Calendario() {
   const day = date.getDate()
   const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
   const month = date.getMonth()
-  const [MonthIndex, setMonthIndex] = useState(month);
+  const [monthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
-  const CalendarDaysValue = useMemo(() => CalendarDays(year, MonthIndex), [year, MonthIndex])
+  const CalendarDaysValue = useMemo(() => CalendarDays(year, monthIndex), [year, monthIndex])
 
   const [days, setDays] = useState<ICalendarDays[]>(CalendarDaysValue)
   const [ismodalOpen, setIsModaOpen] = useState(false)
@@ -25,8 +26,8 @@ export default function Calendario() {
   const [dateInputModal, setDateInputModal] = useState(DateToDateInput(day, month + 1, year))
 
   useEffect(() => {
-    setDays(CalendarDays(year, MonthIndex))
-  }, [MonthIndex])
+    setDays(CalendarDays(year, monthIndex))
+  }, [monthIndex])
 
 
   const BackToday = () => {
@@ -42,7 +43,7 @@ export default function Calendario() {
           onClick={() => BackToday()}
         />
         <MonthController
-          monthIndex={MonthIndex}
+          monthIndex={monthIndex}
           setMonthIndex={setMonthIndex}
           setYear={setYear}
           year={year}
@@ -78,7 +79,7 @@ export default function Calendario() {
                   </div>
                 </div>
                 :
-                item.Month === MonthIndex ?
+                item.Month === monthIndex ?
                   <div className='text-center py-2 pr-4 select-none'>
                     {item.day}
                   </div>
@@ -105,7 +106,7 @@ export default function Calendario() {
                   </div>
                 </div>
                 :
-                item.Month === MonthIndex ?
+                item.Month === monthIndex ?
                   <div className='text-center py-2 pr-4 select-none'>
                     {item.day}
                   </div>

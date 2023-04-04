@@ -1,6 +1,6 @@
 import Sheets from '@ui/goals/sheets'
 import HomeCalendar from '@ui/home/calendario'
-import GoalTracker from '@ui/home/GoalTracker'
+import GoalTracker from '@ui/home/goalTracker'
 import Pomodoro from '@ui/home/pomodoro'
 import { useIdToken } from 'react-firebase-hooks/auth'
 import { auth } from 'src/server/Firebase/ClientApp'

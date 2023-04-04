@@ -1,8 +1,8 @@
 export interface Idiary {
-  Title: string;
-  Data: string;
-  Feeling: string;
-  Text: string;
-  Id: number;
-  Color : string
+  title: string;
+  data: string;
+  feeling: string;
+  text: string;
+  id: number;
+  color: string;
 }

@@ -1,6 +1,6 @@
 import { SetStateAction } from 'jotai';
 import { Dispatch } from 'react';
-import { ModalProps } from './ModalTypes';
+import { ModalProps } from './modalTypes';
 
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A

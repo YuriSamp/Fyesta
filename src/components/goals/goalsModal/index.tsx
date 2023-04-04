@@ -2,18 +2,18 @@ import { useState, useEffect } from 'react'
 import * as Portal from '@radix-ui/react-portal';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { useAtom } from 'jotai';
-import { Goals } from 'src/context/GoalContext';
-import { GoalsModalType, Task } from 'src/interfaces/GoalsTypes';
+import { Goals } from 'src/context/goalContext';
 import { toastNotify } from 'src/utils/toastNotify';
-import { InputWithLabel } from '@ui/input/InputWithLabel';
+import { InputWithLabel } from '@ui/input/inputWithLabel';
 import { Button } from '@ui/button';
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import { useTheme } from 'next-themes';
 import { BsTrash } from 'react-icons/bs';
+import { GoalsModalType, Task } from 'src/interfaces/goalsTypes';
 
 export default function GoalsModal({ State, SetState, goalId, setGoalId }: GoalsModalType) {
 
-  const [Metas, setMetas] = useAtom(Goals)
+  const [metas, setMetas] = useAtom(Goals)
   const [id, setId] = useState(0)
   const [taskarr, setTaskarr] = useState<Task[]>([])
   const [taskId, setTaskId] = useState(0)
@@ -22,7 +22,7 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
   const [field, setField] = useState(0)
   const { theme, setTheme } = useTheme()
 
-  const FieldReceived = (Filter: string) => {
+  const fieldReceived = (Filter: string) => {
     let Categoria = 0
     switch (Filter) {
       case 'Intelectual':
@@ -40,19 +40,19 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
 
   useEffect(() => {
     if (goalId != null) {
-      setTaskarr(Metas[goalId].Tarefas)
-      setTaskId(Metas[goalId].Id)
-      setTaskName(Metas[goalId].Meta)
-      setField(FieldReceived(Metas[goalId].Categoria))
+      setTaskarr(metas[goalId].Tarefas)
+      setTaskId(metas[goalId].Id)
+      setTaskName(metas[goalId].Meta)
+      setField(fieldReceived(metas[goalId].Categoria))
     }
-  }, [goalId, Metas])
+  }, [goalId, metas])
 
   const domNode = useClickOutside(() => {
     SetState(false)
     setGoalId(null)
   })
 
-  const FieldSelected = () => {
+  const fieldSelected = () => {
     let Categoria = ''
     switch (field) {
       case 1:
@@ -79,26 +79,26 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
     setTask('')
   }
 
-  const ClearStates = () => {
+  const clearStates = () => {
     setTaskarr([])
     setTaskName('')
     setTask('')
     setField(0)
   }
 
-  const RemoveTask = (id: number) => {
+  const removeTask = (id: number) => {
     const newLista = taskarr.filter(item => item.id !== id)
     setTaskarr(newLista)
   }
 
   const addGoal = () => {
     try {
-      const Categoria = FieldSelected()
+      const Categoria = fieldSelected()
       toastNotify(taskName.length === 0, "Insira o nome da meta", 'warn')
       toastNotify(taskarr.length === 0, "Insira ao menos uma meta", 'warn')
       toastNotify(field === 0, 'Escolha uma área', 'warn')
 
-      if (Metas.length < 24) {
+      if (metas.length < 24) {
         setMetas(prev => [...prev, {
           Id: id,
           Meta: taskName,
@@ -106,7 +106,7 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
           Categoria: Categoria,
         },])
         setId(prev => prev + 1)
-        ClearStates()
+        clearStates()
       }
 
     } catch (error) {
@@ -116,12 +116,12 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
 
   const EditGoal = () => {
     try {
-      const Categoria = FieldSelected()
+      const Categoria = fieldSelected()
       toastNotify(taskName.length === 0, "Insira o nome da meta", 'warn')
       toastNotify(taskarr.length === 0, "Insira ao menos uma meta", 'warn')
       toastNotify(field === 0, 'Escolha uma área', 'warn')
 
-      const GoalUpdated = Metas.map(item => {
+      const GoalUpdated = metas.map(item => {
         if (item.Id === goalId) {
           item.Categoria = Categoria
           item.Meta = taskName
@@ -131,7 +131,7 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
       })
 
       setMetas(GoalUpdated)
-      ClearStates()
+      clearStates()
 
     } catch (error) {
       console.log(error)
@@ -191,7 +191,7 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
                 <li key={item.id} className='flex justify-between select-none'>
                   <p>{item.Tarefa}</p>
                   <BsTrash className='w-4 h-4 cursor-pointer'
-                    onClick={() => RemoveTask(item.id)}
+                    onClick={() => removeTask(item.id)}
                   />
                 </li>
               ))}
@@ -273,7 +273,7 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
               Children='Limpar meta'
               Width='md'
               intent='danger'
-              onClick={() => ClearStates()}
+              onClick={() => clearStates()}
             />
           </div>
         </section>

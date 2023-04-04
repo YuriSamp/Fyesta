@@ -1,6 +1,7 @@
-import { Select } from '@ui/Select'
+import { Select } from '@ui/select'
 import { useState } from 'react'
-import { SheetsProps, Task, Goal } from 'src/interfaces/GoalsTypes'
+import { Goal, SheetsProps, Task } from 'src/interfaces/goalsTypes'
+
 
 //TODO organizar esse filter
 

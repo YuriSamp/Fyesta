@@ -3,11 +3,12 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import AvatarIcon from './avatar';
 import { ExitIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
-import { routes } from '@ui/SettingsHeader';
 import { useRouter } from 'next/router';
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
 import nookies from 'nookies'
+import { routes } from './settingsHeader';
+
 
 type Props = {
   Path: string | undefined

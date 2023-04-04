@@ -30,19 +30,19 @@ const inputStyles = cva(
 );
 
 interface Controled extends VariantProps<typeof inputStyles> {
-  Id?: string
+  id?: string
   type: string
   placeholder: string
   value: string
   onChange: Dispatch<SetStateAction<string>>
 }
 
-export function ControledInput({ Width, intent, textSize, type, Id, placeholder, value, onChange }: Controled) {
+export function ControledInput({ Width, intent, textSize, type, id, placeholder, value, onChange }: Controled) {
   return (
     <input
       className={inputStyles({ Width, intent, textSize })}
       type={type}
-      id={Id}
+      id={id}
       placeholder={placeholder}
       value={value}
       onChange={(e) => onChange(e.target.value)}

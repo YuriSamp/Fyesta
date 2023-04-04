@@ -1,11 +1,11 @@
 import * as Switch from '@radix-ui/react-switch';
-import Header from '@ui/SettingsHeader';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
-import { Select } from '@ui/Select';
+import { Select } from '@ui/select';
 import { useAtom } from 'jotai';
 import { Language, Monday } from 'src/context/seetingsContext';
+import Header from '@ui/settingsHeader';
 
 const themes = ['dark', 'light']
 const languages = ['Português', 'inglês']
@@ -18,7 +18,7 @@ export default function Settings() {
 
   const [mounted, setMounted] = useState(false)
   const [language, setLanguage] = useAtom(Language)
-  const [StartOnMOnday, setStartOnMonday] = useAtom(Monday)
+  const [startOnMOnday, setStartOnMonday] = useAtom(Monday)
   const { theme, setTheme } = useTheme()
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function Settings() {
           <Switch.Root
             className="w-11 h-[25px] bg-gray-300 dark:bg-white rounded-full relative data-[state=checked]:bg-[rgb(59,130,246)] dark:data-[state=checked]:bg-[#138859]"
             role='switch'
-            checked={StartOnMOnday}
+            checked={startOnMOnday}
             onClick={() => setStartOnMonday(prev => !prev)}
           >
             <Switch.Thumb
