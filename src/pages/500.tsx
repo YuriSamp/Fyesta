@@ -1,4 +1,4 @@
-import RetturnButton from '@ui/RetturnButton'
+import RetturnButton from '@ui/retturnButton'
 import Image from 'next/image'
 import svg500 from '../../public/500.svg'
 

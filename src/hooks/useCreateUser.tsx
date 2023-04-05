@@ -37,7 +37,6 @@ export default function useCreateUser() {
       if (error.message.includes('email-already')) {
         const notify = () => toast.error("E-mail já cadastrado. Faça seu login.");
         notify()
-        return
       }
     }
   }

@@ -1,9 +1,9 @@
 import { cva, VariantProps } from 'class-variance-authority';
 import { SetStateAction } from 'jotai';
 import { Dispatch } from 'react'
-import UpperCaseFirstLetter from 'src/utils/UppercaseFirstLetter';
+import { UpperCaseFirstLetter } from 'src/utils/uppercaseFirstLetter';
 
-const SelectStyles = cva(
+const selectStyles = cva(
   'bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] ',
   {
     variants: {
@@ -23,7 +23,7 @@ const SelectStyles = cva(
   },
 );
 
-export interface ISelect extends VariantProps<typeof SelectStyles> {
+export interface ISelect extends VariantProps<typeof selectStyles> {
   Options: readonly string[]
   value: string | undefined
   onChange: Dispatch<SetStateAction<any>> | ((theme: string) => void) | ((mode: string) => void)
@@ -31,7 +31,7 @@ export interface ISelect extends VariantProps<typeof SelectStyles> {
 
 export function Select({ Width, intent, Options, onChange, value }: ISelect) {
   return (
-    <select className={SelectStyles({ Width, intent })}
+    <select className={selectStyles({ Width, intent })}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >

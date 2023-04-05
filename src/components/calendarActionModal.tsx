@@ -1,12 +1,12 @@
 import * as Portal from '@radix-ui/react-portal';
 import { useState, useEffect } from 'react';
-import { ModalProps } from 'src/interfaces/ModalTypes';
 import { Button } from './button';
 import { ControledInput } from './input/input';
-import { Select } from './Select';
 import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
-import FormataData from 'src/utils/FormataData';
+import { formateData } from 'src/helper/dateHelpers';
+import { Select } from './select';
+import { ModalProps } from 'src/interfaces/modalTypes';
 
 // TODO Finalizar o modal
 
@@ -16,11 +16,11 @@ interface ICalendarModal extends ModalProps {
 
 export default function CalendarModal({ State, SetState, day }: ICalendarModal) {
 
-  const [Title, setTitle] = useState('')
+  const [title, setTitle] = useState('')
   const [reminderOption, setReminderOption] = useState('Não se repete')
-  const [ModalOption, setModalOption] = useState('Tarefa')
+  const [modalOption, setModalOption] = useState('Tarefa')
   const [taskText, setTaskText] = useState('')
-  const [DataRaw, setData] = useState(day)
+  const [dataRaw, setData] = useState(day)
 
 
   useEffect(() => {
@@ -28,20 +28,19 @@ export default function CalendarModal({ State, SetState, day }: ICalendarModal) 
   }, [day])
 
   const handleSubimit = () => {
-    if (ModalOption === 'Lembrete') {
+    if (modalOption === 'Lembrete') {
       const lembreteObj = {
-        title: Title,
+        title: title,
         reminder: reminderOption,
-        date: FormataData(DataRaw),
+        date: formateData(dataRaw),
       }
     }
 
-    if (ModalOption === 'Tarefa') {
+    if (modalOption === 'Tarefa') {
       const TarefaObj = {
-        title: Title,
+        title: title,
         taskText: taskText,
-        date: FormataData(DataRaw),
-
+        date: formateData(dataRaw),
       }
     }
   }
@@ -61,7 +60,7 @@ export default function CalendarModal({ State, SetState, day }: ICalendarModal) 
           <div className='pr-10 pl-20 pt-10'>
             <ControledInput
               onChange={setTitle}
-              value={Title}
+              value={title}
               placeholder='Adicionar titulo'
               type='text'
               Width='full'
@@ -72,12 +71,12 @@ export default function CalendarModal({ State, SetState, day }: ICalendarModal) 
               <Button
                 Children='Tarefa'
                 onClick={() => setModalOption('Tarefa')}
-                intent={ModalOption === 'Tarefa' ? 'Selected' : 'primary'}
+                intent={modalOption === 'Tarefa' ? 'Selected' : 'primary'}
               />
               <Button
                 Children='Lembrete'
                 onClick={() => setModalOption('Lembrete')}
-                intent={ModalOption === 'Tarefa' ? 'primary' : 'Selected'}
+                intent={modalOption === 'Tarefa' ? 'primary' : 'Selected'}
               />
             </div>
           </div>
@@ -86,11 +85,11 @@ export default function CalendarModal({ State, SetState, day }: ICalendarModal) 
             <input
               type='date'
               className='bg-transparent w-36 h-12 px-2 border-[1px] border-black dark:border-white rounded-md focus:outline-none text-center'
-              value={DataRaw}
+              value={dataRaw}
               onChange={e => setData(e.target.value)}
             />
           </div>
-          {ModalOption === 'Tarefa' ?
+          {modalOption === 'Tarefa' ?
             <div className='py-5 px-10 flex gap-4'>
               <RxTextAlignJustify className='w-7 h-7' />
               <textarea

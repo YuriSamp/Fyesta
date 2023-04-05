@@ -1,12 +1,12 @@
 import { useAtomValue } from 'jotai';
-import { PlannerTask } from 'src/context/PlannerContext';
+import { PlannerTask } from 'src/context/plannerContext';
 import EditableListItem from './item';
 
 type EditableProps = { day: number, Title: string }
 
 export default function EditableList({ day, Title }: EditableProps) {
 
-  const TasksForADay = useAtomValue(PlannerTask)
+  const tasksForADay = useAtomValue(PlannerTask)
 
   return (
     <div className='flex flex-col gap-3 w-[352px]'>
@@ -14,7 +14,7 @@ export default function EditableList({ day, Title }: EditableProps) {
         <h3 className='text-2xl text-violet-900 dark:text-green-700 '>{Title}</h3>
       </div>
       <div className='flex flex-col gap-3 items-center'>
-        {TasksForADay[day].tasks.map((item, index) => (
+        {tasksForADay[day].tasks.map((item, index) => (
           <EditableListItem index={index} key={index} day={day} value={item.text} />
         ))}
       </div>

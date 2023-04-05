@@ -1,5 +1,5 @@
 import * as Label from '@radix-ui/react-label';
-import { inputProps } from 'src/interfaces/InputTypes';
+import { inputProps } from 'src/interfaces/inputTypes';
 import { ControledInput } from './input';
 
 export const InputWithLabel = ({ labelText, Id, type, onChange, placeholder, value, theme }: inputProps) => {
@@ -9,9 +9,9 @@ export const InputWithLabel = ({ labelText, Id, type, onChange, placeholder, val
         {labelText}
       </Label.Root>
       {theme == 'light' ?
-        <ControledInput type={type} Id={Id} placeholder={placeholder} value={value} onChange={onChange} intent='light' />
+        <ControledInput type={type} id={Id} placeholder={placeholder} value={value} onChange={onChange} intent='light' />
         :
-        <ControledInput type={type} Id={Id} placeholder={placeholder} value={value} onChange={onChange} />
+        <ControledInput type={type} id={Id} placeholder={placeholder} value={value} onChange={onChange} />
       }
     </fieldset>
   )

@@ -1,12 +1,13 @@
 import React from 'react'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
-import { GoalsProps, Task } from 'src/interfaces/GoalsTypes'
+import { GoalsProps, Task } from 'src/interfaces/goalsTypes'
+
 
 export default function YearBox({ Metas }: GoalsProps) {
 
-  const MetasPlanejadas = Metas.map(item => item.Tarefas.length)
+  const metasPlanejadas = Metas.map(item => item.Tarefas.length)
 
-  const VerificaTarefas = (item: Task[], id: number) => {
+  const verificaTarefas = (item: Task[], id: number) => {
     const arrVerificado = item.filter(item => item.realizada === false)
     if (arrVerificado.length === 0) {
       return <RiCheckboxCircleFill className='w-5 h-5  text-violet-900 dark:text-DarkModeGreen' key={id} />
@@ -14,7 +15,7 @@ export default function YearBox({ Metas }: GoalsProps) {
     return <RiCheckboxBlankCircleLine className='w-5 h-5' key={id} />
   }
 
-  const MetasRealizadas = () => {
+  const metasRealizadas = () => {
     const ArrDeMetas = Metas.map(item => item.Tarefas.map(item => item.realizada))
     const ArrDeBoolean = ArrDeMetas.map(item => item.every(item => item === true))
     const TaksDoneArr = ArrDeBoolean.filter(item => item === true)
@@ -36,20 +37,20 @@ export default function YearBox({ Metas }: GoalsProps) {
         </div>
         <div className='flex gap-2 flex-wrap h-10'>
           {Metas.map((item) => (
-            VerificaTarefas(item.Tarefas, item.Id)
+            verificaTarefas(item.Tarefas, item.Id)
           ))}
         </div>
         <div className='pt-4 pb-2'>
           <p>Planejadas</p>
         </div>
         <div className=''>
-          <p>{MetasPlanejadas.length} metas</p>
+          <p>{metasPlanejadas.length} metas</p>
         </div>
         <div className='pt-4 pb-2'>
           <p>Realizadas</p>
         </div>
         <div className=''>
-          <p>{MetasRealizadas()} metas</p>
+          <p>{metasRealizadas()} metas</p>
         </div>
       </div>
     </section>

@@ -1,7 +1,6 @@
 
 import { Button } from '@ui/button';
 import { ControledInput } from '@ui/input/input';
-import Header from '@ui/SettingsHeader'
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router'
 import { useState } from 'react';
@@ -11,6 +10,9 @@ import { auth } from 'src/server/Firebase/ClientApp';
 import 'react-toastify/dist/ReactToastify.css';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import nookies from 'nookies'
+import Header from '@ui/settingsHeader';
+
+//TODO não atualizar as coisas com o campo vazio
 
 export default function Perfil() {
   const router = useRouter()
@@ -25,7 +27,7 @@ export default function Perfil() {
   const [sendPasswordResetEmail, sending, passwordResetError] = useSendPasswordResetEmail(auth);
   const [verifyBeforeUpdateEmail, updating1, error1] = useVerifyBeforeUpdateEmail(auth);
   const { theme, setTheme } = useTheme()
-  const [AlertOpen, setAlertOpen] = useState(false)
+  const [alertOpen, setAlertOpen] = useState(false)
 
   async function HandlePromise(fn: Promise<Boolean>) {
     await fn
@@ -33,7 +35,7 @@ export default function Perfil() {
   }
 
   return (
-    <div className={`${AlertOpen ? 'blur-sm' : ''}`}>
+    <div className={`${alertOpen ? 'blur-sm' : ''}`}>
       <ToastContainer />
       <Header
         Page={page}
@@ -134,7 +136,7 @@ export default function Perfil() {
             <h2 className='text-xl'>Excluir sua conta</h2>
             <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>É uma pena que você esteja indo embora <span className='text-lg'>😭</span>  </h3>
           </div>
-          <AlertDialog.Root open={AlertOpen} onOpenChange={setAlertOpen}>
+          <AlertDialog.Root open={alertOpen} onOpenChange={setAlertOpen}>
             <AlertDialog.Trigger asChild>
               <Button
                 Children='Excluir sua conta'

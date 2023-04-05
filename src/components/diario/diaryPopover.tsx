@@ -4,7 +4,7 @@ import * as Popover from '@radix-ui/react-popover';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAtomValue } from 'jotai';
 import { emotionsOptions } from 'src/context/emotionsOptions';
-import UpperCaseFirstLetter from 'src/utils/UppercaseFirstLetter';
+import { UpperCaseFirstLetter } from 'src/utils/uppercaseFirstLetter';
 
 export function DiaryPopover() {
   const options = useAtomValue(emotionsOptions)

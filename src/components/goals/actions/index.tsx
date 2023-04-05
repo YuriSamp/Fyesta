@@ -1,12 +1,14 @@
-import { Select } from '@ui/Select'
+import { Select } from '@ui/select'
 import { useEffect, useMemo, useState } from 'react'
 import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
-import { Goal, GoalsWithSetterProps } from 'src/interfaces/GoalsTypes'
+import { Goal, GoalsWithSetterProps } from 'src/interfaces/goalsTypes'
+
+
 
 export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
-  const [Filter, setFilter] = useState('Todas')
+  const [filter, setFilter] = useState('Todas')
 
-  const ActionComplete = (id: number) => {
+  const actionComplete = (id: number) => {
     const Tasks = Metas.map(item => {
       item.Tarefas.map(item => {
         if (item.id === id) {
@@ -23,7 +25,7 @@ export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
     return ['Todas', ...arr]
   }, [Metas])
 
-  const ActionFilter = (Metas: Goal[], Filter: string) => {
+  const actionFilter = (Metas: Goal[], Filter: string) => {
     if (Filter === 'Todas') return Metas
     return Metas.filter(meta => meta.Meta === Filter)
   }
@@ -38,17 +40,17 @@ export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
           <Select
             Options={options}
             onChange={setFilter}
-            value={Filter}
+            value={filter}
             Width='xmd' />
         }
       </div>
       <div className='flex flex-col gap-3 h-[248px] overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
-        {ActionFilter(Metas, Filter).map(item => (
+        {actionFilter(Metas, filter).map(item => (
           item.Tarefas.map((item, index) => (
             <div
               className='flex gap-2 pt-2 items-center cursor-pointer'
               key={index}
-              onClick={() => ActionComplete(item.id)}
+              onClick={() => actionComplete(item.id)}
             >
               {item.realizada === true ?
                 <>

@@ -5,42 +5,42 @@ import { diaryId, diaryPage } from 'src/context/diaryContext'
 import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { TodayDateToDateInput } from 'src/helper/DateHelpers'
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
-import { InputWithSelect } from '@ui/input/EmotionInput'
+import { InputWithSelect } from '@ui/input/emotionInput'
 import { emotionsOptions } from 'src/context/emotionsOptions'
+import { todayDateToDateInput } from 'src/helper/dateHelpers'
 
 const NovaPagina = () => {
 
-  const DateInput = TodayDateToDateInput()
+  const dateInput = todayDateToDateInput()
   const router = useRouter()
 
-  const [Title, setTitle] = useState('')
-  const [Feeling, setFeeling] = useState('Feliz')
-  const [Text, setText] = useState('')
-  const [Data, setData] = useState(DateInput)
+  const [title, setTitle] = useState('')
+  const [feeling, setFeeling] = useState('Feliz')
+  const [text, setText] = useState('')
+  const [data, setData] = useState(dateInput)
   const [_, setdiary] = useAtom(diaryPage);
-  const [Id, setdiaryId] = useAtom(diaryId);
+  const [id, setdiaryId] = useAtom(diaryId);
   const [options, setoptions] = useAtom(emotionsOptions)
-  const [Color, setColor] = useState('')
+  const [color, setColor] = useState('')
 
-  function HandleForm(e: React.FormEvent<HTMLFormElement>) {
+  function handleForm(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
-    if (Title === '' || Data === '') {
+    if (title === '' || data === '') {
       const notify = () => toast.warn("Por favor insira ao menos o titulo e data");
       notify()
       return
     }
 
     const notes = {
-      Title,
-      Data,
-      Feeling,
-      Text,
-      Id,
-      Color
+      title,
+      data,
+      feeling,
+      text,
+      id,
+      color
     }
 
     setdiary(prev => [...prev, notes])
@@ -57,12 +57,12 @@ const NovaPagina = () => {
         <Navbar Page='diario' />
         <section
           className='flex flex-col overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 bg-white dark:bg-[#121212] px-12 py-10 select-none text-black dark:text-white'>
-          <form className='flex flex-col gap-8' onSubmit={e => HandleForm(e)}>
+          <form className='flex flex-col gap-8' onSubmit={e => handleForm(e)}>
             <input
               className='bg-transparent focus:outline-none p-4 text-3xl'
               placeholder='Insira um titulo'
               autoFocus={true}
-              value={Title}
+              value={title}
               onChange={e => setTitle(e.target.value)}
             />
             <div className='flex flex-col gap-6'>
@@ -71,7 +71,7 @@ const NovaPagina = () => {
                 <input
                   type='date'
                   className='bg-transparent h-[40px] px-2 border-[1px] w-[176px] border-black dark:border-white rounded-md focus:outline-none text-center'
-                  value={Data}
+                  value={data}
                   onChange={e => setData(e.target.value)}
                 />
               </div>

@@ -1,14 +1,17 @@
-import DiarypageWritten from '@ui/diario/Card';
+
 import Link from 'next/link';
 import { useAtomValue } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
-import { Idiary } from 'src/interfaces/DiaryTypes';
+import { Idiary } from 'src/interfaces/diaryTypes';
 import { useEffect, useMemo, useState } from 'react';
-import { DateCalendarConvert } from 'src/helper/DateHelpers';
-import MonthController from '@ui/MonthController';
-import { DiaryPopover } from '@ui/diario/DiaryPopover';
+import MonthController from '@ui/monthController';
+
 import { emotionsOptions } from 'src/context/emotionsOptions';
-import { Select } from '@ui/Select';
+import { Select } from '@ui/select';
+import { DiaryPopover } from '@ui/diario/diaryPopover';
+import DiarypageWritten from '@ui/diario/card';
+import { dateCalendarConvert } from 'src/helper/dateHelpers';
+
 
 interface IMonthComponent {
   diary: Idiary[]
@@ -37,15 +40,15 @@ export default function Diario() {
     if (filtro === 'Todas') {
       return diario
     }
-    return diario.filter(item => item.Feeling === filtro)
+    return diario.filter(item => item.feeling === filtro)
   }
 
 
 
   useEffect(() => {
-    const compareDate = DateCalendarConvert(year, monthIndex)
-    const diaryPerMonth = diary.filter(item => item.Data.slice(0, 7).includes(compareDate))
-    const diaryPerMonthSorted = diaryPerMonth.sort((a, b) => Number(b.Data.slice(-2)) - Number(a.Data.slice(-2)))
+    const compareDate = dateCalendarConvert(year, monthIndex)
+    const diaryPerMonth = diary.filter(item => item.data.slice(0, 7).includes(compareDate))
+    const diaryPerMonthSorted = diaryPerMonth.sort((a, b) => Number(b.data.slice(-2)) - Number(a.data.slice(-2)))
     setdiaryRef(diaryPerMonthSorted)
   }, [monthIndex])
 
@@ -87,13 +90,13 @@ const MonthComponent = ({ diary }: IMonthComponent) => {
         </Link>
         {diary.map(entry => (
           <DiarypageWritten
-            Text={entry.Text}
-            Title={entry.Title}
-            Data={entry.Data}
-            Feeling={entry.Feeling}
-            Id={entry.Id}
-            Color={entry.Color}
-            key={entry.Id}
+            text={entry.text}
+            title={entry.title}
+            data={entry.data}
+            feeling={entry.feeling}
+            id={entry.id}
+            color={entry.color}
+            key={entry.id}
           />
         ))}
       </div>

@@ -2,8 +2,7 @@ import React from 'react'
 import { BsLayers } from 'react-icons/bs'
 import { IoLayersSharp } from 'react-icons/io5'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
-import { GoalsProps, IField, TaskWithCategory } from 'src/interfaces/GoalsTypes'
-
+import { GoalsProps, IField, TaskWithCategory } from 'src/interfaces/goalsTypes'
 
 
 export default function Fields({ Metas }: GoalsProps) {
@@ -16,7 +15,7 @@ export default function Fields({ Metas }: GoalsProps) {
     return newObject
   })
 
-  const ProgressTasks = (item: TaskWithCategory[], categoria: 'Intelectual' | 'Pessoal' | 'Financeiro') => {
+  const progressTasks = (item: TaskWithCategory[], categoria: 'Intelectual' | 'Pessoal' | 'Financeiro') => {
     const arrDeCategoriaFiltrado = item.filter(item => item.Categoria === categoria)
     const arrFinal = arrDeCategoriaFiltrado.map((item, index) => {
       const arrVerificado = item.Tarefas.filter(item => item.realizada === false)
@@ -36,15 +35,15 @@ export default function Fields({ Metas }: GoalsProps) {
       <div className='flex gap-2'>
         <Field
           FieldName='Intelectual'
-          Metas={ProgressTasks(arrTratado, 'Intelectual')}
+          Metas={progressTasks(arrTratado, 'Intelectual')}
         />
         <Field
           FieldName='Pessoal'
-          Metas={ProgressTasks(arrTratado, 'Pessoal')}
+          Metas={progressTasks(arrTratado, 'Pessoal')}
         />
         <Field
           FieldName='Financeiro'
-          Metas={ProgressTasks(arrTratado, 'Financeiro')}
+          Metas={progressTasks(arrTratado, 'Financeiro')}
         />
       </div>
     </section>

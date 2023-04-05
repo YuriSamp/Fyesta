@@ -1,8 +1,7 @@
 import { AiOutlineGithub } from 'react-icons/ai'
 import Link from 'next/link'
-import Header from '@ui/SettingsHeader'
 import { useRouter } from 'next/router'
-
+import Header from '@ui/settingsHeader'
 
 
 export default function About() {

@@ -1,16 +1,16 @@
-import { Select } from '@ui/Select'
+import { Select } from '@ui/select'
 import { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
-import { SheetsProps, Task, Goal } from 'src/interfaces/GoalsTypes'
 import { BsTrash, BsPencil } from 'react-icons/bs'
 import * as Progress from '@radix-ui/react-progress';
+import { Goal, SheetsProps, Task } from 'src/interfaces/goalsTypes';
 
 export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsProps) {
 
   const options = ['Todas', 'Concluidas', 'Em progresso', 'Não iniciadas', 'Intelectual', 'Pessoal', 'Financeiro'] as const
   type Filter = typeof options[number]
 
-  const [FilterState, setFilterState] = useState<Filter>('Todas')
+  const [filterState, setFilterState] = useState<Filter>('Todas')
 
   const ordenaPlanilha = (Metas: Goal[], filtro: Filter) => {
 
@@ -32,12 +32,12 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
     }
   }
 
-  const RemoveTask = (id: number) => {
+  const removeTask = (id: number) => {
     const newLista = Metas.filter(item => item.Id !== id)
     setMetas(newLista)
   }
 
-  const ProgressBarfunc = (tarefas: Task[]) => {
+  const progressBarfunc = (tarefas: Task[]) => {
     const TarefasFeitas = tarefas.filter(task => task.realizada === false)
     return tarefas.length - TarefasFeitas.length
   }
@@ -49,7 +49,7 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
         <Select
           Options={options}
           onChange={setFilterState}
-          value={FilterState}
+          value={filterState}
           Width='md' />
       </div>
       <div className='flex flex-col gap-3 pt-2'>
@@ -65,7 +65,7 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
           </div>
         </div>
         <section className='flex flex-col gap-3 h-[200px] overflow-y-auto  scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
-          {ordenaPlanilha(Metas, FilterState)?.map(item => (
+          {ordenaPlanilha(Metas, filterState)?.map(item => (
             <div
               className='w-full flex gap-3'
               key={item.Id}
@@ -83,7 +83,7 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
                 >
                   <Progress.Indicator
                     className="bg-violet-900 dark:bg-green-700 w-full h-full transition-transform duration-[660ms] ease-[cubic-bezier(0.65, 0, 0.35, 1)]"
-                    style={{ transform: `translateX(-${100 - (ProgressBarfunc(item.Tarefas) * (100 / item.Tarefas.length))}%)` }}
+                    style={{ transform: `translateX(-${100 - (progressBarfunc(item.Tarefas) * (100 / item.Tarefas.length))}%)` }}
                   />
                 </Progress.Root>
               </div>
@@ -98,7 +98,7 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
                   }}
                 />
                 <BsTrash className='w-4 h-4 cursor-pointer'
-                  onClick={() => RemoveTask(item.Id)}
+                  onClick={() => removeTask(item.Id)}
                 />
               </div>
             </div>

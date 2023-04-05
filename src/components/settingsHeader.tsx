@@ -3,7 +3,7 @@ import Link from 'next/link';
 import AvatarIcon from '@ui/avatar';
 import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
-import RetturnButton from './RetturnButton';
+import RetturnButton from './retturnButton';
 
 export const routes = [
   { name: 'Perfil e visibilidade', link: '/settings/perfil' },

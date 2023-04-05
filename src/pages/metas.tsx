@@ -3,7 +3,7 @@ import YearBox from '@ui/goals/year'
 import Fields from '@ui/goals/fields'
 import Actions from '@ui/goals/actions'
 import { useAtom } from 'jotai'
-import { Goals } from 'src/context/GoalContext'
+import { Goals } from 'src/context/goalContext'
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { ToastContainer } from 'react-toastify';
