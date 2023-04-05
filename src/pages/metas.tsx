@@ -22,7 +22,7 @@ export default function Metas() {
   return (
     <>
       <ToastContainer limit={3} />
-      <div className={`flex flex-col gap-16 text-black dark:text-white ${isModalOpen ? 'blur-sm' : ''}`}>
+      <div className={`flex flex-col gap-14 text-black dark:text-white ${isModalOpen ? 'blur-sm' : ''}`}>
         <section className='w-full flex justify-center gap-12 items-center'>
           <YearBox Metas={Metas} />
           <Fields Metas={Metas} />

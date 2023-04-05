@@ -1,35 +1,29 @@
-import { Select } from '@ui/select'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { BsTrash, BsPencil } from 'react-icons/bs'
 import * as Progress from '@radix-ui/react-progress';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Goal, SheetsProps, Task } from 'src/interfaces/goalsTypes';
+import { AiOutlineCheck } from 'react-icons/ai'
+
+const progressOptions = ['Todas', 'Concluidas', 'Em progresso', 'Não iniciadas'] as const
+type progressFilter = typeof progressOptions[number]
 
 export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsProps) {
 
-  const options = ['Todas', 'Concluidas', 'Em progresso', 'Não iniciadas', 'Intelectual', 'Pessoal', 'Financeiro'] as const
-  type Filter = typeof options[number]
+  const categoryOptions = ['Todas', 'Intelectual', 'Pessoal', 'Financeiro']
 
-  const [filterState, setFilterState] = useState<Filter>('Todas')
+  const [progess, setProgress] = useState<progressFilter>('Todas')
+  const [category, setCategory] = useState('Todas')
 
-  const ordenaPlanilha = (Metas: Goal[], filtro: Filter) => {
-
-    switch (filtro) {
-      case "Todas":
-        return Metas;
-      case "Concluidas":
-        return Metas.filter(meta => meta.Tarefas.every(task => task.realizada));
-      case "Não iniciadas":
-        return Metas.filter(meta => meta.Tarefas.every(task => !task.realizada));
-      case "Em progresso":
-        return Metas.filter(meta => meta.Tarefas.some(task => !task.realizada) && meta.Tarefas.some(task => task.realizada));
-      case "Financeiro":
-      case "Intelectual":
-      case "Pessoal":
-        return Metas.filter(meta => meta.Categoria === filtro);
-      default:
-        throw new Error("Filtro inválido");
-    }
+  const ordenaPlanilha = (Metas: Goal[], progressFilter: progressFilter, categoryFilter: string) => {
+    return Metas.filter(meta => {
+      return (categoryFilter === "Todas" || meta.Categoria === categoryFilter) &&
+        (progressFilter === "Todas" ||
+          (progressFilter === "Concluidas" && meta.Tarefas.every(task => task.realizada)) ||
+          (progressFilter === "Não iniciadas" && meta.Tarefas.every(task => !task.realizada)) ||
+          (progressFilter === "Em progresso" && meta.Tarefas.some(task => !task.realizada) && meta.Tarefas.some(task => task.realizada)));
+    });
   }
 
   const removeTask = (id: number) => {
@@ -46,11 +40,14 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
     <section className='flex flex-col w-[976px]  self-start'>
       <div className='pb-2 border-b-2 mb-2 flex items-center justify-between '>
         <h3 className='text-3xl  dark:text-white'>Metas</h3>
-        <Select
-          Options={options}
-          onChange={setFilterState}
-          value={filterState}
-          Width='md' />
+        <SheetsFilter
+          onChangeCategory={setCategory}
+          onChangeProgress={setProgress}
+          category={category}
+          progress={progess}
+          categoryOptions={categoryOptions}
+          progressOptions={progressOptions}
+        />
       </div>
       <div className='flex flex-col gap-3 pt-2'>
         <div className='flex '>
@@ -65,7 +62,7 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
           </div>
         </div>
         <section className='flex flex-col gap-3 h-[200px] overflow-y-auto  scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
-          {ordenaPlanilha(Metas, filterState)?.map(item => (
+          {ordenaPlanilha(Metas, progess, category)?.map(item => (
             <div
               className='w-full flex gap-3'
               key={item.Id}
@@ -113,5 +110,86 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
         </section>
       </div>
     </section>
+  )
+}
+
+interface ISheetsFilter {
+  onChangeProgress: Dispatch<SetStateAction<progressFilter>>
+  onChangeCategory: Dispatch<SetStateAction<string>>
+  progressOptions: readonly progressFilter[]
+  categoryOptions: string[]
+  progress: string
+  category: string
+}
+
+const SheetsFilter = ({ onChangeCategory, onChangeProgress, progress, category, categoryOptions, progressOptions }: ISheetsFilter) => {
+
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <DropdownMenu.Root
+      open={isOpen}
+    >
+      <DropdownMenu.Trigger asChild>
+        <button
+          className='bg-transparent w-28 h-9 text-center border-[1px] rounded-md border-[#2A292B] '
+          onClick={() => setIsOpen(true)}
+          onKeyDown={(e) => {
+            if (e.key == 'Enter') {
+              setIsOpen(true)
+            }
+          }}
+        >
+          Filtrar
+        </button>
+      </DropdownMenu.Trigger>
+
+      <DropdownMenu.Portal>
+        <DropdownMenu.Content
+          className=" absolute  left-[-100px] min-w-[220px] bg-white rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+          sideOffset={5}
+          onPointerDownOutside={() => setIsOpen(false)}
+          onEscapeKeyDown={() => setIsOpen(false)}
+        >
+          <DropdownMenu.Item className="text-black text-base flex items-center px-6 outline-none select-none mb-1 ">
+            <p>Progresso</p>
+          </DropdownMenu.Item>
+          <DropdownMenu.Group>
+            {progressOptions.map((item, index) => (
+              <DropdownMenu.Item
+                className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900 dark:hover:bg-gray-800 hover:text-white justify-between"
+                key={index}
+                role='button'
+                onClick={() => onChangeProgress(item)}
+              >
+                {item}
+                {item === progress && <AiOutlineCheck />}
+              </DropdownMenu.Item>
+            ))}
+          </DropdownMenu.Group>
+
+          <DropdownMenu.Separator className="h-[1px] m-1 bg-gray-800" />
+
+          <DropdownMenu.Item className="text-black text-base flex items-center px-6 outline-none select-none mb-1 ">
+            <p>Categorias</p>
+          </DropdownMenu.Item>
+          <DropdownMenu.Group className='max-h-[100px] overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
+            {categoryOptions.map((item, index) => (
+              <DropdownMenu.Item
+                className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900   dark:hover:bg-gray-800 hover:text-white justify-between"
+                key={index}
+                role='button'
+                onClick={() => onChangeCategory(item)}
+              >
+                {item}
+                {item === category && <AiOutlineCheck />}
+              </DropdownMenu.Item>
+            ))}
+          </DropdownMenu.Group>
+
+          <DropdownMenu.Arrow className="fill-white" />
+        </DropdownMenu.Content>
+      </DropdownMenu.Portal>
+    </DropdownMenu.Root>
   )
 }

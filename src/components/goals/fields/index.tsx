@@ -52,7 +52,7 @@ export default function Fields({ Metas }: GoalsProps) {
 
 function Field({ FieldName, Metas }: IField) {
   return (
-    <div className='w-80 flex flex-col border-2 px-4 py-4 shadow-xl'>
+    <div className='w-80 flex flex-col border-2 px-4 py-3 shadow-xl'>
       <IoLayersSharp className='w-20 h-20 self-center my-5' />
       <div className='flex gap-2 items-center pb-4 text-lg'>
         <BsLayers />
