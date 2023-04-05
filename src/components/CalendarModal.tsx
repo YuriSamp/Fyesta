@@ -2,11 +2,11 @@ import * as Portal from '@radix-ui/react-portal';
 import { useState, useEffect } from 'react';
 import { Button } from './button';
 import { ControledInput } from './input/input';
-import { Select } from './select';
 import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
 import { ModalProps } from 'src/interfaces/modalTypes';
 import { formateData } from 'src/helper/DateHelpers';
+import { Select } from './select';
 
 // TODO Finalizar o modal
 
