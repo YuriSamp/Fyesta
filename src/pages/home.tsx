@@ -1,6 +1,5 @@
 import Sheets from '@ui/goals/sheets'
 import HomeCalendar from '@ui/home/calendario'
-import GoalTracker from '@ui/home/goalTracker'
 import Pomodoro from '@ui/home/pomodoro'
 import { useIdToken } from 'react-firebase-hooks/auth'
 import { auth } from 'src/server/Firebase/ClientApp'
@@ -32,7 +31,6 @@ export default function Home() {
       </div>
       <div className='flex gap-20'>
         <div className=''>
-          {/* <GoalTracker /> */}
         </div>
         <div className='flex justify-center items-center shadow-xl border-2 rounded-lg w-96'>
           <p>Aqui vai entrar o mood tracker</p>
