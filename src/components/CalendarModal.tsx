@@ -4,9 +4,9 @@ import { Button } from './button';
 import { ControledInput } from './input/input';
 import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
-import { ModalProps } from 'src/interfaces/modalTypes';
 import { formateData } from 'src/helper/DateHelpers';
 import { Select } from './select';
+import { ModalProps } from 'src/interfaces/modalTypes';
 
 // TODO Finalizar o modal
 
