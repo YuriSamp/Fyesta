@@ -5,7 +5,7 @@ import { diaryId, diaryPage } from 'src/context/diaryContext'
 import { useRouter } from 'next/router'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { TodayDateToDateInput } from 'src/helper/DateHelpers'
+import { todayDateToDateInput } from 'src/helper/DateHelpers'
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
 import { InputWithSelect } from '@ui/input/emotionInput'
@@ -13,7 +13,7 @@ import { emotionsOptions } from 'src/context/emotionsOptions'
 
 const NovaPagina = () => {
 
-  const dateInput = TodayDateToDateInput()
+  const dateInput = todayDateToDateInput()
   const router = useRouter()
 
   const [title, setTitle] = useState('')

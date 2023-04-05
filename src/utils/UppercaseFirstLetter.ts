@@ -1,6 +1,6 @@
-export default function UpperCaseFirstLetter(palavra: string) {
-  const FirstLetter = palavra.slice(0, 1);
-  const FirstLetterUpperCase = FirstLetter.toUpperCase();
+export function UpperCaseFirstLetter(word: string) {
+  const firstLetter = word.slice(0, 1);
+  const firstLetterUpperCase = firstLetter.toUpperCase();
 
-  return FirstLetterUpperCase + palavra.slice(1);
+  return firstLetterUpperCase + word.slice(1);
 }

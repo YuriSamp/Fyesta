@@ -4,7 +4,7 @@ import { useAtomValue } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
 import { Idiary } from 'src/interfaces/diaryTypes';
 import { useEffect, useMemo, useState } from 'react';
-import { DateCalendarConvert } from 'src/helper/DateHelpers';
+import { dateCalendarConvert } from 'src/helper/DateHelpers';
 import MonthController from '@ui/monthController';
 
 import { emotionsOptions } from 'src/context/emotionsOptions';
@@ -46,7 +46,7 @@ export default function Diario() {
 
 
   useEffect(() => {
-    const compareDate = DateCalendarConvert(year, monthIndex)
+    const compareDate = dateCalendarConvert(year, monthIndex)
     const diaryPerMonth = diary.filter(item => item.data.slice(0, 7).includes(compareDate))
     const diaryPerMonthSorted = diaryPerMonth.sort((a, b) => Number(b.data.slice(-2)) - Number(a.data.slice(-2)))
     setdiaryRef(diaryPerMonthSorted)

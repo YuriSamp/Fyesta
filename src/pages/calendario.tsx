@@ -2,7 +2,7 @@ import { Button } from '@ui/button';
 import { useEffect, useState, useMemo } from 'react';
 import { CalendarDays } from 'src/helper/CalendarHelpers';
 import dynamic from 'next/dynamic';
-import { DateToDateInput } from 'src/helper/DateHelpers';
+import { dateToDateInput } from 'src/helper/DateHelpers';
 import { ICalendarDays } from 'src/interfaces/calendarTypes';
 import MonthController from '@ui/monthController';
 
@@ -23,7 +23,7 @@ export default function Calendario() {
   const [days, setDays] = useState<ICalendarDays[]>(CalendarDaysValue)
   const [ismodalOpen, setIsModaOpen] = useState(false)
 
-  const [dateInputModal, setDateInputModal] = useState(DateToDateInput(day, month + 1, year))
+  const [dateInputModal, setDateInputModal] = useState(dateToDateInput(day, month + 1, year))
 
   useEffect(() => {
     setDays(CalendarDays(year, monthIndex))
@@ -68,7 +68,7 @@ export default function Calendario() {
             <div className='w-52 h-32 calendar'
               key={index}
               onClick={() => {
-                setDateInputModal(DateToDateInput(item.day, item.Month + 1, item.year))
+                setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
                 setIsModaOpen(prev => !prev)
               }}
             >
@@ -95,7 +95,7 @@ export default function Calendario() {
             <div className='w-52 h-40 calendar'
               key={index}
               onClick={() => {
-                setDateInputModal(DateToDateInput(item.day, item.Month + 1, item.year))
+                setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
                 setIsModaOpen(prev => !prev)
               }}
             >

@@ -5,9 +5,8 @@ import { ControledInput } from './input/input';
 import { Select } from './select';
 import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
-import FormataData from 'src/utils/FormataData';
 import { ModalProps } from 'src/interfaces/modalTypes';
-
+import { formateData } from 'src/helper/DateHelpers';
 
 // TODO Finalizar o modal
 
@@ -33,7 +32,7 @@ export default function CalendarModal({ State, SetState, day }: ICalendarModal) 
       const lembreteObj = {
         title: title,
         reminder: reminderOption,
-        date: FormataData(dataRaw),
+        date: formateData(dataRaw),
       }
     }
 
@@ -41,7 +40,7 @@ export default function CalendarModal({ State, SetState, day }: ICalendarModal) 
       const TarefaObj = {
         title: title,
         taskText: taskText,
-        date: FormataData(dataRaw),
+        date: formateData(dataRaw),
       }
     }
   }
