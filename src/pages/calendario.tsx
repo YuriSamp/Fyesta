@@ -7,7 +7,7 @@ import { ICalendarDays } from 'src/interfaces/calendarTypes';
 import MonthController from '@ui/monthController';
 
 
-const CalendarModal = dynamic(() => import('@ui/calendarModal'), {
+const CalendarModal = dynamic(() => import('@ui/calendarActionModal'), {
   ssr: false
 })
 
