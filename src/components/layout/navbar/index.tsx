@@ -5,7 +5,7 @@ import { AiOutlineCalendar, AiOutlineHeart, AiOutlineHome } from 'react-icons/ai
 import { BsBook, BsPencil } from 'react-icons/bs';
 import { FiTarget } from 'react-icons/fi';
 import Link from 'next/link';
-import AvatarWithDropDown from '@ui/avatarWithDropDown';
+import AvatarWithDropDown from '@ui/avatarWDropdown';
 
 interface Props {
   Page: string
