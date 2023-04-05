@@ -12,7 +12,7 @@ import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import nookies from 'nookies'
 import Header from '@ui/settingsHeader';
 
-// TODO não atualizar as coisas com o campo vazio
+//TODO não atualizar as coisas com o campo vazio
 
 export default function Perfil() {
   const router = useRouter()

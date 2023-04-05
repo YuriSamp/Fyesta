@@ -4,7 +4,7 @@ import { Button } from './button';
 import { ControledInput } from './input/input';
 import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
-import { formateData } from 'src/helper/DateHelpers';
+import { formateData } from 'src/helper/dateHelpers';
 import { Select } from './select';
 import { ModalProps } from 'src/interfaces/modalTypes';
 
