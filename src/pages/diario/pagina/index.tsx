@@ -7,7 +7,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
-import { InputWithSelect } from '@ui/input/emotionInput'
+import { EmotionInput } from '@ui/input/emotionInput'
 import { emotionsOptions } from 'src/context/emotionsOptions'
 import { todayDateToDateInput } from 'src/helper/dateHelpers'
 
@@ -77,7 +77,7 @@ const NovaPagina = () => {
               </div>
               <div className='flex w-full gap-3 items-center'>
                 <AiOutlineHeart className='w-6 h-6' />
-                <InputWithSelect
+                <EmotionInput
                   options={options}
                   setoption={setoptions}
                   setState={setFeeling}

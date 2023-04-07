@@ -2,71 +2,58 @@ import { useState, useEffect } from 'react'
 import * as Portal from '@radix-ui/react-portal';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { useAtom } from 'jotai';
-import { Goals } from 'src/context/goalContext';
+import { Goals, categoryOptions } from 'src/context/goalContext';
 import { toastNotify } from 'src/utils/toastNotify';
 import { InputWithLabel } from '@ui/input/inputWithLabel';
 import { Button } from '@ui/button';
-import * as RadioGroup from '@radix-ui/react-radio-group';
 import { useTheme } from 'next-themes';
 import { BsTrash } from 'react-icons/bs';
+import * as Label from '@radix-ui/react-label';
 import { GoalsModalType, Task } from 'src/interfaces/goalsTypes';
+import { GoalInput } from '@ui/input/GoalInput';
 
 export default function GoalsModal({ State, SetState, goalId, setGoalId }: GoalsModalType) {
 
   const [metas, setMetas] = useAtom(Goals)
   const [id, setId] = useState(0)
-  const [taskarr, setTaskarr] = useState<Task[]>([])
+  const [taskArr, settaskArr] = useState<Task[]>([])
   const [taskId, setTaskId] = useState(0)
   const [taskName, setTaskName] = useState('')
   const [task, setTask] = useState('')
-  const [field, setField] = useState(0)
   const { theme, setTheme } = useTheme()
+  const [isEmptyTask, setIsEmptyTask] = useState(true)
+  const [categoryOptionsArr, setCategoryOptionsArr] = useAtom(categoryOptions)
+  const [category, setCategory] = useState('')
 
-  const fieldReceived = (Filter: string) => {
-    let Categoria = 0
-    switch (Filter) {
-      case 'Intelectual':
-        Categoria = 1
-        break
-      case 'Pessoal':
-        Categoria = 2
-        break
-      case 'Financeiro':
-        Categoria = 3
-        break
-    }
-    return Categoria
+  const clearStates = () => {
+    settaskArr([])
+    setTaskName('')
+    setTask('')
+    setCategory('')
   }
 
   useEffect(() => {
     if (goalId != null) {
-      setTaskarr(metas[goalId].Tarefas)
+      settaskArr(metas[goalId].Tarefas)
       setTaskId(metas[goalId].Id)
       setTaskName(metas[goalId].Meta)
-      setField(fieldReceived(metas[goalId].Categoria))
+      return
     }
+    clearStates()
   }, [goalId, metas])
+
+  useEffect(() => {
+    if (task.length > 0) {
+      setIsEmptyTask(false)
+      return
+    }
+    setIsEmptyTask(true)
+  }, [task])
 
   const domNode = useClickOutside(() => {
     SetState(false)
     setGoalId(null)
   })
-
-  const fieldSelected = () => {
-    let Categoria = ''
-    switch (field) {
-      case 1:
-        Categoria = 'Intelectual'
-        break
-      case 2:
-        Categoria = 'Pessoal'
-        break
-      case 3:
-        Categoria = 'Financeiro'
-        break
-    }
-    return Categoria
-  }
 
   const addTask = (task: string) => {
     const taskobj = {
@@ -75,35 +62,28 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
       id: taskId
     }
     setTaskId(prev => prev + 1)
-    setTaskarr(prev => [...prev, taskobj])
+    settaskArr(prev => [...prev, taskobj])
     setTask('')
   }
 
-  const clearStates = () => {
-    setTaskarr([])
-    setTaskName('')
-    setTask('')
-    setField(0)
-  }
 
   const removeTask = (id: number) => {
-    const newLista = taskarr.filter(item => item.id !== id)
-    setTaskarr(newLista)
+    const newLista = taskArr.filter(item => item.id !== id)
+    settaskArr(newLista)
   }
 
   const addGoal = () => {
     try {
-      const Categoria = fieldSelected()
       toastNotify(taskName.length === 0, "Insira o nome da meta", 'warn')
-      toastNotify(taskarr.length === 0, "Insira ao menos uma meta", 'warn')
-      toastNotify(field === 0, 'Escolha uma área', 'warn')
+      toastNotify(taskArr.length === 0, "Insira ao menos uma meta", 'warn')
+      toastNotify(category === '', 'Escolha uma área', 'warn')
 
       if (metas.length < 24) {
         setMetas(prev => [...prev, {
           Id: id,
           Meta: taskName,
-          Tarefas: taskarr,
-          Categoria: Categoria,
+          Tarefas: taskArr,
+          Categoria: category,
         },])
         setId(prev => prev + 1)
         clearStates()
@@ -116,30 +96,25 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
 
   const EditGoal = () => {
     try {
-      const Categoria = fieldSelected()
       toastNotify(taskName.length === 0, "Insira o nome da meta", 'warn')
-      toastNotify(taskarr.length === 0, "Insira ao menos uma meta", 'warn')
-      toastNotify(field === 0, 'Escolha uma área', 'warn')
+      toastNotify(taskArr.length === 0, "Insira ao menos uma meta", 'warn')
+      toastNotify(category === '', 'Escolha uma área', 'warn')
 
       const GoalUpdated = metas.map(item => {
         if (item.Id === goalId) {
-          item.Categoria = Categoria
+          item.Categoria = category
           item.Meta = taskName
-          item.Tarefas = taskarr
+          item.Tarefas = taskArr
         }
         return item
       })
 
       setMetas(GoalUpdated)
       clearStates()
-
     } catch (error) {
       console.log(error)
     }
   }
-
-
-  console.log(goalId)
 
   return (
     <Portal.Root>
@@ -161,98 +136,84 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
               labelText='Insira o nome da meta'
               theme={theme === 'light' ? 'light' : ''}
             />
-            <InputWithLabel
-              onChange={setTask}
-              placeholder='Juntar dinheiro'
-              type='text'
-              value={task}
-              Id='form1'
-              labelText='Escreva uma ação para realizar a meta'
-              theme={theme === 'light' ? 'light' : ''}
-            />
+            <fieldset className='flex flex-col gap-2 pt-4 '>
+              <Label.Root>
+                Selecione a categoria da meta
+              </Label.Root>
+              <GoalInput
+                options={categoryOptionsArr}
+                value={goalId != null ? metas[goalId].Categoria : category}
+                setoption={setCategoryOptionsArr}
+                setState={setCategory}
+                placeholder='Procure uma categoria'
+              />
+            </fieldset>
+            <fieldset className='flex flex-col gap-2 pt-4'>
+              <Label.Root htmlFor='form1'>
+                Escreva uma ação para realizar a meta
+              </Label.Root>
+              {theme == 'light' ?
+                <div className='relative border border-black rounded-lg overflow-hidden'>
+                  <input
+                    type='text'
+                    id='form1'
+                    placeholder='Juntar dinheiro'
+                    value={task}
+                    onChange={(e) => setTask(e.target.value)}
+                    className={`py-2 px-2 focus:outline-none  ${isEmptyTask ? "w-full" : 'w-[270px]'}`}
+                    autoComplete="off"
+                  />
+                  <button
+                    className={`${isEmptyTask ? "hidden" : ''} w-20  text-center rounded-r-lg absolute right-0 h-full cursor-pointer bg-blue-400`}
+                    onClick={() => addTask(task)}
+                    type='button'
+                  >
+                    incluir
+                  </button>
+                </div>
+                :
+                <div className='relative border border-black rounded-lg overflow-hidden'>
+                  <input
+                    type='text'
+                    id='form1'
+                    placeholder='Juntar dinheiro'
+                    value={task}
+                    onChange={(e) => setTask(e.target.value)}
+                    className={`py-2 px-2 focus:outline-none  ${isEmptyTask ? "w-full" : 'w-[270px]'}`}
+                    autoComplete="off"
+                  />
+                  <button
+                    className={`${isEmptyTask ? "hidden" : ''} w-20  text-center rounded-r-lg absolute right-0 h-full cursor-pointer bg-blue-400`}
+                    onClick={() => addTask(task)}
+                    type='button'
+                  >
+                    incluir
+                  </button>
+                </div>
+              }
+            </fieldset>
           </div>
-          <div className='pb-2 pt-4 pl-4'>
-            <Button
-              Children='Incluir ação'
-              Width='md'
-              intent='success'
-              onClick={() => addTask(task)}
-            />
-          </div>
-
-          <hr className='border-black  dark:border-white w-3/4 flex justify-center my-2' />
+          <hr className='border-black  dark:border-white w-3/4 flex justify-center my-4' />
 
           <div
             className='h-52 px-4 py-1 mx-4 rounded-lg w-4/5  overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'
           >
             <ul className='flex flex-col gap-2'>
               <li className='pb-2 dark:text-gray-400 text-neutral-700 text-center '>Suas ações aparecerâo aqui</li>
-              {taskarr.map(item => (
+              {taskArr.map(item => (
                 <li key={item.id} className='flex justify-between select-none'>
                   <p>{item.Tarefa}</p>
-                  <BsTrash className='w-4 h-4 cursor-pointer'
-                    onClick={() => removeTask(item.id)}
-                  />
+                  <button>
+                    <BsTrash className='w-4 h-4 cursor-pointer'
+                      onClick={() => removeTask(item.id)}
+                    />
+                  </button>
                 </li>
               ))}
             </ul>
           </div>
 
           <hr className='border-black dark:border-white w-3/4 flex justify-center my-2 mb-3' />
-
-          <div className='flex py-3 justify-center gap-4'>
-            <RadioGroup.Root
-              className="flex gap-2.5"
-              defaultValue="default"
-              aria-label="View density"
-            >
-              <div className="flex items-center">
-                <RadioGroup.Item
-                  className="bg-white w-5 h-5 rounded-full focus:shadow-black outline-none cursor-default ring-violet-600 ring-2 dark:ring-0"
-                  value="Intelectual"
-                  id="r1"
-                  onClick={() => setField(1)}
-                  checked={field === 1}
-                >
-                  <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-3 after:h-3 after:rounded-[50%] after:dark:bg-green-600 after:bg-violet-600" />
-                </RadioGroup.Item>
-                <label className="dark:text-white text-[15px] leading-none pl-3" htmlFor="r1">
-                  Intelectual
-                </label>
-              </div>
-
-              <div className="flex items-center">
-                <RadioGroup.Item
-                  className="bg-white w-5 h-5 rounded-full focus:shadow-black outline-none cursor-default ring-violet-600 ring-2 dark:ring-0"
-                  value="Pessoal"
-                  id="r2"
-                  onClick={() => setField(2)}
-                  checked={field === 2}
-                >
-                  <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-3 after:h-3 after:rounded-[50%] after:dark:bg-green-600 after:bg-violet-600" />
-                </RadioGroup.Item>
-                <label className="dark:text-white text-[15px] leading-none pl-3" htmlFor="r2">
-                  Pessoal
-                </label>
-              </div>
-
-              <div className="flex items-center">
-                <RadioGroup.Item
-                  className="bg-white w-5 h-5 rounded-full focus:shadow-black outline-none cursor-default ring-violet-600 ring-2 dark:ring-0"
-                  value='Financeiro'
-                  id="r3"
-                  onClick={() => setField(3)}
-                  checked={field === 3}
-                >
-                  <RadioGroup.Indicator className="flex items-center justify-center w-full h-full relative after:content-[''] after:block after:w-3 after:h-3 after:rounded-[50%] after:dark:bg-green-600 after:bg-violet-600" />
-                </RadioGroup.Item>
-                <label className="dark:text-white text-[15px] leading-none pl-3" htmlFor="r3">
-                  Financeiro
-                </label>
-              </div>
-            </RadioGroup.Root>
-          </div>
-
           <div className='py-4 flex justify-center gap-8' >
             {goalId === null ?
               <Button

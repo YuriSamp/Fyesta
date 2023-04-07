@@ -27,7 +27,7 @@ export default function YearBox({ Metas }: GoalsProps) {
       <div className='pb-2 border-b-2 mb-2 '>
         <h3 className='text-3xl dark:text-white '>Ano</h3>
       </div>
-      <div className=' flex flex-col border-2 px-4 py-4 shadow-xl'>
+      <div className=' flex flex-col border-2 px-4 py-3 shadow-xl'>
         <div className='py-10 text-center '>
           <h4 className='text-3xl'>2022</h4>
         </div>

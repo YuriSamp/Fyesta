@@ -3,6 +3,10 @@ import { BsThreeDots, BsTrash } from 'react-icons/bs'
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { AiOutlineCheck } from 'react-icons/ai'
 import { emotionOptions, emotionColors } from 'src/context/emotionsOptions';
+import { useAtom } from 'jotai';
+import { diaryPage } from 'src/context/diaryContext';
+
+// TODO SE ADICIONAR MAIS ITENS A LISTA BUGA TUDO
 
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
@@ -32,7 +36,7 @@ interface ISubMenu {
   defaultColor: string
 }
 
-export function InputWithSelect({ options, setState, placeholder, setoption, setColor, defaultValue }: InputWithSelectI) {
+export function EmotionInput({ options, setState, placeholder, setoption, setColor, defaultValue }: InputWithSelectI) {
 
   const optionsTratado = options.map(item => {
     const firstletterUppercase = item.name.slice(0, 1).toUpperCase()
@@ -50,21 +54,18 @@ export function InputWithSelect({ options, setState, placeholder, setoption, set
   const [y, setY] = useState(0)
   const [itemId, setItemId] = useState(0)
   const [defaultColor, setDefaultColor] = useState('')
+  setState(inputSearch)
 
   const domRef = useClickOutside(() => {
     setFocus(false)
   })
 
   useEffect(() => {
-    if (inputSearch.length > 1)
+    if (inputSearch && inputSearch.length > 1)
       setOptionsState(options.filter(item => item.name.toLowerCase().includes(inputSearch.trim().toLowerCase())))
     else {
       setOptionsState(optionsTratado)
     }
-  }, [inputSearch])
-
-  useEffect(() => {
-    setState(inputSearch)
   }, [inputSearch])
 
   return (
@@ -123,7 +124,7 @@ export function InputWithSelect({ options, setState, placeholder, setoption, set
               :
               <button
                 type='button'
-                className='hover:bg-gray-200 cursor-pointer'
+                className='hover:bg-gray-200 cursor-pointer w-full'
                 onClick={() => {
                   const randomColor = emotionColors.sort(() => 0.5 - Math.random()).splice(0, 1).map(item => item.color)
                   setColor(randomColor[0])
@@ -161,22 +162,22 @@ export function InputWithSelect({ options, setState, placeholder, setoption, set
   );
 };
 
-
 const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId, setoption, setOptionsState, defaultColor }: ISubMenu) => {
+
+  const [diary, setDiary] = useAtom(diaryPage);
+  const [colorSelected, setColorSelected] = useState(defaultColor)
 
   const domRef = useClickOutside(() => {
     setSubModalIsOpen(false)
   })
 
-  useEffect(() => {
-    const optionsEdited = options.map(item => {
-      if (item.id === itemId) {
-        item.name = emotion
-      }
-      return item
-    })
-    setoption(optionsEdited)
-  }, [emotion])
+  const optionsEdited = options.map(item => {
+    if (item.id === itemId) {
+      item.name = emotion
+    }
+    return item
+  })
+  setoption(optionsEdited)
 
   const deleteItem = () => {
     const optionsEdited = options.filter(item => item.id != itemId)
@@ -192,9 +193,15 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
       return item
     })
     setoption(optionWithNewColor)
-  }
 
-  const [colorSelected, setColorSelected] = useState(defaultColor)
+    const diaryUptade = diary.map(item => {
+      if (item.feeling === emotion) {
+        item.color = color
+      }
+      return item
+    })
+    setDiary(diaryUptade)
+  }
 
   return (
     <menu

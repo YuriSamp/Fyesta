@@ -16,6 +16,12 @@ const selectStyles = cva(
         lg: 'w-36 h-12',
         full: 'w-full',
       },
+      Height: {
+        md: 'h-10'
+      },
+      rounded: {
+        lg: 'rounded-lg'
+      }
     },
     defaultVariants: {
       intent: 'primary'
@@ -29,9 +35,9 @@ export interface ISelect extends VariantProps<typeof selectStyles> {
   onChange: Dispatch<SetStateAction<any>> | ((theme: string) => void) | ((mode: string) => void)
 }
 
-export function Select({ Width, intent, Options, onChange, value }: ISelect) {
+export function Select({ Width, intent, Options, onChange, value, Height, rounded }: ISelect) {
   return (
-    <select className={selectStyles({ Width, intent })}
+    <select className={selectStyles({ Width, intent, Height, rounded })}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >

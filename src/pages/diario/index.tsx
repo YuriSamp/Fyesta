@@ -12,7 +12,6 @@ import { DiaryPopover } from '@ui/diario/diaryPopover';
 import DiarypageWritten from '@ui/diario/card';
 import { dateCalendarConvert } from 'src/helper/dateHelpers';
 
-
 interface IMonthComponent {
   diary: Idiary[]
 }
@@ -26,7 +25,6 @@ export default function Diario() {
     optionsName.unshift('Todas')
     return optionsName
   }, [options])
-
 
   const date = new Date()
   const month = date.getMonth()
@@ -43,10 +41,8 @@ export default function Diario() {
     return diario.filter(item => item.feeling === filtro)
   }
 
-
-
   useEffect(() => {
-    const compareDate = dateCalendarConvert(year, monthIndex)
+    const compareDate = dateCalendarConvert(year, monthIndex + 1)
     const diaryPerMonth = diary.filter(item => item.data.slice(0, 7).includes(compareDate))
     const diaryPerMonthSorted = diaryPerMonth.sort((a, b) => Number(b.data.slice(-2)) - Number(a.data.slice(-2)))
     setdiaryRef(diaryPerMonthSorted)
