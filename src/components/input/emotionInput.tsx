@@ -32,7 +32,7 @@ interface ISubMenu {
   defaultColor: string
 }
 
-export function InputWithSelect({ options, setState, placeholder, setoption, setColor, defaultValue }: InputWithSelectI) {
+export function EmotionInput({ options, setState, placeholder, setoption, setColor, defaultValue }: InputWithSelectI) {
 
   const optionsTratado = options.map(item => {
     const firstletterUppercase = item.name.slice(0, 1).toUpperCase()
@@ -56,7 +56,7 @@ export function InputWithSelect({ options, setState, placeholder, setoption, set
   })
 
   useEffect(() => {
-    if (inputSearch.length > 1)
+    if (inputSearch && inputSearch.length > 1)
       setOptionsState(options.filter(item => item.name.toLowerCase().includes(inputSearch.trim().toLowerCase())))
     else {
       setOptionsState(optionsTratado)
@@ -123,7 +123,7 @@ export function InputWithSelect({ options, setState, placeholder, setoption, set
               :
               <button
                 type='button'
-                className='hover:bg-gray-200 cursor-pointer'
+                className='hover:bg-gray-200 cursor-pointer w-full'
                 onClick={() => {
                   const randomColor = emotionColors.sort(() => 0.5 - Math.random()).splice(0, 1).map(item => item.color)
                   setColor(randomColor[0])

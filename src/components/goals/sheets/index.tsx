@@ -5,13 +5,24 @@ import * as Progress from '@radix-ui/react-progress';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Goal, SheetsProps, Task } from 'src/interfaces/goalsTypes';
 import { AiOutlineCheck } from 'react-icons/ai'
+import { useAtomValue } from 'jotai';
+import { categoryOptions, categoryType } from 'src/context/goalContext';
+
+interface ISheetsFilter {
+  onChangeProgress: Dispatch<SetStateAction<progressFilter>>
+  onChangeCategory: Dispatch<SetStateAction<string>>
+  progressOptions: readonly progressFilter[]
+  categoryOptions: categoryType[]
+  progress: string
+  category: string
+}
 
 const progressOptions = ['Todas', 'Concluidas', 'Em progresso', 'Não iniciadas'] as const
 type progressFilter = typeof progressOptions[number]
 
 export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsProps) {
 
-  const categoryOptions = ['Todas', 'Intelectual', 'Pessoal', 'Financeiro']
+  const categoryOptionsState = useAtomValue(categoryOptions)
 
   const [progess, setProgress] = useState<progressFilter>('Todas')
   const [category, setCategory] = useState('Todas')
@@ -45,7 +56,7 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
           onChangeProgress={setProgress}
           category={category}
           progress={progess}
-          categoryOptions={categoryOptions}
+          categoryOptions={categoryOptionsState}
           progressOptions={progressOptions}
         />
       </div>
@@ -113,15 +124,6 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
   )
 }
 
-interface ISheetsFilter {
-  onChangeProgress: Dispatch<SetStateAction<progressFilter>>
-  onChangeCategory: Dispatch<SetStateAction<string>>
-  progressOptions: readonly progressFilter[]
-  categoryOptions: string[]
-  progress: string
-  category: string
-}
-
 const SheetsFilter = ({ onChangeCategory, onChangeProgress, progress, category, categoryOptions, progressOptions }: ISheetsFilter) => {
 
   const [isOpen, setIsOpen] = useState(false)
@@ -174,15 +176,23 @@ const SheetsFilter = ({ onChangeCategory, onChangeProgress, progress, category, 
             <p>Categorias</p>
           </DropdownMenu.Item>
           <DropdownMenu.Group className='max-h-[100px] overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
+            <DropdownMenu.Item
+              className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900 dark:hover:bg-gray-800 hover:text-white justify-between"
+              role='button'
+              onClick={(e) => onChangeCategory('Todas')}
+            >
+              Todas
+              {'Todas' === category && <AiOutlineCheck />}
+            </DropdownMenu.Item>
             {categoryOptions.map((item, index) => (
               <DropdownMenu.Item
                 className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900   dark:hover:bg-gray-800 hover:text-white justify-between"
-                key={index}
+                key={item.id}
                 role='button'
-                onClick={() => onChangeCategory(item)}
+                onClick={() => onChangeCategory(item.name)}
               >
-                {item}
-                {item === category && <AiOutlineCheck />}
+                {item.name}
+                {item.name === category && <AiOutlineCheck />}
               </DropdownMenu.Item>
             ))}
           </DropdownMenu.Group>

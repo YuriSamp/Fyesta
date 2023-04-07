@@ -44,7 +44,7 @@ export interface SheetsProps extends GoalsWithSetterProps {
   setGoalId: Dispatch<SetStateAction<number | null>>;
 }
 
-export type TaskWithCategory = Omit<Goal, 'Id' | 'Meta'>;
+export type TaskWithCategory = Omit<Goal, 'Meta'>;
 
 export type Task = {
   Tarefa: string;
@@ -53,6 +53,6 @@ export type Task = {
 };
 
 export interface IField {
-  FieldName: 'Intelectual' | 'Pessoal' | 'Financeiro';
+  FieldName: string;
   Metas: JSX.Element[];
 }

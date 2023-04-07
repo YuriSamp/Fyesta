@@ -17,6 +17,8 @@ interface IMonthComponent {
   diary: Idiary[]
 }
 
+//TODO concertar bug que se trocar de cor no emotion n troca no display
+
 export default function Diario() {
 
   const options = useAtomValue(emotionsOptions)
