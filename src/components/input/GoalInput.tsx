@@ -1,9 +1,9 @@
-import React, { useEffect, useState, SetStateAction, Dispatch, } from 'react';
+import React, { useState, SetStateAction, Dispatch, } from 'react';
 import { BsTrash } from 'react-icons/bs'
 import { useClickOutside } from 'src/hooks/useClickOutside';
-import { categoryType } from 'src/context/goalContext';
-
-//TODO não deixar excluir caso exista uma meta com essa categoria
+import { Goals, categoryType } from 'src/context/goalContext';
+import { useAtomValue } from 'jotai';
+import { toast } from 'react-toastify';
 
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
@@ -19,15 +19,17 @@ interface InputWithSelectI {
 
 export function GoalInput({ options, setState, placeholder, setoption, value }: InputWithSelectI) {
 
+  const goals = useAtomValue(Goals)
+
+  const [inputSearch, setInputSearch] = useState(value)
+  const [focus, setFocus] = useState(false)
+
   const optionsTratado = options.map(item => {
     const firstletterUppercase = item.name.slice(0, 1).toUpperCase()
     const OtherLetters = item.name.slice(1).toLowerCase()
     item.name = firstletterUppercase + OtherLetters
     return item
   })
-
-  const [inputSearch, setInputSearch] = useState(value)
-  const [focus, setFocus] = useState(false)
 
   const domRef = useClickOutside(() => {
     setFocus(false)
@@ -37,6 +39,13 @@ export function GoalInput({ options, setState, placeholder, setoption, value }: 
   setState(inputSearch)
 
   const deleteItem = (id: number) => {
+    const optionWillBeDeleted = options.filter(item => item.id === id)
+    const hasGoals = goals.filter(item => item.Categoria === optionWillBeDeleted[0].name)
+    if (hasGoals.length > 0) {
+      const notify = () => toast.error('Não é possivel excluir uma categoria caso haja metas nela');
+      notify();
+      return
+    }
     const optionsEdited = options.filter(item => item.id != id)
     setoption(optionsEdited)
   }
@@ -88,22 +97,26 @@ export function GoalInput({ options, setState, placeholder, setoption, value }: 
                 </div>
               ))
               :
-              <button
-                type='button'
-                className='hover:bg-gray-200 cursor-pointer w-full'
-                onClick={() => {
-                  setoption(prev => [...prev, { name: inputSearch, id: options.length, }])
-                  setInputSearch('')
-                  setFocus(false)
-                }}
-              >
-                <p
-                  className='flex gap-5 items-center py-1 px-4 '
+              options.length < 9
+                ?
+                <button
+                  type='button'
+                  className='hover:bg-gray-200 cursor-pointer w-full'
+                  onClick={() => {
+                    setoption(prev => [...prev, { name: inputSearch, id: options.length, }])
+                    setInputSearch('')
+                    setFocus(false)
+                  }}
                 >
-                  <span>Criar</span>
-                  <span>{inputSearch}</span>
-                </p>
-              </button>
+                  <p
+                    className='flex gap-5 items-center py-1 px-4 '
+                  >
+                    <span>Criar</span>
+                    <span>{inputSearch}</span>
+                  </p>
+                </button>
+                :
+                <p className='text-center py-2'>você atingiu o numero máximo de categorias</p>
             }
           </>
         }

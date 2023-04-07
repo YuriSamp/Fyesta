@@ -7,7 +7,7 @@ import { categoryOptions } from 'src/context/goalContext'
 import { GoalsProps, IField, TaskWithCategory } from 'src/interfaces/goalsTypes'
 
 //TODO fazer a animação do scroll
-
+// TODO fixar o layout mesmo que não haja nenhuma categoria
 export default function Fields({ Metas }: GoalsProps) {
 
   const categoryOptionsArr = useAtomValue(categoryOptions)

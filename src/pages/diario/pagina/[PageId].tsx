@@ -10,7 +10,6 @@ import { Navbar } from '@ui/layout/navbar'
 import { EmotionInput } from '@ui/input/emotionInput'
 import { emotionsOptions } from 'src/context/emotionsOptions'
 
-//TODO quando eu entro na pagina a informação n vem
 
 const Pagina = () => {
   const router = useRouter()

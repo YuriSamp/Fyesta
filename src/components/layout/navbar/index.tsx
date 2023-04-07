@@ -46,26 +46,28 @@ export const Navbar = ({ Page }: Props) => {
     <header>
       <section
         className='flex py-4 px-8 dark:border-b-2 bg-[#fafaf5] drop-shadow-lg dark:border-neutral-800 dark:bg-[#121212] w-full justify-between items-center text-black dark:text-white'>
-        <div className='flex gap-6 select-none'>
+        <ul className='flex gap-6 select-none'>
           {pages.map((item, index) => (
             Page.includes(item.name) ?
-              <Link
-                key={index}
-                href={item.link}
-                title={item.name}
-                className={`cursor-pointer w-10 h-10 flex justify-center items-center rounded-full text-white  bg-violet-900 dark:bg-green-700`}>
-                {item.emoji}
-              </Link>
+              <li key={index}>
+                <Link
+                  href={item.link}
+                  title={item.name}
+                  className={`cursor-pointer w-10 h-10 flex justify-center items-center rounded-full text-white  bg-violet-900 dark:bg-green-700`}>
+                  {item.emoji}
+                </Link>
+              </li>
               :
-              <Link
-                key={index}
-                href={item.link}
-                title={item.name}
-                className='cursor-pointer w-10 h-10 flex justify-center items-center '>
-                {item.emoji}
-              </Link>
+              <li key={index}>
+                <Link
+                  href={item.link}
+                  title={item.name}
+                  className='cursor-pointer w-10 h-10 flex justify-center items-center '>
+                  {item.emoji}
+                </Link>
+              </li>
           ))}
-        </div>
+        </ul>
         <div className='flex gap-6 items-center'>
           <p className='select-none'>{msg}, {user?.displayName}</p>
           <AvatarWithDropDown Path={user?.photoURL as string} />

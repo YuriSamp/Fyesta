@@ -3,6 +3,10 @@ import { BsThreeDots, BsTrash } from 'react-icons/bs'
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { AiOutlineCheck } from 'react-icons/ai'
 import { emotionOptions, emotionColors } from 'src/context/emotionsOptions';
+import { useAtom } from 'jotai';
+import { diaryPage } from 'src/context/diaryContext';
+
+// TODO SE ADICIONAR MAIS ITENS A LISTA BUGA TUDO
 
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
@@ -50,6 +54,7 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
   const [y, setY] = useState(0)
   const [itemId, setItemId] = useState(0)
   const [defaultColor, setDefaultColor] = useState('')
+  setState(inputSearch)
 
   const domRef = useClickOutside(() => {
     setFocus(false)
@@ -61,10 +66,6 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
     else {
       setOptionsState(optionsTratado)
     }
-  }, [inputSearch])
-
-  useEffect(() => {
-    setState(inputSearch)
   }, [inputSearch])
 
   return (
@@ -161,22 +162,22 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
   );
 };
 
-
 const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId, setoption, setOptionsState, defaultColor }: ISubMenu) => {
+
+  const [diary, setDiary] = useAtom(diaryPage);
+  const [colorSelected, setColorSelected] = useState(defaultColor)
 
   const domRef = useClickOutside(() => {
     setSubModalIsOpen(false)
   })
 
-  useEffect(() => {
-    const optionsEdited = options.map(item => {
-      if (item.id === itemId) {
-        item.name = emotion
-      }
-      return item
-    })
-    setoption(optionsEdited)
-  }, [emotion])
+  const optionsEdited = options.map(item => {
+    if (item.id === itemId) {
+      item.name = emotion
+    }
+    return item
+  })
+  setoption(optionsEdited)
 
   const deleteItem = () => {
     const optionsEdited = options.filter(item => item.id != itemId)
@@ -192,9 +193,15 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
       return item
     })
     setoption(optionWithNewColor)
-  }
 
-  const [colorSelected, setColorSelected] = useState(defaultColor)
+    const diaryUptade = diary.map(item => {
+      if (item.feeling === emotion) {
+        item.color = color
+      }
+      return item
+    })
+    setDiary(diaryUptade)
+  }
 
   return (
     <menu

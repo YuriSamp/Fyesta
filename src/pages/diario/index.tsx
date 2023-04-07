@@ -12,12 +12,9 @@ import { DiaryPopover } from '@ui/diario/diaryPopover';
 import DiarypageWritten from '@ui/diario/card';
 import { dateCalendarConvert } from 'src/helper/dateHelpers';
 
-
 interface IMonthComponent {
   diary: Idiary[]
 }
-
-//TODO concertar bug que se trocar de cor no emotion n troca no display
 
 export default function Diario() {
 
