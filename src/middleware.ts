@@ -16,6 +16,5 @@ export const config = {
     '/planner',
     '/calendario',
     '/metas',
-    '/emocoes',
   ],
 };

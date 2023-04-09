@@ -37,3 +37,10 @@ export function formateData(dateString: string) {
     return '';
   }
 }
+
+export function CalendarDataConverter(dateString: string) {
+  const date = new Date(dateString);
+  const day = date.getDate() + 1;
+  const month = date.getMonth();
+  return { day, month };
+}

@@ -2,46 +2,56 @@ import { Button } from '@ui/button';
 import { useEffect, useState, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { dateToDateInput } from 'src/helper/dateHelpers';
-import { ICalendarDays } from 'src/interfaces/calendarTypes';
+import { ICalendarDays, brasilApiType } from 'src/interfaces/calendarTypes';
 import MonthController from '@ui/monthController';
-import { CalendarDays } from 'src/helper/calendarHelpers';
-
-
+import { calendarBuilder } from 'src/helper/calendarHelpers';
+import { useQuery } from '@tanstack/react-query';
 
 const CalendarModal = dynamic(() => import('@ui/calendarActionModal'), {
   ssr: false
 })
 
+const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
+
 export default function Calendario() {
+
+  const { isLoading, error, data } = useQuery<brasilApiType[]>({
+    queryKey: ['repoData'],
+    queryFn: () =>
+      fetch(`https://brasilapi.com.br/api/feriados/v1/${year}`).then(
+        (res) => res.json(),
+      ),
+  })
+
   const date = new Date()
   const day = date.getDate()
-  const daysOfWeek = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
   const month = date.getMonth()
   const [monthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
-  const CalendarDaysValue = useMemo(() => CalendarDays(year, monthIndex), [year, monthIndex])
 
-  const [days, setDays] = useState<ICalendarDays[]>(CalendarDaysValue)
+  const calendarDaysValue = useMemo(() => calendarBuilder(year, monthIndex, data), [year, monthIndex, data])
+
+  const [days, setDays] = useState<ICalendarDays[]>(calendarDaysValue)
   const [ismodalOpen, setIsModaOpen] = useState(false)
-
   const [dateInputModal, setDateInputModal] = useState(dateToDateInput(day, month + 1, year))
 
   useEffect(() => {
-    setDays(CalendarDays(year, monthIndex))
-  }, [monthIndex])
+    setDays(calendarBuilder(year, monthIndex, data))
+  }, [monthIndex, data, year])
 
-
-  const BackToday = () => {
+  const backToday = () => {
     setYear(date.getFullYear())
     setMonthIndex(date.getMonth())
   }
+
+  console.log(calendarBuilder(year, monthIndex, data))
 
   return (
     <section className='flex flex-col items-center text-black dark:text-white'>
       <div className='flex gap-12'>
         <Button
           Children='Hoje'
-          onClick={() => BackToday()}
+          onClick={() => backToday()}
         />
         <MonthController
           monthIndex={monthIndex}
