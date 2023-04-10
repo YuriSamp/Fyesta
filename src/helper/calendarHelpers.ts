@@ -77,6 +77,7 @@ const generateCalendarDays = (year: number, MonthIndex: number) => {
     for (let i = firstDayIndex + 1; i > 0; i--) {
       if (MonthIndex - 1 === -1) {
         calendarDays.push({
+          id: 1 * i,
           day: prevLastDay - i + 1,
           Month: 11,
           year: year - 1,
@@ -84,6 +85,7 @@ const generateCalendarDays = (year: number, MonthIndex: number) => {
         });
       } else {
         calendarDays.push({
+          id: 1 * i,
           day: prevLastDay - i + 1,
           Month: MonthIndex - 1,
           year: year,
@@ -95,15 +97,28 @@ const generateCalendarDays = (year: number, MonthIndex: number) => {
 
   //Gera os dias do mês atual
   for (let i = 1; i <= lastDay; i++) {
-    calendarDays.push({ day: i, Month: MonthIndex, year: year, tasks: [] });
+    calendarDays.push({
+      id: 8 + i,
+      day: i,
+      Month: MonthIndex,
+      year: year,
+      tasks: [],
+    });
   }
 
   //Gera os dias do próximo mês atual
   for (let i = 1; i <= nextDays; i++) {
     if (MonthIndex + 1 === 12) {
-      calendarDays.push({ day: i, Month: 0, year: year + 1, tasks: [] });
+      calendarDays.push({
+        id: 50 + i,
+        day: i,
+        Month: 0,
+        year: year + 1,
+        tasks: [],
+      });
     } else {
       calendarDays.push({
+        id: 50 + i,
         day: i,
         Month: MonthIndex + 1,
         year: year,

@@ -1,11 +1,10 @@
 export interface holidayType {
   day: number;
   month: number;
+  description?: string;
   name: string;
   type: 'Feriado Nacional' | 'Data Comemorativa';
 }
-
-type holidayDescriptionType = Omit<holidayType, 'day' | 'month'>;
 
 export interface brasilApiType {
   date: string;
@@ -13,21 +12,23 @@ export interface brasilApiType {
   type: string;
 }
 
-interface taskType {
-  name: string;
-  description: string;
-  date: string;
-}
+type CalendarTaskTypes =
+  | 'Reminder'
+  | 'Feriado Nacional'
+  | 'Data Comemorativa'
+  | 'Task';
 
-interface reminderType {
+export interface ICalendarTask {
   name: string;
-  Reminder: string;
-  date: string;
+  description?: string;
+  day?: number;
+  month?: number;
+  year?: number;
+  type: CalendarTaskTypes;
 }
-
-type ICalendarTask = reminderType | taskType | holidayDescriptionType;
 
 export interface ICalendarDays {
+  id: number;
   day: number;
   Month: number;
   year: number;

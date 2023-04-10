@@ -4,44 +4,63 @@ import { Button } from './button';
 import { ControledInput } from './input/input';
 import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
-import { formateData } from 'src/helper/dateHelpers';
 import { Select } from './select';
 import { ModalProps } from 'src/interfaces/modalTypes';
+import { useAtom } from 'jotai';
+import { calendarContext } from 'src/context/calendarContext';
+import { ICalendarTask } from 'src/interfaces/calendarTypes';
 
 // TODO Finalizar o modal
+
+// name: string;
+//   description?: string;
+//   day?: number;
+//   month?: number;
+//   year?: number;
+//   type: CalendarTaskTypes;
 
 interface ICalendarModal extends ModalProps {
   day: string
 }
 
-export default function CalendarModal({ State, SetState, day }: ICalendarModal) {
+export default function CalendarModal({ State, SetState, day, }: ICalendarModal) {
 
+  const [calendarTasks, setCalendarTasks] = useAtom(calendarContext)
   const [title, setTitle] = useState('')
   const [reminderOption, setReminderOption] = useState('Não se repete')
   const [modalOption, setModalOption] = useState('Tarefa')
   const [taskText, setTaskText] = useState('')
   const [dataRaw, setData] = useState(day)
 
-
   useEffect(() => {
     setData(day)
   }, [day])
 
   const handleSubimit = () => {
-    if (modalOption === 'Lembrete') {
-      const lembreteObj = {
-        title: title,
-        reminder: reminderOption,
-        date: formateData(dataRaw),
-      }
-    }
+    const dataFormated = dataRaw.split('-')
+    const year = Number(dataFormated[0])
+    const month = Number(dataFormated[1]) - 1
+    const day = Number(dataFormated[2])
+
+    // if (modalOption === 'Lembrete') {
+    //   const lembreteObj = {
+    //     title: title,
+    //     reminder: reminderOption,
+    //     date: formateData(dataRaw),
+    //   }
+    // }
 
     if (modalOption === 'Tarefa') {
-      const TarefaObj = {
-        title: title,
-        taskText: taskText,
-        date: formateData(dataRaw),
+      const TarefaObj: ICalendarTask = {
+        name: title,
+        description: taskText,
+        type: 'Task',
+        day: day,
+        month: month,
+        year: year
       }
+      console.log(TarefaObj)
+      // setCalendarTasks(prev => [...prev, TarefaObj])
     }
   }
 
@@ -49,7 +68,9 @@ export default function CalendarModal({ State, SetState, day }: ICalendarModal) 
   return (
     <Portal.Root>
       {State &&
-        <section className='w-[450px] rounded-lg fixed left-60 top-48 flex flex-col bg-white dark:bg-neutral-900 shadow-2xl'>
+        <section
+          className='w-[450px] rounded-lg absolute left-[38%] top-[40%] flex flex-col bg-white dark:bg-neutral-900  drop-shadow-2xl'
+        >
           <div className='flex items-center justify-end bg-gray-100 dark:bg-[#505050] rounded-t-lg'>
             <button
               className='text-2xl py-2 px-3'

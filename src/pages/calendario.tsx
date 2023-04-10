@@ -1,8 +1,8 @@
 import { Button } from '@ui/button';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { dateToDateInput } from 'src/helper/dateHelpers';
-import { ICalendarDays, brasilApiType } from 'src/interfaces/calendarTypes';
+import { ICalendarDays, ICalendarTask, brasilApiType } from 'src/interfaces/calendarTypes';
 import MonthController from '@ui/monthController';
 import { calendarBuilder } from 'src/helper/calendarHelpers';
 import { useQuery } from '@tanstack/react-query';
@@ -28,10 +28,7 @@ export default function Calendario() {
   const month = date.getMonth()
   const [monthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
-
-  const calendarDaysValue = useMemo(() => calendarBuilder(year, monthIndex, data), [year, monthIndex, data])
-
-  const [days, setDays] = useState<ICalendarDays[]>(calendarDaysValue)
+  const [days, setDays] = useState<ICalendarDays[]>(calendarBuilder(year, monthIndex, data))
   const [ismodalOpen, setIsModaOpen] = useState(false)
   const [dateInputModal, setDateInputModal] = useState(dateToDateInput(day, month + 1, year))
 
@@ -44,11 +41,9 @@ export default function Calendario() {
     setMonthIndex(date.getMonth())
   }
 
-  console.log(calendarBuilder(year, monthIndex, data))
-
   return (
     <section className='flex flex-col items-center text-black dark:text-white'>
-      <div className='flex gap-12'>
+      <div className='flex gap-12 relative'>
         <Button
           Children='Hoje'
           onClick={() => backToday()}
@@ -63,7 +58,7 @@ export default function Calendario() {
           Children='Criar'
         />
       </div>
-      <div className='flex pt-2 '>
+      <div className='flex pt-2 relative '>
         {daysOfWeek.map(item => (
           <div
             className='px-4 py-2 w-52 text-center'
@@ -74,67 +69,86 @@ export default function Calendario() {
         ))}
       </div>
       <div className='flex flex-wrap max-w-[1460px] justify-center text-lg' >
-        {days.length > 35 ?
-          days.map((item, index) => (
-            <div className='w-52 h-32 calendar'
-              key={index}
-              onClick={() => {
-                setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
-                setIsModaOpen(prev => !prev)
-              }}
-            >
-              {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
-                <div className='flex justify-center  py-2  select-none'>
-                  <div className='w-10 bg-violet-700 dark:bg-DarkModeGreen text-center text-white rounded-full'>
-                    {item.day}
+        {days.map((item) => (
+          <div className='w-52 h-36 calendar'
+            key={item.id}
+            onClick={(e) => {
+              setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
+              setIsModaOpen(prev => !prev)
+
+            }}
+          >
+            {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
+              <div
+                className='flex justify-center py-2 px-2 select-none'
+                role='button'
+              >
+                <div className='w-10 bg-violet-700 dark:bg-DarkModeGreen text-center text-white rounded-full'>
+                  {item.day}
+                  <div className='text-black'>
+                    {item.tasks.map(task => (
+                      <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              :
+              item.Month === monthIndex ?
+                <div
+                  className='text-center py-2 px-2 select-none'
+                  role='button'
+                >
+                  {item.day}
+                  <div className='text-black'>
+                    {item.tasks.map(task => (
+                      <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
+                    ))}
                   </div>
                 </div>
                 :
-                item.Month === monthIndex ?
-                  <div className='text-center py-2 pr-4 select-none'>
-                    {item.day}
-                  </div>
-                  :
-                  <div className='text-center py-2 pr-4 select-none text-red-600 dark:text-gray-600'>
-                    {item.day}
-                  </div>
-              }
-            </div>
-          ))
-          :
-          days.map((item, index) => (
-            <div className='w-52 h-40 calendar'
-              key={index}
-              onClick={() => {
-                setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
-                setIsModaOpen(prev => !prev)
-              }}
-            >
-              {item.Month === date.getMonth() && item.day === date.getDate() ?
-                <div className='flex justify-center  py-2  select-none'>
-                  <div className='w-8 bg-violet-700 dark:bg-DarkModeGreen h-8 flex justify-center items-center  text-white rounded-full'>
-                    {item.day}
+                <div className='text-center py-2 px-2 select-none text-gray-300 dark:text-gray-600'>
+                  {item.day}
+                  <div className='text-black'>
+                    {item.tasks.map(task => (
+                      <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
+                    ))}
                   </div>
                 </div>
-                :
-                item.Month === monthIndex ?
-                  <div className='text-center py-2 pr-4 select-none'>
-                    {item.day}
-                  </div>
-                  :
-                  <div className='text-center py-2 pr-4 select-none text-red-00 dark:text-gray-600'>
-                    {item.day}
-                  </div>
-              }
-            </div>
-          ))
+            }
+          </div>
+        ))
         }
+        <CalendarModal
+          State={ismodalOpen}
+          SetState={setIsModaOpen}
+          day={dateInputModal}
+
+        />
       </div>
-      <CalendarModal
-        State={ismodalOpen}
-        SetState={setIsModaOpen}
-        day={dateInputModal}
-      />
     </section>
+  )
+}
+
+const CalendarDayTasksDisplay = ({ name, description, type }: ICalendarTask) => {
+  let taskColor = ''
+  switch (type) {
+    case 'Data Comemorativa':
+      taskColor = 'bg-blue-400'
+      break
+    case 'Feriado Nacional':
+      taskColor = 'bg-violet-400'
+      break
+    case 'Reminder':
+      taskColor = 'bg-green-400'
+      break
+    case 'Task':
+      taskColor = 'bg-orange-400'
+      break
+  }
+
+  return (
+    <button key={name} className={`w-full h-8 rounded-md ${taskColor} flex justify-center items-center`}>
+      {name}
+    </button>
   )
 }
