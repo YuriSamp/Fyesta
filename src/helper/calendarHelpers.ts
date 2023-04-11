@@ -163,28 +163,33 @@ export const calendarBuilder = (
 
   if (holidaysList) {
     calendarDays.forEach((day) => {
-      const holiday = holidaysList.find(
+      const tasks: ICalendarTask[] = [];
+
+      const holidays = holidaysList.filter(
         (h) => h.month === day.Month && h.day === day.day
       );
-      if (holiday) {
-        day.tasks.push({
+      holidays.forEach((holiday) => {
+        tasks.push({
           name: holiday.name,
           type: holiday.type,
         });
-      }
-      const task = calendarTasks.find(
+      });
+
+      const dayTasks = calendarTasks.filter(
         (task) =>
           task.month === day.Month &&
           task.day === day.day &&
           task.year === day.year
       );
-      if (task) {
-        day.tasks.push({
+      dayTasks.forEach((task) => {
+        tasks.push({
           name: task.name,
           type: task.type,
           description: task.type,
         });
-      }
+      });
+
+      day.tasks = tasks;
     });
   }
   return calendarDays;

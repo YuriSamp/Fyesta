@@ -9,6 +9,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { calendarContext } from 'src/context/calendarContext';
 
+interface CalendarDayDiplayType {
+  isToday: boolean
+  day: number
+  tasks: ICalendarTask[]
+  currentMonth: boolean
+}
+
 const CalendarModal = dynamic(() => import('@ui/calendarActionModal'), {
   ssr: false
 })
@@ -47,7 +54,7 @@ export default function Calendario() {
   }
 
   return (
-    <section className='flex flex-col items-center text-black dark:text-white'>
+    <section className='flex flex-col items-center text-black dark:text-white '>
       <div className='flex gap-12 relative'>
         <Button
           Children='Hoje'
@@ -75,49 +82,21 @@ export default function Calendario() {
       </div>
       <div className='flex flex-wrap max-w-[1460px] justify-center text-lg' >
         {days.map((item) => (
-          <div className='w-52 h-36 calendar'
+          <div className='w-52 h-40 calendar'
             key={item.id}
             onClick={(e) => {
-              console.log(e.currentTarget.getBoundingClientRect())
               setDivRef(e.currentTarget.getBoundingClientRect())
               setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
               setIsModaOpen(prev => !prev)
             }}
           >
             {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
-              <div
-                className='flex justify-center py-2 px-2 select-none'
-              >
-                <div className='w-10 bg-violet-700 dark:bg-DarkModeGreen text-center text-white rounded-full'>
-                  {item.day}
-                  <div className='text-black'>
-                    {item.tasks.map(task => (
-                      <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <CalendarDayDiplay isToday={true} currentMonth={true} day={item.day} tasks={item.tasks} />
               :
               item.Month === monthIndex ?
-                <div
-                  className='text-center py-2 px-2 select-none'
-                >
-                  {item.day}
-                  <div className='text-black'>
-                    {item.tasks.map(task => (
-                      <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
-                    ))}
-                  </div>
-                </div>
+                <CalendarDayDiplay isToday={false} currentMonth={true} day={item.day} tasks={item.tasks} />
                 :
-                <div className='text-center py-2 px-2 select-none text-gray-300 dark:text-gray-600'>
-                  {item.day}
-                  <div className='text-black'>
-                    {item.tasks.map(task => (
-                      <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
-                    ))}
-                  </div>
-                </div>
+                <CalendarDayDiplay isToday={false} currentMonth={false} day={item.day} tasks={item.tasks} />
             }
           </div>
         ))
@@ -126,7 +105,7 @@ export default function Calendario() {
           <CalendarModal
             isModalOpen={ismodalOpen}
             setIsModalOpen={setIsModaOpen}
-            day={dateInputModal}
+            date={dateInputModal}
             divRef={divRef}
           />
         }
@@ -134,6 +113,41 @@ export default function Calendario() {
     </section>
   )
 }
+
+
+const CalendarDayDiplay = ({ isToday, day, tasks, currentMonth }: CalendarDayDiplayType) => {
+
+  if (isToday) {
+    return (
+      <div className='flex flex-col items-center  gap-2 py-2 px-2 select-none'>
+        <div className='w-10 bg-violet-700 dark:bg-DarkModeGreen text-center text-white rounded-full'>
+          {day}
+        </div>
+        <div className='text-black w-full flex flex-col gap-2 h-28 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-4 py-1'>
+          {tasks.map(task => (
+            <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div
+      className='text-center py-2 px-2 select-none'
+    >
+      <div className={`flex flex-col gap-2 h-36 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2 + ${!currentMonth && 'text-gray-300 dark:text-gray-600'}`}>
+        {day}
+        <div className='text-black flex flex-col gap-2 h-28 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2'>
+          {tasks.map(task => (
+            <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 
 const CalendarDayTasksDisplay = ({ name, description, type }: ICalendarTask) => {
   let taskColor = ''

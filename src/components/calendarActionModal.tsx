@@ -12,36 +12,36 @@ import { ICalendarTask } from 'src/interfaces/calendarTypes';
 import { dayNumberToDayString } from 'src/helper/dateHelpers';
 
 interface ICalendarModal extends ModalProps {
-  day: string
+  date: string
   divRef: DOMRect
 }
 
-// const reminderOptions = ['Não se repete', 'todos os dias', `Semanal : Cada ${dayOfWeek}`,]
+export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRef }: ICalendarModal) {
 
-export default function CalendarModal({ isModalOpen, setIsModalOpen, day, divRef }: ICalendarModal) {
-
-  const { left, top, height, width } = divRef
   const setCalendarTasks = useSetAtom(calendarContext)
   const [title, setTitle] = useState('')
-  const [reminderOption, setReminderOption] = useState('Não se repete')
   const [modalOption, setModalOption] = useState('Tarefa')
   const [taskText, setTaskText] = useState('')
-  const [dataRaw, setData] = useState(day)
+  // const [reminderOption, setReminderOption] = useState('Não se repete')
+  const [dataRaw, setData] = useState(date)
+  const [dayOfWeek, setDayOfWeek] = useState(dayNumberToDayString(new Date(date).getDay()))
+  const dataFormated = dataRaw.split('-')
+  const year = Number(dataFormated[0])
+  const month = Number(dataFormated[1]) - 1
+  const day = Number(dataFormated[2])
 
   useEffect(() => {
-    setData(day)
-  }, [day])
+    setData(date)
+    setDayOfWeek(dayNumberToDayString(new Date(date).getDay()))
+  }, [date])
+
+  // const reminderOptions = ['Não se repete', 'nos proximos 5 dias', `Semanal : Cada ${dayOfWeek}`, `anual em ${day} de abril`]
 
   const handleSubimit = () => {
-    const dataFormated = dataRaw.split('-')
-    const year = Number(dataFormated[0])
-    const month = Number(dataFormated[1]) - 1
-    const day = Number(dataFormated[2])
-
     if (modalOption === 'Lembrete') {
       const lembreteObj: ICalendarTask = {
         name: title,
-        description: reminderOption,
+        description: title,
         type: 'Reminder',
         day: day,
         month: month,
@@ -66,22 +66,28 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, day, divRef
     setIsModalOpen(false)
   }
 
-  let leftRef = 0
-  let topRef = 0
+  const modalRelativePosition = (): { leftRef: number, topRef: number } => {
+    const { left, top, height, width } = divRef
 
-  if (left + width < 1200) {
-    leftRef = left + 1.1 * width
-  } else {
-    leftRef = left - 2.3 * width
+    let leftRef = 0
+    let topRef = 0
+
+    if (left + width < 1200) {
+      leftRef = left + 1.1 * width
+    } else {
+      leftRef = left - 2.3 * width
+    }
+
+    if (top + height < 600) {
+      topRef = top + height
+    } else {
+      topRef = top - 2.3 * height
+    }
+
+    return { leftRef, topRef }
   }
 
-  if (top + height < 600) {
-    topRef = top + height
-  } else {
-    topRef = top - 2.3 * height
-  }
-
-  const dayOfWeek = dayNumberToDayString(new Date(day).getDay())
+  const { leftRef, topRef } = modalRelativePosition()
 
   return (
     <Portal.Root>
@@ -141,12 +147,12 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, day, divRef
             </div>
             :
             <div className='py-5 px-10 flex gap-4 items-center '>
-              <RxLoop className='w-7 h-7' />
+              {/* <RxLoop className='w-7 h-7' />
               <Select
-                Options={['Not Finished']}
+                Options={reminderOptions}
                 value={reminderOption}
                 onChange={setReminderOption}
-              />
+              /> */}
             </div>
           }
           <div className='pb-4 pl-20'>

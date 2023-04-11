@@ -50,18 +50,25 @@ export function dayNumberToDayString(day: number) {
   switch (day) {
     case 0:
       daystring = 'Segunda-feira';
+      break;
     case 1:
       daystring = 'Terça-feira';
+      break;
     case 2:
       daystring = 'Quarta-feira';
+      break;
     case 3:
       daystring = 'Quinta-feira';
+      break;
     case 4:
       daystring = 'Sexta-feira';
+      break;
     case 5:
       daystring = 'Sábado';
+      break;
     case 6:
       daystring = 'Domingo';
+      break;
   }
   return daystring;
 }
