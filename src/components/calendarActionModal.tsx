@@ -9,15 +9,18 @@ import { ModalProps } from 'src/interfaces/modalTypes';
 import { useSetAtom } from 'jotai';
 import { calendarContext } from 'src/context/calendarContext';
 import { ICalendarTask } from 'src/interfaces/calendarTypes';
-
-// TODO Finalizar o modal
+import { dayNumberToDayString } from 'src/helper/dateHelpers';
 
 interface ICalendarModal extends ModalProps {
   day: string
+  divRef: DOMRect
 }
 
-export default function CalendarModal({ isModalOpen, setIsModalOpen, day, }: ICalendarModal) {
+// const reminderOptions = ['Não se repete', 'todos os dias', `Semanal : Cada ${dayOfWeek}`,]
 
+export default function CalendarModal({ isModalOpen, setIsModalOpen, day, divRef }: ICalendarModal) {
+
+  const { left, top, height, width } = divRef
   const setCalendarTasks = useSetAtom(calendarContext)
   const [title, setTitle] = useState('')
   const [reminderOption, setReminderOption] = useState('Não se repete')
@@ -63,12 +66,29 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, day, }: ICa
     setIsModalOpen(false)
   }
 
+  let leftRef = 0
+  let topRef = 0
+
+  if (left + width < 1200) {
+    leftRef = left + 1.1 * width
+  } else {
+    leftRef = left - 2.3 * width
+  }
+
+  if (top + height < 600) {
+    topRef = top + height
+  } else {
+    topRef = top - 2.3 * height
+  }
+
+  const dayOfWeek = dayNumberToDayString(new Date(day).getDay())
 
   return (
     <Portal.Root>
       {isModalOpen &&
         <section
-          className='w-[450px] rounded-lg absolute left-[38%] top-[40%] flex flex-col bg-white dark:bg-neutral-900  drop-shadow-2xl'
+          style={{ left: `${leftRef}px`, top: `${topRef}px` }}
+          className='w-[450px] rounded-lg absolute flex flex-col bg-white dark:bg-neutral-900  drop-shadow-2xl'
         >
           <div className='flex items-center justify-end bg-gray-100 dark:bg-[#505050] rounded-t-lg'>
             <button
@@ -123,7 +143,7 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, day, }: ICa
             <div className='py-5 px-10 flex gap-4 items-center '>
               <RxLoop className='w-7 h-7' />
               <Select
-                Options={['Não se repete', 'todos os dias', 'semanal a cada x dias', 'personalizar']}
+                Options={['Not Finished']}
                 value={reminderOption}
                 onChange={setReminderOption}
               />

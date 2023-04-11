@@ -44,3 +44,24 @@ export function CalendarDataConverter(dateString: string) {
   const month = date.getMonth();
   return { day, month };
 }
+
+export function dayNumberToDayString(day: number) {
+  let daystring = '';
+  switch (day) {
+    case 0:
+      daystring = 'Segunda-feira';
+    case 1:
+      daystring = 'Terça-feira';
+    case 2:
+      daystring = 'Quarta-feira';
+    case 3:
+      daystring = 'Quinta-feira';
+    case 4:
+      daystring = 'Sexta-feira';
+    case 5:
+      daystring = 'Sábado';
+    case 6:
+      daystring = 'Domingo';
+  }
+  return daystring;
+}

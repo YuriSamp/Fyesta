@@ -9,11 +9,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { calendarContext } from 'src/context/calendarContext';
 
-//TODO falta logica do lembrete
-//TODO falta a posição do modal
-
-// Meter um querySelector pegando o id que eu passo pra div, pegar as coordenadas e passar como postion pro modal
-
 const CalendarModal = dynamic(() => import('@ui/calendarActionModal'), {
   ssr: false
 })
@@ -39,13 +34,12 @@ export default function Calendario() {
   const [days, setDays] = useState<ICalendarDays[]>(calendarBuilder(year, monthIndex, calendarTasks, data))
   const [ismodalOpen, setIsModaOpen] = useState(false)
   const [dateInputModal, setDateInputModal] = useState(dateToDateInput(day, month + 1, year))
-  const divRef = useRef<HTMLDivElement>(null)
+  const [divRef, setDivRef] = useState<DOMRect | undefined>()
 
   useEffect(() => {
     setDays(calendarBuilder(year, monthIndex, calendarTasks, data))
   }, [monthIndex, data, year, calendarTasks])
 
-  console.log(divRef.current?.getBoundingClientRect())
 
   const backToday = () => {
     setYear(date.getFullYear())
@@ -83,8 +77,9 @@ export default function Calendario() {
         {days.map((item) => (
           <div className='w-52 h-36 calendar'
             key={item.id}
-            ref={divRef}
             onClick={(e) => {
+              console.log(e.currentTarget.getBoundingClientRect())
+              setDivRef(e.currentTarget.getBoundingClientRect())
               setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
               setIsModaOpen(prev => !prev)
             }}
@@ -92,7 +87,6 @@ export default function Calendario() {
             {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
               <div
                 className='flex justify-center py-2 px-2 select-none'
-                role='button'
               >
                 <div className='w-10 bg-violet-700 dark:bg-DarkModeGreen text-center text-white rounded-full'>
                   {item.day}
@@ -107,7 +101,6 @@ export default function Calendario() {
               item.Month === monthIndex ?
                 <div
                   className='text-center py-2 px-2 select-none'
-                  role='button'
                 >
                   {item.day}
                   <div className='text-black'>
@@ -129,11 +122,14 @@ export default function Calendario() {
           </div>
         ))
         }
-        <CalendarModal
-          isModalOpen={ismodalOpen}
-          setIsModalOpen={setIsModaOpen}
-          day={dateInputModal}
-        />
+        {divRef !== undefined &&
+          <CalendarModal
+            isModalOpen={ismodalOpen}
+            setIsModalOpen={setIsModaOpen}
+            day={dateInputModal}
+            divRef={divRef}
+          />
+        }
       </div>
     </section>
   )
