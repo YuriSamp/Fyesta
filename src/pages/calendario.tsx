@@ -6,6 +6,13 @@ import { ICalendarDays, ICalendarTask, brasilApiType } from 'src/interfaces/cale
 import MonthController from '@ui/monthController';
 import { calendarBuilder } from 'src/helper/calendarHelpers';
 import { useQuery } from '@tanstack/react-query';
+import { useAtomValue } from 'jotai';
+import { calendarContext } from 'src/context/calendarContext';
+
+//TODO falta logica do lembrete
+//TODO falta a posição do modal
+
+// Meter um querySelector pegando o id que eu passo pra div, pegar as coordenadas e passar como postion pro modal
 
 const CalendarModal = dynamic(() => import('@ui/calendarActionModal'), {
   ssr: false
@@ -26,15 +33,19 @@ export default function Calendario() {
   const date = new Date()
   const day = date.getDate()
   const month = date.getMonth()
+  const calendarTasks = useAtomValue(calendarContext)
   const [monthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
-  const [days, setDays] = useState<ICalendarDays[]>(calendarBuilder(year, monthIndex, data))
+  const [days, setDays] = useState<ICalendarDays[]>(calendarBuilder(year, monthIndex, calendarTasks, data))
   const [ismodalOpen, setIsModaOpen] = useState(false)
   const [dateInputModal, setDateInputModal] = useState(dateToDateInput(day, month + 1, year))
+  const divRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    setDays(calendarBuilder(year, monthIndex, data))
-  }, [monthIndex, data, year])
+    setDays(calendarBuilder(year, monthIndex, calendarTasks, data))
+  }, [monthIndex, data, year, calendarTasks])
+
+  console.log(divRef.current?.getBoundingClientRect())
 
   const backToday = () => {
     setYear(date.getFullYear())
@@ -72,10 +83,10 @@ export default function Calendario() {
         {days.map((item) => (
           <div className='w-52 h-36 calendar'
             key={item.id}
+            ref={divRef}
             onClick={(e) => {
               setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
               setIsModaOpen(prev => !prev)
-
             }}
           >
             {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
@@ -119,10 +130,9 @@ export default function Calendario() {
         ))
         }
         <CalendarModal
-          State={ismodalOpen}
-          SetState={setIsModaOpen}
+          isModalOpen={ismodalOpen}
+          setIsModalOpen={setIsModaOpen}
           day={dateInputModal}
-
         />
       </div>
     </section>

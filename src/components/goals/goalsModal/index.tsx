@@ -12,7 +12,7 @@ import * as Label from '@radix-ui/react-label';
 import { GoalsModalType, Task } from 'src/interfaces/goalsTypes';
 import { GoalInput } from '@ui/input/GoalInput';
 
-export default function GoalsModal({ State, SetState, goalId, setGoalId }: GoalsModalType) {
+export default function GoalsModal({ isModalOpen, setIsModalOpen, goalId, setGoalId }: GoalsModalType) {
 
   const [metas, setMetas] = useAtom(Goals)
   const [id, setId] = useState(0)
@@ -51,7 +51,7 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
   }, [task])
 
   const domNode = useClickOutside(() => {
-    SetState(false)
+    setIsModalOpen(false)
     setGoalId(null)
   })
 
@@ -118,7 +118,7 @@ export default function GoalsModal({ State, SetState, goalId, setGoalId }: Goals
 
   return (
     <Portal.Root>
-      {State &&
+      {isModalOpen &&
         <section
           className='w-[500px] fixed left-[720px] top-[100px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm shadow-2xl dark:shadow-none'
           ref={domNode}

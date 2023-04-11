@@ -6,26 +6,19 @@ import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
 import { Select } from './select';
 import { ModalProps } from 'src/interfaces/modalTypes';
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { calendarContext } from 'src/context/calendarContext';
 import { ICalendarTask } from 'src/interfaces/calendarTypes';
 
 // TODO Finalizar o modal
 
-// name: string;
-//   description?: string;
-//   day?: number;
-//   month?: number;
-//   year?: number;
-//   type: CalendarTaskTypes;
-
 interface ICalendarModal extends ModalProps {
   day: string
 }
 
-export default function CalendarModal({ State, SetState, day, }: ICalendarModal) {
+export default function CalendarModal({ isModalOpen, setIsModalOpen, day, }: ICalendarModal) {
 
-  const [calendarTasks, setCalendarTasks] = useAtom(calendarContext)
+  const setCalendarTasks = useSetAtom(calendarContext)
   const [title, setTitle] = useState('')
   const [reminderOption, setReminderOption] = useState('Não se repete')
   const [modalOption, setModalOption] = useState('Tarefa')
@@ -42,13 +35,17 @@ export default function CalendarModal({ State, SetState, day, }: ICalendarModal)
     const month = Number(dataFormated[1]) - 1
     const day = Number(dataFormated[2])
 
-    // if (modalOption === 'Lembrete') {
-    //   const lembreteObj = {
-    //     title: title,
-    //     reminder: reminderOption,
-    //     date: formateData(dataRaw),
-    //   }
-    // }
+    if (modalOption === 'Lembrete') {
+      const lembreteObj: ICalendarTask = {
+        name: title,
+        description: reminderOption,
+        type: 'Reminder',
+        day: day,
+        month: month,
+        year: year
+      }
+      setCalendarTasks(prev => [...prev, lembreteObj])
+    }
 
     if (modalOption === 'Tarefa') {
       const TarefaObj: ICalendarTask = {
@@ -59,22 +56,24 @@ export default function CalendarModal({ State, SetState, day, }: ICalendarModal)
         month: month,
         year: year
       }
-      console.log(TarefaObj)
-      // setCalendarTasks(prev => [...prev, TarefaObj])
+      setCalendarTasks(prev => [...prev, TarefaObj])
     }
+    setTitle('')
+    setTaskText('')
+    setIsModalOpen(false)
   }
 
 
   return (
     <Portal.Root>
-      {State &&
+      {isModalOpen &&
         <section
           className='w-[450px] rounded-lg absolute left-[38%] top-[40%] flex flex-col bg-white dark:bg-neutral-900  drop-shadow-2xl'
         >
           <div className='flex items-center justify-end bg-gray-100 dark:bg-[#505050] rounded-t-lg'>
             <button
               className='text-2xl py-2 px-3'
-              onClick={() => SetState(prev => !prev)}>
+              onClick={() => setIsModalOpen(prev => !prev)}>
               <AiOutlineClose />
             </button>
           </div>

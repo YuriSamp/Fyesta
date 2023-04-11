@@ -1,5 +1,6 @@
 import {
   ICalendarDays,
+  ICalendarTask,
   brasilApiType,
   holidayType,
 } from 'src/interfaces/calendarTypes';
@@ -150,10 +151,12 @@ const holidays = (data: brasilApiType[] | undefined) => {
   }
 };
 
+// Função responsavel por montar o calendario e exportar ele
 export const calendarBuilder = (
   year: number,
   monthIndex: number,
-  holidaysArr?: brasilApiType[]
+  calendarTasks: ICalendarTask[],
+  holidaysArr: brasilApiType[] | undefined
 ) => {
   const holidaysList = holidays(holidaysArr);
   const calendarDays = generateCalendarDays(year, monthIndex);
@@ -167,6 +170,19 @@ export const calendarBuilder = (
         day.tasks.push({
           name: holiday.name,
           type: holiday.type,
+        });
+      }
+      const task = calendarTasks.find(
+        (task) =>
+          task.month === day.Month &&
+          task.day === day.day &&
+          task.year === day.year
+      );
+      if (task) {
+        day.tasks.push({
+          name: task.name,
+          type: task.type,
+          description: task.type,
         });
       }
     });

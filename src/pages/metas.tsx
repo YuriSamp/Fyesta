@@ -39,8 +39,8 @@ export default function Metas() {
             setMetas={setMetas} />
         </section>
         <Modal
-          State={isModalOpen}
-          SetState={setIsModalOpen}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
           goalId={goalId}
           setGoalId={setGoalId}
         />
