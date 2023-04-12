@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react';
 
 export type ModalProps = {
-  State: boolean;
-  SetState: Dispatch<SetStateAction<boolean>>
-}
+  isModalOpen: boolean;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+};

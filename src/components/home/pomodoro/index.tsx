@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from 'react'
 import { IoPlaySkipForwardOutline } from 'react-icons/io5'
 import DisplayList from '@ui/To-do/displayList';
 
+// TODO habilitar uma notificação quando terminar o pomodoro
 
 export default function Pomodoro() {
 

@@ -17,7 +17,6 @@ const pages = [
   { link: '/planner', name: "planner", emoji: <BsPencil className='text-xl' /> },
   { link: '/calendario', name: "calendario", emoji: <AiOutlineCalendar className='text-xl' /> },
   { link: '/metas', name: "metas", emoji: <FiTarget className='text-xl' /> },
-  { link: '/emocoes', name: "emocoes", emoji: <AiOutlineHeart className='text-xl' /> }
 ]
 
 export const Navbar = ({ Page }: Props) => {
