@@ -1,4 +1,8 @@
+import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react'
+import { calendarContext } from 'src/context/calendarContext';
+import { getDayOfTheWeek } from 'src/helper/dateHelpers';
+import { GiPartyPopper } from 'react-icons/gi';
 
 //TODO animação quando mudar as horas e minutos
 
@@ -19,24 +23,8 @@ export default function HomeCalendar() {
   const day = date.getDay()
   const dayOfMounth = date.getDate()
 
-  function getDayOfTheWeek(day: number) {
-    switch (day) {
-      case 0:
-        return 'Domingo'
-      case 1:
-        return 'Segunda-Feira'
-      case 2:
-        return 'Terça-Feira'
-      case 3:
-        return 'Quarta-Feira'
-      case 4:
-        return 'Quinta-Feira'
-      case 5:
-        return 'Sexta-Feira'
-      case 6:
-        return 'Sábado'
-    }
-  }
+  const calendarTasks = useAtomValue(calendarContext)
+
 
   return (
     <section className='w-80 shadow-xl rounded-lg border-2'>
@@ -65,18 +53,22 @@ export default function HomeCalendar() {
           </div>
         </div>
         <div className='py-1 px-2 flex flex-col items-center gap-1 overflow-y-auto  scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 h-[190px] '>
-          <div className='w-72 py-2 text-center bg-violet-600 text-white rounded-xl cursor-pointer'>
-            Terminar esse projeto
-          </div>
-          <div className='w-72 py-2 text-center bg-violet-600 text-white rounded-xl cursor-pointer'>
-            Diminuir as tasks
-          </div>
-          <div className='w-72 py-2 text-center bg-violet-600 text-white rounded-xl cursor-pointer'>
-            Melhorar o Design
-          </div>
-          <div className='w-72 py-2 text-center bg-violet-600 text-white rounded-xl cursor-pointer'>
-            Isso esta ficando muito lindo
-          </div>
+          {calendarTasks.length > 0
+            ?
+            calendarTasks.map(task => (
+              <div
+                key={task.name}
+                className='w-72 py-2 text-center bg-violet-600 text-white rounded-xl cursor-pointer'
+              >
+                {task.name}
+              </div>
+            ))
+            :
+            <div className='flex flex-col gap-3 justify-center items-center h-full'>
+              <span className='text-xl'>nada agendado pro dia de hoje</span>
+              <GiPartyPopper className='w-10 h-10' />
+            </div>
+          }
         </div>
       </div>
     </section>

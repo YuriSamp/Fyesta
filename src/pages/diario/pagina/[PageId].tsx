@@ -10,6 +10,7 @@ import { Navbar } from '@ui/layout/navbar'
 import { EmotionInput } from '@ui/input/emotionInput'
 import { emotionsOptions } from 'src/context/emotionsOptions'
 
+//TODO só pra salvar essa pagina no commit
 
 const Pagina = () => {
   const router = useRouter()
