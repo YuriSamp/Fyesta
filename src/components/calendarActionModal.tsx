@@ -11,6 +11,8 @@ import { calendarContext } from 'src/context/calendarContext';
 import { ICalendarTask } from 'src/interfaces/calendarTypes';
 import { dayNumberToDayString } from 'src/helper/dateHelpers';
 
+//TODO o modal ta pegando o tamanho da viewport, isso causa bugs inesperados
+
 interface ICalendarModal extends ModalProps {
   date: string
   divRef: DOMRect
@@ -79,9 +81,9 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
     }
 
     if (top + height < 600) {
-      topRef = top + height
+      topRef = top + height * 0.6
     } else {
-      topRef = top - 2.3 * height
+      topRef = top - 0.6 * height
     }
 
     return { leftRef, topRef }

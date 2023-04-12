@@ -1,18 +1,12 @@
-import Sheets from '@ui/goals/sheets'
 import HomeCalendar from '@ui/home/calendario'
+import { GoalHome } from '@ui/home/homeGoals';
 import Pomodoro from '@ui/home/pomodoro'
 import { useIdToken } from 'react-firebase-hooks/auth'
 import { auth } from 'src/server/Firebase/ClientApp'
-import plannerPhoto from '../../public/plannerImage.jpg'
-
-// TODO implementar o spotify / apple music
-// TODO implementar o GoalTracker
-// TODO implementar o Mood Tracker
 
 export default function Home() {
 
   const [user] = useIdToken(auth);
-
 
   return (
     <section className='flex flex-col items-center text-black dark:text-white gap-10'>
@@ -23,9 +17,7 @@ export default function Home() {
         <q>Learn from yesterday, live for today, hope for tomorrow. The important thing is not to stop questioning.</q>
       </div>
       <div className='flex gap-20'>
-        <div className='w-80 flex justify-center items-center shadow-xl border-2 rounded-lg'>
-          <p>Player do spotify / apple music aqui</p>
-        </div>
+        <GoalHome />
         <Pomodoro />
         <HomeCalendar />
       </div>
