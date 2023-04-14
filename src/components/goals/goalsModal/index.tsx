@@ -152,45 +152,24 @@ export default function GoalsModal({ isModalOpen, setIsModalOpen, goalId, setGoa
               <Label.Root htmlFor='form1'>
                 Escreva uma ação para realizar a meta
               </Label.Root>
-              {theme == 'light' ?
-                <div className='relative border border-black rounded-lg overflow-hidden'>
-                  <input
-                    type='text'
-                    id='form1'
-                    placeholder='Juntar dinheiro'
-                    value={task}
-                    onChange={(e) => setTask(e.target.value)}
-                    className={`py-2 px-2 focus:outline-none  ${isEmptyTask ? "w-full" : 'w-[270px]'}`}
-                    autoComplete="off"
-                  />
-                  <button
-                    className={`${isEmptyTask ? "hidden" : ''} w-20  text-center rounded-r-lg absolute right-0 h-full cursor-pointer bg-blue-400`}
-                    onClick={() => addTask(task)}
-                    type='button'
-                  >
-                    incluir
-                  </button>
-                </div>
-                :
-                <div className='relative border border-black rounded-lg overflow-hidden'>
-                  <input
-                    type='text'
-                    id='form1'
-                    placeholder='Juntar dinheiro'
-                    value={task}
-                    onChange={(e) => setTask(e.target.value)}
-                    className={`py-2 px-2 focus:outline-none  ${isEmptyTask ? "w-full" : 'w-[270px]'}`}
-                    autoComplete="off"
-                  />
-                  <button
-                    className={`${isEmptyTask ? "hidden" : ''} w-20  text-center rounded-r-lg absolute right-0 h-full cursor-pointer bg-blue-400`}
-                    onClick={() => addTask(task)}
-                    type='button'
-                  >
-                    incluir
-                  </button>
-                </div>
-              }
+              <div className='relative border border-black rounded-lg overflow-hidden bg-transparent dark:bg-InputGray'>
+                <input
+                  type='text'
+                  id='form1'
+                  placeholder='Juntar dinheiro'
+                  value={task}
+                  onChange={(e) => setTask(e.target.value)}
+                  className={`py-2 px-2 focus:outline-none  ${isEmptyTask ? "w-full" : 'w-[270px]'}`}
+                  autoComplete="off"
+                />
+                <button
+                  className={`${isEmptyTask ? "hidden" : ''} w-20  text-center rounded-r-lg absolute right-0 h-full cursor-pointer bg-blue-400 dark:bg-DarkModeGreen`}
+                  onClick={() => addTask(task)}
+                  type='button'
+                >
+                  incluir
+                </button>
+              </div>
             </fieldset>
           </div>
           <hr className='border-black  dark:border-white w-3/4 flex justify-center my-4' />

@@ -4,7 +4,7 @@ import { Dispatch } from 'react'
 import { UpperCaseFirstLetter } from 'src/utils/uppercaseFirstLetter';
 
 const selectStyles = cva(
-  'bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] ',
+  'bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] dark:border-white ',
   {
     variants: {
       intent: {

@@ -24,12 +24,17 @@ export default function DisplayList() {
       {taskArr[dayOfWeek].tasks.map(task => (
         <div className='flex gap-3 tasks-center' key={task.id}>
           <Checkbox.Root
-            className="flex h-5 w-5 appearance-none items-center justify-center rounded-[4px] border border-black bg-white drop-shadow-2xl  outline-none"
+            className="flex h-5 w-5 appearance-none items-center justify-center rounded-[4px] border border-black bg-white drop-shadow-2xl  outline-none focus:border-2 focus:border-violet-600 dark:focus:border-DarkModeGreen dark:focus:bg-DarkModeGreen "
             checked={task.done}
             id="c1"
             onClick={() => BooleanChange(task.id)}
+            onKeyDown={(e) => {
+              if (e.key == 'Enter') {
+                BooleanChange(task.id)
+              }
+            }}
           >
-            <Checkbox.Indicator className="text-violet11">
+            <Checkbox.Indicator className="text-black">
               <CheckIcon />
             </Checkbox.Indicator>
           </Checkbox.Root>

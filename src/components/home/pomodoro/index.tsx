@@ -46,7 +46,7 @@ export default function Pomodoro() {
   const breakSeconds = breakTimer % 60
 
   return (
-    <div className='w-96 flex flex-col text-center gap-6 shadow-xl rounded-md border-2'>
+    <section className='w-96 flex flex-col text-center gap-6 shadow-xl rounded-md border-2'>
       <h2 className='pt-4 text-2xl'>Tarefas do dia</h2>
       <div className='flex justify-evenly items-center pl-10'>
         <BiTask className='w-7 h-7' />
@@ -60,23 +60,32 @@ export default function Pomodoro() {
 
         </div>
         {IsCounting ?
-          <CiPause1
-            className='w-7 h-7 cursor-pointer'
+          <button
             onClick={() => setIsCounting(prev => !prev)}
-          />
+          >
+            <CiPause1
+              className='w-7 h-7 cursor-pointer'
+            />
+          </button>
           :
-          <CiPlay1
-            className='w-7 h-7 cursor-pointer'
+          <button
             onClick={() => setIsCounting(prev => !prev)}
-          />
+          >
+            <CiPlay1
+              className='w-7 h-7 cursor-pointer'
+            />
+          </button>
         }
-        <IoPlaySkipForwardOutline
-          className={`w-7 h-7 cursor-pointer ${IsCounting ? '' : 'invisible'}`}
+        <button
           onClick={() => {
             setpomodoroTimer(25 * 60)
             setIsCounting(prev => !prev)
           }}
-        />
+        >
+          <IoPlaySkipForwardOutline
+            className={`w-7 h-7 cursor-pointer ${IsCounting ? '' : 'invisible'}`}
+          />
+        </button>
       </div>
 
       <div className='flex justify-evenly items-center pl-10'>
@@ -92,27 +101,36 @@ export default function Pomodoro() {
           <p>Tempo de descanso</p>
         </div>
         {IsCountingBreak ?
-          <CiPause1
-            className='w-7 h-7 cursor-pointer'
+          <button
             onClick={() => setIsCountingBreak(prev => !prev)}
-          />
+          >
+            <CiPause1
+              className='w-7 h-7 cursor-pointer'
+            />
+          </button>
           :
-          <CiPlay1
-            className='w-7 h-7 cursor-pointer'
+          <button
             onClick={() => setIsCountingBreak(prev => !prev)}
-          />
+          >
+            <CiPlay1
+              className='w-7 h-7 cursor-pointer'
+            />
+          </button>
         }
-        <IoPlaySkipForwardOutline
-          className={`w-7 h-7 ${IsCountingBreak ? '' : 'invisible'}`}
+        <button
           onClick={() => {
             setBreakTime(5 * 60)
             setIsCountingBreak(prev => !prev)
           }}
-        />
+        >
+          <IoPlaySkipForwardOutline
+            className={`w-7 h-7 ${IsCountingBreak ? '' : 'invisible'}`}
+          />
+        </button>
       </div>
       <div className='flex justify-center pb-10 pl-5'>
         <DisplayList />
       </div>
-    </div>
+    </section>
   )
 }

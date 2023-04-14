@@ -52,10 +52,15 @@ export function GoalInput({ options, setState, placeholder, setoption, value }: 
 
   return (
     <menu
-      className='flex flex-col w-full relative'
+      className='flex flex-col w-full relative text-black'
       ref={domRef}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          setFocus(false)
+        }
+      }}
     >
-      <input className='py-2 px-2 rounded-lg focus:outline-none bg-transparent border-[1px] border-black h-10  placeholder:text-sm'
+      <input className='py-2 px-2 rounded-lg focus:outline-none bg-transparent border-[1px] border-black text-white dark:border-none dark:bg-InputGray h-10 '
         value={inputSearch}
         onChange={(e) => setInputSearch(e.target.value)}
         placeholder={placeholder}

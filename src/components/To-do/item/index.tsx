@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { AiOutlineCheck } from 'react-icons/ai';
+import { useState, useEffect, useRef } from 'react'
 import { BsTrash } from 'react-icons/bs'
 import { useAtom } from 'jotai';
 import { PlannerTask } from 'src/context/plannerContext';
@@ -12,11 +11,14 @@ interface Props {
   value: string
 }
 
+
 export default function EditableListItem({ index, day, value }: Props) {
 
   const [taskName, setTaskName] = useState(value)
   const [finished, setFinished] = useState(false)
   const [taskArr, setTaskArr] = useAtom(PlannerTask)
+
+  const teste = useRef<HTMLElement>(null)
 
   const registerText = (task: string) => {
     const newTaskArr = taskArr.map(item => {
@@ -36,12 +38,17 @@ export default function EditableListItem({ index, day, value }: Props) {
   return (
     <div className='flex gap-2 items-center'>
       <Checkbox.Root
-        className="flex h-5 w-5 appearance-none items-center justify-center rounded-[4px] border border-black bg-white drop-shadow-2xl  outline-none"
+        className="flex h-5 w-5 appearance-none items-center justify-center rounded-[4px] border border-black bg-white drop-shadow-2xl  outline-none focus:border-2 focus:border-violet-600 dark:focus:border-DarkModeGreen dark:focus:bg-DarkModeGreen"
         checked={finished}
         id="c1"
         onClick={() => setFinished(prev => !prev)}
+        onKeyDown={(e) => {
+          if (e.key == 'Enter') {
+            setFinished(prev => !prev)
+          }
+        }}
       >
-        <Checkbox.Indicator className="text-violet11">
+        <Checkbox.Indicator className="text-black">
           <CheckIcon />
         </Checkbox.Indicator>
       </Checkbox.Root>

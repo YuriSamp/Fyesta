@@ -141,6 +141,7 @@ const SheetsFilter = ({ onChangeCategory, onChangeProgress, progress, category, 
               setIsOpen(true)
             }
           }}
+          aria-label="Filter options"
         >
           Filtrar
         </button>
