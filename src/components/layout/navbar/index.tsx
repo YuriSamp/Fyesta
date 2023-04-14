@@ -11,7 +11,7 @@ interface Props {
   Page: string
 }
 
-const pages = [
+export const pages = [
   { link: '/home', name: "home", emoji: <AiOutlineHome className='text-xl' /> },
   { link: '/diario', name: "diario", emoji: <BsBook className='text-xl' /> },
   { link: '/planner', name: "planner", emoji: <BsPencil className='text-xl' /> },

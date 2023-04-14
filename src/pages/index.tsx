@@ -18,8 +18,8 @@ interface IFeatureBox {
 
 export default function Home() {
   return (
-    <div className='min-h-screen bg-CreamWhite'>
-      <nav className='bg-CreamWhite z-10 fixed  w-full flex py-5 px-20 md:px-40 lg:px-60 xl:px-80 text-black justify-between item border-b-[1px]'>
+    <div className='min-h-screen bg-white'>
+      <nav className='bg-white z-10 fixed  w-full flex py-5 px-20 md:px-40 lg:px-60 xl:px-80 text-black justify-between item border-b-[1px]'>
         <div className='flex gap-10 items-center'>
           <Link href='/'>
             <h2 className='italic text-3xl'>Fyesta</h2>

@@ -2,6 +2,7 @@ import HomeCalendar from '@ui/home/calendario'
 import { WheatherHome } from '@ui/home/clima';
 import { HomeGoalTracker } from '@ui/home/homeGoals';
 import Pomodoro from '@ui/home/pomodoro'
+import { pages } from '@ui/layout/navbar';
 import { useAtomValue } from 'jotai';
 import Link from 'next/link';
 import { useIdToken } from 'react-firebase-hooks/auth'
@@ -19,14 +20,12 @@ export default function Home() {
         <h1 className='text-center text-6xl font-Caveat text-violet-500 dark:text-white' >Boas vindas, {user?.displayName} ! </h1>
       </div>
       <div className='flex gap-10'>
-        <Pomodoro />
         <div className='flex flex-col gap-4'>
-          <WheatherHome />
-          <div className='flex gap-3'>
-            <RandomQuote />
-            <DiaryEntry />
-          </div>
+          <Navigation />
+          <RandomQuote />
+          <DiaryEntry />
         </div>
+        <Pomodoro />
         <HomeCalendar />
       </div>
       <HomeGoalTracker />
@@ -68,6 +67,35 @@ const RandomQuote = () => {
   return (
     <div className='w-80 h-40 flex p-5 shadow-xl border-2 rounded-lg'>
       <q>Learn from yesterday, live for today, hope for tomorrow. The important thing is not to stop questioning. <br /> - Albert Einstein </q>
+    </div>
+  )
+}
+
+const Navigation = () => {
+  return (
+    <div className='w-80 h-40 p-5 shadow-xl  border-2 rounded-lg'>
+      <ul className='grid grid-cols-2 gap-x-8  select-none'>
+        {pages.slice(0, 3).map((item, index) => (
+          <li key={index}>
+            <Link
+              href={item.link}
+              className='cursor-pointer w-10 h-10 gap-2 flex items-center '>
+              <span>{item.emoji}</span>
+              <span>{item.name}</span>
+            </Link>
+          </li>
+        ))}
+        {pages.slice(3).map((item, index) => (
+          <li key={index}>
+            <Link
+              href={item.link}
+              className='cursor-pointer w-10 h-10 flex gap-2 items-center '>
+              <span>{item.emoji}</span>
+              <span>{item.name}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

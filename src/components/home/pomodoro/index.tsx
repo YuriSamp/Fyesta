@@ -110,7 +110,7 @@ export default function Pomodoro() {
           }}
         />
       </div>
-      <div className='flex justify-center pb-10'>
+      <div className='flex justify-center pb-10 pl-5'>
         <DisplayList />
       </div>
     </div>
