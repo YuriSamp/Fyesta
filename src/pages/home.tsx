@@ -8,6 +8,8 @@ import { useIdToken } from 'react-firebase-hooks/auth'
 import { BiSad } from 'react-icons/bi';
 import { diaryPage } from 'src/context/diaryContext';
 import { auth } from 'src/server/Firebase/ClientApp'
+import { quotes } from '../data/qoutes'
+
 
 
 export default function Home() {
@@ -21,7 +23,7 @@ export default function Home() {
       </div>
       <div className='flex gap-10'>
         <div className='flex flex-col gap-4'>
-          <Navigation />
+          {/* <Navigation />   */}
           <RandomQuote />
           <DiaryEntry />
         </div>
@@ -36,18 +38,18 @@ export default function Home() {
 const DiaryEntry = () => {
   const diary = useAtomValue(diaryPage);
   return (
-    <div className='w-80 h-40 p-5 shadow-xl border-2 rounded-lg'>
+    <div className='w-80 h-56 p-5 shadow-xl border-2 rounded-lg'>
       {diary.length > 0 ?
         <>
           <p>Últimas entradas no diario</p>
           <div className='flex flex-col justify-start gap-1 pt-2'>
-            {diary.slice(-3).map(diaryPage => (
+            {diary.slice(-5).map(diaryPage => (
               <Link
                 href={`./diario/pagina/${diaryPage.id}`}
                 key={diaryPage.id}
                 className='flex gap-2'
               >
-                <span>{diaryPage.id}</span>
+                <span>{diaryPage.id + 1}</span>
                 <span className='italic'>{diaryPage.title}</span>
               </Link>
             ))}
@@ -62,11 +64,19 @@ const DiaryEntry = () => {
     </div>
   )
 }
+interface Quote {
+  citacao: string
+  autor: string
+}
 
 const RandomQuote = () => {
+  const getRandomQuote = (arr: Quote[]) => arr[Math.floor(Math.random() * arr.length)];
+  const placeholder = getRandomQuote(quotes);
+
   return (
-    <div className='w-80 h-40 flex p-5 shadow-xl border-2 rounded-lg'>
-      <q>Learn from yesterday, live for today, hope for tomorrow. The important thing is not to stop questioning. <br /> - Albert Einstein </q>
+    <div className='w-80 h-56 flex flex-col justify-center items-center text-center p-5 shadow-xl border-2 rounded-lg'>
+      <q>{placeholder.citacao} </q>
+      <p> - {placeholder.autor} </p>
     </div>
   )
 }
