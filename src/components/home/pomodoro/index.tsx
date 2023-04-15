@@ -19,42 +19,14 @@ export default function Pomodoro() {
   const breakIntervalRef = useRef<NodeJS.Timeout>();
 
 
-  useEffect(() => {
-    if (IsCounting) {
-      pomodoroIntervalRef.current = setTimeout(() => {
-        setpomodoroTimer(pomodoroTimer - 1);
-      }, 1000)
-    }
-    else {
-      clearTimeout(pomodoroIntervalRef.current);
-    }
-    if (pomodoroTimer === 0) {
-      setIsCounting(false)
-      setpomodoroTimer(initialPomodorTimer)
-    }
-
-  }, [pomodoroTimer, IsCounting])
-
-  useEffect(() => {
-    if (IsCountingBreak) {
-      breakIntervalRef.current = setTimeout(() => {
-        setBreakTime(breakTimer - 1);
-      }, 1000)
-    } else {
-      clearTimeout(breakIntervalRef.current);
-    }
-    if (breakTimer === 0) {
-      setIsCountingBreak(false)
-      setBreakTime(initialBreakTimer)
-    }
-  }, [breakTimer, IsCountingBreak])
-
   function notifyMe(type: string) {
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");
-    } else if (Notification.permission === "granted") {
+    }
+    else if (Notification.permission === "granted") {
       new Notification(`O tempo do ${type} acabou`);
-    } else if (Notification.permission !== "denied") {
+    }
+    else if (Notification.permission !== "denied") {
       Notification.requestPermission().then((permission) => {
         if (permission === "granted") {
           new Notification(`O tempo do ${type} acabou`);
@@ -63,13 +35,38 @@ export default function Pomodoro() {
     }
   }
 
-  if (breakTimer === 0) {
-    notifyMe('Descanso')
-  }
+  useEffect(() => {
+    if (IsCounting) {
+      pomodoroIntervalRef.current = setTimeout(() => {
+        setpomodoroTimer(pomodoroTimer - 1);
+      }, 1000)
+    }
 
-  if (pomodoroTimer === 0) {
-    notifyMe('Pomodoro')
-  }
+    if (pomodoroTimer === 0) {
+      notifyMe('Pomodoro')
+      setIsCounting(false)
+      setpomodoroTimer(initialPomodorTimer)
+    }
+
+    return () => clearTimeout(pomodoroIntervalRef.current);
+  }, [pomodoroTimer, IsCounting, initialPomodorTimer])
+
+  useEffect(() => {
+    if (IsCountingBreak) {
+      breakIntervalRef.current = setTimeout(() => {
+        setBreakTime(breakTimer - 1);
+      }, 1000)
+    }
+
+    if (breakTimer === 0) {
+      notifyMe('Break')
+      setIsCountingBreak(false)
+      setBreakTime(initialBreakTimer)
+    }
+
+    return () => clearTimeout(breakIntervalRef.current);
+
+  }, [breakTimer, IsCountingBreak, initialBreakTimer])
 
   const pomodoroMinutes = Math.floor(pomodoroTimer / 60);
   const pomodoroSeconds = pomodoroTimer % 60;
