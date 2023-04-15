@@ -1,5 +1,4 @@
 import HomeCalendar from '@ui/home/calendario'
-import { WheatherHome } from '@ui/home/clima';
 import { HomeGoalTracker } from '@ui/home/homeGoals';
 import Pomodoro from '@ui/home/pomodoro'
 import { pages } from '@ui/layout/navbar';
@@ -9,6 +8,7 @@ import { useIdToken } from 'react-firebase-hooks/auth'
 import { BiSad } from 'react-icons/bi';
 import { diaryPage } from 'src/context/diaryContext';
 import { auth } from 'src/server/Firebase/ClientApp'
+
 
 export default function Home() {
 

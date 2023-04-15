@@ -4,17 +4,20 @@ import { FiCoffee } from 'react-icons/fi';
 import { useState, useRef, useEffect } from 'react'
 import { IoPlaySkipForwardOutline } from 'react-icons/io5'
 import DisplayList from '@ui/To-do/displayList';
-
-// TODO habilitar uma notificação quando terminar o pomodoro
+import { useAtomValue } from 'jotai';
+import { BreakTimerAtom, pomodoroTimerAtom } from 'src/context/seetingsContext';
 
 export default function Pomodoro() {
 
-  const [pomodoroTimer, setpomodoroTimer] = useState(25 * 60);
-  const [breakTimer, setBreakTime] = useState(5 * 60);
+  const initialPomodorTimer = useAtomValue(pomodoroTimerAtom)
+  const initialBreakTimer = useAtomValue(BreakTimerAtom)
+  const [pomodoroTimer, setpomodoroTimer] = useState(initialPomodorTimer);
+  const [breakTimer, setBreakTime] = useState(initialBreakTimer);
   const [IsCounting, setIsCounting] = useState(false);
   const [IsCountingBreak, setIsCountingBreak] = useState(false);
   const pomodoroIntervalRef = useRef<NodeJS.Timeout>();
   const breakIntervalRef = useRef<NodeJS.Timeout>();
+
 
   useEffect(() => {
     if (IsCounting) {
@@ -22,11 +25,14 @@ export default function Pomodoro() {
         setpomodoroTimer(pomodoroTimer - 1);
       }, 1000)
     }
-
     else {
       clearTimeout(pomodoroIntervalRef.current);
-
     }
+    if (pomodoroTimer === 0) {
+      setIsCounting(false)
+      setpomodoroTimer(initialPomodorTimer)
+    }
+
   }, [pomodoroTimer, IsCounting])
 
   useEffect(() => {
@@ -34,11 +40,36 @@ export default function Pomodoro() {
       breakIntervalRef.current = setTimeout(() => {
         setBreakTime(breakTimer - 1);
       }, 1000)
-    }
-    else {
+    } else {
       clearTimeout(breakIntervalRef.current);
     }
+    if (breakTimer === 0) {
+      setIsCountingBreak(false)
+      setBreakTime(initialBreakTimer)
+    }
   }, [breakTimer, IsCountingBreak])
+
+  function notifyMe(type: string) {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+      new Notification(`O tempo do ${type} acabou`);
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          new Notification(`O tempo do ${type} acabou`);
+        }
+      });
+    }
+  }
+
+  if (breakTimer === 0) {
+    notifyMe('Descanso')
+  }
+
+  if (pomodoroTimer === 0) {
+    notifyMe('Pomodoro')
+  }
 
   const pomodoroMinutes = Math.floor(pomodoroTimer / 60);
   const pomodoroSeconds = pomodoroTimer % 60;
@@ -78,7 +109,7 @@ export default function Pomodoro() {
         }
         <button
           onClick={() => {
-            setpomodoroTimer(25 * 60)
+            setpomodoroTimer(initialPomodorTimer)
             setIsCounting(prev => !prev)
           }}
         >
@@ -119,7 +150,7 @@ export default function Pomodoro() {
         }
         <button
           onClick={() => {
-            setBreakTime(5 * 60)
+            setBreakTime(initialBreakTimer)
             setIsCountingBreak(prev => !prev)
           }}
         >
