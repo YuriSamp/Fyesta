@@ -122,15 +122,11 @@ export default function Home() {
 
   return (
     <div className='min-h-screen bg-white'>
-      <nav className='bg-white z-10 fixed  w-full flex py-5 px-20 md:px-40 lg:px-60 xl:px-80 text-black justify-between item border-b-[1px]'>
-        <div className='flex gap-10 items-center'>
-          <Link href='/'>
-            <h2 className='italic text-3xl'>{nav.title}</h2>
-          </Link>
-        </div>
+      <nav className='bg-white z-10 fixed  w-full flex py-5 justify-center sm:px-20 md:px-40 lg:px-60 xl:px-80 text-black sm:justify-between item border-b-[1px]'>
+        <h2 className='italic text-3xl'>{nav.title}</h2>
         <ul className='flex gap-6 items-center'>
           <li> <Link href='./login' className='select-none cursor-pointer px-6 py-2 border-[1px] border-transparent rounded-lg hover:border-black hidden sm:block '>{nav.login}</Link> </li>
-          <li>  <Link href='./login/signup' className='bg-black text-white px-6 py-2 rounded-lg select-none cursor-pointer'>{nav.signup}</Link>  </li>
+          <li>  <Link href='./login/signup' className='bg-black text-white px-6 py-2 rounded-lg select-none cursor-pointer  hidden sm:block'>{nav.signup}</Link>  </li>
         </ul>
       </nav>
       <section className='flex flex-col pt-44 pb-20 border-b-[1px]'>
@@ -182,7 +178,7 @@ export default function Home() {
       <section className='pt-10 pb-20 border-b-[1px] px-4'>
         <p className='text-black text-center pt-10 text-4xl'>Open Source</p>
         <span className='text-black text-center block pt-2 text-xl'>{section3.span1}</span>
-        <span className='text-black text-center block pt-2 text-xl'>{section3.span2}<Link href='https://github.com/YuriSamp/Fyesta' target='_blank' className='italic underline'>Github</Link></span>
+        <span className='text-black text-center block pt-2 text-xl'>{section3.span2} <Link href='https://github.com/YuriSamp/Fyesta' target='_blank' className='italic underline'>Github</Link></span>
       </section>
 
       <footer className='flex py-5 px-20 md:px-40 lg:px-40 xl:px-60 2xl:px-80  text-black justify-center xl:justify-between '>
@@ -206,7 +202,7 @@ function FeatureBox({ Description, Title, Icon }: IFeatureBox) {
           <Icon className='w-5 h-5' />
           <h3 className='text-2xl'>{Title}</h3>
         </div>
-        <h3 className='text-lg pt-2 text-center sm:text-left'>{Description}</h3>
+        <h3 className='text-lg pt-2 px-5 sm:px-0 text-center sm:text-left'>{Description}</h3>
       </div>
       <div className='grid grid-cols-2 justify-items-center gap-6 '>
         <Image src={Loginpage} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />

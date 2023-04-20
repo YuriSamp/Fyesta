@@ -70,14 +70,14 @@ export default function SignUp() {
       <Head>
         <title>Fyesta</title>
       </Head>
-      <main className='flex justify-center items-center min-h-screen ' >
+      <main className='flex justify-center items-center min-h-screen py-2'>
         <ToastContainer limit={3} />
         <section className='flex flex-col'>
           <RetturnButton
             text='Retornar'
             href='./'
           />
-          <form className='w-96 pt-8' onSubmit={(e) => HandleSubmit(e)}>
+          <form className='pt-8' onSubmit={(e) => HandleSubmit(e)}>
             <div>
               <h1 className='text-center text-4xl'>Criar uma conta</h1>
             </div>
