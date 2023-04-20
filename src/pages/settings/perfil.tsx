@@ -11,8 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as AlertDialog from '@radix-ui/react-alert-dialog';
 import nookies from 'nookies'
 import Header from '@ui/settingsHeader';
-
-//TODO não atualizar as coisas com o campo vazio
+import { toastNotify } from 'src/utils/toastNotify';
 
 export default function Perfil() {
   const router = useRouter()
@@ -21,13 +20,40 @@ export default function Perfil() {
   const [signOut, loading, error] = useSignOut(auth);
   const [deleteUser, deleteUserloading, deleteUserError] = useDeleteUser(auth);
   const [user] = useIdToken(auth);
-  const [Username, setUsername] = useState('')
+  const [userName, setuserName] = useState('')
   const [photo, setPhoto] = useState<string>('')
   const [updateProfile, updating, updateError] = useUpdateProfile(auth);
   const [sendPasswordResetEmail, sending, passwordResetError] = useSendPasswordResetEmail(auth);
   const [verifyBeforeUpdateEmail, updating1, error1] = useVerifyBeforeUpdateEmail(auth);
   const { theme, setTheme } = useTheme()
   const [alertOpen, setAlertOpen] = useState(false)
+
+
+  const updateuserName = () => {
+    try {
+      toastNotify(userName === '', 'Por favor insira ao menos 1 caracterer', 'error')
+
+      updateProfile({ displayName: userName })
+      setuserName('')
+      const notify = () => toast.success("O nome do usuario foi alterado com sucesso");
+      notify()
+
+    } catch (error) {
+
+    }
+  }
+
+
+  const updatePhoto = () => {
+    try {
+      toastNotify(photo === '', 'Por favor insira ao menos 1 caracterer', 'error')
+      updateProfile({ photoURL: photo })
+      setPhoto('')
+      const notify = () => toast.success("A foto do usuario foi alterado com sucesso");
+      notify()
+    } catch (error) {
+    }
+  }
 
   async function HandlePromise(fn: Promise<Boolean>) {
     await fn
@@ -46,21 +72,15 @@ export default function Perfil() {
             <h2 className='text-xl'>Nome</h2>
             <div className='pt-2'>
               {theme == 'light' ?
-                <ControledInput type='text' Width='lg' intent='light' placeholder={user?.displayName as string} value={Username} onChange={setUsername} />
+                <ControledInput type='text' Width='lg' intent='light' placeholder={user?.displayName as string} value={userName} onChange={setuserName} />
                 :
-                <ControledInput type='text' Width='lg' placeholder={user?.displayName as string} value={Username} onChange={setUsername} />
+                <ControledInput type='text' Width='lg' placeholder={user?.displayName as string} value={userName} onChange={setuserName} />
               }
             </div>
           </div>
           <Button
             Children='Atualizar'
-            onClick={() => {
-              updateProfile({ displayName: Username })
-              setUsername('')
-              const notify = () => toast.success("O nome do usuario foi alterado com sucesso");
-              notify()
-            }
-            }
+            onClick={() => updateuserName()}
           />
         </div>
 
@@ -77,12 +97,7 @@ export default function Perfil() {
           </div>
           <Button
             Children='Atualizar'
-            onClick={() => {
-              updateProfile({ photoURL: photo })
-              setPhoto('')
-              const notify = () => toast.success("A foto do usuario foi alterado com sucesso");
-              notify()
-            }}
+            onClick={() => updatePhoto()}
           />
         </div>
 
@@ -175,7 +190,6 @@ export default function Perfil() {
               </AlertDialog.Content>
             </AlertDialog.Portal>
           </AlertDialog.Root>
-
         </div>
       </div>
     </div>

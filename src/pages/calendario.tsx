@@ -82,8 +82,10 @@ export default function Calendario() {
       </div>
       <div className='flex flex-wrap max-w-[1460px] justify-center text-lg' >
         {days.map((item) => (
-          <button className='w-52 h-40 calendar'
+          <div
+            className='w-52 h-40 calendar'
             key={item.id}
+            tabIndex={0}
             onClick={(e) => {
               setDivRef(e.currentTarget.getBoundingClientRect())
               setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
@@ -98,7 +100,7 @@ export default function Calendario() {
                 :
                 <CalendarDayDiplay isToday={false} currentMonth={false} day={item.day} tasks={item.tasks} />
             }
-          </button>
+          </div>
         ))
         }
         {divRef !== undefined &&
@@ -167,7 +169,7 @@ const CalendarDayTasksDisplay = ({ name, description, type }: ICalendarTask) => 
   }
 
   return (
-    <button key={name} className={`w-full h-8 rounded-md ${taskColor} flex justify-center items-center `}>
+    <button key={name} className={`w-full min-h-[32px] px-1 rounded-md ${taskColor} flex justify-center items-center `}>
       {name}
     </button>
   )

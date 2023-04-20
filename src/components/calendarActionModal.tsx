@@ -95,8 +95,16 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
     <Portal.Root>
       {isModalOpen &&
         <section
+          onKeyDown={e => {
+            console.log(e.key)
+            if (e.key === 'Escape') {
+              console.log('deucerto')
+              setIsModalOpen(prev => !prev)
+            }
+          }}
           style={{ left: `${leftRef}px`, top: `${topRef}px` }}
           className='w-[450px] rounded-lg absolute flex flex-col bg-white dark:bg-neutral-900  drop-shadow-2xl'
+
         >
           <div className='flex items-center justify-end bg-gray-100 dark:bg-[#505050] rounded-t-lg'>
             <button
