@@ -36,7 +36,7 @@ export default function EditableListItem({ index, day, value }: Props) {
 
 
   return (
-    <div className='flex gap-2 items-center'>
+    <div className='flex gap-2 items-center z-0'>
       <Checkbox.Root
         className="flex h-5 w-5 appearance-none items-center justify-center rounded-[4px] border border-black bg-white drop-shadow-2xl  outline-none focus:border-2 focus:border-violet-600 dark:focus:border-DarkModeGreen dark:focus:bg-DarkModeGreen"
         checked={finished}

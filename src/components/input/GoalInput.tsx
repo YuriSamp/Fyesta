@@ -60,7 +60,7 @@ export function GoalInput({ options, setState, placeholder, setoption, value }: 
         }
       }}
     >
-      <input className='py-2 px-2 rounded-lg focus:outline-none bg-transparent border-[1px] border-black text-white dark:border-none dark:bg-InputGray h-10 '
+      <input className='py-2 px-2 rounded-lg focus:outline-none bg-transparent border-[1px] border-black text-black dark:text-white dark:border-none dark:bg-InputGray h-10 '
         value={inputSearch}
         onChange={(e) => setInputSearch(e.target.value)}
         placeholder={placeholder}
