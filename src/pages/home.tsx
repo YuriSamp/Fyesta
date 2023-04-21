@@ -8,7 +8,7 @@ import { useIdToken } from 'react-firebase-hooks/auth'
 import { BiSad } from 'react-icons/bi';
 import { diaryPage } from 'src/context/diaryContext';
 import { auth } from 'src/server/Firebase/ClientApp'
-import { quotes } from '../data/qoutes'
+import { quotes, quotesEn } from '../data/qoutes'
 
 
 
