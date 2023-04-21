@@ -7,7 +7,7 @@ import { categoryOptions } from 'src/context/goalContext'
 import { GoalsProps, IField, TaskWithCategory } from 'src/interfaces/goalsTypes'
 
 //TODO fazer a animação do scroll
-// TODO fixar o layout mesmo que não haja nenhuma categoria
+
 export default function Fields({ Metas }: GoalsProps) {
 
   const categoryOptionsArr = useAtomValue(categoryOptions)
@@ -34,12 +34,12 @@ export default function Fields({ Metas }: GoalsProps) {
   }
 
   return (
-    <section className='self-start'>
+    <section className='self-start 2xl:min-w-[976px]'>
       <div className='pb-2 border-b-2 mb-2 '>
         <h3 className='text-3xl  dark:text-white '>Áreas</h3>
       </div>
       <div
-        className='flex gap-2 max-w-[980px] overflow-x-scroll '>
+        className='flex gap-2 max-w-[980px] '>
         {categoryOptionsArr.map(item => (
           <Field
             key={item.id}
@@ -54,8 +54,8 @@ export default function Fields({ Metas }: GoalsProps) {
 
 function Field({ FieldName, Metas }: IField) {
   return (
-    <div className='min-w-[320px] flex flex-col border-2 px-4 py-3 shadow-xl'>
-      <IoLayersSharp className='w-20 h-20 self-center my-5' />
+    <div className='w-36 sm:w-44 xl:w-64 2xl:w-80 flex flex-col border-2 px-4 py-3 shadow-xl'>
+      <IoLayersSharp className='w-16 h-16 xl:w-20 xl:h-20 self-center my-5' />
       <div className='flex gap-2 items-center pb-4 text-lg'>
         <BsLayers />
         <p>{FieldName}</p>

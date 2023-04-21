@@ -52,16 +52,21 @@ export function GoalInput({ options, setState, placeholder, setoption, value }: 
 
   return (
     <menu
-      className='flex flex-col w-full relative'
+      className='flex flex-col w-full relative text-black'
       ref={domRef}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          setFocus(false)
+        }
+      }}
     >
-      <input className='py-2 px-2 rounded-lg focus:outline-none bg-transparent border-[1px] border-black h-10  placeholder:text-sm'
+      <input className='py-2 px-2 rounded-lg focus:outline-none bg-transparent border-[1px] border-black text-black dark:text-white dark:border-none dark:bg-InputGray h-10 '
         value={inputSearch}
         onChange={(e) => setInputSearch(e.target.value)}
         placeholder={placeholder}
         onFocus={() => setFocus(true)}
       />
-      <section className='absolute top-[40px] z-10 bg-white w-full shadow-2xl rounded-lg'>
+      <section className='absolute top-[40px] z-10 bg-white dark:bg-[#151515] text-black dark:text-white  w-full shadow-2xl rounded-lg'>
         {focus
           &&
           <>
@@ -69,7 +74,7 @@ export function GoalInput({ options, setState, placeholder, setoption, value }: 
             {inputTratado.length > 0 ?
               inputTratado.map(item => (
                 <div
-                  className='hover:bg-gray-200 cursor-pointer'
+                  className='hover:bg-gray-200 dark: dark:hover:bg-neutral-700 cursor-pointer'
                   key={item.id}
                 >
                   <div className='flex  items-center py-1 px-4 '>

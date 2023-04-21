@@ -29,22 +29,41 @@ const MonthController = ({ year, setYear, setMonthIndex, monthIndex }: Props) =>
 
   return (
     <div className='flex gap-6 items-center justify-center'>
-      <AiOutlineArrowLeft
-        className='w-7 h-7 cursor-pointer'
+      <button
+        onKeyDown={(e) => {
+          if (e.key == 'Enter') {
+            setMonthIndex(minusMonthIndex(monthIndex))
+            monthDisplay = arrMeses[monthIndex]
+          }
+        }}
         onClick={() => {
           setMonthIndex(minusMonthIndex(monthIndex))
           monthDisplay = arrMeses[monthIndex]
         }}
-        title='mês anterior'
-      />
+      >
+        <AiOutlineArrowLeft
+          className='w-7 h-7 cursor-pointer'
+
+          title='mês anterior'
+        />
+      </button>
       <h1 className='text-3xl text-center select-none w-72'>{monthDisplay} de {year}</h1>
-      <AiOutlineArrowRight className='w-7 h-7 cursor-pointer'
+      <button
+        onKeyDown={(e) => {
+          if (e.key == 'Enter') {
+            setMonthIndex(plusMonthIndex(monthIndex))
+            monthDisplay = arrMeses[monthIndex]
+          }
+        }}
         onClick={() => {
           setMonthIndex(plusMonthIndex(monthIndex))
           monthDisplay = arrMeses[monthIndex]
         }}
-        title='proximo mês'
-      />
+      >
+        <AiOutlineArrowRight className='w-7 h-7 cursor-pointer'
+          title='proximo mês'
+        />
+      </button>
     </div>
   )
 }

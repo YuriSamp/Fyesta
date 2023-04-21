@@ -1,16 +1,16 @@
-import * as Switch from '@radix-ui/react-switch';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react'
 import { useTheme } from 'next-themes'
 import { Select } from '@ui/select';
 import { useAtom } from 'jotai';
-import { Language, Monday } from 'src/context/seetingsContext';
+import { BreakTimerAtom, Language, pomodoroTimerAtom } from 'src/context/seetingsContext';
 import Header from '@ui/settingsHeader';
+import { UpperCaseFirstLetter } from 'src/utils/uppercaseFirstLetter';
 
 const themes = ['dark', 'light']
 const languages = ['Português', 'inglês']
-
-//TODO retirar o calendario na segunda e implementar o resto
+const breakOptions = [5, 10, 15, 20, 25]
+const pomodoroOptions = [20, 25, 30, 45, 60]
 
 export default function Settings() {
   const router = useRouter()
@@ -18,8 +18,9 @@ export default function Settings() {
 
   const [mounted, setMounted] = useState(false)
   const [language, setLanguage] = useAtom(Language)
-  const [startOnMOnday, setStartOnMonday] = useAtom(Monday)
   const { theme, setTheme } = useTheme()
+  const [pomodoroTimer, setPomodoroTimer] = useAtom(pomodoroTimerAtom)
+  const [breakTimer, setBreakTimer] = useAtom(BreakTimerAtom)
 
   useEffect(() => {
     setMounted(true)
@@ -34,39 +35,60 @@ export default function Settings() {
       <Header
         Page={page}
       />
-      <div className='py-10 flex justify-between items-center px-4'>
-        <div className='flex flex-col gap-2'>
-          <h2 className='text-xl'>Aparencia</h2>
-          <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Customiza o tema do Fyesta no seu dispositivo</h3>
+      <div className='max-h-[600px] overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 pr-2'>
+        <div className='py-10 flex justify-between items-center px-4'>
+          <div className='flex flex-col gap-2'>
+            <h2 className='text-xl'>Aparencia</h2>
+            <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Customiza o tema do Fyesta no seu dispositivo</h3>
+          </div>
+          <div>
+            <Select Options={themes} onChange={setTheme} value={theme} />
+          </div>
         </div>
-        <div>
-          <Select Options={themes} onChange={setTheme} value={theme} />
+        <div className='py-10  flex justify-between items-center px-4'>
+          <div className='flex flex-col gap-2'>
+            <h2 className='text-xl'>Idioma</h2>
+            <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o idioma para a interface</h3>
+          </div>
+          <div>
+            <Select Options={languages} value={language} onChange={setLanguage} />
+          </div>
         </div>
-      </div>
-      <div className='py-10  flex justify-between items-center px-4'>
-        <div className='flex flex-col gap-2'>
-          <h2 className='text-xl'>Idioma</h2>
-          <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o idioma para a interface</h3>
+        <div className='py-10  flex justify-between items-center px-4'>
+          <div className='flex flex-col gap-2'>
+            <h2 className='text-xl'>Pomodoro</h2>
+            <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o tempo que acha necessário para realizar suas tarefas</h3>
+          </div>
+          <div>
+            <select className='bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] dark:border-white '
+              value={pomodoroTimer / 60}
+              onChange={(e) => setPomodoroTimer(Number(e.target.value) * 60)}
+            >
+              {pomodoroOptions.map((item, index) => (
+                <option value={item} key={index} className='dark:bg-InputGray'>
+                  {UpperCaseFirstLetter(String(item) + ' min')}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div>
-          <Select Options={languages} value={language} onChange={setLanguage} />
-        </div>
-      </div>
-      <div className='py-10  flex justify-between items-center px-4'>
-        <div className='flex flex-col gap-2'>
-          <h2 className='text-xl'>Começar a semana na segunda</h2>
-          <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>isso vai alterar a maneira como o calendario é apresentado</h3>
-        </div>
-        <div>
-          <Switch.Root
-            className="w-11 h-[25px] bg-gray-300 dark:bg-white rounded-full relative data-[state=checked]:bg-[rgb(59,130,246)] dark:data-[state=checked]:bg-[#138859]"
-            role='switch'
-            checked={startOnMOnday}
-            onClick={() => setStartOnMonday(prev => !prev)}
-          >
-            <Switch.Thumb
-              className="block w-[21px] h-[21px] bg-white dark:bg-black rounded-full shadow-SwitchShadow data-[state=checked]:translate-x-[19px] duration-100 transform translate-x-[2px]" />
-          </Switch.Root>
+        <div className='py-10  flex justify-between items-center px-4'>
+          <div className='flex flex-col gap-2'>
+            <h2 className='text-xl'>Descanso</h2>
+            <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o tempo de descanso entre suas tarefas</h3>
+          </div>
+          <div>
+            <select className='bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] dark:border-white '
+              value={breakTimer / 60}
+              onChange={(e) => setBreakTimer(Number(e.target.value) * 60)}
+            >
+              {breakOptions.map((item, index) => (
+                <option value={item} key={index} className='dark:bg-InputGray'>
+                  {UpperCaseFirstLetter(String(item) + ' min')}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
     </>

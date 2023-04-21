@@ -4,17 +4,36 @@ import { FiCoffee } from 'react-icons/fi';
 import { useState, useRef, useEffect } from 'react'
 import { IoPlaySkipForwardOutline } from 'react-icons/io5'
 import DisplayList from '@ui/To-do/displayList';
-
-// TODO habilitar uma notificação quando terminar o pomodoro
+import { useAtomValue } from 'jotai';
+import { BreakTimerAtom, pomodoroTimerAtom } from 'src/context/seetingsContext';
 
 export default function Pomodoro() {
 
-  const [pomodoroTimer, setpomodoroTimer] = useState(25 * 60);
-  const [breakTimer, setBreakTime] = useState(5 * 60);
+  const initialPomodorTimer = useAtomValue(pomodoroTimerAtom)
+  const initialBreakTimer = useAtomValue(BreakTimerAtom)
+  const [pomodoroTimer, setpomodoroTimer] = useState(initialPomodorTimer);
+  const [breakTimer, setBreakTime] = useState(initialBreakTimer);
   const [IsCounting, setIsCounting] = useState(false);
   const [IsCountingBreak, setIsCountingBreak] = useState(false);
   const pomodoroIntervalRef = useRef<NodeJS.Timeout>();
   const breakIntervalRef = useRef<NodeJS.Timeout>();
+
+
+  function notifyMe(type: string) {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
+    else if (Notification.permission === "granted") {
+      new Notification(`O tempo do ${type} acabou`);
+    }
+    else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          new Notification(`O tempo do ${type} acabou`);
+        }
+      });
+    }
+  }
 
   useEffect(() => {
     if (IsCounting) {
@@ -23,11 +42,14 @@ export default function Pomodoro() {
       }, 1000)
     }
 
-    else {
-      clearTimeout(pomodoroIntervalRef.current);
-
+    if (pomodoroTimer === 0) {
+      notifyMe('Pomodoro')
+      setIsCounting(false)
+      setpomodoroTimer(initialPomodorTimer)
     }
-  }, [pomodoroTimer, IsCounting])
+
+    return () => clearTimeout(pomodoroIntervalRef.current);
+  }, [pomodoroTimer, IsCounting, initialPomodorTimer])
 
   useEffect(() => {
     if (IsCountingBreak) {
@@ -35,10 +57,16 @@ export default function Pomodoro() {
         setBreakTime(breakTimer - 1);
       }, 1000)
     }
-    else {
-      clearTimeout(breakIntervalRef.current);
+
+    if (breakTimer === 0) {
+      notifyMe('Break')
+      setIsCountingBreak(false)
+      setBreakTime(initialBreakTimer)
     }
-  }, [breakTimer, IsCountingBreak])
+
+    return () => clearTimeout(breakIntervalRef.current);
+
+  }, [breakTimer, IsCountingBreak, initialBreakTimer])
 
   const pomodoroMinutes = Math.floor(pomodoroTimer / 60);
   const pomodoroSeconds = pomodoroTimer % 60;
@@ -46,7 +74,7 @@ export default function Pomodoro() {
   const breakSeconds = breakTimer % 60
 
   return (
-    <div className='w-96 flex flex-col text-center gap-6 shadow-xl rounded-md border-2'>
+    <section className='w-96 flex flex-col text-center gap-6 shadow-xl rounded-md border-2'>
       <h2 className='pt-4 text-2xl'>Tarefas do dia</h2>
       <div className='flex justify-evenly items-center pl-10'>
         <BiTask className='w-7 h-7' />
@@ -60,23 +88,32 @@ export default function Pomodoro() {
 
         </div>
         {IsCounting ?
-          <CiPause1
-            className='w-7 h-7 cursor-pointer'
+          <button
             onClick={() => setIsCounting(prev => !prev)}
-          />
+          >
+            <CiPause1
+              className='w-7 h-7 cursor-pointer'
+            />
+          </button>
           :
-          <CiPlay1
-            className='w-7 h-7 cursor-pointer'
+          <button
             onClick={() => setIsCounting(prev => !prev)}
-          />
+          >
+            <CiPlay1
+              className='w-7 h-7 cursor-pointer'
+            />
+          </button>
         }
-        <IoPlaySkipForwardOutline
-          className={`w-7 h-7 cursor-pointer ${IsCounting ? '' : 'invisible'}`}
+        <button
           onClick={() => {
-            setpomodoroTimer(25 * 60)
+            setpomodoroTimer(initialPomodorTimer)
             setIsCounting(prev => !prev)
           }}
-        />
+        >
+          <IoPlaySkipForwardOutline
+            className={`w-7 h-7 cursor-pointer ${IsCounting ? '' : 'invisible'}`}
+          />
+        </button>
       </div>
 
       <div className='flex justify-evenly items-center pl-10'>
@@ -92,27 +129,36 @@ export default function Pomodoro() {
           <p>Tempo de descanso</p>
         </div>
         {IsCountingBreak ?
-          <CiPause1
-            className='w-7 h-7 cursor-pointer'
+          <button
             onClick={() => setIsCountingBreak(prev => !prev)}
-          />
+          >
+            <CiPause1
+              className='w-7 h-7 cursor-pointer'
+            />
+          </button>
           :
-          <CiPlay1
-            className='w-7 h-7 cursor-pointer'
+          <button
             onClick={() => setIsCountingBreak(prev => !prev)}
-          />
+          >
+            <CiPlay1
+              className='w-7 h-7 cursor-pointer'
+            />
+          </button>
         }
-        <IoPlaySkipForwardOutline
-          className={`w-7 h-7 ${IsCountingBreak ? '' : 'invisible'}`}
+        <button
           onClick={() => {
-            setBreakTime(5 * 60)
+            setBreakTime(initialBreakTimer)
             setIsCountingBreak(prev => !prev)
           }}
-        />
+        >
+          <IoPlaySkipForwardOutline
+            className={`w-7 h-7 ${IsCountingBreak ? '' : 'invisible'}`}
+          />
+        </button>
       </div>
-      <div className='flex justify-center pb-10'>
+      <div className='flex justify-center pb-10 pl-5'>
         <DisplayList />
       </div>
-    </div>
+    </section>
   )
 }

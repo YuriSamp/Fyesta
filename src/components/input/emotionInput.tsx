@@ -115,7 +115,19 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
                         setY(100 - item.id * 30)
                         setItemId(item.id)
                         setDefaultColor(item.color)
-                      }}>
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key == 'Enter') {
+                          setEmotion(item.name)
+                          setSubModalIsOpen(true)
+                          setX(80)
+                          setY(100 - item.id * 30)
+                          setItemId(item.id)
+                          setDefaultColor(item.color)
+                        }
+                      }
+                      }
+                    >
                       <BsThreeDots />
                     </button>
                   </div>

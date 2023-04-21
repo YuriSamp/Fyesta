@@ -5,6 +5,7 @@ interface Props {
   children: React.ReactNode
 }
 
+
 export default function Layout({ page, children }: Props) {
 
   const paths = [
