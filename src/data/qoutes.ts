@@ -1046,56 +1046,56 @@ export const quotes = [
 
 export const quotesEn = [
   {
-    citation: "What we know is a drop, what we don't know is an ocean.",
-    author: 'Isaac Newton',
+    citacao: "What we know is a drop, what we don't know is an ocean.",
+    autor: 'Isaac Newton',
   },
   {
-    citation: 'Happiness is only real when shared.',
-    author: 'Christopher McCandless',
+    citacao: 'Happiness is only real when shared.',
+    autor: 'Christopher McCandless',
   },
   {
-    citation: 'The only true wisdom is in knowing you know nothing.',
-    author: 'Socrates',
+    citacao: 'The only true wisdom is in knowing you know nothing.',
+    autor: 'Socrates',
   },
   {
-    citation: 'Truth is a pathless land.',
-    author: 'Jiddu Krishnamurti',
+    citacao: 'Truth is a pathless land.',
+    autor: 'Jiddu Krishnamurti',
   },
   {
-    citation: 'Man is the measure of all things.',
-    author: 'Protagoras',
+    citacao: 'Man is the measure of all things.',
+    autor: 'Protagoras',
   },
   {
-    citation: 'That which does not kill us makes us stronger.',
-    author: 'Friedrich Nietzsche',
+    citacao: 'That which does not kill us makes us stronger.',
+    autor: 'Friedrich Nietzsche',
   },
   {
-    citation:
+    citacao:
       "Destiny is not a matter of chance, it's a matter of choice. It's not something to be waited for, it's something to be achieved.",
-    author: 'William Jennings Bryan',
+    autor: 'William Jennings Bryan',
   },
   {
-    citation:
+    citacao:
       'There is no favorable wind for those who do not know where they want to go.',
-    author: 'Seneca',
+    autor: 'Seneca',
   },
   {
-    citation: 'I do not find problems, I find solutions. Anyone can complain.',
-    author: 'Henry Ford',
+    citacao: 'I do not find problems, I find solutions. Anyone can complain.',
+    autor: 'Henry Ford',
   },
   {
-    citation:
+    citacao:
       'Happiness is a butterfly, which when pursued, is always beyond your grasp, but which, if you will sit down quietly, may alight upon you.',
-    author: 'Nathaniel Hawthorne',
+    autor: 'Nathaniel Hawthorne',
   },
   {
-    citation: 'What cannot be solved is solved.',
-    author: 'Luis Fernando Verissimo',
+    citacao: 'What cannot be solved is solved.',
+    autor: 'Luis Fernando Verissimo',
   },
   {
-    citation:
+    citacao:
       'The greatest glory in living lies not in never falling, but in rising every time we fall.',
-    author: 'Nelson Mandela',
+    autor: 'Nelson Mandela',
   },
   {
     citacao: 'What we know is a drop, what we dont know is an ocean.',
@@ -1193,52 +1193,52 @@ export const quotesEn = [
     autor: 'Thucydides',
   },
   {
-    autor:
+    citacao:
       "Don't stand still looking back, because what you did yesterday is already history. Instead, look forward and do something new.",
-    author: 'Mahatma Gandhi',
+    autor: 'Mahatma Gandhi',
   },
   {
-    autor: 'Pain is inevitable, suffering is optional.',
-    author: 'Buddha',
+    citacao: 'Pain is inevitable, suffering is optional.',
+    autor: 'Buddha',
   },
   {
-    autor:
+    citacao:
       'Courage is resistance to fear, mastery of fear, not absence of fear.',
-    author: 'Mark Twain',
+    autor: 'Mark Twain',
   },
   {
-    autor: 'The hardest thing in life is to know yourself.',
-    author: 'Thales of Miletus',
+    citacao: 'The hardest thing in life is to know yourself.',
+    autor: 'Thales of Miletus',
   },
   {
-    autor:
+    citacao:
       'A dream you dream alone is only a dream. A dream you dream together is reality.',
-    author: 'John Lennon',
+    autor: 'John Lennon',
   },
   {
-    autor:
+    citacao:
       "Don't judge each day by the harvest you reap, but by the seeds that you plant.",
-    author: 'Robert Louis Stevenson',
+    autor: 'Robert Louis Stevenson',
   },
   {
-    autor:
+    citacao:
       'Imagination is more important than knowledge. Knowledge is limited. Imagination encircles the world.',
-    author: 'Albert Einstein',
+    autor: 'Albert Einstein',
   },
   {
-    autor:
+    citacao:
       "Where there is love and inspiration, I don't think you can go wrong.",
-    author: 'Ella Fitzgerald',
+    autor: 'Ella Fitzgerald',
   },
   {
-    autor:
+    citacao:
       'Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.',
-    author: 'Christian D. Larson',
+    autor: 'Christian D. Larson',
   },
   {
-    autor:
+    citacao:
       "The only way to do great work is to love what you do. If you haven't found it yet, keep looking. Don't settle.",
-    author: 'Steve Jobs',
+    autor: 'Steve Jobs',
   },
   {
     citacao:

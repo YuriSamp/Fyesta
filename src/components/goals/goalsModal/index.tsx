@@ -159,7 +159,7 @@ export default function GoalsModal({ isModalOpen, setIsModalOpen, goalId, setGoa
                   placeholder='Juntar dinheiro'
                   value={task}
                   onChange={(e) => setTask(e.target.value)}
-                  className={`py-2 px-2 focus:outline-none bg-[#fafaf5]  ${isEmptyTask ? "w-full" : 'w-[270px]'}`}
+                  className={`py-2 px-2 focus:outline-none bg-[#fafaf5] dark:bg-InputGray  ${isEmptyTask ? "w-full" : 'w-[270px]'}`}
                   autoComplete="off"
                 />
                 <button

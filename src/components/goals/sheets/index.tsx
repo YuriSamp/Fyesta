@@ -149,18 +149,18 @@ const SheetsFilter = ({ onChangeCategory, onChangeProgress, progress, category, 
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className=" absolute  left-[-100px] min-w-[220px] bg-white rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
+          className=" absolute  left-[-100px] min-w-[220px] bg-white dark:bg-[#151515] text-black dark:text-white rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
           sideOffset={5}
           onPointerDownOutside={() => setIsOpen(false)}
           onEscapeKeyDown={() => setIsOpen(false)}
         >
-          <DropdownMenu.Item className="text-black text-base flex items-center px-6 outline-none select-none mb-1 ">
+          <DropdownMenu.Item className=" text-base flex items-center px-6 outline-none select-none mb-1 ">
             <p>Progresso</p>
           </DropdownMenu.Item>
           <DropdownMenu.Group>
             {progressOptions.map((item, index) => (
               <DropdownMenu.Item
-                className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900 dark:hover:bg-gray-800 hover:text-white justify-between"
+                className="text-sm  rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900 dark:hover:bg-gray-800 hover:text-white justify-between"
                 key={index}
                 role='button'
                 onClick={() => onChangeProgress(item)}
@@ -173,21 +173,21 @@ const SheetsFilter = ({ onChangeCategory, onChangeProgress, progress, category, 
 
           <DropdownMenu.Separator className="h-[1px] m-1 bg-gray-800" />
 
-          <DropdownMenu.Item className="text-black text-base flex items-center px-6 outline-none select-none mb-1 ">
+          <DropdownMenu.Item className=" text-base flex items-center px-6 outline-none select-none mb-1 ">
             <p>Categorias</p>
           </DropdownMenu.Item>
           <DropdownMenu.Group className='max-h-[100px] overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
             <DropdownMenu.Item
-              className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900 dark:hover:bg-gray-800 hover:text-white justify-between"
+              className="text-sm  rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900 dark:hover:bg-gray-800 hover:text-white justify-between"
               role='button'
-              onClick={(e) => onChangeCategory('Todas')}
+              onClick={() => onChangeCategory('Todas')}
             >
               Todas
               {'Todas' === category && <AiOutlineCheck />}
             </DropdownMenu.Item>
-            {categoryOptions.map((item, index) => (
+            {categoryOptions.map(item => (
               <DropdownMenu.Item
-                className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900   dark:hover:bg-gray-800 hover:text-white justify-between"
+                className="text-sm rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900   dark:hover:bg-gray-800 hover:text-white justify-between"
                 key={item.id}
                 role='button'
                 onClick={() => onChangeCategory(item.name)}

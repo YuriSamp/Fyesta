@@ -66,7 +66,7 @@ export function GoalInput({ options, setState, placeholder, setoption, value }: 
         placeholder={placeholder}
         onFocus={() => setFocus(true)}
       />
-      <section className='absolute top-[40px] z-10 bg-white w-full shadow-2xl rounded-lg'>
+      <section className='absolute top-[40px] z-10 bg-white dark:bg-[#151515] text-black dark:text-white  w-full shadow-2xl rounded-lg'>
         {focus
           &&
           <>
@@ -74,7 +74,7 @@ export function GoalInput({ options, setState, placeholder, setoption, value }: 
             {inputTratado.length > 0 ?
               inputTratado.map(item => (
                 <div
-                  className='hover:bg-gray-200 cursor-pointer'
+                  className='hover:bg-gray-200 dark: dark:hover:bg-neutral-700 cursor-pointer'
                   key={item.id}
                 >
                   <div className='flex  items-center py-1 px-4 '>
