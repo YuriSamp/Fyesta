@@ -1,9 +1,13 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import Loginpage from '../../public/loginpage.png'
 import reset from '../../public/reset.png'
 import recovery from '../../public/recovery.png'
 import SignUp from '../../public/SignUp.png'
+import diary from '../../public/diario.png'
+import calendar from '../../public/Calendário.png'
+import goals from '../../public/Metas.png'
+import planner from '../../public/planner.png'
 import { BsShieldCheck, BsBrush } from 'react-icons/bs'
 import { AiOutlineCalendar } from 'react-icons/ai'
 import { IconType } from 'react-icons'
@@ -15,6 +19,10 @@ interface IFeatureBox {
   Title: string
   Description: string
   Icon: IconType
+  image1: StaticImageData
+  image2: StaticImageData
+  image3: StaticImageData
+  image4: StaticImageData
 }
 
 const content = {
@@ -160,18 +168,28 @@ export default function Home() {
           Title={section2.feature1.title}
           Icon={BsShieldCheck}
           Description={section2.feature1.description}
+          image1={Loginpage}
+          image2={SignUp}
+          image3={recovery}
+          image4={reset}
         />
-
         <FeatureBox
           Title={section2.feature2.title}
           Icon={AiOutlineCalendar}
           Description={section2.feature2.description}
+          image1={goals}
+          image2={calendar}
+          image3={planner}
+          image4={diary}
         />
-
         <FeatureBox
           Title={section2.feature3.title}
           Icon={BsBrush}
           Description={section2.feature3.description}
+          image1={Loginpage}
+          image2={SignUp}
+          image3={recovery}
+          image4={reset}
         />
       </section>
 
@@ -194,7 +212,7 @@ export default function Home() {
   )
 }
 
-function FeatureBox({ Description, Title, Icon }: IFeatureBox) {
+function FeatureBox({ Description, Title, Icon, image1, image2, image3, image4 }: IFeatureBox) {
   return (
     <div className='flex flex-col lg:flex-row justify-center items-center lg:items-start pt-20 gap-8'>
       <div className='flex flex-col w-[400px]'>
@@ -205,10 +223,10 @@ function FeatureBox({ Description, Title, Icon }: IFeatureBox) {
         <h3 className='text-lg pt-2 px-5 sm:px-0 text-center sm:text-left'>{Description}</h3>
       </div>
       <div className='grid grid-cols-2 justify-items-center gap-6 '>
-        <Image src={Loginpage} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-        <Image src={SignUp} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-        <Image src={recovery} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
-        <Image src={reset} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
+        <Image src={image1} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
+        <Image src={image2} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
+        <Image src={image3} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
+        <Image src={image4} alt='foto da parte de login' width={300} height={500} className='drop-shadow-2xl rounded-md' />
       </div>
     </div>
   )
