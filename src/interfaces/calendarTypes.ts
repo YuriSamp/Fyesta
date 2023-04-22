@@ -12,7 +12,7 @@ export interface brasilApiType {
   type: string;
 }
 
-type CalendarTaskTypes =
+export type CalendarTaskTypes =
   | 'Reminder'
   | 'Feriado Nacional'
   | 'Data Comemorativa'

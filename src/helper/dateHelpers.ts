@@ -73,22 +73,98 @@ export function dayNumberToDayString(day: number) {
   return daystring;
 }
 
-
 export function getDayOfTheWeek(day: number) {
   switch (day) {
     case 0:
-      return 'Domingo'
+      return 'Domingo';
     case 1:
-      return 'Segunda-Feira'
+      return 'Segunda-Feira';
     case 2:
-      return 'Terça-Feira'
+      return 'Terça-Feira';
     case 3:
-      return 'Quarta-Feira'
+      return 'Quarta-Feira';
     case 4:
-      return 'Quinta-Feira'
+      return 'Quinta-Feira';
     case 5:
-      return 'Sexta-Feira'
+      return 'Sexta-Feira';
     case 6:
-      return 'Sábado'
+      return 'Sábado';
   }
+}
+
+function monthNumberToString(month: number) {
+  let daystring = '';
+  switch (month) {
+    case 0:
+      daystring = 'Janeiro';
+      break;
+    case 1:
+      daystring = 'Fevereiro';
+      break;
+    case 2:
+      daystring = 'Março';
+      break;
+    case 3:
+      daystring = 'Abril';
+      break;
+    case 4:
+      daystring = 'Maio';
+      break;
+    case 5:
+      daystring = 'Junho';
+      break;
+    case 6:
+      daystring = 'Julho';
+      break;
+    case 7:
+      daystring = 'Agosto';
+      break;
+    case 8:
+      daystring = 'Setembro';
+      break;
+    case 9:
+      daystring = 'Outubro';
+      break;
+    case 10:
+      daystring = 'Novembro';
+      break;
+    case 11:
+      daystring = 'Dezembro';
+      break;
+  }
+  return daystring;
+}
+
+export function detailsModalDateDisplay(date: string) {
+  const dayofWeek = new Date(date).getDay();
+  let dayofWeekString = '';
+
+  switch (dayofWeek) {
+    case 0:
+      dayofWeekString = 'Segunda-Feira';
+      break;
+    case 1:
+      dayofWeekString = 'Terça-Feira';
+      break;
+    case 2:
+      dayofWeekString = 'Quarta-Feira';
+      break;
+    case 3:
+      dayofWeekString = 'Quinta-Feira';
+      break;
+    case 4:
+      dayofWeekString = 'Sexta-Feira';
+      break;
+    case 5:
+      dayofWeekString = 'Sábado';
+      break;
+    case 6:
+      dayofWeekString = 'Domingo';
+      break;
+  }
+
+  const dateParts = date.split('-');
+  const day = dateParts[2];
+  const month = monthNumberToString(Number(dateParts[1]));
+  return `${dayofWeekString}, ${day} de ${month}`;
 }

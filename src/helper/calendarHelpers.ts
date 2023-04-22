@@ -185,7 +185,7 @@ export const calendarBuilder = (
         tasks.push({
           name: task.name,
           type: task.type,
-          description: task.type,
+          description: task.description,
         });
       });
 

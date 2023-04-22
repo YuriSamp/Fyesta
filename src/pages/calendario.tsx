@@ -1,22 +1,18 @@
 import { Button } from '@ui/button';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { dateToDateInput } from 'src/helper/dateHelpers';
-import { ICalendarDays, ICalendarTask, brasilApiType } from 'src/interfaces/calendarTypes';
+import { ICalendarDays, brasilApiType } from 'src/interfaces/calendarTypes';
 import MonthController from '@ui/monthController';
 import { calendarBuilder } from 'src/helper/calendarHelpers';
 import { useQuery } from '@tanstack/react-query';
-import { useAtomValue } from 'jotai';
-import { calendarContext } from 'src/context/calendarContext';
+import { atom, useAtom, useAtomValue } from 'jotai';
+import { actionModalOpenState, calendarContext, detailsModalOpenState, modalDateAtom } from 'src/context/calendarContext';
+import { CalendarDayDiplay } from '@ui/calendar/DayDisplay';
+import DetailsModal from '@ui/calendar/DetailsModal';
 
-interface CalendarDayDiplayType {
-  isToday: boolean
-  day: number
-  tasks: ICalendarTask[]
-  currentMonth: boolean
-}
 
-const CalendarModal = dynamic(() => import('@ui/calendarActionModal'), {
+const CalendarModal = dynamic(() => import('@ui/calendar/ActionModal'), {
   ssr: false
 })
 
@@ -33,15 +29,16 @@ export default function Calendario() {
   })
 
   const date = new Date()
-  const day = date.getDate()
   const month = date.getMonth()
   const calendarTasks = useAtomValue(calendarContext)
   const [monthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
   const [days, setDays] = useState<ICalendarDays[]>(calendarBuilder(year, monthIndex, calendarTasks, data))
-  const [ismodalOpen, setIsModaOpen] = useState(false)
-  const [dateInputModal, setDateInputModal] = useState(dateToDateInput(day, month + 1, year))
-  const [divRef, setDivRef] = useState<DOMRect | undefined>()
+  const [modalDate, setModalDate] = useAtom(modalDateAtom)
+  const [modalRef, setModalRef] = useState<DOMRect | undefined>()
+  const [modalRef2, setModalRef2] = useState<DOMRect | undefined>()
+  const [isActionModalOpen, setIsActionModalModaOpen] = useAtom(actionModalOpenState)
+  const [isdetailsModalOpen, setIsDetailsModalOpen] = useAtom(detailsModalOpenState)
 
   useEffect(() => {
     setDays(calendarBuilder(year, monthIndex, calendarTasks, data))
@@ -87,90 +84,40 @@ export default function Calendario() {
             key={item.id}
             tabIndex={0}
             onClick={(e) => {
-              setDivRef(e.currentTarget.getBoundingClientRect())
-              setDateInputModal(dateToDateInput(item.day, item.Month + 1, item.year))
-              setIsModaOpen(prev => !prev)
+              setModalRef(e.currentTarget.getBoundingClientRect())
+              setModalDate(dateToDateInput(item.day, item.Month + 1, item.year))
+              setIsDetailsModalOpen(false)
+              setIsActionModalModaOpen(prev => !prev)
             }}
           >
             {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
-              <CalendarDayDiplay isToday={true} currentMonth={true} day={item.day} tasks={item.tasks} />
+              <CalendarDayDiplay isToday={true} currentMonth={true} item={item} day={item.day} tasks={item.tasks} setModalRef2={setModalRef2} />
               :
               item.Month === monthIndex ?
-                <CalendarDayDiplay isToday={false} currentMonth={true} day={item.day} tasks={item.tasks} />
+                <CalendarDayDiplay isToday={false} currentMonth={true} item={item} day={item.day} tasks={item.tasks} setModalRef2={setModalRef2} />
                 :
-                <CalendarDayDiplay isToday={false} currentMonth={false} day={item.day} tasks={item.tasks} />
+                <CalendarDayDiplay isToday={false} currentMonth={false} item={item} day={item.day} tasks={item.tasks} setModalRef2={setModalRef2} />
             }
           </div>
         ))
         }
-        {divRef !== undefined &&
+        {modalRef !== undefined &&
           <CalendarModal
-            isModalOpen={ismodalOpen}
-            setIsModalOpen={setIsModaOpen}
-            date={dateInputModal}
-            divRef={divRef}
+            isModalOpen={isActionModalOpen}
+            setIsModalOpen={setIsActionModalModaOpen}
+            date={modalDate}
+            divRef={modalRef}
+          />
+        }
+        {modalRef2 !== undefined &&
+          <DetailsModal
+            isModalOpen={isdetailsModalOpen}
+            setIsModalOpen={setIsDetailsModalOpen}
+            date={modalDate}
+            divRef={modalRef2}
           />
         }
       </div>
     </section>
-  )
-}
-
-
-const CalendarDayDiplay = ({ isToday, day, tasks, currentMonth }: CalendarDayDiplayType) => {
-
-  if (isToday) {
-    return (
-      <div className='flex flex-col items-center  gap-2 py-2 px-2 select-none'>
-        <div className='w-10 bg-violet-700 dark:bg-DarkModeGreen text-center text-white rounded-full'>
-          {day}
-        </div>
-        <div className='text-black w-full flex flex-col gap-2 h-28 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-4 py-1'>
-          {tasks.map(task => (
-            <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
-          ))}
-        </div>
-      </div>
-    )
-  }
-
-  return (
-    <div
-      className='text-center py-2 px-2 select-none'
-    >
-      <div className={`flex flex-col gap-2 h-36 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2 + ${!currentMonth && 'text-gray-300 dark:text-gray-600'}`}>
-        {day}
-        <div className='text-black flex flex-col gap-2 h-28 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2'>
-          {tasks.map(task => (
-            <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} key={task.day} />
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
-
-const CalendarDayTasksDisplay = ({ name, description, type }: ICalendarTask) => {
-  let taskColor = ''
-  switch (type) {
-    case 'Data Comemorativa':
-      taskColor = 'bg-blue-400'
-      break
-    case 'Feriado Nacional':
-      taskColor = 'bg-violet-400'
-      break
-    case 'Reminder':
-      taskColor = 'bg-green-400'
-      break
-    case 'Task':
-      taskColor = 'bg-orange-400'
-      break
-  }
-
-  return (
-    <button key={name} className={`w-full min-h-[32px] px-1 rounded-md ${taskColor} flex justify-center items-center `}>
-      {name}
-    </button>
   )
 }

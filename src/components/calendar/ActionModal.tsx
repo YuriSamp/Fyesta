@@ -1,15 +1,15 @@
 import * as Portal from '@radix-ui/react-portal';
 import { useState, useEffect } from 'react';
-import { Button } from './button';
-import { ControledInput } from './input/input';
-import { RxLoop, RxTextAlignJustify } from 'react-icons/rx'
+import { Button } from '../button';
+import { ControledInput } from '../input/input';
+import { RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
-import { Select } from './select';
 import { ModalProps } from 'src/interfaces/modalTypes';
 import { useSetAtom } from 'jotai';
 import { calendarContext } from 'src/context/calendarContext';
 import { ICalendarTask } from 'src/interfaces/calendarTypes';
 import { dayNumberToDayString } from 'src/helper/dateHelpers';
+import { useClickOutside } from 'src/hooks/useClickOutside';
 
 //TODO o modal ta pegando o tamanho da viewport, isso causa bugs inesperados
 
@@ -91,14 +91,18 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
 
   const { leftRef, topRef } = modalRelativePosition()
 
+  const domNode = useClickOutside(() => {
+    setIsModalOpen(false)
+  })
+
+
   return (
     <Portal.Root>
       {isModalOpen &&
         <section
+          ref={domNode}
           onKeyDown={e => {
-            console.log(e.key)
             if (e.key === 'Escape') {
-              console.log('deucerto')
               setIsModalOpen(prev => !prev)
             }
           }}
@@ -110,7 +114,7 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
             <button
               className='text-2xl py-2 px-3'
               onClick={() => setIsModalOpen(prev => !prev)}>
-              <AiOutlineClose />
+              <AiOutlineClose className='w-5 h-5' />
             </button>
           </div>
           <div className='pr-10 pl-20 pt-10'>

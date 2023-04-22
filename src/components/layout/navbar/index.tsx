@@ -1,7 +1,7 @@
 
 import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
-import { AiOutlineCalendar, AiOutlineHome, AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineCalendar, AiOutlineHome } from 'react-icons/ai';
 import { TfiClose } from 'react-icons/tfi'
 import { HiOutlineBars3 } from 'react-icons/hi2'
 import { BsBook, BsPencil } from 'react-icons/bs';
