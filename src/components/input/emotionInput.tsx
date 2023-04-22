@@ -73,13 +73,13 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
       className='flex flex-col h-10'
       ref={domRef}
     >
-      <input className='py-2 px-2 rounded-lg focus:outline-none bg-transparent border-[1px] border-black h-10 w-44 text-center placeholder:text-sm'
+      <input className='py-2 px-2 rounded-lg focus:outline-none bg-transparent border-[1px] border-black dark:border-white h-10 w-44 text-center placeholder:text-sm dark:placeholder:text-white'
         value={inputSearch}
         onChange={(e) => setInputSearch(e.target.value)}
         placeholder={placeholder}
         onFocus={() => setFocus(true)}
       />
-      <section className='relative z-10 bg-white w-64 shadow-2xl rounded-lg'>
+      <section className='relative z-10 bg-white dark:bg-[#151515] w-64 shadow-2xl rounded-lg'>
         {focus
           &&
           <>
@@ -87,7 +87,7 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
             {optionsState.length > 0 ?
               optionsState.map(item => (
                 <div
-                  className='hover:bg-gray-200 cursor-pointer'
+                  className='hover:bg-gray-200 dark:hover:bg-gray-800  cursor-pointer'
                   key={item.id}
                 >
                   <div className='flex  items-center py-1 px-4 '>
@@ -102,12 +102,12 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
                     >
                       <p
                         style={{ backgroundColor: item.color }}
-                        className='px-2 py-1 bg-red-300 rounded-md min-w-[70px] flex justify-center'
+                        className='px-2 py-1 bg-red-300 rounded-md dark:text-black min-w-[70px] flex justify-center'
                       >{item.name}</p>
                     </button>
                     <button
                       type='button'
-                      className='hover:bg-gray-300 w-6 h-6 flex justify-center items-center'
+                      className='hover:bg-gray-300 dark:hover:bg-DarkModeGreen w-6 h-6 flex justify-center items-center'
                       onClick={() => {
                         setEmotion(item.name)
                         setSubModalIsOpen(true)
@@ -189,7 +189,6 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
     }
     return item
   })
-  setoption(optionsEdited)
 
   const deleteItem = () => {
     const optionsEdited = options.filter(item => item.id != itemId)
@@ -206,6 +205,7 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
     })
     setoption(optionWithNewColor)
 
+
     const diaryUptade = diary.map(item => {
       if (item.feeling === emotion) {
         item.color = color
@@ -215,15 +215,21 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
     setDiary(diaryUptade)
   }
 
+  useEffect(() => {
+    setoption(optionsEdited)
+  }, [options])
+
+
+
   return (
     <menu
       style={{ transform: `translate(${x + 'px'}, -${y + 'px'})`, }}
-      className=' bg-white w-64 shadow-2xl z-20 px-5 relative'
+      className=' bg-white dark:bg-[#151515]  shadow-2xl z-20 px-5 relative'
       ref={domRef}
     >
-      <section className='pt-4 pb-2 flex flex-col'>
+      <section className='pt-4 flex flex-col'>
         <input
-          className='bg-[rgb(243,239,239)] border px-2 py-1 focus:outline-none'
+          className='bg-[rgb(243,239,239)] dark:bg-InputGray  border px-2 py-1 focus:outline-none'
           autoFocus={true}
           value={emotion}
           onChange={e => setEmotion(e.target.value)}
@@ -231,7 +237,7 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
         <div className='py-3 '>
           <button
             type='button'
-            className='flex gap-2 items-center pl-1  hover:bg-gray-200 cursor-pointer'
+            className='flex gap-2 w-full items-center pl-1 py-1  hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer'
             onClick={() => {
               deleteItem()
               setSubModalIsOpen(false)
@@ -242,10 +248,10 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
           </button>
         </div>
       </section>
-      <p className='pb-2'>Colors</p>
+      <p className='pb-3 text-lg'>Colors</p>
       <ul className='flex flex-col gap-2 pb-2'>
         {emotionColors.map((item, index) => (
-          <li className='hover:bg-gray-200 ' key={index}>
+          <li className='hover:bg-gray-200 dark:hover:bg-gray-800 ' key={index}>
             <button
               type='button'
               className='flex justify-between items-center w-full cursor-pointer'
