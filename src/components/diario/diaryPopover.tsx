@@ -1,5 +1,4 @@
 
-import React from 'react'
 import * as Popover from '@radix-ui/react-popover';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { useAtomValue } from 'jotai';

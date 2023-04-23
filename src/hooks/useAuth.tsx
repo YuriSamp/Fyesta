@@ -4,7 +4,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
 import nookies from 'nookies'
 import { cookeisIsAccept } from 'src/context/cookiesContext';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { toastNotify } from 'src/utils/toastNotify';
 
 type ProviderType = (
@@ -23,7 +23,7 @@ export default function useAuth(): useAuthType {
     signInWithEmailAndPassword,
   ] = useSignInWithEmailAndPassword(auth);
 
-  const [cookiesAcept, setCookiesAccept] = useAtom(cookeisIsAccept)
+  const cookiesAcept = useAtomValue(cookeisIsAccept)
 
   async function AuthhProvider(Provider: ProviderType) {
     try {

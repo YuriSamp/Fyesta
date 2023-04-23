@@ -10,8 +10,6 @@ import { actionModalOpenState, calendarContext, detailsModalOpenState, modalDate
 import { CalendarDayDiplay } from '@ui/calendar/DayDisplay';
 import DetailsModal from '@ui/calendar/DetailsModal';
 import CalendarMonthController from '@ui/calendarMonthController';
-import * as Checkbox from '@radix-ui/react-checkbox';
-import { CheckIcon } from '@radix-ui/react-icons';
 import { CalendarFilters } from '@ui/calendar/CalendarFilters';
 
 

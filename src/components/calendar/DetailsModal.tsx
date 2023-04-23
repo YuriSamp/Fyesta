@@ -8,7 +8,7 @@ import { detailsModalDateDisplay } from 'src/helper/dateHelpers';
 import { useAtomValue } from 'jotai';
 import { taskDescriptionAtom, taskNameAtom, taskTypeAtom } from 'src/context/calendarContext';
 import { useClickOutside } from 'src/hooks/useClickOutside';
-import { CalendarTaskTypes, ICalendarTask } from 'src/interfaces/calendarTypes';
+import { CalendarTaskTypes } from 'src/interfaces/calendarTypes';
 
 //TODO o modal ta pegando o tamanho da viewport, isso causa bugs inesperados
 
