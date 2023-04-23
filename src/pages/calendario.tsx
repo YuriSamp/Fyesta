@@ -5,13 +5,14 @@ import { dateToDateInput } from 'src/helper/dateHelpers';
 import { ICalendarDays, brasilApiType } from 'src/interfaces/calendarTypes';
 import { calendarBuilder } from 'src/helper/calendarHelpers';
 import { useQuery } from '@tanstack/react-query';
-import { atom, useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { actionModalOpenState, calendarContext, detailsModalOpenState, modalDateAtom } from 'src/context/calendarContext';
 import { CalendarDayDiplay } from '@ui/calendar/DayDisplay';
 import DetailsModal from '@ui/calendar/DetailsModal';
 import CalendarMonthController from '@ui/calendarMonthController';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@radix-ui/react-icons';
+import { CalendarFilters } from '@ui/calendar/CalendarFilters';
 
 
 const CalendarModal = dynamic(() => import('@ui/calendar/ActionModal'), {
@@ -53,7 +54,7 @@ export default function Calendario() {
   }
 
   return (
-    <section className='flex  text-black dark:text-white px-12  '>
+    <section className='flex gap-3  text-black dark:text-white px-12  '>
       <div className='flex flex-col gap-5 pt-12 py-4'>
         <div className='flex flex-col gap-5'>
           <CalendarMonthController
@@ -72,81 +73,7 @@ export default function Calendario() {
             />
           </div>
         </div>
-        <div className='flex flex-col  pt-3'>
-          <h2 className='text-3xl'>Minha Agenda</h2>
-          <div className='flex gap-3 items-center z-0 pt-2'>
-            <Checkbox.Root
-              className="flex h-5 w-5 appearance-none items-center justify-center rounded-[4px] border border-black bg-white drop-shadow-2xl  outline-none focus:border-2 focus:border-violet-600 dark:focus:border-DarkModeGreen dark:focus:bg-DarkModeGreen"
-              // checked={finished}
-              id="c1"
-              // onClick={() => setFinished(prev => !prev)}
-              onKeyDown={(e) => {
-                if (e.key == 'Enter') {
-                  // setFinished(prev => !prev)
-                }
-              }}
-            >
-              <Checkbox.Indicator className="text-black">
-                <CheckIcon />
-              </Checkbox.Indicator>
-            </Checkbox.Root>
-            <p className='text-xl w-52'>Feriados nacionais</p>
-          </div>
-          <div className='flex gap-3 items-center z-0 pt-2'>
-            <Checkbox.Root
-              className="flex h-5 w-5 appearance-none items-center justify-center rounded-[4px] border border-black bg-white drop-shadow-2xl  outline-none focus:border-2 focus:border-violet-600 dark:focus:border-DarkModeGreen dark:focus:bg-DarkModeGreen"
-              // checked={finished}
-              id="c1"
-              // onClick={() => setFinished(prev => !prev)}
-              onKeyDown={(e) => {
-                if (e.key == 'Enter') {
-                  // setFinished(prev => !prev)
-                }
-              }}
-            >
-              <Checkbox.Indicator className="text-black">
-                <CheckIcon />
-              </Checkbox.Indicator>
-            </Checkbox.Root>
-            <p className='text-xl w-52'>Datas comemorativas</p>
-          </div>
-          <div className='flex gap-3 items-center z-0 pt-2'>
-            <Checkbox.Root
-              className="flex h-5 w-5 appearance-none items-center justify-center rounded-[4px] border border-black bg-white drop-shadow-2xl  outline-none focus:border-2 focus:border-violet-600 dark:focus:border-DarkModeGreen dark:focus:bg-DarkModeGreen"
-              // checked={finished}
-              id="c1"
-              // onClick={() => setFinished(prev => !prev)}
-              onKeyDown={(e) => {
-                if (e.key == 'Enter') {
-                  // setFinished(prev => !prev)
-                }
-              }}
-            >
-              <Checkbox.Indicator className="text-black">
-                <CheckIcon />
-              </Checkbox.Indicator>
-            </Checkbox.Root>
-            <p className='text-xl w-52'>Lembretes</p>
-          </div>
-          <div className='flex gap-3 items-center z-0 pt-2'>
-            <Checkbox.Root
-              className="flex h-5 w-5 appearance-none items-center justify-center rounded-[4px] border border-black bg-white drop-shadow-2xl  outline-none focus:border-2 focus:border-violet-600 dark:focus:border-DarkModeGreen dark:focus:bg-DarkModeGreen"
-              // checked={finished}
-              id="c1"
-              // onClick={() => setFinished(prev => !prev)}
-              onKeyDown={(e) => {
-                if (e.key == 'Enter') {
-                  // setFinished(prev => !prev)
-                }
-              }}
-            >
-              <Checkbox.Indicator className="text-black">
-                <CheckIcon />
-              </Checkbox.Indicator>
-            </Checkbox.Root>
-            <p className='text-xl w-52'>Feriados</p>
-          </div>
-        </div>
+        <CalendarFilters />
       </div>
       <div className='flex flex-col items-center justify-center'>
         <div className='flex pt-2 relative '>
@@ -174,12 +101,36 @@ export default function Calendario() {
                 }}
               >
                 {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
-                  <CalendarDayDiplay isToday={true} currentMonth={true} item={item} day={item.day} tasks={item.tasks} setModalRef2={setModalRef2} />
+                  <CalendarDayDiplay
+                    isToday={true}
+                    currentMonth={true}
+                    item={item}
+                    day={item.day}
+                    tasks={item.tasks}
+                    setModalRef2={setModalRef2}
+                    size='small'
+                  />
                   :
                   item.Month === monthIndex ?
-                    <CalendarDayDiplay isToday={false} currentMonth={true} item={item} day={item.day} tasks={item.tasks} setModalRef2={setModalRef2} />
+                    <CalendarDayDiplay
+                      isToday={false}
+                      currentMonth={true}
+                      item={item}
+                      day={item.day}
+                      tasks={item.tasks}
+                      setModalRef2={setModalRef2}
+                      size='small'
+                    />
                     :
-                    <CalendarDayDiplay isToday={false} currentMonth={false} item={item} day={item.day} tasks={item.tasks} setModalRef2={setModalRef2} />
+                    <CalendarDayDiplay
+                      isToday={false}
+                      currentMonth={false}
+                      item={item}
+                      day={item.day}
+                      tasks={item.tasks}
+                      setModalRef2={setModalRef2}
+                      size='small'
+                    />
                 }
               </div>
             ))
@@ -197,12 +148,36 @@ export default function Calendario() {
                 }}
               >
                 {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
-                  <CalendarDayDiplay isToday={true} currentMonth={true} item={item} day={item.day} tasks={item.tasks} setModalRef2={setModalRef2} />
+                  <CalendarDayDiplay
+                    isToday={true}
+                    currentMonth={true}
+                    item={item}
+                    day={item.day}
+                    tasks={item.tasks}
+                    setModalRef2={setModalRef2}
+                    size='big'
+                  />
                   :
                   item.Month === monthIndex ?
-                    <CalendarDayDiplay isToday={false} currentMonth={true} item={item} day={item.day} tasks={item.tasks} setModalRef2={setModalRef2} />
+                    <CalendarDayDiplay
+                      isToday={false}
+                      currentMonth={true}
+                      item={item}
+                      day={item.day}
+                      tasks={item.tasks}
+                      setModalRef2={setModalRef2}
+                      size='big'
+                    />
                     :
-                    <CalendarDayDiplay isToday={false} currentMonth={false} item={item} day={item.day} tasks={item.tasks} setModalRef2={setModalRef2} />
+                    <CalendarDayDiplay
+                      isToday={false}
+                      currentMonth={false}
+                      item={item}
+                      day={item.day}
+                      tasks={item.tasks}
+                      setModalRef2={setModalRef2}
+                      size='big'
+                    />
                 }
               </div>
             ))

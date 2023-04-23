@@ -8,6 +8,7 @@ import { detailsModalDateDisplay } from 'src/helper/dateHelpers';
 import { useAtomValue } from 'jotai';
 import { taskDescriptionAtom, taskNameAtom, taskTypeAtom } from 'src/context/calendarContext';
 import { useClickOutside } from 'src/hooks/useClickOutside';
+import { CalendarTaskTypes, ICalendarTask } from 'src/interfaces/calendarTypes';
 
 //TODO o modal ta pegando o tamanho da viewport, isso causa bugs inesperados
 
@@ -29,16 +30,18 @@ export default function DetailsModal({ isModalOpen, setIsModalOpen, date, divRef
     let leftRef = 0
     let topRef = 0
 
+    //aqui eu pego o eixo horizontal
     if (left + width < 1200) {
       leftRef = left + 1.1 * width
     } else {
-      leftRef = left - 2.3 * width
+      leftRef = left - 3.2 * width
     }
 
+    //Aqui eu pego o eixo vertical
     if (top + height < 600) {
       topRef = top + height * 0.6
     } else {
-      topRef = top - 0.6 * height
+      topRef = top - 6 * height
     }
 
     return { leftRef, topRef }
@@ -66,6 +69,19 @@ export default function DetailsModal({ isModalOpen, setIsModalOpen, date, divRef
   const domNode = useClickOutside(() => {
     setIsModalOpen(false)
   })
+
+  const translateTaskType = (taskType: CalendarTaskTypes | undefined) => {
+    switch (taskType) {
+      case 'Data Comemorativa':
+        return 'Data Comemorativa'
+      case 'Feriado Nacional':
+        return 'Feriado Nacional'
+      case 'Reminder':
+        return 'Lembrete'
+      case 'Task':
+        return 'Tarefa'
+    }
+  }
 
   return (
     <Portal.Root>
@@ -116,7 +132,7 @@ export default function DetailsModal({ isModalOpen, setIsModalOpen, date, divRef
           }
           <div className='py-5 flex gap-4 items-center px-10'>
             <HiOutlineBars3 className='w-5 h-5' />
-            <p className='text-xl'>{taskType}</p>
+            <p className='text-xl'>{translateTaskType(taskType)}</p>
           </div>
         </section>
       }

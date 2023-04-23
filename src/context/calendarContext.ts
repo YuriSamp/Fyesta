@@ -17,3 +17,7 @@ export const modalDateAtom = atom<string>(
 
 export const taskNameAtom = atom<string>('');
 export const taskDescriptionAtom = atom<string>('');
+export const nationalHolidayAtom = atom<boolean>(true);
+export const holidayAtom = atom<boolean>(true);
+export const reminderAtom = atom<boolean>(true);
+export const taskAtom = atom<boolean>(true);

@@ -42,12 +42,12 @@ const CalendarMonthController = ({ year, setYear, setMonthIndex, monthIndex }: P
         }}
       >
         <AiOutlineArrowLeft
-          className='w-7 h-7 cursor-pointer'
+          className='h-5 w-5 2xl:w-7 2xl:h-7 cursor-pointer'
 
           title='mês anterior'
         />
       </button>
-      <h1 className='text-3xl text-center select-none w-72'>{monthDisplay} de {year}</h1>
+      <h1 className='text-lg xl:text-2xl 2xl:text-3xl text-center select-none w-40 xl:w-60 2xl:w-72'>{monthDisplay} de {year}</h1>
       <button
         onKeyDown={(e) => {
           if (e.key == 'Enter') {
@@ -60,7 +60,7 @@ const CalendarMonthController = ({ year, setYear, setMonthIndex, monthIndex }: P
           monthDisplay = arrMeses[monthIndex]
         }}
       >
-        <AiOutlineArrowRight className='w-7 h-7 cursor-pointer'
+        <AiOutlineArrowRight className='h-5 w-5 2xl:w-7 2xl:h-7 cursor-pointer'
           title='proximo mês'
         />
       </button>

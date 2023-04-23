@@ -1,10 +1,14 @@
-import { useSetAtom } from 'jotai'
+import { useAtomValue, useSetAtom } from 'jotai'
 import { ICalendarDays, ICalendarTask } from 'src/interfaces/calendarTypes'
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, } from 'react'
 import {
   actionModalOpenState,
   detailsModalOpenState,
+  holidayAtom,
   modalDateAtom,
+  nationalHolidayAtom,
+  reminderAtom,
+  taskAtom,
   taskDescriptionAtom,
   taskNameAtom,
   taskTypeAtom
@@ -18,6 +22,7 @@ interface CalendarDayDiplayType {
   tasks: ICalendarTask[]
   currentMonth: boolean
   setModalRef2: Dispatch<SetStateAction<DOMRect | undefined>>
+  size: 'big' | 'small'
 }
 
 interface calendarDayTasksDisplay extends ICalendarTask {
@@ -25,7 +30,32 @@ interface calendarDayTasksDisplay extends ICalendarTask {
   item: ICalendarDays
 }
 
-export const CalendarDayDiplay = ({ isToday, day, tasks, currentMonth, setModalRef2, item }: CalendarDayDiplayType) => {
+export const CalendarDayDiplay = ({ isToday, day, tasks, currentMonth, setModalRef2, item, size }: CalendarDayDiplayType) => {
+
+  const isNationalHolidaysAllowed = useAtomValue(nationalHolidayAtom)
+  const isHolidaysAllowed = useAtomValue(holidayAtom)
+  const isReminderAllowed = useAtomValue(reminderAtom)
+  const isTaskAllowed = useAtomValue(taskAtom)
+
+  const taskFilter = (tasks: ICalendarTask[]) => {
+    let arr1: ICalendarTask[] = []
+    let arr2: ICalendarTask[] = []
+    let arr3: ICalendarTask[] = []
+    let arr4: ICalendarTask[] = []
+    if (isNationalHolidaysAllowed) {
+      arr1 = tasks.filter(task => task.type === 'Feriado Nacional')
+    }
+    if (isHolidaysAllowed) {
+      arr2 = tasks.filter(task => task.type === 'Data Comemorativa')
+    }
+    if (isReminderAllowed) {
+      arr3 = tasks.filter(task => task.type === 'Reminder')
+    }
+    if (isTaskAllowed) {
+      arr4 = tasks.filter(task => task.type === 'Task')
+    }
+    return arr1.concat(arr2, arr3, arr4)
+  }
 
   if (isToday) {
     return (
@@ -34,7 +64,7 @@ export const CalendarDayDiplay = ({ isToday, day, tasks, currentMonth, setModalR
           {day}
         </div>
         <div className='text-black w-full flex flex-col gap-2 h-28 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-4 py-1'>
-          {tasks.map((task, i) => (
+          {taskFilter(tasks).map((task, i) => (
             <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} setModalRef2={setModalRef2} key={i} item={item} />
           ))}
         </div>
@@ -48,8 +78,8 @@ export const CalendarDayDiplay = ({ isToday, day, tasks, currentMonth, setModalR
     >
       <div className={`flex flex-col gap-2 h-36 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2 + ${!currentMonth && 'text-gray-300 dark:text-gray-600'}`}>
         {day}
-        <div className='text-black flex flex-col gap-2 h-28 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2'>
-          {tasks.map((task, i) => (
+        <div className={`text-black flex flex-col gap-2 ${size === 'big' ? 'h-36' : 'h-20'}  overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2`}>
+          {taskFilter(tasks).map((task, i) => (
             <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} setModalRef2={setModalRef2} key={i} item={item} description={task.description} />
           ))}
         </div>
@@ -82,7 +112,6 @@ const CalendarDayTasksDisplay = ({ name, type, setModalRef2, item, description }
   const setModalDate = useSetAtom(modalDateAtom)
   const setModalTask = useSetAtom(taskNameAtom)
   const setTaskDescription = useSetAtom(taskDescriptionAtom)
-  console.log(description)
 
   return (
     <button

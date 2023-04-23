@@ -68,22 +68,27 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
     setIsModalOpen(false)
   }
 
+
   const modalRelativePosition = (): { leftRef: number, topRef: number } => {
     const { left, top, height, width } = divRef
 
     let leftRef = 0
     let topRef = 0
 
+    //aqui eu pego o eixo horizontal
     if (left + width < 1200) {
       leftRef = left + 1.1 * width
     } else {
-      leftRef = left - 2.3 * width
+      leftRef = left - 2.4 * width
     }
 
-    if (top + height < 600) {
+    //Aqui eu pego o eixo vertical
+    if (top + height < 500) {
       topRef = top + height * 0.6
+    } else if (top + height < 600) {
+      topRef = top - 2 * height
     } else {
-      topRef = top - 0.6 * height
+      topRef = top - 3.2 * height
     }
 
     return { leftRef, topRef }
