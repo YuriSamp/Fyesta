@@ -35,29 +35,29 @@ export default function Settings() {
       <Header
         Page={page}
       />
-      <div className='max-h-[600px] overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 pr-2'>
-        <div className='py-10 flex justify-between items-center px-4'>
+      <div className='sm:max-h-[600px] overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 pr-2'>
+        <div className='py-10 flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between items-start sm:items-center px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Aparencia</h2>
-            <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Customiza o tema do Fyesta no seu dispositivo</h3>
+            <h3 className='text-base  w-60 sm:w-72 xl:w-[500px] 2xl:w-[700px]'>Customiza o tema do Fyesta no seu dispositivo</h3>
           </div>
           <div>
             <Select Options={themes} onChange={setTheme} value={theme} />
           </div>
         </div>
-        <div className='py-10  flex justify-between items-center px-4'>
+        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Idioma</h2>
-            <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o idioma para a interface</h3>
+            <h3 className='text-base  w-60 sm:w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o idioma para a interface</h3>
           </div>
           <div>
             <Select Options={languages} value={language} onChange={setLanguage} />
           </div>
         </div>
-        <div className='py-10  flex justify-between items-center px-4'>
+        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Pomodoro</h2>
-            <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o tempo que acha necessário para realizar suas tarefas</h3>
+            <h3 className='text-base  w-60 sm:w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o tempo que acha necessário para realizar suas tarefas</h3>
           </div>
           <div>
             <select className='bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] dark:border-white '
@@ -72,10 +72,10 @@ export default function Settings() {
             </select>
           </div>
         </div>
-        <div className='py-10  flex justify-between items-center px-4'>
+        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Descanso</h2>
-            <h3 className='text-base  w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o tempo de descanso entre suas tarefas</h3>
+            <h3 className='text-base  w-60 sm:w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o tempo de descanso entre suas tarefas</h3>
           </div>
           <div>
             <select className='bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] dark:border-white '

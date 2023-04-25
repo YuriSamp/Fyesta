@@ -68,6 +68,8 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
     }
   }, [inputSearch])
 
+  // console.log(window.screenX)
+
   return (
     <menu
       className='flex flex-col h-10'
@@ -79,7 +81,7 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
         placeholder={placeholder}
         onFocus={() => setFocus(true)}
       />
-      <section className='relative z-10 bg-white dark:bg-[#151515] w-64 shadow-2xl rounded-lg'>
+      <section className='relative z-10 bg-white dark:bg-[#151515] w-52 sm:w-64 shadow-2xl rounded-lg'>
         {focus
           &&
           <>
@@ -217,14 +219,14 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
 
   useEffect(() => {
     setoption(optionsEdited)
-  }, [options])
+  }, [emotion])
 
 
 
   return (
     <menu
       style={{ transform: `translate(${x + 'px'}, -${y + 'px'})`, }}
-      className=' bg-white dark:bg-[#151515]  shadow-2xl z-20 px-5 relative'
+      className=' bg-white dark:bg-[#151515]  shadow-2xl  z-20 px-5 relative'
       ref={domRef}
     >
       <section className='pt-4 flex flex-col'>

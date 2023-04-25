@@ -14,7 +14,7 @@ export default function About() {
         Page={page}
       />
       <div className='pt-5 flex flex-col  px-4'>
-        <h1 className='text-2xl py-5 '>Porque esse aplicativo existe ? </h1>
+        <h1 className='text-2xl py-5 '>Como esse projeto ganhou vida ? </h1>
         <p className='text-lg tracking-wider'>Esse projeto nasceu da minha vontade de ter um lugar para escrever o meu diário,
           mas eu nunca encontrei um aplicativo para computador da exata maneira que eu queria,
           então por muito tempo eu usei o Google Keep posteriormente acabei migrando para o notion,

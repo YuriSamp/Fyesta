@@ -28,7 +28,7 @@ const MonthController = ({ year, setYear, setMonthIndex, monthIndex }: Props) =>
   };
 
   return (
-    <div className='flex gap-6 items-center justify-center'>
+    <div className='flex gap-1 lg:gap-6 items-center justify-center'>
       <button
         onKeyDown={(e) => {
           if (e.key == 'Enter') {
