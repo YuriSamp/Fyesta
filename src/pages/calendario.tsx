@@ -11,7 +11,7 @@ import { CalendarDayDiplay } from '@ui/calendar/DayDisplay';
 import DetailsModal from '@ui/calendar/DetailsModal';
 import CalendarMonthController from '@ui/calendarMonthController';
 import { CalendarFilters } from '@ui/calendar/CalendarFilters';
-
+import CreateModal from '@ui/calendar/CreateModal';
 
 const CalendarModal = dynamic(() => import('@ui/calendar/ActionModal'), {
   ssr: false
@@ -31,6 +31,7 @@ export default function Calendario() {
 
   const date = new Date()
   const month = date.getMonth()
+  const day = date.getDate()
   const calendarTasks = useAtomValue(calendarContext)
   const [monthIndex, setMonthIndex] = useState(month);
   const [year, setYear] = useState(date.getFullYear())
@@ -40,16 +41,23 @@ export default function Calendario() {
   const [modalRef2, setModalRef2] = useState<DOMRect | undefined>()
   const [isActionModalOpen, setIsActionModalModaOpen] = useAtom(actionModalOpenState)
   const [isdetailsModalOpen, setIsDetailsModalOpen] = useAtom(detailsModalOpenState)
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
 
   useEffect(() => {
     setDays(calendarBuilder(year, monthIndex, calendarTasks, data))
   }, [monthIndex, data, year, calendarTasks])
 
+  useEffect(() => {
+    const seletor = `${day}`
+    let elem = document.getElementById(seletor);
+    setModalRef(elem?.getBoundingClientRect())
+  }, [isCreateModalOpen, day])
 
   const backToday = () => {
     setYear(date.getFullYear())
     setMonthIndex(date.getMonth())
   }
+
 
   return (
     <section className='flex gap-3  text-black dark:text-white px-12  '>
@@ -68,12 +76,13 @@ export default function Calendario() {
             />
             <Button
               Children='Criar'
+              onClick={() => setIsCreateModalOpen(prev => !prev)}
             />
           </div>
         </div>
         <CalendarFilters />
       </div>
-      <div className='flex flex-col items-center justify-center'>
+      <div className='flex flex-col items-center justify-center' >
         <div className='flex pt-2 relative '>
           {daysOfWeek.map(item => (
             <div
@@ -84,10 +93,12 @@ export default function Calendario() {
             </div>
           ))}
         </div>
-        <div className='flex flex-wrap max-w-[1460px] justify-center text-lg' >
+        <div
+          className='flex flex-wrap max-w-[1460px] justify-center text-lg' >
           {days.length > 35 ?
             days.map((item) => (
               <div
+                id={String(item.id)}
                 className='w-48 h-32 calendar'
                 key={item.id}
                 tabIndex={0}
@@ -97,6 +108,7 @@ export default function Calendario() {
                   setIsDetailsModalOpen(false)
                   setIsActionModalModaOpen(prev => !prev)
                 }}
+
               >
                 {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
                   <CalendarDayDiplay
@@ -194,6 +206,13 @@ export default function Calendario() {
               setIsModalOpen={setIsDetailsModalOpen}
               date={modalDate}
               divRef={modalRef2}
+            />
+          }
+          {isCreateModalOpen &&
+            <CreateModal
+              isModalOpen={isCreateModalOpen}
+              setIsModalOpen={setIsCreateModalOpen}
+              setCalendarModalOpen={setIsActionModalModaOpen}
             />
           }
         </div>

@@ -165,6 +165,6 @@ export function detailsModalDateDisplay(date: string) {
 
   const dateParts = date.split('-');
   const day = dateParts[2];
-  const month = monthNumberToString(Number(dateParts[1]));
+  const month = monthNumberToString(Number(dateParts[1]) - 1);
   return `${dayofWeekString}, ${day} de ${month}`;
 }

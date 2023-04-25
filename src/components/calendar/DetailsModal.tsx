@@ -10,8 +10,6 @@ import { taskDescriptionAtom, taskNameAtom, taskTypeAtom } from 'src/context/cal
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { CalendarTaskTypes } from 'src/interfaces/calendarTypes';
 
-//TODO o modal ta pegando o tamanho da viewport, isso causa bugs inesperados
-
 interface ICalendarModal extends ModalProps {
   date: string
   divRef: DOMRect

@@ -5,13 +5,12 @@ import { ControledInput } from '../input/input';
 import { RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
 import { ModalProps } from 'src/interfaces/modalTypes';
-import { useSetAtom } from 'jotai';
-import { calendarContext } from 'src/context/calendarContext';
+import { useAtom, useSetAtom } from 'jotai';
+import { calendarContext, modalOptionAtom } from 'src/context/calendarContext';
 import { ICalendarTask } from 'src/interfaces/calendarTypes';
 import { dayNumberToDayString } from 'src/helper/dateHelpers';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 
-//TODO o modal ta pegando o tamanho da viewport, isso causa bugs inesperados
 
 interface ICalendarModal extends ModalProps {
   date: string
@@ -22,7 +21,7 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
 
   const setCalendarTasks = useSetAtom(calendarContext)
   const [title, setTitle] = useState('')
-  const [modalOption, setModalOption] = useState('Tarefa')
+  const [modalOption, setModalOption] = useAtom(modalOptionAtom)
   const [taskText, setTaskText] = useState('')
   // const [reminderOption, setReminderOption] = useState('Não se repete')
   const [dataRaw, setData] = useState(date)
@@ -98,6 +97,7 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
 
   const domNode = useClickOutside(() => {
     setIsModalOpen(false)
+    setModalOption('Tarefa')
   })
 
 
@@ -109,6 +109,7 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
           onKeyDown={e => {
             if (e.key === 'Escape') {
               setIsModalOpen(prev => !prev)
+              setModalOption('Tarefa')
             }
           }}
           style={{ left: `${leftRef}px`, top: `${topRef}px` }}
@@ -118,7 +119,10 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
           <div className='flex items-center justify-end bg-gray-100 dark:bg-[#505050] rounded-t-lg'>
             <button
               className='text-2xl py-2 px-3'
-              onClick={() => setIsModalOpen(prev => !prev)}>
+              onClick={() => {
+                setIsModalOpen(prev => !prev)
+                setModalOption('Tarefa')
+              }}>
               <AiOutlineClose className='w-5 h-5' />
             </button>
           </div>

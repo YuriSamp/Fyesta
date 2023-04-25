@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { dateToDateInput } from 'src/helper/dateHelpers';
+import { dateToDateInput, dayNumberToDayString } from 'src/helper/dateHelpers';
 import { CalendarTaskTypes, ICalendarTask } from 'src/interfaces/calendarTypes';
 
 const date = new Date();
@@ -21,3 +21,4 @@ export const nationalHolidayAtom = atom<boolean>(true);
 export const holidayAtom = atom<boolean>(true);
 export const reminderAtom = atom<boolean>(true);
 export const taskAtom = atom<boolean>(true);
+export const modalOptionAtom = atom<'Tarefa' | 'Lembrete'>('Tarefa');
