@@ -66,8 +66,8 @@ export default function Perfil() {
       <Header
         Page={page}
       />
-      <div className='max-h-[600px] overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2'>
-        <div className='py-10 flex justify-between items-center px-4'>
+      <div className='sm:max-h-[600px] overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2'>
+        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
           <div className='flex flex-col gap-2 '>
             <h2 className='text-xl'>Nome</h2>
             <div className='pt-2'>
@@ -84,7 +84,7 @@ export default function Perfil() {
           />
         </div>
 
-        <div className='py-10 flex justify-between items-center px-4'>
+        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Foto</h2>
             <div className='pt-2 '>
@@ -101,7 +101,7 @@ export default function Perfil() {
           />
         </div>
 
-        <div className='py-10 flex justify-between items-center px-4'>
+        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Email</h2>
             <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>{user?.email}</h3>
@@ -118,7 +118,7 @@ export default function Perfil() {
           />
         </div>
 
-        <div className='py-10  flex justify-between items-center px-4'>
+        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Senha</h2>
             <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha uma senha forte, afinal você não quer que ninguem saiba seus segredos</h3>
@@ -131,7 +131,7 @@ export default function Perfil() {
             }}
           />
         </div>
-        <div className='py-10  flex justify-between items-center px-4'>
+        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Sair da conta</h2>
             <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>Irá te redirecionar para página de login</h3>
@@ -146,7 +146,7 @@ export default function Perfil() {
             }}
           />
         </div>
-        <div className='py-10  flex justify-between items-center px-4'>
+        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
           <div className='flex flex-col gap-2'>
             <h2 className='text-xl'>Excluir sua conta</h2>
             <h3 className='text-base w-72 xl:w-[500px] 2xl:w-[700px]'>É uma pena que você esteja indo embora <span className='text-lg'>😭</span>  </h3>

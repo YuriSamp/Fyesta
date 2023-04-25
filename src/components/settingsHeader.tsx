@@ -6,7 +6,7 @@ import { auth } from 'src/server/Firebase/ClientApp';
 import RetturnButton from './retturnButton';
 
 export const routes = [
-  { name: 'Perfil e visibilidade', link: '/settings/perfil' },
+  { name: 'Sua conta', link: '/settings/perfil' },
   { name: 'Configurações', link: '/settings' },
   { name: 'Sobre', link: '/settings/about' },
 ]
@@ -22,12 +22,12 @@ export default function Header({ Page }: Props) {
   return (
     <>
       <RetturnButton href='/home' text='Home' />
-      <section className='pt-10 pb-2  border-b-2 border-gray-800'>
-        <div className='flex'>
+      <section className='pt-10 pb-2 border-b-2 border-gray-800'>
+        <div className='flex items-center sm:items-start'>
           <div className='pl-6' >
             <AvatarIcon Width='lg' userPhoto={user?.photoURL as string} />
           </div>
-          <div className='flex flex-col pl-8 pt-3'>
+          <div className='flex flex-col pl-8 sm:pt-3'>
             <p className='text-3xl'>{user?.displayName}</p>
             <p>{user?.email}</p>
           </div>
@@ -38,13 +38,13 @@ export default function Header({ Page }: Props) {
               <li key={index}>
                 <Link
                   href={item.link}
-                  className="text-xl cursor-pointer relative text-violet-900 dark:text-[#138859]  after:absolute after:bottom-[-11px] after:left-0 after:h-[2px]  after:w-full after:bg-violet-900 after:content-[''] after:dark:bg-[#138859]">
+                  className=" text-lg sm:text-xl cursor-pointer relative text-violet-900 dark:text-[#138859]  after:absolute after:bottom-[-11px] after:left-0 after:h-[2px]  after:w-full after:bg-violet-900 after:content-[''] after:dark:bg-[#138859]">
                   {item.name}
                 </Link>
               </li>
               :
               <li key={index}>
-                <Link href={item.link} className='text-xl cursor-pointer '>{item.name}</Link>
+                <Link href={item.link} className=' text-lg sm:text-xl cursor-pointer '>{item.name}</Link>
               </li>
           ))}
         </ul>

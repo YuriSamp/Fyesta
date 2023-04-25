@@ -51,19 +51,31 @@ export default function Diario() {
 
   return (
     <section className='pt-5'>
-      <div className='flex justify-center gap-12'>
-        <DiaryPopover />
+      <div className='flex flex-col sm:flex-row justify-center gap-3 md:gap-12'>
+        <div className='hidden sm:block'>
+          <DiaryPopover />
+        </div>
         <MonthController
           monthIndex={monthIndex}
           year={year}
           setYear={setYear}
           setMonthIndex={setMonthIndex}
         />
-        <Select
-          Options={selectOptions}
-          onChange={setEmotionSelected}
-          value={emotionSelected}
-        />
+        <div className='hidden sm:block'>
+          <Select
+            Options={selectOptions}
+            onChange={setEmotionSelected}
+            value={emotionSelected}
+          />
+        </div>
+        <div className='flex justify-center gap-3 sm:hidden'>
+          <DiaryPopover />
+          <Select
+            Options={selectOptions}
+            onChange={setEmotionSelected}
+            value={emotionSelected}
+          />
+        </div>
       </div>
       <MonthComponent
         diary={diarioFiltrado(diaryRef, emotionSelected)}
@@ -77,7 +89,7 @@ const MonthComponent = ({ diary }: IMonthComponent) => {
   return (
     <div>
       <hr className='mt-10 mb-5' />
-      <div className='flex flex-wrap gap-4 pt-4'>
+      <div className='flex justify-center sm:justify-start flex-wrap gap-4 pt-4'>
         <Link
           href='./diario/pagina'
           className='w-60 h-52  bg-white  text-black dark:text-white drop-shadow-lg dark:bg-neutral-900 flex justify-center items-center cursor-pointer  select border-2'
