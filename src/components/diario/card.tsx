@@ -1,6 +1,5 @@
 
 import Link from 'next/link'
-import React from 'react'
 import { Idiary } from 'src/interfaces/diaryTypes'
 
 

@@ -4,7 +4,7 @@ import { useAtomValue } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
 import { Idiary } from 'src/interfaces/diaryTypes';
 import { useEffect, useMemo, useState } from 'react';
-import MonthController from '@ui/monthController';
+import MonthController from '@ui/diaryMonthController';
 
 import { emotionsOptions } from 'src/context/emotionsOptions';
 import { Select } from '@ui/select';

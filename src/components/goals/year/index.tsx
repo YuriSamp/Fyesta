@@ -1,4 +1,3 @@
-import React from 'react'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
 import { GoalsProps, Task } from 'src/interfaces/goalsTypes'
 
