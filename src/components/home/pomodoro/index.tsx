@@ -1,8 +1,7 @@
 import { BiTask } from 'react-icons/bi';
-import { CiPlay1, CiPause1 } from 'react-icons/ci';
+import { BsPlay, BsPause, BsSkipForward } from 'react-icons/bs';
 import { FiCoffee } from 'react-icons/fi';
 import { useState, useRef, useEffect } from 'react'
-import { IoPlaySkipForwardOutline } from 'react-icons/io5'
 import DisplayList from '@ui/To-do/displayList';
 import { useAtomValue } from 'jotai';
 import { BreakTimerAtom, pomodoroTimerAtom } from 'src/context/seetingsContext';
@@ -91,7 +90,7 @@ export default function Pomodoro() {
           <button
             onClick={() => setIsCounting(prev => !prev)}
           >
-            <CiPause1
+            <BsPause
               className='w-7 h-7 cursor-pointer'
             />
           </button>
@@ -99,7 +98,7 @@ export default function Pomodoro() {
           <button
             onClick={() => setIsCounting(prev => !prev)}
           >
-            <CiPlay1
+            <BsPlay
               className='w-7 h-7 cursor-pointer'
             />
           </button>
@@ -110,7 +109,7 @@ export default function Pomodoro() {
             setIsCounting(prev => !prev)
           }}
         >
-          <IoPlaySkipForwardOutline
+          <BsSkipForward
             className={`w-7 h-7 cursor-pointer ${IsCounting ? '' : 'invisible'}`}
           />
         </button>
@@ -132,7 +131,7 @@ export default function Pomodoro() {
           <button
             onClick={() => setIsCountingBreak(prev => !prev)}
           >
-            <CiPause1
+            <BsPause
               className='w-7 h-7 cursor-pointer'
             />
           </button>
@@ -140,7 +139,7 @@ export default function Pomodoro() {
           <button
             onClick={() => setIsCountingBreak(prev => !prev)}
           >
-            <CiPlay1
+            <BsPlay
               className='w-7 h-7 cursor-pointer'
             />
           </button>
@@ -151,7 +150,7 @@ export default function Pomodoro() {
             setIsCountingBreak(prev => !prev)
           }}
         >
-          <IoPlaySkipForwardOutline
+          <BsSkipForward
             className={`w-7 h-7 ${IsCountingBreak ? '' : 'invisible'}`}
           />
         </button>
