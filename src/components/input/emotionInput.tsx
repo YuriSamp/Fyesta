@@ -5,13 +5,14 @@ import { AiOutlineCheck } from 'react-icons/ai'
 import { emotionOptions, emotionColors } from 'src/context/emotionsOptions';
 import { useAtom } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
+import { UpperCaseFirstLetter } from 'src/utils/uppercaseFirstLetter';
+import useMediaQuery from 'src/hooks/useMediaQuery';
 
 // TODO SE ADICIONAR MAIS ITENS A LISTA BUGA TUDO
 
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
 ) => Result;
-
 
 interface InputWithSelectI {
   value?: string
@@ -38,17 +39,10 @@ interface ISubMenu {
 
 export function EmotionInput({ options, setState, placeholder, setoption, setColor, defaultValue }: InputWithSelectI) {
 
-  const optionsTratado = options.map(item => {
-    const firstletterUppercase = item.name.slice(0, 1).toUpperCase()
-    const OtherLetters = item.name.slice(1).toLowerCase()
-    item.name = firstletterUppercase + OtherLetters
-    return item
-  })
-
   const [inputSearch, setInputSearch] = useState(defaultValue)
   const [focus, setFocus] = useState(false)
   const [subModalIsOpen, setSubModalIsOpen] = useState(false)
-  const [optionsState, setOptionsState] = useState(optionsTratado)
+  const [optionsState, setOptionsState] = useState(options)
   const [emotion, setEmotion] = useState('')
   const [x, setX] = useState(0)
   const [y, setY] = useState(0)
@@ -64,11 +58,11 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
     if (inputSearch && inputSearch.length > 1)
       setOptionsState(options.filter(item => item.name.toLowerCase().includes(inputSearch.trim().toLowerCase())))
     else {
-      setOptionsState(optionsTratado)
+      setOptionsState(options)
     }
   }, [inputSearch])
 
-  // console.log(window.screenX)
+  const matches = useMediaQuery('(min-width: 500px)')
 
   return (
     <menu
@@ -105,7 +99,7 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
                       <p
                         style={{ backgroundColor: item.color }}
                         className='px-2 py-1 bg-red-300 rounded-md dark:text-black min-w-[70px] flex justify-center'
-                      >{item.name}</p>
+                      >{UpperCaseFirstLetter(item.name)}</p>
                     </button>
                     <button
                       type='button'
@@ -113,19 +107,27 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
                       onClick={() => {
                         setEmotion(item.name)
                         setSubModalIsOpen(true)
-                        setX(80)
-                        setY(100 - item.id * 30)
+                        setX(matches ? 80 : 20)
                         setItemId(item.id)
                         setDefaultColor(item.color)
+                        if (item.id > 2) {
+                          setY(-500 + 40 * (item.id - 3))
+                        } else {
+                          setY(-230 + 40 * item.id)
+                        }
                       }}
                       onKeyDown={(e) => {
                         if (e.key == 'Enter') {
                           setEmotion(item.name)
                           setSubModalIsOpen(true)
-                          setX(80)
-                          setY(100 - item.id * 30)
+                          setX(matches ? 80 : 20)
                           setItemId(item.id)
                           setDefaultColor(item.color)
+                          if (item.id > 2) {
+                            setY(-500 + 40 * (item.id - 3))
+                          } else {
+                            setY(-230 + 40 * item.id)
+                          }
                         }
                       }
                       }
@@ -140,7 +142,7 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
                 type='button'
                 className='hover:bg-gray-200 cursor-pointer w-full'
                 onClick={() => {
-                  const randomColor = emotionColors.sort(() => 0.5 - Math.random()).splice(0, 1).map(item => item.color)
+                  const randomColor = emotionColors.sort(() => 0.5 - Math.random()).slice(0, 1).map(item => item.color)
                   setColor(randomColor[0])
                   setoption(prev => [...prev, { name: inputSearch, id: options.length, color: randomColor[0] }])
                   setInputSearch('')
@@ -222,10 +224,9 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
   }, [emotion])
 
 
-
   return (
     <menu
-      style={{ transform: `translate(${x + 'px'}, -${y + 'px'})`, }}
+      style={{ transform: `translate(${x + 'px'}, ${y + 'px'})`, }}
       className=' bg-white dark:bg-[#151515]  shadow-2xl  z-20 px-5 relative'
       ref={domRef}
     >
@@ -251,9 +252,9 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
         </div>
       </section>
       <p className='pb-3 text-lg'>Colors</p>
-      <ul className='flex flex-col gap-2 pb-2'>
+      <ul className='flex flex-col gap-2 pb-2 max-h-[200px] overflow-y-scroll scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
         {emotionColors.map((item, index) => (
-          <li className='hover:bg-gray-200 dark:hover:bg-gray-800 ' key={index}>
+          <li className='hover:bg-gray-200 dark:hover:bg-gray-800 pr-3 ' key={index}>
             <button
               type='button'
               className='flex justify-between items-center w-full cursor-pointer'
