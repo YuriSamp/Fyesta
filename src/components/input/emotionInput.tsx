@@ -8,8 +8,6 @@ import { diaryPage } from 'src/context/diaryContext';
 import { UpperCaseFirstLetter } from 'src/utils/uppercaseFirstLetter';
 import useMediaQuery from 'src/hooks/useMediaQuery';
 
-// TODO SE ADICIONAR MAIS ITENS A LISTA BUGA TUDO
-
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
 ) => Result;
