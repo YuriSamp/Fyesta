@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Dispatch, SetStateAction } from 'react'
 import { useTheme } from 'next-themes'
 import { Select } from '@ui/select';
 import { useAtom } from 'jotai';
 import { BreakTimerAtom, Language, pomodoroTimerAtom } from 'src/context/seetingsContext';
-import Header from '@ui/settingsHeader';
+import Header from '@ui/settings/settingsHeader';
 import { UpperCaseFirstLetter } from 'src/utils/uppercaseFirstLetter';
+import { SettingsContainer } from '@ui/settings/settingsContainer';
 
 const themes = ['dark', 'light']
 const languages = ['Português', 'inglês']
@@ -30,66 +31,59 @@ export default function Settings() {
     return null
   }
 
+  const mapOptions = (arr: any[]) => {
+    return (
+      arr.map((item, index) => (
+        <option value={item} key={index} className='dark:bg-InputGray'>
+          {UpperCaseFirstLetter(String(item) + ' min')}
+        </option>
+      ))
+    )
+  }
+
   return (
     <>
       <Header
         Page={page}
       />
       <div className='sm:max-h-[600px] overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 pr-2'>
-        <div className='py-10 flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between items-start sm:items-center px-4'>
-          <div className='flex flex-col gap-2'>
-            <h2 className='text-xl'>Aparencia</h2>
-            <h3 className='text-base  w-60 sm:w-72 xl:w-[500px] 2xl:w-[700px]'>Customiza o tema do Fyesta no seu dispositivo</h3>
-          </div>
-          <div>
-            <Select Options={themes} onChange={setTheme} value={theme} />
-          </div>
-        </div>
-        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
-          <div className='flex flex-col gap-2'>
-            <h2 className='text-xl'>Idioma</h2>
-            <h3 className='text-base  w-60 sm:w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o idioma para a interface</h3>
-          </div>
-          <div>
-            <Select Options={languages} value={language} onChange={setLanguage} />
-          </div>
-        </div>
-        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
-          <div className='flex flex-col gap-2'>
-            <h2 className='text-xl'>Pomodoro</h2>
-            <h3 className='text-base  w-60 sm:w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o tempo que acha necessário para realizar suas tarefas</h3>
-          </div>
-          <div>
-            <select className='bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] dark:border-white '
-              value={pomodoroTimer / 60}
-              onChange={(e) => setPomodoroTimer(Number(e.target.value) * 60)}
-            >
-              {pomodoroOptions.map((item, index) => (
-                <option value={item} key={index} className='dark:bg-InputGray'>
-                  {UpperCaseFirstLetter(String(item) + ' min')}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className='py-10  flex flex-col sm:flex-row gap-4 sm:gap-0  justify-between items-start sm:items-center  px-4'>
-          <div className='flex flex-col gap-2'>
-            <h2 className='text-xl'>Descanso</h2>
-            <h3 className='text-base  w-60 sm:w-72 xl:w-[500px] 2xl:w-[700px]'>Escolha o tempo de descanso entre suas tarefas</h3>
-          </div>
-          <div>
-            <select className='bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] dark:border-white '
-              value={breakTimer / 60}
-              onChange={(e) => setBreakTimer(Number(e.target.value) * 60)}
-            >
-              {breakOptions.map((item, index) => (
-                <option value={item} key={index} className='dark:bg-InputGray'>
-                  {UpperCaseFirstLetter(String(item) + ' min')}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+        <SettingsContainer
+          title='Aparencia'
+          firstChild='Customiza o tema do Fyesta no seu dispositivo'
+        >
+          <Select Options={themes} onChange={setTheme} value={theme} />
+        </SettingsContainer>
+
+        <SettingsContainer
+          title='Idioma'
+          firstChild='Escolha o idioma para a interface'
+        >
+          <Select Options={languages} value={language} onChange={setLanguage} />
+        </SettingsContainer>
+
+        <SettingsContainer
+          title='Pomodoro'
+          firstChild='Escolha o tempo que acha necessário para realizar suas tarefas'
+        >
+          <select className='bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] dark:border-white '
+            value={pomodoroTimer / 60}
+            onChange={(e) => setPomodoroTimer(Number(e.target.value) * 60)}
+          >
+            {mapOptions(pomodoroOptions)}
+          </select>
+        </SettingsContainer>
+
+        <SettingsContainer
+          title='Descanso'
+          firstChild='Escolha o tempo de descanso entre suas tarefas'
+        >
+          <select className='bg-transparent w-36 h-12 text-center border-[1px] rounded-md border-[#2A292B] dark:border-white '
+            value={breakTimer / 60}
+            onChange={(e) => setBreakTimer(Number(e.target.value) * 60)}
+          >
+            {mapOptions(breakOptions)}
+          </select>
+        </SettingsContainer>
       </div>
     </>
   )

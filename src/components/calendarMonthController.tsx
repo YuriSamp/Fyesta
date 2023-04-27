@@ -1,15 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
+import { monthControllerProps } from 'src/interfaces/controllerTypes';
 
-interface Props {
-  year: number
-  monthIndex: number
-  setYear: Dispatch<SetStateAction<number>>
-  setMonthIndex: Dispatch<SetStateAction<number>>
-}
+import { arrMeses } from 'src/shared/months';
 
-const CalendarMonthController = ({ year, setYear, setMonthIndex, monthIndex }: Props) => {
-  const arrMeses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+
+const CalendarMonthController = ({ year, setYear, setMonthIndex, monthIndex }: monthControllerProps) => {
   let monthDisplay = arrMeses[monthIndex]
 
   const minMonthIndex = 0;

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
 import nookies from 'nookies'
-import { routes } from './settingsHeader';
+import { routes } from './settings/settingsHeader';
 
 
 type Props = {

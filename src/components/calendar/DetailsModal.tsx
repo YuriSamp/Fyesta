@@ -9,6 +9,7 @@ import { useAtomValue } from 'jotai';
 import { taskDescriptionAtom, taskNameAtom, taskTypeAtom } from 'src/context/calendarContext';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { CalendarTaskTypes } from 'src/interfaces/calendarTypes';
+import { getTaskColor } from 'src/utils/taskColors';
 
 interface ICalendarModal extends ModalProps {
   date: string
@@ -47,22 +48,7 @@ export default function DetailsModal({ isModalOpen, setIsModalOpen, date, divRef
 
   const { leftRef, topRef } = modalRelativePosition()
 
-
-  let taskColor = ''
-  switch (taskType) {
-    case 'Data Comemorativa':
-      taskColor = 'bg-blue-400'
-      break
-    case 'Feriado Nacional':
-      taskColor = 'bg-violet-400'
-      break
-    case 'Reminder':
-      taskColor = 'bg-green-400'
-      break
-    case 'Task':
-      taskColor = 'bg-orange-400'
-      break
-  }
+  const taskColor = taskType && getTaskColor(taskType)
 
   const domNode = useClickOutside(() => {
     setIsModalOpen(false)

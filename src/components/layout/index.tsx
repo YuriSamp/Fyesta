@@ -8,12 +8,15 @@ interface Props {
 
 export default function Layout({ page, children }: Props) {
 
+  console.log(page)
+
   const paths = [
     '/home',
     '/diario',
     '/emocoes',
     '/planner',
     '/metas',
+    '/calendario'
   ]
 
   if (paths.includes(page)) {
@@ -27,25 +30,7 @@ export default function Layout({ page, children }: Props) {
             Page={page}
           />
           <div
-            className='flex flex-col overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 bg-white dark:bg-[#121212] px-12 py-10 select-none'>
-            {children}
-          </div>
-        </section>
-      </>
-    )
-  }
-  if (page.includes('/calendario')) {
-    return (
-      <>
-        <Head>
-          <title>Fyesta</title>
-        </Head>
-        <section className='w-full'>
-          <Navbar
-            Page={page}
-          />
-          <div
-            className='flex flex-col  bg-white dark:bg-[#121212]  select-none'>
+            className={`flex flex-col select-none bg-white dark:bg-[#121212] ${page !== '/calendario' && 'overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400  px-12 py-10'}  `}>
             {children}
           </div>
         </section>
