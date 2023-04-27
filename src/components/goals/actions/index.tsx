@@ -3,8 +3,6 @@ import { useEffect, useMemo, useState } from 'react'
 import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
 import { Goal, GoalsWithSetterProps } from 'src/interfaces/goalsTypes'
 
-
-
 export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
   const [filter, setFilter] = useState('Todas')
 

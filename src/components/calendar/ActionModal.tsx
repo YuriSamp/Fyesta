@@ -8,8 +8,9 @@ import { ModalProps } from 'src/interfaces/modalTypes';
 import { useAtom, useSetAtom } from 'jotai';
 import { calendarContext, modalOptionAtom } from 'src/context/calendarContext';
 import { ICalendarTask } from 'src/interfaces/calendarTypes';
-import { dayNumberToDayString } from 'src/helper/dateHelpers';
+import { getDayOfTheWeek } from 'src/helper/dateHelpers';
 import { useClickOutside } from 'src/hooks/useClickOutside';
+import { modalRelativePosition } from '../../helper/calendarModalPosition';
 
 
 interface ICalendarModal extends ModalProps {
@@ -25,7 +26,7 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
   const [taskText, setTaskText] = useState('')
   // const [reminderOption, setReminderOption] = useState('Não se repete')
   const [dataRaw, setData] = useState(date)
-  const [dayOfWeek, setDayOfWeek] = useState(dayNumberToDayString(new Date(date).getDay()))
+  const [dayOfWeek, setDayOfWeek] = useState(getDayOfTheWeek(new Date(date).getDay()))
   const dataFormated = dataRaw.split('-')
   const year = Number(dataFormated[0])
   const month = Number(dataFormated[1]) - 1
@@ -33,7 +34,7 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
 
   useEffect(() => {
     setData(date)
-    setDayOfWeek(dayNumberToDayString(new Date(date).getDay()))
+    setDayOfWeek(getDayOfTheWeek(new Date(date).getDay()))
   }, [date])
 
   // const reminderOptions = ['Não se repete', 'nos proximos 5 dias', `Semanal : Cada ${dayOfWeek}`, `anual em ${day} de abril`]
@@ -67,39 +68,12 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
     setIsModalOpen(false)
   }
 
-
-  const modalRelativePosition = (): { leftRef: number, topRef: number } => {
-    const { left, top, height, width } = divRef
-
-    let leftRef = 0
-    let topRef = 0
-
-    //aqui eu pego o eixo horizontal
-    if (left + width < 1200) {
-      leftRef = left + 1.1 * width
-    } else {
-      leftRef = left - 2.4 * width
-    }
-
-    //Aqui eu pego o eixo vertical
-    if (top + height < 500) {
-      topRef = top + height * 0.6
-    } else if (top + height < 600) {
-      topRef = top - 2 * height
-    } else {
-      topRef = top - 3.2 * height
-    }
-
-    return { leftRef, topRef }
-  }
-
-  const { leftRef, topRef } = modalRelativePosition()
+  const { leftRef, topRef } = modalRelativePosition(divRef, 'Actions')
 
   const domNode = useClickOutside(() => {
     setIsModalOpen(false)
     setModalOption('Tarefa')
   })
-
 
   return (
     <Portal.Root>

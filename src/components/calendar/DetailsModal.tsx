@@ -10,6 +10,7 @@ import { taskDescriptionAtom, taskNameAtom, taskTypeAtom } from 'src/context/cal
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { CalendarTaskTypes } from 'src/interfaces/calendarTypes';
 import { getTaskColor } from 'src/utils/taskColors';
+import { modalRelativePosition } from '../../helper/calendarModalPosition';
 
 interface ICalendarModal extends ModalProps {
   date: string
@@ -23,30 +24,7 @@ export default function DetailsModal({ isModalOpen, setIsModalOpen, date, divRef
   const setModalTask = useAtomValue(taskNameAtom)
   const taskDescription = useAtomValue(taskDescriptionAtom)
 
-  const modalRelativePosition = (): { leftRef: number, topRef: number } => {
-    const { left, top, height, width } = divRef
-
-    let leftRef = 0
-    let topRef = 0
-
-    //aqui eu pego o eixo horizontal
-    if (left + width < 1200) {
-      leftRef = left + 1.1 * width
-    } else {
-      leftRef = left - 3.2 * width
-    }
-
-    //Aqui eu pego o eixo vertical
-    if (top + height < 600) {
-      topRef = top + height * 0.6
-    } else {
-      topRef = top - 6 * height
-    }
-
-    return { leftRef, topRef }
-  }
-
-  const { leftRef, topRef } = modalRelativePosition()
+  const { leftRef, topRef } = modalRelativePosition(divRef, 'Details')
 
   const taskColor = taskType && getTaskColor(taskType)
 

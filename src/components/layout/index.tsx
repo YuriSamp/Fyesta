@@ -5,19 +5,16 @@ interface Props {
   children: React.ReactNode
 }
 
+const paths = [
+  '/home',
+  '/diario',
+  '/emocoes',
+  '/planner',
+  '/metas',
+  '/calendario'
+]
 
 export default function Layout({ page, children }: Props) {
-
-  console.log(page)
-
-  const paths = [
-    '/home',
-    '/diario',
-    '/emocoes',
-    '/planner',
-    '/metas',
-    '/calendario'
-  ]
 
   if (paths.includes(page)) {
     return (
