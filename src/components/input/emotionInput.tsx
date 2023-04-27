@@ -8,6 +8,9 @@ import { diaryPage } from 'src/context/diaryContext';
 import { UpperCaseFirstLetter } from 'src/utils/uppercaseFirstLetter';
 import useMediaQuery from 'src/hooks/useMediaQuery';
 
+
+//TODO escrever a animação daqui
+
 type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
 ) => Result;
@@ -78,83 +81,77 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
           &&
           <>
             <p className='text-sm pt-4 px-4 pb-3'>Selecione uma opção ou crie uma</p>
-            {optionsState.length > 0 ?
-              optionsState.map(item => (
-                <div
-                  className='hover:bg-gray-200 dark:hover:bg-gray-800  cursor-pointer'
-                  key={item.id}
-                >
-                  <div className='flex  items-center py-1 px-4 '>
-                    <button
-                      type='button'
-                      className='flex items-center w-full'
-                      onClick={() => {
-                        setInputSearch(item.name)
-                        setFocus(false)
-                        setColor(item.color)
-                      }}
-                    >
-                      <p
-                        style={{ backgroundColor: item.color }}
-                        className='px-2 py-1 bg-red-300 rounded-md dark:text-black min-w-[70px] flex justify-center'
-                      >{UpperCaseFirstLetter(item.name)}</p>
-                    </button>
-                    <button
-                      type='button'
-                      className='hover:bg-gray-300 dark:hover:bg-DarkModeGreen w-6 h-6 flex justify-center items-center'
-                      onClick={() => {
-                        setEmotion(item.name)
-                        setSubModalIsOpen(true)
-                        setX(matches ? 80 : 20)
-                        setItemId(item.id)
-                        setDefaultColor(item.color)
-                        if (item.id > 2) {
-                          setY(-500 + 40 * (item.id - 3))
-                        } else {
-                          setY(-230 + 40 * item.id)
-                        }
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key == 'Enter') {
+            <div className='max-h-[160px] overflow-y-scroll scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
+              {optionsState.length > 0 ?
+                optionsState.map((item, index) => (
+                  <div
+                    className='hover:bg-gray-200 dark:hover:bg-gray-800  cursor-pointer'
+                    key={item.id}
+                  >
+                    <div className='flex  items-center py-1 px-4 '>
+                      <button
+                        type='button'
+                        className='flex items-center w-full'
+                        onClick={() => {
+                          setInputSearch(item.name)
+                          setFocus(false)
+                          setColor(item.color)
+                        }}
+                      >
+                        <p
+                          style={{ backgroundColor: item.color }}
+                          className='px-2 py-1 bg-red-300 rounded-md dark:text-black min-w-[70px] flex justify-center'
+                        >{UpperCaseFirstLetter(item.name)}</p>
+                      </button>
+                      <button
+                        type='button'
+                        className='hover:bg-gray-300 dark:hover:bg-DarkModeGreen w-6 h-6 flex justify-center items-center'
+                        onClick={() => {
                           setEmotion(item.name)
                           setSubModalIsOpen(true)
-                          setX(matches ? 80 : 20)
+                          setX(matches ? 260 : 20)
                           setItemId(item.id)
                           setDefaultColor(item.color)
-                          if (item.id > 2) {
-                            setY(-500 + 40 * (item.id - 3))
-                          } else {
-                            setY(-230 + 40 * item.id)
+                          setY(-100)
+                        }}
+                        onKeyDown={(e) => {
+                          if (e.key == 'Enter') {
+                            setEmotion(item.name)
+                            setSubModalIsOpen(true)
+                            setX(matches ? 260 : 20)
+                            setItemId(item.id)
+                            setDefaultColor(item.color)
+                            setY(-100)
                           }
                         }
-                      }
-                      }
-                    >
-                      <BsThreeDots />
-                    </button>
+                        }
+                      >
+                        <BsThreeDots />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))
-              :
-              <button
-                type='button'
-                className='hover:bg-gray-200 cursor-pointer w-full'
-                onClick={() => {
-                  const randomColor = emotionColors.sort(() => 0.5 - Math.random()).slice(0, 1).map(item => item.color)
-                  setColor(randomColor[0])
-                  setoption(prev => [...prev, { name: inputSearch, id: options.length, color: randomColor[0] }])
-                  setInputSearch('')
-                  setFocus(false)
-                }}
-              >
-                <p
-                  className='flex gap-5 items-center py-1 px-4 '
+                ))
+                :
+                <button
+                  type='button'
+                  className='hover:bg-gray-200 cursor-pointer w-full'
+                  onClick={() => {
+                    const randomColor = emotionColors.sort(() => 0.5 - Math.random()).slice(0, 1).map(item => item.color)
+                    setColor(randomColor[0])
+                    setoption(prev => [...prev, { name: inputSearch, id: options.length, color: randomColor[0] }])
+                    setInputSearch('')
+                    setFocus(false)
+                  }}
                 >
-                  <span>Criar</span>
-                  <span>{inputSearch}</span>
-                </p>
-              </button>
-            }
+                  <p
+                    className='flex gap-5 items-center py-1 px-4 '
+                  >
+                    <span>Criar</span>
+                    <span>{inputSearch}</span>
+                  </p>
+                </button>
+              }
+            </div>
           </>
         }
       </section>
@@ -225,7 +222,7 @@ const SubMenu = ({ setSubModalIsOpen, x, y, emotion, setEmotion, options, itemId
   return (
     <menu
       style={{ transform: `translate(${x + 'px'}, ${y + 'px'})`, }}
-      className=' bg-white dark:bg-[#151515]  shadow-2xl  z-20 px-5 relative'
+      className=' bg-white dark:bg-[#151515]  shadow-2xl  z-20 px-5 relative '
       ref={domRef}
     >
       <section className='pt-4 flex flex-col'>

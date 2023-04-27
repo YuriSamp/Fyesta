@@ -12,6 +12,8 @@ import { DiaryPopover } from '@ui/diario/diaryPopover';
 import DiarypageWritten from '@ui/diario/card';
 import { dateCalendarConvert } from 'src/helper/dateHelpers';
 
+//TODO animação entre as paginas
+
 interface IMonthComponent {
   diary: Idiary[]
 }
