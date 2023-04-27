@@ -1,4 +1,4 @@
-import React, { useState, SetStateAction, Dispatch, } from 'react';
+import { useState, SetStateAction, Dispatch, } from 'react';
 import { BsTrash } from 'react-icons/bs'
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { Goals, categoryType } from 'src/context/goalContext';

@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
-import { dateToDateInput, dayNumberToDayString } from 'src/helper/dateHelpers';
+import { dateToDateInput } from 'src/helper/dateHelpers';
 import { CalendarTaskTypes, ICalendarTask } from 'src/interfaces/calendarTypes';
 
 const date = new Date();

@@ -1,5 +1,5 @@
 import { Button } from '@ui/button';
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { dateToDateInput } from 'src/helper/dateHelpers';
 import { ICalendarDays, brasilApiType } from 'src/interfaces/calendarTypes';
@@ -58,6 +58,13 @@ export default function Calendario() {
     setMonthIndex(date.getMonth())
   }
 
+  const setter = (e: MouseEvent<HTMLDivElement, globalThis.MouseEvent>, day: number, month: number, year: number) => {
+    setModalRef(e.currentTarget.getBoundingClientRect())
+    setModalDate(dateToDateInput(day, month + 1, year))
+    setIsDetailsModalOpen(false)
+    setIsActionModalModaOpen(prev => !prev)
+  }
+
 
   return (
     <section className='flex gap-3  text-black dark:text-white px-12  '>
@@ -95,104 +102,50 @@ export default function Calendario() {
         </div>
         <div
           className='flex flex-wrap max-w-[1460px] justify-center text-lg' >
-          {days.length > 35 ?
-            days.map((item) => (
-              <div
-                id={String(item.id)}
-                className='w-48 h-32 calendar'
-                key={item.id}
-                tabIndex={0}
-                onClick={(e) => {
-                  setModalRef(e.currentTarget.getBoundingClientRect())
-                  setModalDate(dateToDateInput(item.day, item.Month + 1, item.year))
-                  setIsDetailsModalOpen(false)
-                  setIsActionModalModaOpen(prev => !prev)
-                }}
-
-              >
-                {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
+          {days.map((item) => (
+            <div
+              id={String(item.id)}
+              className={`w-48 h-32 ${days.length > 35 ? 'h-32' : 'h-[153.6px]'} calendar`}
+              key={item.id}
+              tabIndex={0}
+              onClick={(e) => setter(e, item.day, item.Month, item.year)}
+            >
+              {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
+                <CalendarDayDiplay
+                  isToday={true}
+                  currentMonth={true}
+                  item={item}
+                  day={item.day}
+                  tasks={item.tasks}
+                  setModalRef2={setModalRef2}
+                  size={`${days.length > 35 ? 'small' : 'big'}`}
+                />
+                :
+                item.Month === monthIndex ?
                   <CalendarDayDiplay
-                    isToday={true}
+                    isToday={false}
                     currentMonth={true}
                     item={item}
                     day={item.day}
                     tasks={item.tasks}
                     setModalRef2={setModalRef2}
-                    size='small'
+                    size={`${days.length > 35 ? 'small' : 'big'}`}
                   />
                   :
-                  item.Month === monthIndex ?
-                    <CalendarDayDiplay
-                      isToday={false}
-                      currentMonth={true}
-                      item={item}
-                      day={item.day}
-                      tasks={item.tasks}
-                      setModalRef2={setModalRef2}
-                      size='small'
-                    />
-                    :
-                    <CalendarDayDiplay
-                      isToday={false}
-                      currentMonth={false}
-                      item={item}
-                      day={item.day}
-                      tasks={item.tasks}
-                      setModalRef2={setModalRef2}
-                      size='small'
-                    />
-                }
-              </div>
-            ))
-            :
-            days.map((item) => (
-              <div
-                className='w-48 h-[153.6px] calendar'
-                key={item.id}
-                tabIndex={0}
-                onClick={(e) => {
-                  setModalRef(e.currentTarget.getBoundingClientRect())
-                  setModalDate(dateToDateInput(item.day, item.Month + 1, item.year))
-                  setIsDetailsModalOpen(false)
-                  setIsActionModalModaOpen(prev => !prev)
-                }}
-              >
-                {item.Month === date.getMonth() && item.day === date.getDate() && item.year === date.getFullYear() ?
                   <CalendarDayDiplay
-                    isToday={true}
-                    currentMonth={true}
+                    isToday={false}
+                    currentMonth={false}
                     item={item}
                     day={item.day}
                     tasks={item.tasks}
                     setModalRef2={setModalRef2}
-                    size='big'
+                    size={`${days.length > 35 ? 'small' : 'big'}`}
                   />
-                  :
-                  item.Month === monthIndex ?
-                    <CalendarDayDiplay
-                      isToday={false}
-                      currentMonth={true}
-                      item={item}
-                      day={item.day}
-                      tasks={item.tasks}
-                      setModalRef2={setModalRef2}
-                      size='big'
-                    />
-                    :
-                    <CalendarDayDiplay
-                      isToday={false}
-                      currentMonth={false}
-                      item={item}
-                      day={item.day}
-                      tasks={item.tasks}
-                      setModalRef2={setModalRef2}
-                      size='big'
-                    />
-                }
-              </div>
-            ))
+              }
+            </div>
+          ))
           }
-          {modalRef !== undefined &&
+          {modalRef &&
             <CalendarModal
               isModalOpen={isActionModalOpen}
               setIsModalOpen={setIsActionModalModaOpen}
@@ -200,7 +153,7 @@ export default function Calendario() {
               divRef={modalRef}
             />
           }
-          {modalRef2 !== undefined &&
+          {modalRef2 &&
             <DetailsModal
               isModalOpen={isdetailsModalOpen}
               setIsModalOpen={setIsDetailsModalOpen}

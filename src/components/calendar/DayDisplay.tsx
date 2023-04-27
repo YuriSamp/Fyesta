@@ -14,6 +14,7 @@ import {
   taskTypeAtom
 } from 'src/context/calendarContext'
 import { dateToDateInput } from 'src/helper/dateHelpers'
+import { getTaskColor } from 'src/utils/taskColors'
 
 interface CalendarDayDiplayType {
   item: ICalendarDays
@@ -90,21 +91,7 @@ export const CalendarDayDiplay = ({ isToday, day, tasks, currentMonth, setModalR
 
 
 const CalendarDayTasksDisplay = ({ name, type, setModalRef2, item, description }: calendarDayTasksDisplay) => {
-  let taskColor = ''
-  switch (type) {
-    case 'Data Comemorativa':
-      taskColor = 'bg-blue-400'
-      break
-    case 'Feriado Nacional':
-      taskColor = 'bg-violet-400'
-      break
-    case 'Reminder':
-      taskColor = 'bg-green-400'
-      break
-    case 'Task':
-      taskColor = 'bg-orange-400'
-      break
-  }
+  const taskColor = getTaskColor(type)
 
   const setIsModaOpen = useSetAtom(detailsModalOpenState)
   const setIsActionModalModaOpen = useSetAtom(actionModalOpenState)

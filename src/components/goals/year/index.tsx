@@ -1,7 +1,6 @@
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
 import { GoalsProps, Task } from 'src/interfaces/goalsTypes'
 
-
 export default function YearBox({ Metas }: GoalsProps) {
 
   const metasPlanejadas = Metas.map(item => item.Tarefas.length)

@@ -1,3 +1,4 @@
+import { arrMeses } from 'src/shared/months';
 function formatDateString(date: Date): string {
   const day = date.getDate();
   const month = date.getMonth() + 1;
@@ -7,6 +8,11 @@ function formatDateString(date: Date): string {
   const formattedMonth = month < 10 ? `0${month}` : `${month}`;
 
   return `${year}-${formattedMonth}-${formattedDay}`;
+}
+
+function monthNumberToString(month: number) {
+  let daystring = arrMeses[month];
+  return daystring;
 }
 
 export function todayDateToDateInput(): string {
@@ -45,34 +51,6 @@ export function CalendarDataConverter(dateString: string) {
   return { day, month };
 }
 
-export function dayNumberToDayString(day: number) {
-  let daystring = '';
-  switch (day) {
-    case 0:
-      daystring = 'Segunda-feira';
-      break;
-    case 1:
-      daystring = 'Terça-feira';
-      break;
-    case 2:
-      daystring = 'Quarta-feira';
-      break;
-    case 3:
-      daystring = 'Quinta-feira';
-      break;
-    case 4:
-      daystring = 'Sexta-feira';
-      break;
-    case 5:
-      daystring = 'Sábado';
-      break;
-    case 6:
-      daystring = 'Domingo';
-      break;
-  }
-  return daystring;
-}
-
 export function getDayOfTheWeek(day: number) {
   switch (day) {
     case 0:
@@ -92,77 +70,9 @@ export function getDayOfTheWeek(day: number) {
   }
 }
 
-function monthNumberToString(month: number) {
-  let daystring = '';
-  switch (month) {
-    case 0:
-      daystring = 'Janeiro';
-      break;
-    case 1:
-      daystring = 'Fevereiro';
-      break;
-    case 2:
-      daystring = 'Março';
-      break;
-    case 3:
-      daystring = 'Abril';
-      break;
-    case 4:
-      daystring = 'Maio';
-      break;
-    case 5:
-      daystring = 'Junho';
-      break;
-    case 6:
-      daystring = 'Julho';
-      break;
-    case 7:
-      daystring = 'Agosto';
-      break;
-    case 8:
-      daystring = 'Setembro';
-      break;
-    case 9:
-      daystring = 'Outubro';
-      break;
-    case 10:
-      daystring = 'Novembro';
-      break;
-    case 11:
-      daystring = 'Dezembro';
-      break;
-  }
-  return daystring;
-}
-
 export function detailsModalDateDisplay(date: string) {
   const dayofWeek = new Date(date).getDay();
-  let dayofWeekString = '';
-
-  switch (dayofWeek) {
-    case 0:
-      dayofWeekString = 'Segunda-Feira';
-      break;
-    case 1:
-      dayofWeekString = 'Terça-Feira';
-      break;
-    case 2:
-      dayofWeekString = 'Quarta-Feira';
-      break;
-    case 3:
-      dayofWeekString = 'Quinta-Feira';
-      break;
-    case 4:
-      dayofWeekString = 'Sexta-Feira';
-      break;
-    case 5:
-      dayofWeekString = 'Sábado';
-      break;
-    case 6:
-      dayofWeekString = 'Domingo';
-      break;
-  }
-
+  let dayofWeekString = getDayOfTheWeek(dayofWeek);
   const dateParts = date.split('-');
   const day = dateParts[2];
   const month = monthNumberToString(Number(dateParts[1]) - 1);

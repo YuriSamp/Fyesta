@@ -10,6 +10,7 @@ import Link from 'next/link';
 import AvatarWithDropDown from '@ui/avatarWDropdown';
 import { useState } from 'react'
 import { UpperCaseFirstLetter } from 'src/utils/uppercaseFirstLetter';
+import { greetings } from 'src/utils/grettings';
 
 interface Props {
   Page: string
@@ -26,25 +27,7 @@ export const pages = [
 export const Navbar = ({ Page }: Props) => {
 
   const [user] = useIdToken(auth);
-
-  const horaAtual = new Date().getHours()
-  let msg = ''
-
-  switch (true) {
-    case horaAtual >= 0 && horaAtual <= 6:
-      msg = 'Boa Madrugada';
-      break;
-    case horaAtual > 6 && horaAtual <= 12:
-      msg = 'Bom dia';
-      break;
-    case horaAtual > 12 && horaAtual <= 18:
-      msg = 'Boa tarde';
-      break;
-    case horaAtual > 18 && horaAtual <= 24:
-      msg = 'Boa noite';
-      break;
-  }
-
+  const msg = greetings()
   const [isSidebarOpen, setSidebarOpen] = useState(false)
 
   return (

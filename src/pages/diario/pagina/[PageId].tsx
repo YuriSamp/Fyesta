@@ -7,8 +7,8 @@ import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head'
 import { Navbar } from '@ui/layout/navbar'
-import { EmotionInput } from '@ui/input/emotionInput'
 import { emotionsOptions } from 'src/context/emotionsOptions'
+import { EmotionInput } from '@ui/input/emotionInput'
 
 const Pagina = () => {
   const router = useRouter()
