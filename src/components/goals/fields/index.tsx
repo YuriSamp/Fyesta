@@ -1,12 +1,14 @@
 import { useAtomValue } from 'jotai'
-import React, { useRef } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
 import { BsLayers } from 'react-icons/bs'
 import { IoLayersSharp } from 'react-icons/io5'
 import { RiCheckboxBlankCircleLine, RiCheckboxCircleFill } from 'react-icons/ri'
 import { categoryOptions } from 'src/context/goalContext'
 import { GoalsProps, IField, TaskWithCategory } from 'src/interfaces/goalsTypes'
 
-//TODO fazer a animação do scroll
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 export default function Fields({ Metas }: GoalsProps) {
 
@@ -38,23 +40,35 @@ export default function Fields({ Metas }: GoalsProps) {
       <div className='pb-2 border-b-2 mb-2 '>
         <h3 className='text-3xl  dark:text-white '>Áreas</h3>
       </div>
-      <div
-        className='flex gap-2 max-w-[980px] '>
+      <Swiper
+        modules={[Pagination]}
+        className='max-w-[1000px]'
+        pagination={{
+          clickable: true,
+          type: 'bullets',
+        }}
+        spaceBetween={20}
+        slidesPerView={3}
+        speed={50}
+      >
         {categoryOptionsArr.map(item => (
-          <Field
+          <SwiperSlide
             key={item.id}
-            FieldName={item.name}
-            Metas={progressTasks(arrTratado, item.name)}
-          />
+          >
+            <Field
+              FieldName={item.name}
+              Metas={progressTasks(arrTratado, item.name)}
+            />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </section>
   )
 }
 
 function Field({ FieldName, Metas }: IField) {
   return (
-    <div className='w-36 sm:w-44 xl:w-64 2xl:w-80 flex flex-col border-2 px-4 py-3 shadow-xl'>
+    <div className='w-36 sm:w-44 xl:w-64 2xl:w-80 flex flex-col border-2 px-4 py-3 shadow-xl dark:bg-neutral-300 text-black'>
       <IoLayersSharp className='w-16 h-16 xl:w-20 xl:h-20 self-center my-5' />
       <div className='flex gap-2 items-center pb-4 text-lg'>
         <BsLayers />

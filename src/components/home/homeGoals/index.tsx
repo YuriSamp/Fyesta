@@ -24,10 +24,9 @@ export const HomeGoalTracker = () => {
   }
 
   return (
-    <div className='flex flex-col items-center max-w-[1000px]'>
+    <div className='flex flex-col gap-4 items-center max-w-[1000px]'>
       <h2 className='text-3xl'>Metas para {year}</h2>
-      <hr className='border-black  dark:border-white w-2/4 mt-2 mb-4' />
-      <div className='flex gap-3'>
+      <div className='grid grid-cols-3 gap-10'>
         {filtraMetas().map((item, i) => (
           <div className='w-80 flex flex-col p-5 shadow-xl border-2 rounded-lg ' key={i}>
             <h3 className='pb-1'>{item.categoryName}</h3>

@@ -64,7 +64,7 @@ export default function HomeCalendar() {
               </div>
             ))
             :
-            <div className='flex flex-col gap-3 justify-center items-center h-full'>
+            <div className='flex flex-col gap-7 justify-center items-center h-full'>
               <span className='text-xl'>nada agendado pro dia de hoje</span>
               <GiPartyPopper className='w-10 h-10' />
             </div>
