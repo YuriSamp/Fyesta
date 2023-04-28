@@ -11,6 +11,7 @@ const selectStyles = cva(
         primary: '',
       },
       Width: {
+        sm: 'w-24 h-9',
         md: 'w-28 h-9',
         xmd: 'w-44 h-9',
         lg: 'w-36 h-12',

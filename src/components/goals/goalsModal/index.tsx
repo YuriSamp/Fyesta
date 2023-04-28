@@ -12,6 +12,8 @@ import * as Label from '@radix-ui/react-label';
 import { GoalsModalType, Task } from 'src/interfaces/goalsTypes';
 import { GoalInput } from '@ui/input/GoalInput';
 
+//md:left-[35%]  lg:left-[30%]  xl:left-[33%] 2xl:
+
 export default function GoalsModal({ isModalOpen, setIsModalOpen, goalId, setGoalId }: GoalsModalType) {
 
   const [metas, setMetas] = useAtom(Goals)
@@ -120,7 +122,7 @@ export default function GoalsModal({ isModalOpen, setIsModalOpen, goalId, setGoa
     <Portal.Root>
       {isModalOpen &&
         <section
-          className='w-[500px] fixed left-[720px] top-[100px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm shadow-2xl dark:shadow-none'
+          className='sm:w-[400px] md:w-[500px] fixed left-[15%] sm:left-[22%] lg:left-[30%] xl:left-[33%] 2xl:left-[36%] top-[100px] flex flex-col items-center bg-[#fafaf5] dark:bg-neutral-900 text-black dark:text-white rounded-sm shadow-2xl dark:shadow-none'
           ref={domNode}
         >
           <div className='pt-4 text-center'>

@@ -1,6 +1,7 @@
 import { Select } from '@ui/select'
 import { useEffect, useMemo, useState } from 'react'
 import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
+import useMediaQuery from 'src/hooks/useMediaQuery'
 import { Goal, GoalsWithSetterProps } from 'src/interfaces/goalsTypes'
 
 export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
@@ -30,8 +31,11 @@ export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
 
   useEffect(() => setFilter('Todas'), [options])
 
+  const mdBP = useMediaQuery('(min-width: 1050px)')
+  const lgBP = useMediaQuery('(min-width: 1100px)')
+
   return (
-    <section className='w-80 self-start'>
+    <section className='w-72 2xl:w-80 self-start'>
       <div className='pb-2 border-b-2 mb-2 flex items-center justify-between'>
         <h3 className='text-3xl  dark:text-white'>Ações</h3>
         {options.length > 2 &&
@@ -39,10 +43,10 @@ export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
             Options={options}
             onChange={setFilter}
             value={filter}
-            Width='xmd' />
+            Width={mdBP ? lgBP ? 'xmd' : 'md' : 'md'} />
         }
       </div>
-      <div className='flex flex-col gap-3 h-[248px] overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
+      <div className='flex flex-col gap-3 h-[248px]  overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400'>
         {actionFilter(Metas, filter).map(item => (
           item.Tarefas.map((item, index) => (
             <div
