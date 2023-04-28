@@ -9,6 +9,7 @@ import { GoalsProps, IField, TaskWithCategory } from 'src/interfaces/goalsTypes'
 
 import 'swiper/css';
 import 'swiper/css/pagination';
+import useMediaQuery from 'src/hooks/useMediaQuery';
 
 export default function Fields({ Metas }: GoalsProps) {
 
@@ -35,20 +36,23 @@ export default function Fields({ Metas }: GoalsProps) {
     return arrFinal
   }
 
+  const mdBP = useMediaQuery('(min-width: 640px)')
+  const lgBP = useMediaQuery('(min-width: 1300px)')
+
   return (
-    <section className='self-start 2xl:min-w-[976px]'>
+    <section className='self-start w-full lg:w-[600px] xl:w-[800px]  2xl:min-w-[976px]'>
       <div className='pb-2 border-b-2 mb-2 '>
         <h3 className='text-3xl  dark:text-white '>Áreas</h3>
       </div>
       <Swiper
         modules={[Pagination]}
-        className='max-w-[1000px]'
+        className='w-80 sm:w-full lg:w-[600px] xl:w-[800px] 2xl:w-[976px]'
         pagination={{
           clickable: true,
           type: 'bullets',
         }}
-        spaceBetween={20}
-        slidesPerView={3}
+        spaceBetween={40}
+        slidesPerView={mdBP ? lgBP ? 3 : 2 : 1}
         speed={50}
       >
         {categoryOptionsArr.map(item => (
@@ -68,7 +72,7 @@ export default function Fields({ Metas }: GoalsProps) {
 
 function Field({ FieldName, Metas }: IField) {
   return (
-    <div className='w-36 sm:w-44 xl:w-64 2xl:w-80 flex flex-col border-2 px-4 py-3 shadow-xl dark:bg-neutral-300 text-black'>
+    <div className='w-64 2xl:w-80 flex flex-col border-2 px-4 py-3 shadow-xl dark:bg-neutral-300 text-black'>
       <IoLayersSharp className='w-16 h-16 xl:w-20 xl:h-20 self-center my-5' />
       <div className='flex gap-2 items-center pb-4 text-lg'>
         <BsLayers />

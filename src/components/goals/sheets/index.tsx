@@ -48,7 +48,7 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
   }
 
   return (
-    <section className='flex flex-col w-[976px]  self-start'>
+    <section className='flex flex-col xl:w-[800px] 2xl:w-[976px]  self-start'>
       <div className='pb-2 border-b-2 mb-2 flex items-center justify-between '>
         <h3 className='text-3xl  dark:text-white'>Metas</h3>
         <SheetsFilter
@@ -62,13 +62,13 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
       </div>
       <div className='flex flex-col gap-3 pt-2'>
         <div className='flex '>
-          <div className='w-60 text-center'>
+          <div className='lg:w-36 xl:w-48 2xl:w-60 text-center'>
             <p className='text-lg'>Objetivo</p>
           </div>
-          <div className='w-96 text-center'>
+          <div className='lg:w-72 xl:w-80 2xl:w-96 text-center'>
             <p className='text-lg'>Progresso</p>
           </div>
-          <div className='w-60 text-center'>
+          <div className='lg:w-36 xl:w-48 2xl:w-60  text-center'>
             <p className='text-lg pl-10 '>Categoria</p>
           </div>
         </div>
@@ -78,10 +78,10 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
               className='w-full flex gap-3'
               key={item.Id}
             >
-              <div className='flex gap-2 items-center w-60'>
+              <div className='flex gap-2 items-center lg:w-36 xl:w-48 2xl:w-60 '>
                 <p className='text-xl'>{item.Meta}</p>
               </div>
-              <div className='w-96 flex gap-2 items-center justify-center'>
+              <div className='lg:w-72 xl:w-80 2xl:w-96 flex gap-2 items-center justify-center'>
                 <Progress.Root
                   className="relative overflow-hidden bg-white border-[1px] border-black rounded-full w-52 h-[25px]"
                   style={{
@@ -95,7 +95,7 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
                   />
                 </Progress.Root>
               </div>
-              <div className='w-60 text-center'>
+              <div className='lg:w-36 xl:w-48 2xl:w-60 flex items-center justify-center'>
                 <p>{item.Categoria}</p>
               </div>
               <div className='flex gap-5 items-center'>

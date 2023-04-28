@@ -23,11 +23,11 @@ export default function Metas() {
     <>
       <ToastContainer limit={3} />
       <div className={`flex flex-col gap-14 text-black dark:text-white ${isModalOpen ? 'blur-sm' : ''}`}>
-        <section className='w-full flex justify-center gap-12 items-center'>
+        <section className='w-full flex flex-col lg:flex-row justify-center gap-12 items-center'>
           <YearBox Metas={Metas} />
           <Fields Metas={Metas} />
         </section>
-        <section className='w-full flex justify-center gap-12 items-center'>
+        <section className='w-full flex flex-col md:flex-row justify-center gap-12 items-center'>
           <Sheets
             Metas={Metas}
             setMetas={setMetas}
