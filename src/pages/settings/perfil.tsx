@@ -34,28 +34,22 @@ export default function Perfil() {
   const locale = useAtomValue(Language)
   const { Container1, Container2, Container3, Container4, Container5, Container6, placeholders } = perfilContent[locale as keyof typeof perfilContent]
 
-  const updateuserName = () => {
+  const update = (object: 'username' | 'photo') => {
     try {
       toastNotify(userName === '', 'Por favor insira ao menos 1 caracterer', 'error')
+      if (object === 'username') {
+        updateProfile({ displayName: userName })
+        setuserName('')
+      } else {
+        updateProfile({ photoURL: photo })
+        setPhoto('')
+      }
 
-      updateProfile({ displayName: userName })
-      setuserName('')
-      const notify = () => toast.success("O nome do usuario foi alterado com sucesso");
-      notify()
-
-    } catch (error) {
-
-    }
-  }
-
-  const updatePhoto = () => {
-    try {
-      toastNotify(photo === '', 'Por favor insira ao menos 1 caracterer', 'error')
-      updateProfile({ photoURL: photo })
-      setPhoto('')
-      const notify = () => toast.success("A foto do usuario foi alterado com sucesso");
+      const notify = () => toast.success("Sua alteração foi realizada com sucesso");
       notify()
     } catch (error) {
+      const notify = () => toast.error("Ocorreu um erro, por favor tente novamente");
+      notify()
     }
   }
 
@@ -109,7 +103,7 @@ export default function Perfil() {
         >
           <Button
             Children={Container1.children}
-            onClick={() => updateuserName()}
+            onClick={() => update('username')}
           />
         </SettingsContainer>
 
@@ -119,7 +113,7 @@ export default function Perfil() {
         >
           <Button
             Children={Container2.children}
-            onClick={() => updatePhoto()}
+            onClick={() => update('photo')}
           />
         </SettingsContainer>
 

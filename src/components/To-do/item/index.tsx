@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { BsTrash } from 'react-icons/bs'
 import { useAtom } from 'jotai';
 import { PlannerTask } from 'src/context/plannerContext';
@@ -11,14 +11,11 @@ interface Props {
   value: string
 }
 
-
 export default function EditableListItem({ index, day, value }: Props) {
 
   const [taskName, setTaskName] = useState(value)
   const [finished, setFinished] = useState(false)
   const [taskArr, setTaskArr] = useAtom(PlannerTask)
-
-  const teste = useRef<HTMLElement>(null)
 
   const registerText = (task: string) => {
     const newTaskArr = taskArr.map(item => {
@@ -32,7 +29,7 @@ export default function EditableListItem({ index, day, value }: Props) {
 
   useEffect(() => {
     registerText(taskName)
-  }, [taskName])
+  }, [taskName,])
 
 
   return (
