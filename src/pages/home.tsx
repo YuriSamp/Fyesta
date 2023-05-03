@@ -8,7 +8,7 @@ import { BiSad } from 'react-icons/bi';
 import { diaryPage } from 'src/context/diaryContext';
 import { auth } from 'src/server/Firebase/ClientApp'
 import { quotes, quotesEn } from '../data/qoutes'
-import { useRouter } from 'next/router';
+import { Language } from 'src/context/seetingsContext';
 
 interface Quote {
   citacao: string
@@ -33,9 +33,9 @@ const content = {
 }
 
 export default function Home() {
-  const { locale } = useRouter()
   const [user] = useIdToken(auth);
   const diaryArr = useAtomValue(diaryPage);
+  const locale = useAtomValue(Language)
   const { greetings, diary } = content[locale as keyof typeof content]
 
   return (

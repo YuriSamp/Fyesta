@@ -11,6 +11,7 @@ import { Select } from '@ui/select';
 import { DiaryPopover } from '@ui/diario/diaryPopover';
 import DiarypageWritten from '@ui/diario/card';
 import { dateCalendarConvert } from 'src/helper/dateHelpers';
+import { Language } from 'src/context/seetingsContext';
 
 //TODO animação entre as paginas
 
@@ -88,6 +89,7 @@ export default function Diario() {
 
 
 const MonthComponent = ({ diary }: IMonthComponent) => {
+  const locale = useAtomValue(Language)
   return (
     <div>
       <hr className='mt-10 mb-5' />
@@ -96,7 +98,7 @@ const MonthComponent = ({ diary }: IMonthComponent) => {
           href='./diario/pagina'
           className='w-60 h-52  bg-white  text-black dark:text-white drop-shadow-lg dark:bg-neutral-900 flex justify-center items-center cursor-pointer  select border-2'
         >
-          <p className='text-lg'> + Entrada</p>
+          <p className='text-lg'> {locale === 'pt-BR' ? '+ Entrada' : ' + Entry'} </p>
         </Link>
         {diary.map(entry => (
           <DiarypageWritten

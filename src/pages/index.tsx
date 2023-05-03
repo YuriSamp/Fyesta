@@ -9,15 +9,17 @@ import goals from '../../public/Metas.png'
 import planner from '../../public/planner.png'
 import { BsShieldCheck, BsBrush } from 'react-icons/bs'
 import { AiOutlineCalendar } from 'react-icons/ai'
-import { useRouter } from 'next/router';
 import { FeatureBox, bluredAtom } from '@ui/landingPage/featureBox';
 import { useAtomValue } from 'jotai';
 import { landingPagecontent } from 'src/translate/landingPage';
+import { Language } from 'src/context/seetingsContext';
+
 
 // TODO tirar fotos melhores pra home
 
+
 export default function Home() {
-  const { locale } = useRouter()
+  const locale = useAtomValue(Language)
   const { nav, section1, section2, section3, footer } = landingPagecontent[locale as keyof typeof landingPagecontent]
   const ísblured = useAtomValue(bluredAtom)
 

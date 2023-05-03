@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
 import nookies from 'nookies'
-import { routes } from './settings/settingsHeader';
+import { routes } from 'src/translate/settings/header';
 
 
 type Props = {
@@ -40,7 +40,7 @@ export default function AvatarWithDropDown({ Path }: Props) {
               className="text-sm text-black rounded flex items-center h-6 px-5 py-0 relative pl-6 select-none outline-none cursor-pointer hover:bg-violet-900 dark:hover:bg-gray-800 hover:text-white"
               key={index}
             >
-              <Link href={item.link} className='w-full' >{item.name}</Link>
+              <Link href={item.link} className='w-full' >{item['pt-BR'].name}</Link>
             </DropdownMenu.Item>
 
           ))}

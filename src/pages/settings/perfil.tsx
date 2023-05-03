@@ -13,6 +13,9 @@ import Header from '@ui/settings/settingsHeader';
 import { toastNotify } from 'src/utils/toastNotify';
 import { SettingsContainer } from '@ui/settings/settingsContainer';
 import SettingsAlert from '@ui/settings/settingsAlert';
+import { perfilContent } from 'src/translate/settings/perfil';
+import { Language } from 'src/context/seetingsContext';
+import { useAtomValue } from 'jotai';
 
 export default function Perfil() {
   const router = useRouter()
@@ -27,6 +30,9 @@ export default function Perfil() {
   const [verifyBeforeUpdateEmail, updating1, error1] = useVerifyBeforeUpdateEmail(auth);
   const { theme, setTheme } = useTheme()
   const [alertOpen, setAlertOpen] = useState(false)
+
+  const locale = useAtomValue(Language)
+  const { Container1, Container2, Container3, Container4, Container5, Container6, placeholders } = perfilContent[locale as keyof typeof perfilContent]
 
   const updateuserName = () => {
     try {
@@ -64,11 +70,16 @@ export default function Perfil() {
     router.push('/')
   }
 
-  const input = (theme: string | undefined) => {
-    if (theme === 'light') {
-      return <ControledInput type='text' Width='lg' intent='light' placeholder='Insira a nova url' value={photo} onChange={setPhoto} />
-    }
-    return <ControledInput type='text' Width='lg' placeholder='Insira a nova url' value={photo} onChange={setPhoto} />
+  const input = (theme: string | undefined, type: 'name' | 'photo') => {
+    return (
+      <ControledInput
+        type='text'
+        Width='lg'
+        intent={theme === 'light' ? 'light' : 'primary'}
+        placeholder={`${type === 'name' ? placeholders.nameInput : placeholders.photoInput}`}
+        value={photo}
+        onChange={setPhoto} />
+    )
   }
 
   const changePassword = async () => {
@@ -93,57 +104,58 @@ export default function Perfil() {
       />
       <div className='sm:max-h-[600px] overflow-hidden overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2'>
         <SettingsContainer
-          title='Nome'
-          firstChild={input(theme)}
+          title={Container1.title}
+          firstChild={input(theme, 'name')}
         >
           <Button
-            Children='Atualizar'
+            Children={Container1.children}
             onClick={() => updateuserName()}
           />
         </SettingsContainer>
 
         <SettingsContainer
-          title='Foto'
-          firstChild={input(theme)}
+          title={Container2.title}
+          firstChild={input(theme, 'photo')}
         >
           <Button
-            Children='Atualizar'
+            Children={Container2.children}
             onClick={() => updatePhoto()}
           />
         </SettingsContainer>
 
         <SettingsContainer
-          title='Email'
+          title={Container3.title}
           firstChild={user?.email}
         >
           <Button
-            Children='Mudar o email'
+            Children={Container3.children}
             onClick={async () => updateEmail()}
           />
         </SettingsContainer>
 
         <SettingsContainer
-          title='Senha'
-          firstChild='Escolha uma senha forte, afinal você não quer que ninguem saiba seus segredos'
+          title={Container4.children}
+          firstChild={Container4.firstChild}
         >
-          <Button Children='Mudar a senha'
+          <Button
+            Children={Container4.children}
             onClick={async () => changePassword()}
           />
         </SettingsContainer>
 
         <SettingsContainer
-          title='Sair da conta'
-          firstChild='Irá te redirecionar para página de login'
+          title={Container5.title}
+          firstChild={Container5.firstChild}
         >
           <Button
-            Children='Sair da conta'
+            Children={Container5.children}
             intent='danger'
             onClick={async () => logout()}
           />
         </SettingsContainer>
         <SettingsContainer
-          title='Excluir sua conta'
-          firstChild={`É uma pena que você esteja indo embora ${<span className='text-lg'>😭</span>}`}
+          title={Container6.title}
+          firstChild={`${Container6.firstChild} + ${<span className='text-lg'>😭</span>}`}
         >
           <SettingsAlert
             HandlePromise={HandlePromise}
