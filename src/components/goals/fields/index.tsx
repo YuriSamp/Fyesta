@@ -10,6 +10,7 @@ import { GoalsProps, IField, TaskWithCategory } from 'src/interfaces/goalsTypes'
 import 'swiper/css';
 import 'swiper/css/pagination';
 import useMediaQuery from 'src/hooks/useMediaQuery';
+import { Language } from 'src/context/seetingsContext';
 
 export default function Fields({ Metas }: GoalsProps) {
 
@@ -39,10 +40,12 @@ export default function Fields({ Metas }: GoalsProps) {
   const mdBP = useMediaQuery('(min-width: 640px)')
   const lgBP = useMediaQuery('(min-width: 1300px)')
 
+  const locale = useAtomValue(Language)
+
   return (
     <section className='self-start w-full lg:w-[600px] xl:w-[800px]  2xl:min-w-[976px]'>
       <div className='pb-2 border-b-2 mb-2 '>
-        <h3 className='text-3xl  dark:text-white '>Áreas</h3>
+        <h3 className='text-3xl  dark:text-white '>{locale === 'pt-BR' ? 'Áreas' : 'Fields'}</h3>
       </div>
       <Swiper
         modules={[Pagination]}
@@ -71,6 +74,9 @@ export default function Fields({ Metas }: GoalsProps) {
 }
 
 function Field({ FieldName, Metas }: IField) {
+
+  const locale = useAtomValue(Language)
+
   return (
     <div className='w-64 2xl:w-80 flex flex-col border-2 px-4 py-3 shadow-xl dark:bg-neutral-300 text-black'>
       <IoLayersSharp className='w-16 h-16 xl:w-20 xl:h-20 self-center my-5' />
@@ -78,7 +84,7 @@ function Field({ FieldName, Metas }: IField) {
         <BsLayers />
         <p>{FieldName}</p>
       </div>
-      <p className='pb-2'>Progresso</p>
+      <p className='pb-2'>{locale === 'pt-BR' ? 'Progresso' : 'Progress'}</p>
       <div className='flex gap-2 flex-wrap h-10'>
         {Metas}
       </div>

@@ -1,6 +1,8 @@
 import { Select } from '@ui/select'
+import { useAtomValue } from 'jotai'
 import { useEffect, useMemo, useState } from 'react'
 import { RiCheckboxCircleFill, RiCheckboxBlankCircleLine } from 'react-icons/ri'
+import { Language } from 'src/context/seetingsContext'
 import useMediaQuery from 'src/hooks/useMediaQuery'
 import { Goal, GoalsWithSetterProps } from 'src/interfaces/goalsTypes'
 
@@ -34,10 +36,12 @@ export default function Actions({ Metas, setMetas }: GoalsWithSetterProps) {
   const mdBP = useMediaQuery('(min-width: 1050px)')
   const lgBP = useMediaQuery('(min-width: 1100px)')
 
+  const locale = useAtomValue(Language)
+
   return (
     <section className='w-72 2xl:w-80 self-start'>
       <div className='pb-2 border-b-2 mb-2 flex items-center justify-between'>
-        <h3 className='text-3xl  dark:text-white'>Ações</h3>
+        <h3 className='text-3xl  dark:text-white'>{locale === 'pt-BR' ? 'Ações' : 'Actions'} </h3>
         {options.length > 2 &&
           <Select
             Options={options}

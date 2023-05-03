@@ -4,14 +4,13 @@ import { useAtomValue } from 'jotai';
 import { diaryPage } from 'src/context/diaryContext';
 import { Idiary } from 'src/interfaces/diaryTypes';
 import { useEffect, useMemo, useState } from 'react';
-import MonthController from '@ui/diaryMonthController';
-
 import { emotionsOptions } from 'src/context/emotionsOptions';
 import { Select } from '@ui/select';
 import { DiaryPopover } from '@ui/diario/diaryPopover';
 import DiarypageWritten from '@ui/diario/card';
 import { dateCalendarConvert } from 'src/helper/dateHelpers';
 import { Language } from 'src/context/seetingsContext';
+import { MonthController } from '@ui/monthController';
 
 //TODO animação entre as paginas
 

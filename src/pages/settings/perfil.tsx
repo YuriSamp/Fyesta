@@ -155,7 +155,7 @@ export default function Perfil() {
         </SettingsContainer>
         <SettingsContainer
           title={Container6.title}
-          firstChild={`${Container6.firstChild} + ${<span className='text-lg'>😭</span>}`}
+          firstChild={`${Container6.firstChild} 😭`}
         >
           <SettingsAlert
             HandlePromise={HandlePromise}
