@@ -39,46 +39,23 @@ export const CalendarDayDiplay = ({ isToday, day, tasks, currentMonth, setModalR
   const isTaskAllowed = useAtomValue(taskAtom)
 
   const taskFilter = (tasks: ICalendarTask[]) => {
-    let arr1: ICalendarTask[] = []
-    let arr2: ICalendarTask[] = []
-    let arr3: ICalendarTask[] = []
-    let arr4: ICalendarTask[] = []
-    if (isNationalHolidaysAllowed) {
-      arr1 = tasks.filter(task => task.type === 'Feriado Nacional')
-    }
-    if (isHolidaysAllowed) {
-      arr2 = tasks.filter(task => task.type === 'Data Comemorativa')
-    }
-    if (isReminderAllowed) {
-      arr3 = tasks.filter(task => task.type === 'Reminder')
-    }
-    if (isTaskAllowed) {
-      arr4 = tasks.filter(task => task.type === 'Task')
-    }
-    return arr1.concat(arr2, arr3, arr4)
+    const allowedTypes = {
+      'Feriado Nacional': isNationalHolidaysAllowed,
+      'Data Comemorativa': isHolidaysAllowed,
+      Reminder: isReminderAllowed,
+      Task: isTaskAllowed,
+    };
+
+    return tasks.filter((task) => allowedTypes[task.type]);
   }
 
-  if (isToday) {
-    return (
-      <div className='flex flex-col items-center  gap-2 py-2 px-2 select-none'>
-        <div className='w-10 bg-violet-700 dark:bg-DarkModeGreen text-center text-white rounded-full'>
-          {day}
-        </div>
-        <div className='text-black w-full flex flex-col gap-2 h-28 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-4 py-1'>
-          {taskFilter(tasks).map((task, i) => (
-            <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} setModalRef2={setModalRef2} key={i} item={item} />
-          ))}
-        </div>
-      </div>
-    )
-  }
 
   return (
-    <div
-      className='text-center py-2 px-2 select-none'
-    >
-      <div className={`flex flex-col gap-2 h-36 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2 + ${!currentMonth && 'text-gray-300 dark:text-gray-600'}`}>
-        {day}
+    <div className='text-center py-2 px-2 select-none'>
+      <div className={`flex flex-col item gap-2 h-36 overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2  ${!currentMonth && 'text-gray-300 dark:text-gray-600'}`}>
+        <div className={` ${isToday && 'w-10 bg-violet-700 dark:bg-DarkModeGreen text-center text-white rounded-full self-center'}`}>
+          {day}
+        </div>
         <div className={`text-black flex flex-col gap-2 ${size === 'big' ? 'h-36' : 'h-20'}  overflow-y-auto scrollbar-thin scrollbar-track-gray-700 scrollbar-thumb-slate-400 px-2`}>
           {taskFilter(tasks).map((task, i) => (
             <CalendarDayTasksDisplay day={task.day} month={task.month} name={task.name} type={task.type} setModalRef2={setModalRef2} key={i} item={item} description={task.description} />

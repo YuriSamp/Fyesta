@@ -17,7 +17,6 @@ export default function Pomodoro() {
   const pomodoroIntervalRef = useRef<NodeJS.Timeout>();
   const breakIntervalRef = useRef<NodeJS.Timeout>();
 
-
   function notifyMe(type: string) {
     if (!("Notification" in window)) {
       alert("This browser does not support desktop notification");

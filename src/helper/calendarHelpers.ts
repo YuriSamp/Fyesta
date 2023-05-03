@@ -63,17 +63,14 @@ const DatasComemorativas: holidayType[] = [
   },
 ];
 
-const generateCalendarDays = (year: number, MonthIndex: number) => {
-  const date = new Date();
-  date.setDate(1);
-  const calendarDays: ICalendarDays[] = [];
-  const prevLastDay = new Date(year, MonthIndex, 0).getDate();
-  const lastDayOfWeekIndex = new Date(year, MonthIndex + 1, 0).getDay();
-  const nextDays = 7 - lastDayOfWeekIndex - 1;
+const getPrevMonthDays = (
+  year: number,
+  MonthIndex: number,
+  calendarDays: ICalendarDays[]
+) => {
   const firstDayIndex = new Date(year, MonthIndex, 0).getDay();
-  const lastDay = new Date(year, MonthIndex + 1, 0).getDate();
+  const prevLastDay = new Date(year, MonthIndex, 0).getDate();
 
-  //Gera os dias do mes anterior até o começo do mês atual
   if (firstDayIndex !== 6) {
     for (let i = firstDayIndex + 1; i > 0; i--) {
       if (MonthIndex - 1 === -1) {
@@ -95,19 +92,15 @@ const generateCalendarDays = (year: number, MonthIndex: number) => {
       }
     }
   }
+};
 
-  //Gera os dias do mês atual
-  for (let i = 1; i <= lastDay; i++) {
-    calendarDays.push({
-      id: i,
-      day: i,
-      Month: MonthIndex,
-      year: year,
-      tasks: [],
-    });
-  }
-
-  //Gera os dias do próximo mês atual
+const getNextMonthDays = (
+  year: number,
+  MonthIndex: number,
+  calendarDays: ICalendarDays[]
+) => {
+  const lastDayOfWeekIndex = new Date(year, MonthIndex + 1, 0).getDay();
+  const nextDays = 7 - lastDayOfWeekIndex - 1;
   for (let i = 1; i <= nextDays; i++) {
     if (MonthIndex + 1 === 12) {
       calendarDays.push({
@@ -127,6 +120,31 @@ const generateCalendarDays = (year: number, MonthIndex: number) => {
       });
     }
   }
+};
+
+const getMonthDays = (
+  year: number,
+  MonthIndex: number,
+  calendarDays: ICalendarDays[]
+) => {
+  const lastDay = new Date(year, MonthIndex + 1, 0).getDate();
+  for (let i = 1; i <= lastDay; i++) {
+    calendarDays.push({
+      id: i,
+      day: i,
+      Month: MonthIndex,
+      year: year,
+      tasks: [],
+    });
+  }
+};
+
+const generateCalendarDays = (year: number, monthIndex: number) => {
+  const calendarDays: ICalendarDays[] = [];
+
+  getPrevMonthDays(year, monthIndex, calendarDays);
+  getMonthDays(year, monthIndex, calendarDays);
+  getNextMonthDays(year, monthIndex, calendarDays);
 
   return calendarDays;
 };
@@ -151,7 +169,6 @@ const holidays = (data: brasilApiType[] | undefined) => {
   }
 };
 
-// Função responsavel por montar o calendario e exportar ele
 export const calendarBuilder = (
   year: number,
   monthIndex: number,
