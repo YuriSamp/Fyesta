@@ -7,6 +7,7 @@ import { Goal, SheetsProps, Task } from 'src/interfaces/goalsTypes';
 import { AiOutlineCheck } from 'react-icons/ai'
 import { useAtomValue } from 'jotai';
 import { categoryOptions, categoryType } from 'src/context/goalContext';
+import { Language } from 'src/context/seetingsContext';
 
 interface ISheetsFilter {
   onChangeProgress: Dispatch<SetStateAction<progressFilter>>
@@ -46,6 +47,8 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
     const TarefasFeitas = tarefas.filter(task => task.realizada === false)
     return tarefas.length - TarefasFeitas.length
   }
+
+  const locale = useAtomValue(Language)
 
   return (
     <section className='flex flex-col xl:w-[800px] 2xl:w-[976px]  self-start'>

@@ -9,9 +9,9 @@ import { useAtom, useAtomValue } from 'jotai';
 import { actionModalOpenState, calendarContext, detailsModalOpenState, modalDateAtom } from 'src/context/calendarContext';
 import { CalendarDayDiplay } from '@ui/calendar/DayDisplay';
 import DetailsModal from '@ui/calendar/DetailsModal';
-import CalendarMonthController from '@ui/calendarMonthController';
 import { CalendarFilters } from '@ui/calendar/CalendarFilters';
 import CreateModal from '@ui/calendar/CreateModal';
+import { MonthController } from '@ui/monthController';
 
 const CalendarModal = dynamic(() => import('@ui/calendar/ActionModal'), {
   ssr: false
@@ -70,7 +70,7 @@ export default function Calendario() {
     <section className='flex gap-3  text-black dark:text-white px-12  '>
       <div className='flex flex-col gap-5 pt-12 py-4'>
         <div className='flex flex-col gap-5'>
-          <CalendarMonthController
+          <MonthController
             monthIndex={monthIndex}
             setMonthIndex={setMonthIndex}
             setYear={setYear}

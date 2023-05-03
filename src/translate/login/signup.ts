@@ -1,0 +1,26 @@
+export const singUpContent = {
+  'pt-BR': {
+    greetings: 'Criar uma conta',
+    label1: 'Nome',
+    label2: 'Senha',
+    label3: 'Confirme sua senha',
+    label4: 'Coloque uma foto',
+    placeholder1: 'Seu nome',
+    placeholder2: 'Senha',
+    placeholder3: 'Senha',
+    placeholder4: 'Insira a url',
+    warning: 'Você não preicsa de uma foto, é só pra ficar bonitao',
+  },
+  'en-US': {
+    greetings: 'Create an Account',
+    label1: 'Name',
+    label2: 'Password',
+    label3: 'Confirm Password',
+    label4: 'Upload a Photo',
+    placeholder1: 'Your name',
+    placeholder2: 'Password',
+    placeholder3: 'Password',
+    placeholder4: 'Insert the URL',
+    warning: "You don't need a photo, it's just to look cool",
+  },
+};

@@ -4,12 +4,10 @@ import AvatarIcon from '@ui/avatar';
 import { useIdToken } from 'react-firebase-hooks/auth';
 import { auth } from 'src/server/Firebase/ClientApp';
 import RetturnButton from '../retturnButton';
+import { routes } from 'src/translate/settings/header';
+import { useAtomValue } from 'jotai';
+import { Language } from 'src/context/seetingsContext';
 
-export const routes = [
-  { name: 'Sua conta', link: '/settings/perfil' },
-  { name: 'Configurações', link: '/settings' },
-  { name: 'Sobre', link: '/settings/about' },
-]
 
 interface Props {
   Page: string
@@ -18,6 +16,9 @@ interface Props {
 export default function Header({ Page }: Props) {
 
   const [user] = useIdToken(auth);
+
+  const locale = useAtomValue(Language)
+
 
   return (
     <>
@@ -39,12 +40,14 @@ export default function Header({ Page }: Props) {
                 <Link
                   href={item.link}
                   className=" text-lg sm:text-xl cursor-pointer relative text-violet-900 dark:text-[#138859]  after:absolute after:bottom-[-11px] after:left-0 after:h-[2px]  after:w-full after:bg-violet-900 after:content-[''] after:dark:bg-[#138859]">
-                  {item.name}
+                  {item[locale].name}
                 </Link>
               </li>
               :
               <li key={index}>
-                <Link href={item.link} className=' text-lg sm:text-xl cursor-pointer '>{item.name}</Link>
+                <Link href={item.link} className=' text-lg sm:text-xl cursor-pointer '>
+                  {item[locale].name}
+                </Link>
               </li>
           ))}
         </ul>
