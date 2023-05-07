@@ -5,6 +5,13 @@ import { Language } from 'src/context/seetingsContext';
 export default function Planner() {
   const locale = useAtomValue(Language)
 
+  const days = {
+    "pt-BR": ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", 'Sábado'],
+    "en-US": ["Sunday", "Monday", 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+  };
+
+
+
   return (
     <>
       <section className='flex justify-evenly'>
@@ -15,13 +22,9 @@ export default function Planner() {
         </div>
       </section>
       <section className=' pt-16 grid  grid-cols-1 lg:grid-cols-2 xl:grid-cols-3  2xl:grid-cols-4 gap-y-16 justify-items-center'>
-        <EditableList Title={locale === 'pt-BR' ? 'Domingo' : 'Sunday'} day={0} />
-        <EditableList Title={locale === 'pt-BR' ? 'Segunda' : 'Monday'} day={1} />
-        <EditableList Title={locale === 'pt-BR' ? 'Terça' : 'Tuesday'} day={2} />
-        <EditableList Title={locale === 'pt-BR' ? 'Quarta' : 'Wednesday'} day={3} />
-        <EditableList Title={locale === 'pt-BR' ? 'Quinta' : 'Thursday'} day={4} />
-        <EditableList Title={locale === 'pt-BR' ? 'Sexta' : 'Friday'} day={5} />
-        <EditableList Title={locale === 'pt-BR' ? 'Sabado' : 'Saturday'} day={6} />
+        {days[locale].map((day, index) => (
+          <EditableList Title={day} day={index} key={index} />
+        ))}
         <EditableList Title='Extra' day={7} />
       </section>
     </>

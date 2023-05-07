@@ -43,7 +43,7 @@ export function Select({ Width, intent, Options, onChange, value, Height, rounde
       onChange={(e) => onChange(e.target.value)}
     >
       {Options.map((item, index) => (
-        <option value={item} key={index} className='dark:bg-InputGray'>
+        <option value={item} key={index} className='dark:bg-InputGray min-w-[100px] max-w-[180px] overflow-ellipsis'>
           {UpperCaseFirstLetter(item)}
         </option>
       ))}

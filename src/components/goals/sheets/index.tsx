@@ -101,7 +101,7 @@ export default function Sheets({ Metas, setState, setMetas, setGoalId }: SheetsP
               <div className='lg:w-36 xl:w-48 2xl:w-60 flex items-center justify-center'>
                 <p>{item.Categoria}</p>
               </div>
-              <div className='flex gap-5 items-center'>
+              <div className='flex gap-5 items-center pr-3'>
                 <BsPencil className='w-4 h-4 cursor-pointer'
                   onClick={() => {
                     setGoalId(item.Id)
