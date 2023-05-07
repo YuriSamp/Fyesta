@@ -1,4 +1,3 @@
-import { AiOutlineCheck } from 'react-icons/ai';
 import { useAtom } from 'jotai';
 import { PlannerTask } from 'src/context/plannerContext';
 import * as Checkbox from '@radix-ui/react-checkbox';
@@ -20,7 +19,7 @@ export default function DisplayList() {
   }
 
   return (
-    <div className='flex flex-col gap-3  w-[280px]'>
+    <div className='flex flex-col gap-3'>
       {taskArr[dayOfWeek].tasks.map(task => (
         <div className='flex gap-3 tasks-center' key={task.id}>
           <Checkbox.Root
