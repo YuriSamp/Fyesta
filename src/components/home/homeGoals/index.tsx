@@ -2,6 +2,7 @@ import { useAtomValue } from 'jotai'
 import { categoryOptions } from 'src/context/goalContext'
 import { Goals } from 'src/context/goalContext'
 import { BsDot } from 'react-icons/bs'
+import { Language } from 'src/context/seetingsContext'
 
 export const HomeGoalTracker = () => {
 
@@ -23,10 +24,13 @@ export const HomeGoalTracker = () => {
     return arrFiltrado
   }
 
+  const locale = useAtomValue(Language)
+
+
   return (
     <div className='flex flex-col gap-4 items-center max-w-[1000px]'>
-      <h2 className='text-3xl'>Metas para {year}</h2>
-      <div className='grid grid-cols-3 gap-10'>
+      <h2 className='text-3xl'> {locale === 'pt-BR' ? 'Metas para' : 'Goals for'} {year}</h2>
+      <div className='grid  md:grid-cols-2 xl:grid-cols-3 gap-10'>
         {filtraMetas().map((item, i) => (
           <div className='w-80 flex flex-col p-5 shadow-xl border-2 rounded-lg ' key={i}>
             <h3 className='pb-1'>{item.categoryName}</h3>
@@ -41,7 +45,7 @@ export const HomeGoalTracker = () => {
               </ol>
               :
               <div>
-                nenhuma meta nessa categoria
+                {locale === 'pt-BR' ? 'nenhuma meta nessa categoria' : 'no goals in this category'}
               </div>
             }
           </div>

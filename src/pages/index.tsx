@@ -18,7 +18,7 @@ import { Language } from 'src/context/seetingsContext';
 // TODO tirar fotos melhores pra home
 
 
-export default function Home() {
+export default function LandingPage() {
   const locale = useAtomValue(Language)
   const { nav, section1, section2, section3, footer } = landingPagecontent[locale as keyof typeof landingPagecontent]
   const ísblured = useAtomValue(bluredAtom)

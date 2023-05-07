@@ -51,28 +51,31 @@ export function CalendarDataConverter(dateString: string) {
   return { day, month };
 }
 
-export function getDayOfTheWeek(day: number) {
+export function getDayOfTheWeek(day: number, locale: 'pt-BR' | 'en-US') {
   switch (day) {
     case 0:
-      return 'Domingo';
+      return locale === 'pt-BR' ? 'Domingo' : 'Sunday';
     case 1:
-      return 'Segunda-Feira';
+      return locale === 'pt-BR' ? 'Segunda-Feira' : 'Monday';
     case 2:
-      return 'Terça-Feira';
+      return locale === 'pt-BR' ? 'Terça-Feira' : 'Thursday';
     case 3:
-      return 'Quarta-Feira';
+      return locale === 'pt-BR' ? 'Quarta-Feira' : 'Wednesday';
     case 4:
-      return 'Quinta-Feira';
+      return locale === 'pt-BR' ? 'Quinta-Feira' : 'Tuednesday';
     case 5:
-      return 'Sexta-Feira';
+      return locale === 'pt-BR' ? 'Sexta-Feira' : 'Friday';
     case 6:
-      return 'Sábado';
+      return locale === 'pt-BR' ? 'Sábado' : 'Saturday';
   }
 }
 
-export function detailsModalDateDisplay(date: string) {
+export function detailsModalDateDisplay(
+  date: string,
+  locale: 'pt-BR' | 'en-US'
+) {
   const dayofWeek = new Date(date).getDay();
-  let dayofWeekString = getDayOfTheWeek(dayofWeek);
+  let dayofWeekString = getDayOfTheWeek(dayofWeek, locale);
   const dateParts = date.split('-');
   const day = dateParts[2];
   const month = monthNumberToString(Number(dateParts[1]) - 1);

@@ -11,6 +11,7 @@ import { useClickOutside } from 'src/hooks/useClickOutside';
 import { CalendarTaskTypes } from 'src/interfaces/calendarTypes';
 import { getTaskColor } from 'src/utils/taskColors';
 import { modalRelativePosition } from '../../helper/calendarModalPosition';
+import { Language } from 'src/context/seetingsContext';
 
 interface ICalendarModal extends ModalProps {
   date: string
@@ -19,7 +20,8 @@ interface ICalendarModal extends ModalProps {
 
 export default function DetailsModal({ isModalOpen, setIsModalOpen, date, divRef }: ICalendarModal) {
 
-  const data = detailsModalDateDisplay(date)
+  const locale = useAtomValue(Language)
+  const data = detailsModalDateDisplay(date, locale)
   const taskType = useAtomValue(taskTypeAtom)
   const setModalTask = useAtomValue(taskNameAtom)
   const taskDescription = useAtomValue(taskDescriptionAtom)

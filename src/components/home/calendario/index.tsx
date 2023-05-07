@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react'
 import { calendarContext } from 'src/context/calendarContext';
 import { getDayOfTheWeek } from 'src/helper/dateHelpers';
 import { GiPartyPopper } from 'react-icons/gi';
-
-//TODO animação quando mudar as horas e minutos
+import { Language } from 'src/context/seetingsContext';
 
 export default function HomeCalendar() {
 
@@ -22,12 +21,11 @@ export default function HomeCalendar() {
   const Mounth = date.getMonth()
   const day = date.getDay()
   const dayOfMounth = date.getDate()
-
   const calendarTasks = useAtomValue(calendarContext)
-
+  const locale = useAtomValue(Language)
 
   return (
-    <section className='w-80 shadow-xl rounded-lg border-2'>
+    <section className='w-80 h-[450px] shadow-xl rounded-lg border-2'>
       <div className='flex gap-3 h-32 items-center justify-center'>
         <span className='text-7xl'>
           {String(hours).padStart(2, '0')}
@@ -40,11 +38,11 @@ export default function HomeCalendar() {
       <div className='w-full h-40'>
         <div className=' flex justify-between py-2 px-4 select-none'>
           <div>
-            {getDayOfTheWeek(day)}
+            {getDayOfTheWeek(day, locale)}
           </div>
           <div className='flex gap-1'>
             <span>
-              {dayOfMounth}
+              {dayOfMounth > 10 ? dayOfMounth : String(dayOfMounth).padStart(2, '0')}
             </span>
             <span> / </span>
             <span>
@@ -65,7 +63,7 @@ export default function HomeCalendar() {
             ))
             :
             <div className='flex flex-col gap-7 justify-center items-center h-full'>
-              <span className='text-xl'>nada agendado pro dia de hoje</span>
+              <span className='text-xl'>{locale === 'pt-BR' ? 'nada agendado pro dia de hoje' : 'Nothing schedule for today'} </span>
               <GiPartyPopper className='w-10 h-10' />
             </div>
           }
