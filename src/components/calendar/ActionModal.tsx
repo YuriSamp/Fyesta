@@ -5,12 +5,13 @@ import { ControledInput } from '../input/input';
 import { RxTextAlignJustify } from 'react-icons/rx'
 import { AiOutlineClockCircle, AiOutlineClose } from 'react-icons/ai'
 import { ModalProps } from 'src/interfaces/modalTypes';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { calendarContext, modalOptionAtom } from 'src/context/calendarContext';
 import { ICalendarTask } from 'src/interfaces/calendarTypes';
 import { getDayOfTheWeek } from 'src/helper/dateHelpers';
 import { useClickOutside } from 'src/hooks/useClickOutside';
 import { modalRelativePosition } from '../../helper/calendarModalPosition';
+import { Language } from 'src/context/seetingsContext';
 
 
 interface ICalendarModal extends ModalProps {
@@ -20,13 +21,15 @@ interface ICalendarModal extends ModalProps {
 
 export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRef }: ICalendarModal) {
 
+  const locale = useAtomValue(Language)
+
   const setCalendarTasks = useSetAtom(calendarContext)
   const [title, setTitle] = useState('')
   const [modalOption, setModalOption] = useAtom(modalOptionAtom)
   const [taskText, setTaskText] = useState('')
   // const [reminderOption, setReminderOption] = useState('Não se repete')
   const [dataRaw, setData] = useState(date)
-  const [dayOfWeek, setDayOfWeek] = useState(getDayOfTheWeek(new Date(date).getDay()))
+  const [dayOfWeek, setDayOfWeek] = useState(getDayOfTheWeek(new Date(date).getDay(), locale))
   const dataFormated = dataRaw.split('-')
   const year = Number(dataFormated[0])
   const month = Number(dataFormated[1]) - 1
@@ -34,7 +37,7 @@ export default function CalendarModal({ isModalOpen, setIsModalOpen, date, divRe
 
   useEffect(() => {
     setData(date)
-    setDayOfWeek(getDayOfTheWeek(new Date(date).getDay()))
+    setDayOfWeek(getDayOfTheWeek(new Date(date).getDay(), locale))
   }, [date])
 
   // const reminderOptions = ['Não se repete', 'nos proximos 5 dias', `Semanal : Cada ${dayOfWeek}`, `anual em ${day} de abril`]
