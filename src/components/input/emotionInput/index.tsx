@@ -41,6 +41,17 @@ export function EmotionInput({ options, setState, placeholder, setoption, setCol
     }
   }, [inputSearch, options, setState])
 
+  useEffect(() => {
+    if (defaultValue !== '') {
+      options.map((option) => {
+        if (option.name === defaultValue) {
+          setColor(option.color)
+        }
+      })
+    }
+
+  }, [defaultValue])
+
   const matches = useMediaQuery('(min-width: 500px)')
 
   const setter = (name: string, id: number, color: string) => {
