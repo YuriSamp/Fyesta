@@ -42,7 +42,7 @@ export default function Home() {
       <div className='pt-3 flex flex-col justify-center '>
         <h1 className='text-center text-5xl sm:text-6xl font-Caveat text-violet-500 dark:text-white' >{greetings}, {user?.displayName} ! </h1>
       </div>
-      <div className='grid md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-x-8 gap-y-8'>
+      <div className='grid md:grid-cols-2 xl:grid-cols-3  justify-items-center gap-x-8 gap-y-8'>
         <Pomodoro />
         <div className='flex flex-col gap-4'>
           <RandomQuote locale={locale} />

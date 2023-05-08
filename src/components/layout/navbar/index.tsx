@@ -43,7 +43,7 @@ export const Navbar = ({ Page }: Props) => {
           <div
             className='absolute top-20 bg-white w-64 py-3 will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade'
           >
-            <ul className='flex flex-col gap-4 select-none'>
+            <ul className='flex flex-col gap-4 px-4 select-none rounded'>
               {pages.map((item, index) => (
                 Page.includes(item.name) ?
                   <li key={index}>
