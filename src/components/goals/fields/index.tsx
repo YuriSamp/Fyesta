@@ -78,7 +78,7 @@ function Field({ FieldName, Metas }: IField) {
   const locale = useAtomValue(Language)
 
   return (
-    <div className='w-64 2xl:w-80 flex flex-col border-2 px-4 py-3 shadow-xl dark:bg-neutral-300 text-black'>
+    <div className='w-64 2xl:w-80 flex flex-col border-2 px-4 py-3 shadow-xl dark:bg-neutral-300 text-black rounded'>
       <IoLayersSharp className='w-16 h-16 xl:w-20 xl:h-20 self-center my-5' />
       <div className='flex gap-2 items-center pb-4 text-lg'>
         <BsLayers />

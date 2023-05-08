@@ -76,7 +76,7 @@ export default function Calendario() {
             setYear={setYear}
             year={year}
           />
-          <div className='flex gap-8'>
+          <div className='flex lg:gap-4 xl:gap-8'>
             <Button
               Children='Mês atual'
               onClick={() => backToday()}
@@ -93,7 +93,7 @@ export default function Calendario() {
         <div className='flex pt-2 relative '>
           {daysOfWeek.map(item => (
             <div
-              className='px-4 py-2 w-48 text-center'
+              className='px-4 py-2 lg:w-32 2xl:w-48 text-center'
               key={item}
             >
               <h3 className='select-none'>{item}</h3>
@@ -101,11 +101,11 @@ export default function Calendario() {
           ))}
         </div>
         <div
-          className='flex flex-wrap max-w-[1460px] justify-center text-lg' >
+          className='flex flex-wrap lg:w-[1000px] 2xl:w-[1460px] justify-center text-lg' >
           {days.map((item) => (
             <div
               id={String(item.id)}
-              className={`w-48 h-32 ${days.length > 35 ? 'h-32' : 'h-[153.6px]'} calendar`}
+              className={`w-32 2xl:w-48 h-32 ${days.length > 35 ? 'h-32' : 'h-[153.6px]'} calendar`}
               key={item.id}
               tabIndex={0}
               onClick={(e) => setter(e, item.day, item.Month, item.year)}
