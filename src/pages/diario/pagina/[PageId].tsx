@@ -12,8 +12,8 @@ import { EmotionInput } from '@ui/input/emotionInput'
 
 const Pagina = () => {
   const router = useRouter()
-  const { pageId } = router.query
-  const PageIdNumber = Number(pageId)
+  const { PageId } = router.query
+  const PageIdNumber = Number(PageId)
 
   const [diary, setdiary] = useAtom(diaryPage);
   const id = useAtomValue(diaryId);
@@ -35,7 +35,7 @@ const Pagina = () => {
     }
 
     const updated = diary.map(item => {
-      if (item.id === id - 1) {
+      if (item.id === id) {
         item.title = title
         item.data = data
         item.feeling = feeling

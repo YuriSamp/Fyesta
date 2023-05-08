@@ -48,7 +48,11 @@ export default function Diario() {
     const diaryPerMonth = diary.filter(item => item.data.slice(0, 7).includes(compareDate))
     const diaryPerMonthSorted = diaryPerMonth.sort((a, b) => Number(b.data.slice(-2)) - Number(a.data.slice(-2)))
     setdiaryRef(diaryPerMonthSorted)
-  }, [monthIndex])
+  }, [monthIndex, diary, year])
+
+  useEffect(() => {
+    setdiaryRef(diary)
+  }, [diary])
 
 
   return (
